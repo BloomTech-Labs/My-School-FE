@@ -35,7 +35,9 @@ const [data, setData] = useState([]);
   return (
     <div className='container'>   
         <header>
-        {/* TITLE AND ADD ACTIVITY BUTTON HERE */}
+        {/* TITLE */}
+        {/* ADD BUTTON */}
+        <button>+ Add Activity</button>
         {/*SEARCH BOX AND SORT/FILTER FEATURE GO HERE*/}
         </header> 
 
