@@ -43,7 +43,7 @@ const DateSelector = () => {
     }
 
     return (
-        <Flex>
+        <Flex w="372px">
             <FormControl w="40%" pr="1rem">
                 <FormLabel htmlFor="month">Month</FormLabel>
                 <Select id="month" defaultValue={month ? month.num : 1} onChange={handleMonthChange}>

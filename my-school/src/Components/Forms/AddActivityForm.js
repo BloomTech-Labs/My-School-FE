@@ -6,6 +6,7 @@ import {
     FormErrorMessage,
     FormLabel,
     FormControl,
+    FormHelperText,
     Input,
     Select,
     Textarea,
@@ -16,12 +17,14 @@ import {
     NumberDecrementStepper,
     Button,
 } from "@chakra-ui/core";
-// import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import DateSelector from '../DateSelector';
 
 const AddActivityForm = () => {
-    const [subjects, setSubjects] = useState([]);
+    const { handleSubmit, errors, register, formState } = useForm();
 
+    // Gets subject values from db
+    const [subjects, setSubjects] = useState([]);
     useEffect(() => {
         axios.get("https://my-school-v1.herokuapp.com/api/subjects")
         .then(res => {
@@ -32,20 +35,36 @@ const AddActivityForm = () => {
         })
     }, [])
 
+    function onSubmit(data) {
+        console.log(data)
+    }
+
+    function validateTitle(value) {
+        let error;
+        if (value.length === 0) {
+            error = "A title is required";
+        } else if (value.length < 3)  {
+            error = "Title must be at least 3 characters long";
+        }
+        return error || true;
+    }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
         {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
             <Box w={1/2} px={20}>
-                <FormControl>
-                    <FormLabel htmlFor="title">Title</FormLabel>
+                <FormControl  isRequired isInvalid={errors.name}>
+                    <FormLabel htmlFor="name">Title</FormLabel>
                     <Input 
                         type="text" 
-                        id="title"
-                        name="title" 
+                        id="name"
+                        name="name" 
                         placeholder="What's the name of the activity you completed?" 
+                        ref={register({ validate: validateTitle })}
                     />
-
+                    <FormErrorMessage>
+                        {errors.name && errors.name.message}
+                    </FormErrorMessage>
                 </FormControl>
 
                 <FormControl>
@@ -64,7 +83,7 @@ const AddActivityForm = () => {
                     <Textarea placeholder="Tell us all about what you did in this activity!" />
                 </FormControl>
 
-                <p>How long did it take to complete this activity?</p>
+                <p style={{fontWeight: "bold"}}>How long did it take to complete this activity?</p>
                 <Box borderWidth="1px" borderColor="#D4D4D4" rounded="4px" p="32px">
                     <p style={{fontWeight: "bold"}}>Duration</p>
                     <Flex>
@@ -93,9 +112,9 @@ const AddActivityForm = () => {
                 </Box>
 
                 <p style={{fontWeight: "bold"}}>Confirm Submission Date</p>
-                <Flex align="flex-end" justify="space-between">
-                    <DateSelector w="70%"/>
-                    <Button type="submit" w="30%" ml="80px">Submit</Button>
+                <Flex align="flex-end" justify="space-between"  flexWrap="wrap">
+                    <DateSelector />
+                    <Button type="submit" w="120px" isLoading={formState.isSubmitting}>Submit</Button>
                 </Flex>
 
             </Box>
