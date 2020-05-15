@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import {
+    Flex,
     FormControl,
     FormLabel,
     Select,
@@ -12,7 +13,7 @@ import {
 } from '@chakra-ui/core';
 
 const DateSelector = () => {
-    // Sets default date values based on current date
+    // Gets current date values...used to set default value in input fields
     const currentMonth = moment().month() + 1; 
     const currentDate = moment().date();
     const currentYear = moment().year();
@@ -42,8 +43,8 @@ const DateSelector = () => {
     }
 
     return (
-        <>
-            <FormControl>
+        <Flex>
+            <FormControl w="40%" pr="1rem">
                 <FormLabel htmlFor="month">Month</FormLabel>
                 <Select id="month" defaultValue={month ? month.num : 1} onChange={handleMonthChange}>
                     {months.map(month => {
@@ -54,7 +55,7 @@ const DateSelector = () => {
                 </Select>
             </FormControl>
 
-            <FormControl>
+            <FormControl w="30%" pr="1rem">
                 <FormLabel htmlFor="day">Day</FormLabel>
                 <NumberInput id="day" defaultValue={currentDate} min={1} max={month ? month.length : 31}>
                     <NumberInputField />
@@ -65,7 +66,7 @@ const DateSelector = () => {
                 </NumberInput>
             </FormControl>
 
-            <FormControl>
+            <FormControl w="30%">
                 <FormLabel htmlFor="year">Year</FormLabel>
                 <NumberInput id="year" defaultValue={currentYear} max={currentYear + 10} min={currentYear - 100}>
                     <NumberInputField />
@@ -75,7 +76,7 @@ const DateSelector = () => {
                     </NumberInputStepper>
                 </NumberInput>
             </FormControl>
-        </>
+        </Flex>
     )
 }
 

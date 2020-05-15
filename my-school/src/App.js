@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+// import './App.css';
 import TopNav from './Components/TopNav';
 import AddActivityForm from './Components/Forms/AddActivityForm';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
