@@ -19,7 +19,7 @@ const AddActivityForm = () => {
 
 
     return (
-        <form>
+        <form w={1/2}>
             {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
 
             <FormControl>

@@ -13,10 +13,9 @@ import {
 
 const DateSelector = () => {
     // Sets default date values based on current date
-    const d = new Date();
-    const currentMonth = d.getMonth() + 1; 
-    const currentDate = d.getDate();
-    const currentYear = d.getFullYear();
+    const currentMonth = moment().month() + 1; 
+    const currentDate = moment().date();
+    const currentYear = moment().year();
 
     // Uses Moment Library to create months array with month number, name & length (# of days)
     const rangeStart = moment().startOf('year');
