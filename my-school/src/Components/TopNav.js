@@ -15,7 +15,6 @@ export default function TopNav() {
 
           {/* Gear icon for parent users -- route to account settings */}
 
-          {/* Breadcrumb? */}
       </nav>
     );
   }
