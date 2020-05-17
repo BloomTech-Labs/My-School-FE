@@ -1,6 +1,7 @@
 import React from 'react';
-import './App.css';
+// import './App.css';
 import TopNav from './Components/TopNav';
+
 import PortfolioContainer from './Components/PortfolioContainer';
 import AddActivityForm from './Components/AddActivityForm';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
