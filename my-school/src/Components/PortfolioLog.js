@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import EntryCard from './EntryCard';
 
 const PortfolioLog = () => {
 
@@ -22,7 +24,7 @@ const PortfolioLog = () => {
               })
               .catch(error => console.log('whoops', error))
               
-      }, [query]);
+      }, []);
     
     
     //   const handleChanges = event => {
