@@ -8,10 +8,11 @@ export default function TopNav() {
           <a href="http://www.myschoolathome.io"><img url="..\mySchoolLogo.svg" /></a>
 
           {/* Image linked to current user account */}
-          <img alt="user avatar"/>
+          {/* <img alt="user avatar"/> */}
+          <span alt="user name">User's Avatar</span>
 
           {/* Name linked to current user account */}
-          <span alt="user name">{}</span>
+          <span alt="user name">User's Name</span>
 
           {/* Gear icon for parent users -- route to account settings */}
 
