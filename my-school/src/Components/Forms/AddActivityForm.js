@@ -38,16 +38,29 @@ const AddActivityForm = () => {
 
     // Submit handler
     function onSubmit(data) {
-        console.log(data)
+        console.log({data})
+        // this adds leading zero to "day" value to ensure completion_date is correct format (leading zero is added to month in DateSelector component)...may update this at some point in DateSelector...TBD...
+        const dayLeadingZero = data.day < 10 ? "0" + String(data.day) : String(data.day);
 
         let activity = {
+            // student id is currently hardcoded...change this later...
+            student_id: 3,
             name: data.name,
             description: data.description || null,
-            duration: Number(`${data.hours}.${data.minutes}`) || null,
-            subject: parseInt(data.subject) || null
+            duration: Number(data.hours) * 60 + Number(data.minutes) || null, 
+            subject: parseInt(data.subject) || null,
+            completion_date: `${data.year}-${data.month}-${dayLeadingZero}`
         }
 
         console.log({activity})
+
+        axios.post("https://my-school-v1.herokuapp.com/api/activities/attachimg", activity)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     // Form validation for title input
