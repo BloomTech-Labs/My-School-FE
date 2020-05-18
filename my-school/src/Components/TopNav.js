@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from  'react';
 import axios from 'axios';
+import { Box, Image, Avatar, Heading, IconButton, Flex } from '@chakra-ui/core';
 
 
 export default function TopNav() {
@@ -7,7 +8,7 @@ export default function TopNav() {
   const [ user, setUser ] = useState({});
 
   useEffect(() => {
-    axios.get('https://my-school-v1.herokuapp.com/api/users/{id}') 
+    axios.get('https://my-school-v1.herokuapp.com/api/users/3') 
     // needs dynamic id from current user)
     .then(response =>{
       setUser(response)
@@ -17,17 +18,24 @@ export default function TopNav() {
 
     return (
       <nav className="top-nav">
-          {/* logo link to landing page or login? */}
-          <a href="http://www.myschoolathome.io"><img url="..\mySchoolLogo.svg" className='logo' /></a>
+        
+        <Box bg="papayawhip" w="100%" >
+          <Flex align="flex-start">
+          {/* logo link to landing page? */}
+          <a href="http://www.myschoolathome.io"><Image src='..\public\mySchoolLogo.svg' className='logo' alt='MySchool logo'/></a>
+          </Flex>
+          <Flex align="flex-end">
+          {/* Image linked to current user account https://my-school-v1.herokuapp.com/api/users/3/ */}
+          <Avatar size="md" src={user.profile_picture} alt="user avatar" />
 
-          {/* Image linked to current user account https://my-school-v1.herokuapp.com/api/users/{user.id}/ */}
-          <img src={user.profile_picture} alt="user avatar" className='user-avatar'/>
-
-          {/* Name linked to current user account https://my-school-v1.herokuapp.com/api/users/{user.id}/*/}
-          <span alt="user name" className='user-name'>{user}</span>
+          {/* Name linked to current user account https://my-school-v1.herokuapp.com/api/users/3/*/}
+          <Heading as="h3" size="lg" alt="user name" >{user.name}</Heading>
 
           {/* Gear icon for parent users -- route body to account settings */}
-
+          <IconButton variantColor="teal" aria-label="Account Settings" icon="settings"/>
+          </Flex>
+          </Box>
+       
       </nav>
     );
   }

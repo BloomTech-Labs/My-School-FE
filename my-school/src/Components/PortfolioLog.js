@@ -10,7 +10,7 @@ const PortfolioLog = () => {
     
       useEffect(() => {
       //get array of entries
-        axios.get('https://my-school-v1.herokuapp.com/api/users/{id}/activities')
+        axios.get('https://my-school-v1.herokuapp.com/api/users/3/activities')
     
       // .then(response => console.log(response))
     
@@ -31,19 +31,23 @@ const PortfolioLog = () => {
     //   const handleChanges = event => {
     //     setQuery(event.target.value )
     //   }
-function showActivity(){
-    if(activities.length >= 1){
-      activities.map(activity => 
-      <ActivityCard key={activity.id} activitiy={activity}/>);
-    } else {
-      return("This Portfolio Is Empty :/");
-    }};
+
+    
+// function showActivity(){
+//     if(activities.length >= 1){
+//       activities.map(activity => {
+//       return(<ActivityCard key={activity.id} activitiy={activity}/>)});
+//     } else {
+//       return(<p>"This Portfolio Is Empty :/"</p>);
+//     }};
 
 
     return(
         <div className='portfolio-list'>
         {/* NO ENTRIES BY DEFAULT */}
-        {showActivity()}
+        {activities.map(activity => {
+          return(<ActivityCard key={activity.id} activitiy={activity}/>)
+        })}
         </div>
     )
 
