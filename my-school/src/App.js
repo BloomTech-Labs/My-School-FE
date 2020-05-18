@@ -1,26 +1,30 @@
 import React from 'react';
-import './App.css';
+// import './App.css';
 import TopNav from './Components/TopNav';
-import AddActivityForm from './Components/AddActivityForm';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+// import ActivityContainer from './Components/ActivityContainer';
+import PortfolioLog from './Components/PortfolioLog';
+import { BrowserRouter as Router } from 'react-router-dom'
+import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
 
 function App() {
+
+
   return (
-    <body>
-      <TopNav />
-      <Router>
         <ThemeProvider>
           <CSSReset />
           <div className="App">
-            This is the app.
-            <Route exact path='/' component={} />
-            <Route path='/portfolio'component={PortfolioContainer}/>
-            <Route path='/addactivity' component={AddActivityForm} />
+           
+            <Router>
+            <TopNav />
+            <Box>
+            <p>This is the app.</p>
+            <PortfolioLog />
+            </Box>
+            </Router>
+
           </div>
         </ThemeProvider>
-      </Router>
-    </body>
+     
   );
 }
 
