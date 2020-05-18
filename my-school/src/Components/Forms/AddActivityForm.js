@@ -17,11 +17,12 @@ import {
     NumberDecrementStepper,
     Button,
 } from "@chakra-ui/core";
-import { useForm } from 'react-hook-form';
+import { useForm, FormContext } from 'react-hook-form';
 import DateSelector from '../DateSelector';
 
 const AddActivityForm = () => {
-    const { handleSubmit, errors, register, formState } = useForm();
+    const methods = useForm();
+    const { handleSubmit, errors, register, formState } = methods;
 
     // Gets subject values from db
     const [subjects, setSubjects] = useState([]);
@@ -37,6 +38,15 @@ const AddActivityForm = () => {
 
     function onSubmit(data) {
         console.log(data)
+
+        let activity = {
+            name: data.name,
+            description: data.description || null,
+            duration: Number(`${data.hours}.${data.minutes}`) || null,
+            subject: parseInt(data.subject) || null
+        }
+
+        console.log({activity})
     }
 
     function validateTitle(value) {
@@ -50,6 +60,7 @@ const AddActivityForm = () => {
     }
 
     return (
+        <FormContext {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
         {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
             <Box w={1/2} px={20}>
@@ -69,7 +80,7 @@ const AddActivityForm = () => {
 
                 <FormControl>
                     <FormLabel htmlFor="subject">Subject</FormLabel>
-                    <Select id="subject" placeholder="Select...">
+                    <Select id="subject" name="subject" placeholder="Select..." ref={register} >
                         {subjects.map(s => {
                             return (
                                 <option value={s.id} key={s.id}>{s.name}</option>
@@ -80,7 +91,7 @@ const AddActivityForm = () => {
 
                 <FormControl>
                     <FormLabel htmlFor="description">Description</FormLabel>
-                    <Textarea placeholder="Tell us all about what you did in this activity!" />
+                    <Textarea id="description" name="description" placeholder="Tell us all about what you did in this activity!" ref={register} />
                 </FormControl>
 
                 <p style={{fontWeight: "bold"}}>How long did it take to complete this activity?</p>
@@ -89,8 +100,8 @@ const AddActivityForm = () => {
                     <Flex>
                         <FormControl>
                             <FormLabel htmlFor="hours">Hours</FormLabel>
-                            <NumberInput id="hours" defaultValue={0} w="120px" mr="32px">
-                                <NumberInputField />
+                            <NumberInput mr="20px" defaultValue={0}>
+                                <NumberInputField id="hours" name="hours"  w="120px" mr="32px" ref={register} mr="0px" />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
@@ -100,8 +111,8 @@ const AddActivityForm = () => {
 
                         <FormControl>
                             <FormLabel htmlFor="minutes">Minutes</FormLabel>
-                            <NumberInput id="minutes" defaultValue={0} max={59} w="120px">
-                                <NumberInputField />
+                            <NumberInput max={59}defaultValue={0}>
+                                <NumberInputField id="minutes" name="minutes"   w="120px" ref={register} />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
@@ -113,12 +124,18 @@ const AddActivityForm = () => {
 
                 <p style={{fontWeight: "bold"}}>Confirm Submission Date</p>
                 <Flex align="flex-end" justify="space-between"  flexWrap="wrap">
-                    <DateSelector />
-                    <Button type="submit" w="120px" isLoading={formState.isSubmitting}>Submit</Button>
+                    <DateSelector onSubmit/>
+                    <Button 
+                        type="submit" 
+                        w="120px" 
+                        isLoading={formState.isSubmitting}
+                        // isDisabled={!name ? true : false}
+                    >Submit</Button>
                 </Flex>
 
             </Box>
         </form>
+        </FormContext>
     )
 }
 
