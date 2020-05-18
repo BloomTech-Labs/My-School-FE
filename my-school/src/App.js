@@ -2,8 +2,8 @@ import React from 'react';
 // import './App.css';
 import TopNav from './Components/TopNav';
 
-import PortfolioContainer from './Components/PortfolioContainer';
-import AddActivityForm from './Components/AddActivityForm';
+import ActivityContainer from './Components/ActivityContainer';
+import AddActivityForm from './Components/Forms/AddActivityForm';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 
@@ -15,10 +15,11 @@ function App() {
         <ThemeProvider>
           <CSSReset />
           <div className="App">
-            This is the app.
-            {/* <Route exact path='/' /> */}
-            <Route path='/portfolio'component={PortfolioContainer}/>
-            <Route path='/addactivity' component={AddActivityForm} />
+            <p>This is the app.</p>
+            <Route exact path='/'component={ActivityContainer}/>
+            {/* <Route path='/register' component={} />
+                <Route path='/settings' component={} /> */}
+            <Route path='/addentry' component={AddActivityForm} />
           </div>
         </ThemeProvider>
       </Router>

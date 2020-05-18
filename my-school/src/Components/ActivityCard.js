@@ -1,6 +1,10 @@
 import React from 'react';
 
-export default function EntryCard(props)  {
+
+export default function ActivityCard(props)  {
+
+
+
     return (
        <div>
            {/* SUBJECT ICON OR OTHER GRAPHIC? IMAGES FROM DATABASE? */}

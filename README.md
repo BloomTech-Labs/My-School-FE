@@ -6,17 +6,16 @@
 
 🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
-# 1️⃣ MySchool
+# MySchool
 
 1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
 
-## 4️⃣ Contributors
+## Contributors
 
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
 
 |                                       [Elysia Gabe](https://github.com/elysiagabe)                                        |                                       [Dylan Collins](https://github.com/dylan17th)                                        |                                       [Sara Reidy](https://github.com/reidysj)                                        |                                       [Marc Dandoy](https://github.com/MD412)                                        |                                       [Katrina Hernandez](https://github.com/abqkatrina)                                        |
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
-|                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/elysiagabe)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/dylan17th)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/reidysj)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-female.png" width = "200" />](https://github.com/MD412)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/abqkatrina)                       |
+|                      [<img src="https://ca.slack-edge.com/ESZCHB482-W0123RSB89M-5652347e0f72-512" width = "200" />](https://github.com/elysiagabe)                       |                      [<img src="https://ca.slack-edge.com/ESZCHB482-W012BRRS6B0-9da44ed2172e-512" width = "200" />](https://github.com/dylan17th)                       |                      [<img src="https://ca.slack-edge.com/ESZCHB482-W012H6RR32R-59d396a2c11b-512" width = "200" />](https://github.com/reidysj)                       |                      [<img src="https://ca.slack-edge.com/ESZCHB482-W012X6SE2CR-e180dcd347e7-512" width = "200" />](https://github.com/MD412)                       |                      [<img src="https://ca.slack-edge.com/ESZCHB482-W0123RRCX0F-117b2e41f058-512" width = "200" />](https://github.com/abqkatrina)                       |
 |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/elysiagabe)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/dylan17th)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/reidysj)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/MD412)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/abqkatrina)             |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/abqkatrina) |
 
@@ -72,7 +71,7 @@ MySchool is a portfolio-building app for parents and students participating in h
 
 #### Front end deployed to `🚫insert service here`
 
-#### [Back end](🚫link to back end repo here) built using:
+#### [Back end](https://my-school-v1.herokuapp.com/) built using:
 
 #### 🚫 back end framework goes here
 
@@ -118,27 +117,13 @@ Volunteering your time; it pays you and your whole community fantastic dividends
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
-🚫These are just examples, replace them with the specifics for your app
-
-    *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
-    *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
-    *  REACT_APP_databaseURL - in the Firebase dashboard
-    *  REACT_APP_projectID - in the Firebase dashboard
-    *  REACT_APP_storageBucket - in the Firebase dashboard
-    *  REACT_APP_messagingSenderId - in the Firebase dashboard
-    *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
-    *  REACT_APP_backendURL - optional for your local development server
-    *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
-    *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
-
-# 5️⃣ Content Licenses
-
-🚫For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
-
-| Image Filename | Source / Creator | License                                                                      |
-| -------------- | ---------------- | ---------------------------------------------------------------------------- |
-| doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
-| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
+    *  PORT - set to any valid local port number for running server locally
+    *  DB_ENV - set to "development" until ready for "production"
+    *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
+    *  CLOUDINARY_NAME - this is your Cloudinary username
+    *  CLOUDINARY_API_KEY - this is generated in your Cloudinary account
+    *  CLOUDINARY_API_SECRET - this is generated in your Cloudinary account
+   
 
 # 4️⃣ Testing
 
@@ -195,4 +180,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](🚫_link to your backend readme here_) for details on the backend of our project.
+See [Backend Documentation](https://github.com/Lambda-School-Labs/My-School-BE-/edit/master/README.md) for details on the backend of our project.
