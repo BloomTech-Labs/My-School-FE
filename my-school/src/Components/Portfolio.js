@@ -2,7 +2,7 @@ import React from 'react';
 import PortfolioHeader from './PortfolioHeader';
 import PortfolioLog from './PortfolioLog';
 
-export default Portfolio = () => {
+const Portfolio = () => {
 
     return(
         <div>
@@ -11,3 +11,5 @@ export default Portfolio = () => {
         </div>
     )
 };
+
+export default Portfolio;

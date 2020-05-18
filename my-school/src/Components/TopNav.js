@@ -20,9 +20,10 @@ export default function TopNav() {
       <nav className="top-nav">
         
         <Box bg="papayawhip" w="100%" >
+          <Flex direction="row" align="center">
           <Flex align="flex-start">
           {/* logo link to landing page? */}
-          <a href="http://www.myschoolathome.io"><Image src='..\public\mySchoolLogo.svg' className='logo' alt='MySchool logo'/></a>
+          <a href="http://www.myschoolathome.io"><Image src='https://myschoolathome.io/static/media/logo100-100.ba4f14e7.svg' alt='MySchool logo'/></a>
           </Flex>
           <Flex align="flex-end">
           {/* Image linked to current user account https://my-school-v1.herokuapp.com/api/users/3/ */}
@@ -33,6 +34,7 @@ export default function TopNav() {
 
           {/* Gear icon for parent users -- route body to account settings */}
           <IconButton variantColor="teal" aria-label="Account Settings" icon="settings"/>
+          </Flex>
           </Flex>
           </Box>
        
