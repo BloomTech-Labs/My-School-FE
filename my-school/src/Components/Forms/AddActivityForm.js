@@ -24,7 +24,7 @@ const AddActivityForm = () => {
     const methods = useForm();
     const { handleSubmit, errors, register, formState } = methods;
 
-    // Gets subject values from db
+    // Gets subject value options from db
     const [subjects, setSubjects] = useState([]);
     useEffect(() => {
         axios.get("https://my-school-v1.herokuapp.com/api/subjects")
@@ -36,6 +36,7 @@ const AddActivityForm = () => {
         })
     }, [])
 
+    // Submit handler
     function onSubmit(data) {
         console.log(data)
 
@@ -49,6 +50,7 @@ const AddActivityForm = () => {
         console.log({activity})
     }
 
+    // Form validation for title input
     function validateTitle(value) {
         let error;
         if (value.length === 0) {

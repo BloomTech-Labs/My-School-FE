@@ -14,7 +14,6 @@ import {
 } from '@chakra-ui/core';
 
 const DateSelector = (props) => {
-    console.log(props)
     const methods = useFormContext();
 
     // Gets current date values...used to set default value in input fields
@@ -39,7 +38,7 @@ const DateSelector = (props) => {
         dateIterator.add(1, 'month');
     }
     
-    // Month state...helps set max # of days 
+    // Month state...sets max # of days user can enter based on what month user selects
     const [month, setMonth] = useState(months.find(m => m.num === currentMonth));
 
     const handleMonthChange = e => {
@@ -68,13 +67,14 @@ const DateSelector = (props) => {
 
             <FormControl w="30%" pr="1rem">
                 <FormLabel htmlFor="day">Day</FormLabel>
-                <NumberInput defaultValue={currentDate} 
-                        min={1} 
-                        max={month ? month.length : 31}>
+                <NumberInput 
+                    defaultValue={currentDate} 
+                    min={1} 
+                    max={month ? month.length : 31}
+                >
                     <NumberInputField 
                         id="day" 
                         name="day"
-                        
                         ref={methods.register}
                     />
                     <NumberInputStepper>
@@ -86,9 +86,11 @@ const DateSelector = (props) => {
 
             <FormControl w="30%">
                 <FormLabel htmlFor="year">Year</FormLabel>
-                <NumberInput defaultValue={currentYear} 
-                        max={currentYear + 10}
-                        min={currentYear - 100}>
+                <NumberInput 
+                    defaultValue={currentYear} 
+                    max={currentYear + 10}
+                    min={currentYear - 100}
+                >
                     <NumberInputField 
                         id="year" 
                         name="year"
