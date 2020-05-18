@@ -27,7 +27,7 @@ const PortfolioHeader = () => {
     return(
          
         
-        <Router>
+      
         <header>
             {/* TITLE  -- based on user type and name*/}
             <Heading as="h2">{title}</Heading>
@@ -41,7 +41,7 @@ const PortfolioHeader = () => {
             {/*SEARCH BOX AND SORT/FILTER FEATUREs WILL GO HERE*/}
             {/* future -- activity tracker? */}
         </header> 
-        </Router>
+      
     )
 }
 
