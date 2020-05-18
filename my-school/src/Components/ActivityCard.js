@@ -33,9 +33,9 @@ export default function ActivityCard(props)  {
     return (
        <div className='activity-card'>
            {/* SUBJECT ICON OR OTHER GRAPHIC? IMAGES FROM DATABASE? */}
-            <p>Title: {props.entry.title}</p>
-            <p>Date: {props.entry.submission_date}</p>
-            <Tag variantColor="red" rounded="full">{props.entry.subject}</Tag>
+            <p>Title: {props.name}</p>
+            <p>Date: {props.completion_date}</p>
+            <Tag variantColor="red" rounded="full">{props.subject_id}</Tag>
             
             <Button   
                 _hover={{ bg: "white", 

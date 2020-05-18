@@ -2,6 +2,7 @@ import React from 'react';
 import {   
   Switch,
   Route,
+  Router,
   useParams,
   useRouteMatch
 } from 'react-router-dom';
@@ -9,16 +10,17 @@ import Portfolio from './Portfolio';
 import AddActivityForm from './Forms/AddActivityForm';
 
 
-export default function ActivityList(){
+export default function ActivityContainer(){
 
   return (
     <div>
+      <Router>
     <Switch>
 
           {/* <Route exact path '/family' component={ListFamily} */}
             {/* ^parent login default -- requires parent type*/}
 
-      <Route path='/portfolio' component={Portfolio} />
+      <Route exact path='/' component={Portfolio} />
         {/* ^ student login default -- viewable by student and parent*/}
 
           {/* <Route path='/settings' component={SettingsForm} */}
@@ -28,6 +30,7 @@ export default function ActivityList(){
         {/*  ^ replaces portfolio -- useable by student and parent */}
 
    </Switch>
+   </Router>
    </div>
   );
 }

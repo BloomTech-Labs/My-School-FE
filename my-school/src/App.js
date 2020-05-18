@@ -1,9 +1,10 @@
 import React from 'react';
 // import './App.css';
 import TopNav from './Components/TopNav';
-import ActivityContainer from './Components/ActivityContainer';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+// import ActivityContainer from './Components/ActivityContainer';
+import PortfolioLog from './Components/PortfolioLog';
+import { BrowserRouter as Router } from 'react-router-dom'
+import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
 
 function App() {
 
@@ -12,11 +13,15 @@ function App() {
         <ThemeProvider>
           <CSSReset />
           <div className="App">
-            <TopNav />
+           
             <Router>
+            <TopNav />
+            <Box>
             <p>This is the app.</p>
-            <Route exact path='/portfolio/'component={ActivityContainer}/>
+            <PortfolioLog />
+            </Box>
             </Router>
+
           </div>
         </ThemeProvider>
      

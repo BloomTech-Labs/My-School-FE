@@ -15,12 +15,12 @@ const PortfolioLog = () => {
       // .then(response => console.log(response))
     
               .then(response => {
-                
+                console.log(response.data)
                 // .filter
                 // (entry=>
                 // entry.toLowerCase().includes(query.toLowerCase())
                 // );
-                setActivities(response);
+                setActivities(response.data);
               })
               .catch(error => console.log('whoops', error))
               
