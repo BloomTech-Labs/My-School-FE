@@ -1,21 +1,43 @@
-import React from  'react';
+import React, { useEffect, useState } from  'react';
+import axios from 'axios';
+import { Box, Image, Avatar, Heading, IconButton, Flex } from '@chakra-ui/core';
 
 
 export default function TopNav() {
+
+  const [ user, setUser ] = useState({});
+
+  useEffect(() => {
+    axios.get('https://my-school-v1.herokuapp.com/api/users/3') 
+    // needs dynamic id from current user)
+    .then(response =>{
+      setUser(response)
+    })
+  }, []);
+
+
     return (
       <nav className="top-nav">
-          {/* logo link to landing page or login? */}
-          <a href="http://www.myschoolathome.io"><img url="..\mySchoolLogo.svg" /></a>
+        
+        <Box bg="papayawhip" w="100%" >
+          <Flex direction="row" align="center">
+          <Flex align="flex-start">
+          {/* logo link to landing page? */}
+          <a href="http://www.myschoolathome.io"><Image src='https://myschoolathome.io/static/media/logo100-100.ba4f14e7.svg' alt='MySchool logo'/></a>
+          </Flex>
+          <Flex align="flex-end">
+          {/* Image linked to current user account https://my-school-v1.herokuapp.com/api/users/3/ */}
+          <Avatar size="md" src={user.profile_picture} alt="user avatar" />
 
-          {/* Image linked to current user account */}
-          <img alt="user avatar"/>
+          {/* Name linked to current user account https://my-school-v1.herokuapp.com/api/users/3/*/}
+          <Heading as="h3" size="lg" alt="user name" >{user.name}</Heading>
 
-          {/* Name linked to current user account */}
-          <span alt="user name">{}</span>
-
-          {/* Gear icon for parent users -- route to account settings */}
-
-          {/* Breadcrumb? */}
+          {/* Gear icon for parent users -- route body to account settings */}
+          <IconButton variantColor="teal" aria-label="Account Settings" icon="settings"/>
+          </Flex>
+          </Flex>
+          </Box>
+       
       </nav>
     );
   }
