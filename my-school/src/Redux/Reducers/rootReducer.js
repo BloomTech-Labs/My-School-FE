@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
-//import other reducers here
+import { portfolioReducer } from './portfolio-reducer.js';
 
-const rootReducer = combineReducers({
-    //reducers here
-});
+const rootReducer = combineReducers({ portfolioReducer});
 
 export default rootReducer;
