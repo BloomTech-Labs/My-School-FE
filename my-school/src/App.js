@@ -23,9 +23,6 @@ function App() {
             <Portfolio />
             </Box>
             </Router>
-            <PDFViewer>
-              <MyDocument />
-            </PDFViewer>
           </div>
         </ThemeProvider>
      

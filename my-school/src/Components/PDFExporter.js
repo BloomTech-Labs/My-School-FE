@@ -5,7 +5,7 @@ import {
   View,
   Document,
   StyleSheet,
-  Image
+  Image,
 } from "@react-pdf/renderer";
 import axios from "axios";
 
@@ -30,63 +30,50 @@ const styles = StyleSheet.create({
   text: {
     margin: 12,
     fontSize: 14,
-    textAlign: 'justify',
-    fontFamily: 'Times-Roman'
+    textAlign: "justify",
+    fontFamily: "Times-Roman",
   },
   image: {
-    marginVertical: 15,
-    marginHorizontal: 100,
+    width: '150px'
   },
 });
 
 // Create Document Component
-const MyDocument = () => {
-  const [activities, setActivities] = useState([]);
+const MyDocument = ({ activities }) => {
+  // const [activities, setActivities] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("https://my-school-v1.herokuapp.com/api/activities")
-      .then((res) => {
-        console.log('****************************', res.data)
-        setActivities(res.data);
-       
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://my-school-v1.herokuapp.com/api/activities")
+  //     .then((res) => {
+  //       console.log('****************************', res.data)
+  //       setActivities(res.data);
 
-  if(activities.length >= 0){
-    const student = ([activities.studentsName] + "\'s Portfolio");
-    return (
-        <Document onRender={() => alert("rendered")} title={student}>
-     
-           
-                <Page size="A4" style={styles.page}>
-                {activities.map(a => {
-                return(
-                        <View style={styles.section}  key={a.id}>
-                            <Text >{a.name}</Text>
-                            <Text >{a.description}</Text>
-                            <Image  src={a.photo} />
-                        </View>
-                    
-                )
-                  
-            })}
-             </Page> 
-        </Document>
-    )
-  } else {
-    return (
-      <Document>
-        <Page>
-          <Text>Hi</Text>
-        </Page>
-      </Document>
-    )
-  }
-;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+  console.log({activities})
+
+  const student = [activities.studentsName] + "'s Portfolio";
+  return (
+    <Document onRender={() => alert("rendered")} title={student}>
+      <Page size="A4" style={styles.page}>
+      <View style={styles.section} >
+        {activities.map((a) => {
+          return (
+            <View key={a.id}>
+              <Text>{a.name}</Text>
+              <Text>{a.description}</Text>
+              {a.photo && <Image src={a.photo} style={styles.image}/>}
+              </View>
+          );
+        })}
+        </View>
+      </Page>
+    </Document>
+  );
 };
 
 export default MyDocument;
