@@ -42,7 +42,7 @@ function ActivityCard(props)  {
     const toast = useToast();
 
     useEffect(()=>{
-        console.log('this useEffect is working')
+        console.log('this useEffect is working with duration props', props.activity.duration)
         if(props.activity.duration !== null){
             console.log('this useEffect is working 2.0')
             let num = props.activity.duration;
@@ -50,8 +50,8 @@ function ActivityCard(props)  {
             let arr = str.split('.');
             setHour(arr[0])
             setMin(arr[1])
-            console.log(hour)
-            console.log(min)
+            console.log('inside the useEffect for duration',arr[0],arr[1])
+
         }else{
             setHour(0)
             setMin(0)
@@ -93,7 +93,7 @@ function ActivityCard(props)  {
         if(month === '06'){
             return setMonth("JUNE")
         }
-        if(month == '07'){
+        if(month === '07'){
             return setMonth("JULY")
         }
         if(month === '08'){
@@ -113,10 +113,9 @@ function ActivityCard(props)  {
         }
     }
 
-console.log(props)
 
     function editEntry(id){
-        const arr = [input.hours, input.hours]
+        const arr = [input.hours, input.minutes]
         const duration = arr.join('.');
         console.log(duration)
 
@@ -159,15 +158,16 @@ console.log(props)
             let arr = str.split('.');
             const hourNum = arr[0];
             const minNum = arr[1];
+            console.log('inside the duration handler', hourNum, minNum)
             setInput({
                 ...props.activity, 
                 description: props.activity.description === null ? '' : props.activity.description,
                 hours: hourNum,
                 minutes: minNum
             })
-
             onOpen()
         }else{
+            console.log('the else is the one is running')
             setInput({
                 ...props.activity, 
                 description: props.activity.description === null ? '' : props.activity.description,
@@ -177,6 +177,7 @@ console.log(props)
         }}
 
     const handleHours = value => {
+        console.log('this is the hours value in real time', value)
             setInput({
                 ...input, 
                 hours: value
@@ -184,12 +185,12 @@ console.log(props)
         }
 
     const handleMins = value => {
+        console.log('this is the minues value in real time', value)
             setInput({
                 ...input, 
                 minutes: value
             })
         }
-        console.log(hour,min)
     return (
        <div className='activity-card'>
             <p>{props.activity.name}</p>
@@ -238,7 +239,7 @@ console.log(props)
                         <Flex>
                             <FormControl handeChange={handleInput} >
                                 <FormLabel htmlFor="hours">Hours</FormLabel>
-                                <NumberInput id="hours" defaultValue={input.hours} w="120px" mr="32px" onChange={handleHours}>
+                                <NumberInput id="hours"  defaultValue={input.hours} w="120px" mr="32px" onChange={handleHours}>
                                     <NumberInputField />
                                     <NumberInputStepper>
                                         <NumberIncrementStepper />
