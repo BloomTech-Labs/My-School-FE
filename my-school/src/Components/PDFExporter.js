@@ -9,6 +9,8 @@ import {
 } from "@react-pdf/renderer";
 import axios from "axios";
 
+// import ActivityCard from "./ActivityCard";
+
 // Create styles
 const styles = StyleSheet.create({
   page: {
@@ -38,17 +40,25 @@ const MyDocument = () => {
       });
   }, []);
 
-  if(activities.length){
+  if(activities.length >= 0){
     return (
-      <Document>
-        <Page size="A4" style={styles.page}>
-          <View style={styles.section}>
-            <Text>{activities[0].name}</Text>
-            <Text>{activities[0].description}</Text>
-            <Image src={activities[0].photo}/>
-          </View>
-        </Page>
-      </Document>
+        <Document onRender={() => alert("rendered")}>
+     
+            {activities.map(a => {
+                return(
+                <Page size="A4" style={styles.page} key={a.id}>
+                  
+                        <View style={styles.section}>
+                            <Text >{activities.name}
+                            {activities.description}</Text>
+                            <Image  src={activities.photo} />
+                        </View>
+                    
+                
+                </Page>    )
+            })}
+            
+        </Document>
     )
   } else {
     return (

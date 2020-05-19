@@ -9,7 +9,6 @@ import {
 import Portfolio from './Portfolio';
 import AddActivityForm from './Forms/AddActivityForm';
 
-
 export default function ActivityContainer(){
 
   return (

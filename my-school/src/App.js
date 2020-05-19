@@ -7,7 +7,6 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
 import {PDFViewer} from '@react-pdf/renderer';
 import MyDocument from './Components/PDFExporter';
-import { Page, Text, View, Document, StyleSheet, Image } from "@react-pdf/renderer";
 
 function App() {
 
