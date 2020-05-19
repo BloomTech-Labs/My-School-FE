@@ -13,8 +13,9 @@ import AddActivityForm from './Forms/AddActivityForm';
 export default function ActivityContainer(){
 
   return (
+    <Router>
     <div>
-      <Router>
+      
     <Switch>
 
           {/* <Route exact path '/family' component={ListFamily} */}
@@ -30,7 +31,8 @@ export default function ActivityContainer(){
         {/*  ^ replaces portfolio -- useable by student and parent */}
 
    </Switch>
-   </Router>
+  
    </div>
+   </Router>
   );
 }

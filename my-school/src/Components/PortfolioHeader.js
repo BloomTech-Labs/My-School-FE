@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Heading } from '@chakra-ui/core';
 import axios from 'axios';
 
@@ -27,13 +27,13 @@ const PortfolioHeader = () => {
     return(
          
         
-        <Router>
+      
         <header>
             {/* TITLE  -- based on user type and name*/}
-            <Heading as="h2">{title}</Heading>
+            <Link to = '/portfolio'><Heading as="h2">{title}</Heading></Link>
 
             {/* ADD ACTIVITY BUTTON */}
-            <Link to ='/addactivity'><Button lefticon="small-add" variantColor="teal" variant="solid">Add Activity</Button></Link>
+            <Link to ='/add'><Button lefticon="small-add" variantColor="teal" variant="solid">Add Activity</Button></Link>
 
             {/*  EXPORT BUTTON -- PARENTS ONLY? */}
             {/* <Button lefticon="download" variantColor="teal" variant="solid">Convert to PDF</Button> */}
@@ -41,7 +41,7 @@ const PortfolioHeader = () => {
             {/*SEARCH BOX AND SORT/FILTER FEATUREs WILL GO HERE*/}
             {/* future -- activity tracker? */}
         </header> 
-        </Router>
+      
     )
 }
 
