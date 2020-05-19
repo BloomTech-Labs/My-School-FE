@@ -116,7 +116,7 @@ const AddActivityForm = () => {
 
                 <FormControl>
                     <FormLabel htmlFor="subject">Subject</FormLabel>
-                    <FormHelperText>Note: Automatically sets subject to "Other" if nothing is selected.</FormHelperText>
+                    
                     <Select id="subject" name="subject" placeholder="Select..." ref={register} >
                         {subjects.map(s => {
                             return (
@@ -124,6 +124,7 @@ const AddActivityForm = () => {
                             )
                         })}
                     </Select>
+                    <FormHelperText>Note: Automatically sets subject to "Other" if nothing is selected.</FormHelperText>
                 </FormControl>
 
                 <FormControl>
