@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
     Box,
     Flex,
+    Text,
     FormErrorMessage,
     FormLabel,
     FormControl,
@@ -20,6 +21,7 @@ import {
 } from "@chakra-ui/core";
 import { useForm, FormContext } from 'react-hook-form';
 import DateSelector from '../DateSelector';
+import NewActivityPreview from './NewActivityPreview';
 
 const AddActivityForm = () => {
     const methods = useForm();
@@ -44,7 +46,7 @@ const AddActivityForm = () => {
 
     // Submit handler
     function onSubmit(data) {
-        console.log({data})
+        // console.log({data})
         // this adds leading zero to day & month values to ensure completion_date is correct format
         const monthLeadingZero = data.month < 10 ? "0" + String(data.month) : String(data.month);
         const dayLeadingZero = data.day < 10 ? "0" + String(data.day) : String(data.day);
@@ -55,7 +57,7 @@ const AddActivityForm = () => {
             name: data.name,
             description: data.description || null,
             duration: Number(data.hours) * 60 + Number(data.minutes) || null, 
-            subject_id: parseInt(data.subject) || null,
+            subject_id: parseInt(data.subject) || 9,
             completion_date: `${data.year}-${monthLeadingZero}-${dayLeadingZero}`
         }
 
@@ -63,6 +65,7 @@ const AddActivityForm = () => {
 
         axios.post("https://my-school-v1.herokuapp.com/api/activities", activity)
             .then(res => {
+                console.log(res)
                 setPreview(res.data[0])
             })
             .catch(err => {
@@ -89,14 +92,16 @@ const AddActivityForm = () => {
 
     return (
         <>
-        { preview ? <h1>This is the preview</h1> 
+        { preview ? <NewActivityPreview preview={preview} /> 
         : 
         <FormContext {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
         {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
+        <Flex>
             <Box w={1/2} px={20}>
+                <Text fontSize="lg" fontWeight="500" pb="37px">Add an Activity</Text>
                 <FormControl isInvalid={errors.name}>
-                    <FormLabel htmlFor="name">Title</FormLabel>
+                    <FormLabel htmlFor="name">Title<span style={{color: "#e53e3e", margin: "4px"}}>*</span></FormLabel>
                     <Input 
                         type="text" 
                         id="name"
@@ -111,6 +116,7 @@ const AddActivityForm = () => {
 
                 <FormControl>
                     <FormLabel htmlFor="subject">Subject</FormLabel>
+                    <FormHelperText>Note: Automatically sets subject to "Other" if nothing is selected.</FormHelperText>
                     <Select id="subject" name="subject" placeholder="Select..." ref={register} >
                         {subjects.map(s => {
                             return (
@@ -132,7 +138,7 @@ const AddActivityForm = () => {
                         <FormControl>
                             <FormLabel htmlFor="hours">Hours</FormLabel>
                             <NumberInput mr="20px" defaultValue={0}>
-                                <NumberInputField id="hours" name="hours"  w="120px" mr="32px" ref={register} mr="0px" />
+                                <NumberInputField id="hours" name="hours"  w="120px" ref={register} mr="0px" />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
@@ -165,6 +171,11 @@ const AddActivityForm = () => {
                 </Flex>
 
             </Box>
+            <Box w={1/2} px={20}>
+                <Text fontSize="lg" fontWeight="500" pb="61px">Upload an Activity Photo</Text>
+                <Button>Choose File</Button>
+            </Box>
+            </Flex>
         </form>
         </FormContext>
         }
