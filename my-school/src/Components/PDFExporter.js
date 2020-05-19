@@ -41,23 +41,25 @@ const MyDocument = () => {
   }, []);
 
   if(activities.length >= 0){
+    
+
     return (
         <Document onRender={() => alert("rendered")}>
      
-            {activities.map(a => {
+           
+                <Page size="A4" style={styles.page}>
+                {activities.map(a => {
                 return(
-                <Page size="A4" style={styles.page} key={a.id}>
-                  
-                        <View style={styles.section}>
-                            <Text >{activities.name}
-                            {activities.description}</Text>
-                            <Image  src={activities.photo} />
+                        <View style={styles.section}  key={a.id}>
+                            <Text >{a.name}
+                            {a.description}</Text>
+                            <Image  src={a.photo} />
                         </View>
                     
-                
-                </Page>    )
+                )
+                  
             })}
-            
+             </Page> 
         </Document>
     )
   } else {
