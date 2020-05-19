@@ -16,6 +16,7 @@ import {
     NumberIncrementStepper,
     NumberDecrementStepper,
     Button,
+    useToast
 } from "@chakra-ui/core";
 import { useForm, FormContext } from 'react-hook-form';
 import DateSelector from '../DateSelector';
@@ -23,6 +24,11 @@ import DateSelector from '../DateSelector';
 const AddActivityForm = () => {
     const methods = useForm();
     const { handleSubmit, errors, register, formState } = methods;
+    const toast = useToast();
+
+    // Preview state...will get passed to Preview component
+    const [preview, setPreview] = useState();
+    console.log({preview})
 
     // Gets subject value options from db
     const [subjects, setSubjects] = useState([]);
@@ -39,7 +45,8 @@ const AddActivityForm = () => {
     // Submit handler
     function onSubmit(data) {
         console.log({data})
-        // this adds leading zero to "day" value to ensure completion_date is correct format (leading zero is added to month in DateSelector component)...may update this at some point in DateSelector...TBD...
+        // this adds leading zero to day & month values to ensure completion_date is correct format
+        const monthLeadingZero = data.month < 10 ? "0" + String(data.month) : String(data.month);
         const dayLeadingZero = data.day < 10 ? "0" + String(data.day) : String(data.day);
 
         let activity = {
@@ -48,18 +55,24 @@ const AddActivityForm = () => {
             name: data.name,
             description: data.description || null,
             duration: Number(data.hours) * 60 + Number(data.minutes) || null, 
-            subject: parseInt(data.subject) || null,
-            completion_date: `${data.year}-${data.month}-${dayLeadingZero}`
+            subject_id: parseInt(data.subject) || null,
+            completion_date: `${data.year}-${monthLeadingZero}-${dayLeadingZero}`
         }
 
         console.log({activity})
 
-        axios.post("https://my-school-v1.herokuapp.com/api/activities/attachimg", activity)
+        axios.post("https://my-school-v1.herokuapp.com/api/activities", activity)
             .then(res => {
-                console.log(res)
+                setPreview(res.data[0])
             })
             .catch(err => {
                 console.log(err)
+                toast({
+                    title: "An error occurred.",
+                    description: "Unable to log new activity.",
+                    status: "error",
+                    isClosable: true
+                })
             })
     }
 
@@ -75,11 +88,14 @@ const AddActivityForm = () => {
     }
 
     return (
+        <>
+        { preview ? <h1>This is the preview</h1> 
+        : 
         <FormContext {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
         {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
             <Box w={1/2} px={20}>
-                <FormControl  isRequired isInvalid={errors.name}>
+                <FormControl isInvalid={errors.name}>
                     <FormLabel htmlFor="name">Title</FormLabel>
                     <Input 
                         type="text" 
@@ -151,6 +167,8 @@ const AddActivityForm = () => {
             </Box>
         </form>
         </FormContext>
+        }
+        </>
     )
 }
 

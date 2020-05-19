@@ -17,7 +17,7 @@ const DateSelector = (props) => {
     const methods = useFormContext();
 
     // Gets current date values...used to set default value in input fields
-    const currentMonth = (moment().month() + 1 < 10) ? "0" + String(moment().month() + 1) : String(moment().month() + 1); 
+    const currentMonth = moment().month() + 1; 
     const currentDate = moment().date();
     const currentYear = moment().year();
 
@@ -31,24 +31,19 @@ const DateSelector = (props) => {
     while (dateIterator.isBefore(rangeEnd) || dateIterator.isSame(rangeEnd)) {
         const endOfMonth = moment(dateIterator).endOf('month');
         months.push({
-            num: (dateIterator.month() + 1) < 10 
-                ? "0" + String(dateIterator.month() + 1)
-                : String(dateIterator.month() + 1),
+            num: dateIterator.month() + 1,
             length: endOfMonth.date(),
             name: dateIterator.format('MMMM')
         });
         dateIterator.add(1, 'month');
     }
 
-    console.log(months)
-    console.log(currentMonth)
     // Month state...sets max # of days user can enter based on what month user selects
     const [month, setMonth] = useState(months.find(m => m.num === currentMonth));
 
     const handleMonthChange = e => {
         setMonth(months.find(m => m.num === parseInt(e.target.value)))
     }
-
 
     return (
         <Flex w="372px">
