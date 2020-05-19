@@ -42,17 +42,21 @@ function ActivityCard(props)  {
     const toast = useToast();
 
     useEffect(()=>{
+        console.log('this useEffect is working')
         if(props.activity.duration !== null){
+            console.log('this useEffect is working 2.0')
             let num = props.activity.duration;
             let str = num.toString();
             let arr = str.split('.');
             setHour(arr[0])
             setMin(arr[1])
+            console.log(hour)
+            console.log(min)
         }else{
             setHour(0)
             setMin(0)
         }
-    },[])
+    },[props.activity.duration])
 
     useEffect(()=>{
         const dateVar = props.activity.created_at;
@@ -68,7 +72,7 @@ function ActivityCard(props)  {
         const dateArr = [newArr[2],newArr[3]]
         const dayDisplayed = dateArr.join('')
         setDay(dayDisplayed)
-    },[])
+    },[props.activity.created_at])
 
     function getMonth(month){
         if(month === '1'){
@@ -109,9 +113,13 @@ function ActivityCard(props)  {
         }
     }
 
+console.log(props)
+
     function editEntry(id){
         const arr = [input.hours, input.hours]
-        const duration = arr.join('.')
+        const duration = arr.join('.');
+        console.log(duration)
+
         if(selectedFile !== null){
             const formData = new FormData();
             formData.append('photo', selectedFile, selectedFile.name);
@@ -181,7 +189,7 @@ function ActivityCard(props)  {
                 minutes: value
             })
         }
-
+        console.log(hour,min)
     return (
        <div className='activity-card'>
             <p>{props.activity.name}</p>

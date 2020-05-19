@@ -6,16 +6,16 @@ import {
 import ActivityCard from './ActivityCard';
 import '../App.css';
 
-const PortfolioLog = (props) => {
+const PortfolioLog = ({activities, getAllActivitiesForUser}) => {
   // const { id } = useParams;
       useEffect(() => {
         //the paramter passed in will not be hard coded once we make user login and dynamic routes
-        props.getAllActivitiesForUser(3)       
+        getAllActivitiesForUser(3)       
       }, []);
 
     return(
         <div className='portfolio-list'>
-          {props.activities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />))}
+          {activities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />))}
         </div>
     )
 };
