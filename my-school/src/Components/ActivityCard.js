@@ -30,12 +30,12 @@ import '../App.css';
 
 function ActivityCard(props)  {
 
-    const [input, setInput]= useState();
+    const [input, setInput]= useState({});
     const [hour, setHour] = useState();
     const [min, setMin] = useState();
-    const [month, setMonth] = useState();
-    const [day, setDay]= useState();
-    const [year, setYear] = useState();
+    const [month, setMonth] = useState('');
+    const [day, setDay]= useState('');
+    const [year, setYear] = useState('');
     const [ selectedFile , setSelectedFile]= useState(null)
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
