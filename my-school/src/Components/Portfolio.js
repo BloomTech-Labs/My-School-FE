@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PortfolioHeader from './PortfolioHeader';
 import PortfolioLog from './PortfolioLog';
+import AddActivityForm from './Forms/AddActivityForm';
 
 const Portfolio = () => {
 
@@ -11,7 +12,12 @@ const Portfolio = () => {
             <Router>
   
             <Route ><PortfolioHeader /></Route>
-            <Route><PortfolioLog /></Route>
+            <div>
+            <Switch>
+            <Route  path='/portfolio'><PortfolioLog /></Route>
+            <Route  path='/add'><AddActivityForm /></Route>
+            </Switch>
+            </div>
         
             </Router>
         </div>
