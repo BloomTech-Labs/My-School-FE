@@ -23,26 +23,10 @@ const Portfolio = () => {
 
   return (
     <div>
-      <Router>
-        <Route>
-          <PortfolioHeader />
-        </Route>
-        <div>
-          <Switch>
-            <Route path="/portfolio">
-              <PortfolioLog />
-            </Route>
-            <Route path="/add">
-              <AddActivityForm />
-            </Route>
-            <Route path="/doc">
-              <PDFViewer>
-                <MyDocument activities={activities}/>
-              </PDFViewer>
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+      <PortfolioHeader />
+      <Route path="/portfolio" component={PortfolioLog} />     
+      <Route path="/add" component={AddActivityForm} />
+      <Route path="/doc" render={_ => <MyDocument activities={activities} /> } />
     </div>
   );
 };

@@ -15,17 +15,15 @@ function App() {
         <ThemeProvider>
           <CSSReset />
           <div className="App">
-           
             <Router>
-            <TopNav />
-            <Box>
-            <p>This is the app.</p>
-            <Portfolio />
-            </Box>
+              <TopNav />
+              <Box>
+                <p>This is the app.</p>
+                <Portfolio />
+              </Box>
             </Router>
           </div>
         </ThemeProvider>
-     
   );
 }
 

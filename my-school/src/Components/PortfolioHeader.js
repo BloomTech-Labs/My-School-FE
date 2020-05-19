@@ -34,7 +34,7 @@ const PortfolioHeader = () => {
             <Link to ='/add'><Button lefticon="small-add" variantColor="teal" variant="solid">Add Activity</Button></Link>
 
             {/*  EXPORT BUTTON -- PARENTS ONLY? */}
-            <Link to = '/doc'><Button lefticon="download" variantColor="teal" variant="solid">Convert to PDF</Button></Link>
+            <Link to='/doc' ><Button lefticon="download" variantColor="teal" variant="solid">Convert to PDF</Button></Link>
         {/*  Start with opening in another tab, then download. */}
             {/*SEARCH BOX AND SORT/FILTER FEATUREs WILL GO HERE*/}
             {/* future -- activity tracker? */}
