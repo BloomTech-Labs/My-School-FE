@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import {
     Button,
     Input,
@@ -11,9 +12,9 @@ import {
     ModalBody,
     ModalCloseButton,
     SlideIn,
-    Tag,
     FormControl,
     FormLabel,
+    Select,
     Textarea,
     NumberInput,
     NumberInputField,
@@ -30,7 +31,9 @@ import { useForm, FormContext } from 'react-hook-form';
 const EditActivityModal = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
+
     const methods = useForm();
+    const { handleSubmit, errors, register, formState } = methods;
 
     // Subject value options
     const [subjects, setSubjects] = useState([]);
@@ -123,12 +126,13 @@ const EditActivityModal = () => {
                                     </FormControl>
 
                                     {/* DURATION: HOURS & MINUTES */}
+                                    <Text fontWeight="500">Duration</Text>
                                     <Box>
                                         <Flex>
                                             {/* HOURS */}
                                             <FormControl>
                                                 <FormLabel htmlFor="hours">Hours</FormLabel>
-                                                <NumberInput>
+                                                <NumberInput w="120px" mr="32px">
                                                     <NumberInputField 
                                                         id="hours"
                                                         name="hours"
@@ -144,7 +148,7 @@ const EditActivityModal = () => {
                                             {/* MINUTES */}
                                             <FormControl>
                                                 <FormLabel htmlFor="minutes">Minutes</FormLabel>
-                                                <NumberInput max={59}>
+                                                <NumberInput max={59} w="120px">
                                                     <NumberInputField 
                                                         id="minutes"
                                                         name="minutes"
