@@ -49,7 +49,6 @@ function ActivityCard(props)  {
             let arr = str.split('.');
             setHour(arr[0])
             setMin(arr[1])
-            console.log('inside the useEffect for duration',arr[0],arr[1])
         }else{
             setHour(0)
             setMin(0)
@@ -114,8 +113,6 @@ function ActivityCard(props)  {
     function editEntry(id){
         const arr = [input.hours, input.minutes]
         const duration = arr.join('.');
-        console.log(duration)
-
         if(selectedFile !== null){
             const formData = new FormData();
             formData.append('photo', selectedFile, selectedFile.name);
@@ -155,7 +152,6 @@ function ActivityCard(props)  {
             let arr = str.split('.');
             const hourNum = arr[0];
             const minNum = arr[1];
-            console.log('inside the duration handler', hourNum, minNum)
             setInput({
                 ...props.activity, 
                 description: props.activity.description === null ? '' : props.activity.description,
@@ -164,7 +160,6 @@ function ActivityCard(props)  {
             })
             onOpen()
         }else{
-            console.log('the else is the one is running')
             setInput({
                 ...props.activity, 
                 description: props.activity.description === null ? '' : props.activity.description,
@@ -174,7 +169,6 @@ function ActivityCard(props)  {
         }}
 
     const handleHours = value => {
-        console.log('this is the hours value in real time', value)
             setInput({
                 ...input, 
                 hours: value
@@ -182,7 +176,6 @@ function ActivityCard(props)  {
         }
 
     const handleMins = value => {
-        console.log('this is the minues value in real time', value)
             setInput({
                 ...input, 
                 minutes: value
