@@ -46,8 +46,6 @@ function ActivityCard(props)  {
         if(props.activity.duration !== null){
             const hours = Math.floor(props.activity.duration / 60);
             const minutes = props.activity.duration % 60;
-            console.log(hours)
-            console.log(minutes)
             setHour(hours)
             setMin(minutes)
         }else{
