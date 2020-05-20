@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import moment from 'moment';
 import {
     Flex,
@@ -12,7 +13,9 @@ import {
     NumberDecrementStepper,
 } from '@chakra-ui/core';
 
-const DateSelector = () => {
+const DateSelector = (props) => {
+    const methods = useFormContext();
+
     // Gets current date values...used to set default value in input fields
     const currentMonth = moment().month() + 1; 
     const currentDate = moment().date();
@@ -34,19 +37,25 @@ const DateSelector = () => {
         });
         dateIterator.add(1, 'month');
     }
-    
-    // Month state
+
+    // Month state...sets max # of days user can enter based on what month user selects
     const [month, setMonth] = useState(months.find(m => m.num === currentMonth));
 
     const handleMonthChange = e => {
-        setMonth(months.find(m => m.num == e.target.value))
+        setMonth(months.find(m => m.num === parseInt(e.target.value)))
     }
 
     return (
-        <Flex>
+        <Flex w="372px">
             <FormControl w="40%" pr="1rem">
                 <FormLabel htmlFor="month">Month</FormLabel>
-                <Select id="month" defaultValue={month ? month.num : 1} onChange={handleMonthChange}>
+                <Select 
+                    id="month" 
+                    name="month" 
+                    defaultValue={month ? month.num : 1} 
+                    onChange={handleMonthChange} 
+                    ref={methods.register} 
+                >
                     {months.map(month => {
                         return (
                             <option value={month.num} key={month.num}>{month.name}</option>
@@ -57,8 +66,16 @@ const DateSelector = () => {
 
             <FormControl w="30%" pr="1rem">
                 <FormLabel htmlFor="day">Day</FormLabel>
-                <NumberInput id="day" defaultValue={currentDate} min={1} max={month ? month.length : 31}>
-                    <NumberInputField />
+                <NumberInput 
+                    defaultValue={currentDate} 
+                    min={1} 
+                    max={month ? month.length : 31}
+                >
+                    <NumberInputField 
+                        id="day" 
+                        name="day"
+                        ref={methods.register}
+                    />
                     <NumberInputStepper>
                         <NumberIncrementStepper />
                         <NumberDecrementStepper />
@@ -68,8 +85,16 @@ const DateSelector = () => {
 
             <FormControl w="30%">
                 <FormLabel htmlFor="year">Year</FormLabel>
-                <NumberInput id="year" defaultValue={currentYear} max={currentYear + 10} min={currentYear - 100}>
-                    <NumberInputField />
+                <NumberInput 
+                    defaultValue={currentYear} 
+                    max={currentYear + 10}
+                    min={currentYear - 100}
+                >
+                    <NumberInputField 
+                        id="year" 
+                        name="year"
+                        ref={methods.register}
+                    />
                     <NumberInputStepper>
                         <NumberIncrementStepper />
                         <NumberDecrementStepper />

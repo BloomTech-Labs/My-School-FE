@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PortfolioHeader from './PortfolioHeader';
 import PortfolioLog from './PortfolioLog';
-import AddActivityForm from './Forms/AddActivityForm';
+import AddActivityForm from './AddActivity/AddActivityForm';
 
 const Portfolio = () => {
 

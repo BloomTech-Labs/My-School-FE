@@ -7,7 +7,7 @@ import {
   useRouteMatch
 } from 'react-router-dom';
 import Portfolio from './Portfolio';
-import AddActivityForm from './Forms/AddActivityForm';
+import AddActivityForm from './AddActivity/AddActivityForm';
 
 
 export default function ActivityContainer(){
