@@ -44,11 +44,10 @@ function ActivityCard(props)  {
 
     useEffect(()=>{
         if(props.activity.duration !== null){
-            let num = props.activity.duration;
-            let str = num.toString();
-            let arr = str.split('.');
-            setHour(arr[0])
-            setMin(arr[1])
+            const hours = Math.floor(props.activity.duration / 60);
+            const minutes = props.activity.duration % 60;
+            setHour(hours)
+            setMin(minutes)
         }else{
             setHour(0)
             setMin(0)
@@ -111,20 +110,19 @@ function ActivityCard(props)  {
     }
 
     function editEntry(id){
-        const arr = [input.hours, input.minutes]
-        const duration = arr.join('.');
+        const durationInMinutes = input.hours * 60 + input.minutes
         if(selectedFile !== null){
             const formData = new FormData();
             formData.append('photo', selectedFile, selectedFile.name);
             formData.set('name', input.name);
             formData.set('description', input.description);
-            formData.set('duration', duration);
+            formData.set('duration', durationInMinutes);
             props.editActivity(id, formData , 3);
         }else{
             const changes = {
                 name: input.name, 
                 description: input.description, 
-                duration: duration
+                duration: durationInMinutes
             }
             props.editActivityWithoutPhoto(id,changes, 3)
         }
@@ -147,16 +145,11 @@ function ActivityCard(props)  {
 
     const handleDuration = () =>{
         if(props.activity.duration !== null){
-            let num = props.activity.duration;
-            let str = num.toString();
-            let arr = str.split('.');
-            const hourNum = arr[0];
-            const minNum = arr[1];
             setInput({
                 ...props.activity, 
                 description: props.activity.description === null ? '' : props.activity.description,
-                hours: hourNum,
-                minutes: minNum
+                hours: hour,
+                minutes: min
             })
             onOpen()
         }else{
