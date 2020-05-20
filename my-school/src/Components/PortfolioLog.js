@@ -1,56 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect} from 'react';
+import { connect } from 'react-redux';
+import {
+  getAllActivitiesForUser
+} from '../actions/actions-portfolio.js';
 import ActivityCard from './ActivityCard';
+import '../App.css';
 
-const PortfolioLog = () => {
-
-    // get portfolio data -- select correct portfolio based on user(student) or click(parent)
-    const [activities, setActivities] = useState([]);
-    // const [query, setQuery] = useState('');
-    
+const PortfolioLog = ({activities, getAllActivitiesForUser}) => {
+  // const { id } = useParams;
       useEffect(() => {
-      //get array of entries
-        axios.get('https://my-school-v1.herokuapp.com/api/users/3/activities')
-    
-      // .then(response => console.log(response))
-    
-              .then(response => {
-                console.log(response.data)
-                // .filter
-                // (entry=>
-                // entry.toLowerCase().includes(query.toLowerCase())
-                // );
-                setActivities(response.data);
-              })
-              .catch(error => console.log('whoops', error))
-              
+        //the paramter passed in will not be hard coded once we make user login and dynamic routes
+        getAllActivitiesForUser(3)       
       }, []);
-      // } , [query];
-    
-    
-    //   const handleChanges = event => {
-    //     setQuery(event.target.value )
-    //   }
-
-    
-// function showActivity(){
-//     if(activities.length >= 1){
-//       activities.map(activity => {
-//       return(<ActivityCard key={activity.id} activitiy={activity}/>)});
-//     } else {
-//       return(<p>"This Portfolio Is Empty :/"</p>);
-//     }};
-
 
     return(
         <div className='portfolio-list'>
-        {/* NO ENTRIES BY DEFAULT */}
-        {activities.map(activity => {
-          return(<ActivityCard key={activity.id} activitiy={activity}/>)
-        })}
+          {activities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />))}
         </div>
     )
-
 };
 
-export default PortfolioLog;
+const mapStateToProps = (state) => {
+  return {
+    activities: state.portfolioReducer.activities,
+    isLoading: state.portfolioReducer.isLoading,
+    error: state.portfolioReducer.error,
+  };
+};
+
+export default connect(mapStateToProps , { getAllActivitiesForUser })(PortfolioLog);
