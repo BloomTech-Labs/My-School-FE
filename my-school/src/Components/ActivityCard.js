@@ -30,7 +30,7 @@ import '../App.css';
 import DateSelector from './DateSelector.js'
 
 function ActivityCard(props)  {
-
+console.log(props.activity.created_at)
     const [input, setInput]= useState({});
     const [hour, setHour] = useState();
     const [min, setMin] = useState();
