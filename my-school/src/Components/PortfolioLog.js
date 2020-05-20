@@ -11,7 +11,7 @@ const PortfolioLog = ({activities, getAllActivitiesForUser}) => {
       useEffect(() => {
         //the paramter passed in will not be hard coded once we make user login and dynamic routes
         getAllActivitiesForUser(3)       
-      }, []);
+      }, [getAllActivitiesForUser]);
 
     return(
         <div className='portfolio-list'>
