@@ -28,6 +28,9 @@ const AddActivityForm = () => {
     const { handleSubmit, errors, register, formState } = methods;
     const toast = useToast();
 
+    const [image, setImage] = useState('');
+    console.log(image)
+
     // Preview state...will get passed to Preview component
     const [preview, setPreview] = useState();
     console.log({preview})
@@ -44,26 +47,33 @@ const AddActivityForm = () => {
         })
     }, [])
 
-    // Submit handler
+    // Photo upload change handler
+    const handleImageUpload = e => {
+        setImage(e.target.files[0])
+    }
+
+    // Submit handler: 2 different endpoints based on whether or not user wants to include a photo
     function onSubmit(data) {
-        // console.log({data})
-        // this adds leading zero to day & month values to ensure completion_date is correct format
+        console.log({data})
+        // converts user's duration input into minutes
+        const duration = Number(data.hours) * 60 + Number(data.minutes) || null;
+        // adds leading zero to day & month values to ensure completion_date is correct format
         const monthLeadingZero = data.month < 10 ? "0" + String(data.month) : String(data.month);
         const dayLeadingZero = data.day < 10 ? "0" + String(data.day) : String(data.day);
+        // formats completion Date in YYYY-MM-DD format
+        const completionDate = `${data.year}-${monthLeadingZero}-${dayLeadingZero}`;
 
-        let activity = {
-            // student id is currently hardcoded...change this later...
-            student_id: 3,
-            name: data.name,
-            description: data.description || null,
-            duration: Number(data.hours) * 60 + Number(data.minutes) || null, 
-            subject_id: parseInt(data.subject) || 9,
-            completion_date: `${data.year}-${monthLeadingZero}-${dayLeadingZero}`
-        }
+        if (image) {
+            const formData = new FormData();
+            formData.append('photo', image, image.name);
+            formData.set('student_id', 3); //hardcoded...change later
+            formData.set('name', data.name);
+            formData.set('description', data.description || null);
+            formData.set('duration', duration);
+            formData.set('subject_id', parseInt(data.subject) || 9);
+            formData.set('completion_date', completionDate);
 
-        console.log({activity})
-
-        axios.post("https://my-school-v1.herokuapp.com/api/activities", activity)
+            axios.post("https://my-school-v1.herokuapp.com/api/activities/attachimg", formData)
             .then(res => {
                 console.log(res)
                 setPreview(res.data[0])
@@ -77,6 +87,30 @@ const AddActivityForm = () => {
                     isClosable: true
                 })
             })
+        } else {
+            let activity = {
+                student_id: 3, //hardcoded...will need to change
+                name: data.name,
+                description: data.description || null,
+                duration: duration, 
+                subject_id: parseInt(data.subject) || 9,
+                completion_date: completionDate
+            }
+            axios.post("https://my-school-v1.herokuapp.com/api/activities", activity)
+            .then(res => {
+                console.log({res})
+                setPreview(res.data[0])
+            })
+            .catch(err => {
+                console.log(err)
+                toast({
+                    title: "An error occurred.",
+                    description: "Unable to log new activity.",
+                    status: "error",
+                    isClosable: true
+                })
+            })
+        }
     }
 
     // Form validation for title input
@@ -92,7 +126,7 @@ const AddActivityForm = () => {
 
     return (
         <>
-        { preview ? <NewActivityPreview preview={preview} /> 
+        {/* { preview ? <NewActivityPreview preview={preview} />  */}
         : 
         <FormContext {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -116,7 +150,6 @@ const AddActivityForm = () => {
 
                 <FormControl>
                     <FormLabel htmlFor="subject">Subject</FormLabel>
-                    
                     <Select id="subject" name="subject" placeholder="Select..." ref={register} >
                         {subjects.map(s => {
                             return (
@@ -175,11 +208,18 @@ const AddActivityForm = () => {
             <Box w={1/2} px={20}>
                 <Text fontSize="lg" fontWeight="500" pb="61px">Upload an Activity Photo</Text>
                 <Button>Choose File</Button>
+                <Input 
+                    type="file" 
+                    name="image" 
+                    id="image"
+                    placeholder="Upload an image"
+                    onChange={handleImageUpload}
+                />
             </Box>
             </Flex>
         </form>
         </FormContext>
-        }
+        {/* } */}
         </>
     )
 }
