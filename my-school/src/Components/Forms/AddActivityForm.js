@@ -126,7 +126,7 @@ const AddActivityForm = () => {
 
     return (
         <>
-        {/* { preview ? <NewActivityPreview preview={preview} />  */}
+        { preview ? <NewActivityPreview preview={preview} /> 
         : 
         <FormContext {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -219,7 +219,7 @@ const AddActivityForm = () => {
             </Flex>
         </form>
         </FormContext>
-        {/* } */}
+        }
         </>
     )
 }

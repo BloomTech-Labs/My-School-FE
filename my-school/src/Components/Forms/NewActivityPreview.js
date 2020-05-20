@@ -4,6 +4,7 @@ import {
     Box,
     Flex,
     Text,
+    Image,
     useToast
 } from '@chakra-ui/core';
 
@@ -29,7 +30,8 @@ const NewActivityPreview = ({ preview }) => {
 
     return (
         <>
-            <Box>
+        <Flex>
+            <Box w={1/2} px={20}>
                 <Text fontSize="2xl">{preview.name}</Text>
                 <Flex>
                     <Text>Subject: </Text>
@@ -48,6 +50,20 @@ const NewActivityPreview = ({ preview }) => {
                     <Text>{moment(preview.completion_date).format('l')}</Text>
                 </Flex>
             </Box>
+            <Box w={1/2} px={20}>
+                <Box border="1px solid #C4C4C4" borderRadius="8px">
+                    <Text>Assignment Photo</Text>
+                    {preview.photo ? 
+                    <Image 
+                        src={preview.photo} 
+                        alt={preview.name} 
+                        size="100px"
+                        objectFit="cover"
+                    />
+                    : <Text>No image uploaded</Text>}
+                </Box>
+            </Box>
+            </Flex>
         </>
     )
 }
