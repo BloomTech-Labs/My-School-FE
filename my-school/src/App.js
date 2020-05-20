@@ -5,11 +5,14 @@ import TopNav from './Components/TopNav';
 import Portfolio from './Components/Portfolio';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
-import {PDFViewer} from '@react-pdf/renderer';
-import MyDocument from './Components/PDFExporter';
+import ReactGA from "react-ga"
 
 function App() {
 
+  React.useEffect( _ => {
+    ReactGA.initialize("UA-156199574-5")
+    ReactGA.event({category: "App", action: "App loaded" })
+  },[])
 
   return (
         <ThemeProvider>

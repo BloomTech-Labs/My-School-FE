@@ -5,9 +5,15 @@ import {
 } from '../actions/actions-portfolio.js';
 import ActivityCard from './ActivityCard';
 import '../App.css';
+import ReactGA from "react-ga"
 
 const PortfolioLog = ({activities, getAllActivitiesForUser}) => {
   // const { id } = useParams;
+
+      useEffect( _ => {
+        ReactGA.pageview("/portfolio")
+      },[])
+
       useEffect(() => {
         //the paramter passed in will not be hard coded once we make user login and dynamic routes
         getAllActivitiesForUser(3)       
