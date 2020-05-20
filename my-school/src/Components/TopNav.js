@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from  'react';
 import axios from 'axios';
 import { Box, Image, Avatar, Heading, IconButton, Flex } from '@chakra-ui/core';
+import {Link} from 'react-router-dom'
 
 
 export default function TopNav() {
@@ -24,7 +25,7 @@ export default function TopNav() {
           <Flex direction="row" align="center">
           <Flex align="flex-start">
           {/* logo link to landing page? */}
-          <a href="http://www.myschoolathome.io"><Image src='https://myschoolathome.io/static/media/logo100-100.ba4f14e7.svg' alt='MySchool logo'/></a>
+          <Link to="/"><Image src='https://myschoolathome.io/static/media/logo100-100.ba4f14e7.svg' alt='MySchool logo'/></Link>
           </Flex>
           <Flex align="flex-end">
           {/* Image linked to current user account https://my-school-v1.herokuapp.com/api/users/3/ */}

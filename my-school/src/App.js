@@ -18,7 +18,6 @@ function App() {
             <Router>
               <TopNav />
               <Box>
-                <p>This is the app.</p>
                 <Portfolio />
               </Box>
             </Router>
