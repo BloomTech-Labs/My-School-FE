@@ -31,6 +31,29 @@ const AddActivityForm = () => {
     const [image, setImage] = useState('');
     console.log(image)
 
+    const [testing, setTesting] = useState([]);
+    console.log({testing})
+    useEffect(() => {
+        axios.get("https://my-school-v1.herokuapp.com/api/users/3/activities")
+        .then(res => {
+            console.log("user 3 acts", res)
+            setTesting(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [])
+
+    useEffect(() => {
+        axios.get("https://my-school-v1.herokuapp.com/api/activities/16")
+        .then(res => {
+            console.log("activity 15 response", res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    })
+
     // Preview state...will get passed to Preview component
     const [preview, setPreview] = useState();
     console.log({preview})
@@ -72,6 +95,7 @@ const AddActivityForm = () => {
             formData.set('duration', duration);
             formData.set('subject_id', parseInt(data.subject) || 9);
             formData.set('completion_date', completionDate);
+            formData.set('activity_type_id', 4)
 
             axios.post("https://my-school-v1.herokuapp.com/api/activities/attachimg", formData)
             .then(res => {
@@ -94,7 +118,8 @@ const AddActivityForm = () => {
                 description: data.description || null,
                 duration: duration, 
                 subject_id: parseInt(data.subject) || 9,
-                completion_date: completionDate
+                completion_date: completionDate,
+                activity_type_id: 4
             }
             axios.post("https://my-school-v1.herokuapp.com/api/activities", activity)
             .then(res => {
