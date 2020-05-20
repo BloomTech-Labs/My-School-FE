@@ -7,9 +7,11 @@ import {
   useRouteMatch
 } from 'react-router-dom';
 import Portfolio from './Portfolio';
-import AddActivityForm from './Forms/AddActivityForm';
+
 import MyDocument from './PDFExporter'
 import {PDFViewer} from '@react-pdf/renderer'
+import AddActivityForm from './AddActivity/AddActivityForm';
+
 
 export default function ActivityContainer(){
 

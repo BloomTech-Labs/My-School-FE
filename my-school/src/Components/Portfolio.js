@@ -1,11 +1,13 @@
+
 import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PortfolioHeader from "./PortfolioHeader";
 import PortfolioLog from "./PortfolioLog";
-import AddActivityForm from "./Forms/AddActivityForm";
 import { PDFViewer } from "@react-pdf/renderer";
 import MyDocument from "./PDFExporter";
 import axios from 'axios'
+import AddActivityForm from './AddActivity/AddActivityForm';
+
 
 const Portfolio = () => {
     const [activities, setActivities] = useState([]);
