@@ -27,6 +27,7 @@ import {
     Flex
 } from '@chakra-ui/core';
 import '../App.css';
+import DateSelector from './DateSelector.js'
 
 function ActivityCard(props)  {
 
@@ -42,16 +43,13 @@ function ActivityCard(props)  {
     const toast = useToast();
 
     useEffect(()=>{
-        console.log('this useEffect is working with duration props', props.activity.duration)
         if(props.activity.duration !== null){
-            console.log('this useEffect is working 2.0')
             let num = props.activity.duration;
             let str = num.toString();
             let arr = str.split('.');
             setHour(arr[0])
             setMin(arr[1])
             console.log('inside the useEffect for duration',arr[0],arr[1])
-
         }else{
             setHour(0)
             setMin(0)
@@ -112,7 +110,6 @@ function ActivityCard(props)  {
            return setMonth("DECEMBER")
         }
     }
-
 
     function editEntry(id){
         const arr = [input.hours, input.minutes]
@@ -191,6 +188,7 @@ function ActivityCard(props)  {
                 minutes: value
             })
         }
+        
     return (
        <div className='activity-card'>
             <p>{props.activity.name}</p>
@@ -221,22 +219,24 @@ function ActivityCard(props)  {
                     <ModalHeader>{props.activity.name}</ModalHeader>
                     <div className='containerForPhoto'>
                         <img className='image' src={props.activity.photo} alt={`activity with the name of ${props.activity.name}`}/>
-                        <FormControl>
+                        <FormControl ml='-1rem'>
                             <FormLabel htmlFor={`photo${props.activity.id}`}/>
-                            <Input id={`photo${props.activity.id}`} name="photo" type='file' onChange={handlePhoto}/>
+                            <Input id={`photo${props.activity.id}`} name="photo" type='file' onChange={handlePhoto} w='400px'/>
                         </FormControl>
                      </div>
                     <FormControl className='container'>
-                        <FormLabel htmlFor='name'>Name:
-                            <Input id="name" name="name" type='text' value={input.name} onChange={handleInput}/>
+                        <FormLabel htmlFor='name' >
+                            <p style={{fontWeight: "bold", width: '100%' , paddingTop:'.5rem'}}>Name:</p>
+                            <Input id="name" name="name" type='text' value={input.name} onChange={handleInput} w='400px'/>
                         </FormLabel>
-                        <FormLabel htmlFor='description'>Description:
-                            <Textarea id="description" name="description" type='text' value={input.description} onChange={handleInput}/>
+                        <FormLabel htmlFor='description'>
+                            <p style={{fontWeight: "bold", width: '100%' , paddingTop:'1rem'}}>Description:</p>
+                            <Textarea id="description" name="description" type='text' value={input.description} onChange={handleInput}  w='400px' h='150px'/>
                         </FormLabel>
                     </FormControl>
-                    <Box borderWidth="1px" borderColor="#D4D4D4" rounded="4px" p="32px">
-                        <p style={{fontWeight: "bold"}}>Duration</p>
-                        <Flex>
+                    <Box p='1rem' w='400px'>
+                        <p style={{fontWeight: "bold", marginTop:'-1.7rem'}}>Duration:</p>
+                        <Flex borderWidth="1px" rounded="lg" w='300px' padding='1rem 11rem' w='400px' justifyContent='center' >
                             <FormControl handeChange={handleInput} >
                                 <FormLabel htmlFor="hours">Hours</FormLabel>
                                 <NumberInput id="hours"  defaultValue={input.hours} w="120px" mr="32px" onChange={handleHours}>
@@ -258,6 +258,10 @@ function ActivityCard(props)  {
                                 </NumberInput>
                             </FormControl>
                         </Flex>
+                        <h3 style={{fontWeight: "bold", width: '100%', paddingTop:'1rem', paddingBottom: '.5rem'}}>Date Completed:</h3>
+                        <Flex flexWrap='wrap' borderWidth="1px" rounded="lg" w='300px' padding='1rem' w='400px' justifyContent='center' >
+                            <div><DateSelector w="100%" /></div>
+                        </Flex>
                     </Box>
                     <ModalCloseButton />
                     <ModalBody>
@@ -265,6 +269,7 @@ function ActivityCard(props)  {
                     </ModalBody>
                     <ModalFooter>
                         <Button  
+                            marginTop='-.8rem'
                             variant="solid" 
                             variantColor="teal" 
                             _hover={{ bg: "white", 
