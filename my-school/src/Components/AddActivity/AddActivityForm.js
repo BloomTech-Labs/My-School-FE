@@ -31,29 +31,6 @@ const AddActivityForm = () => {
     const [image, setImage] = useState('');
     console.log(image)
 
-    const [testing, setTesting] = useState([]);
-    console.log({testing})
-    useEffect(() => {
-        axios.get("https://my-school-v1.herokuapp.com/api/users/3/activities")
-        .then(res => {
-            console.log("user 3 acts", res)
-            setTesting(res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }, [])
-
-    useEffect(() => {
-        axios.get("https://my-school-v1.herokuapp.com/api/activities/16")
-        .then(res => {
-            console.log("activity 15 response", res)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    })
-
     // Preview state...will get passed to Preview component
     const [preview, setPreview] = useState();
     console.log({preview})
