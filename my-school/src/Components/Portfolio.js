@@ -27,8 +27,8 @@ const Portfolio = () => {
     <div>
       <PortfolioHeader />
       <Route path="/portfolio" component={PortfolioLog} />     
-      <Route path="/add" component={AddActivityForm} />
-      <Route path="/doc" render={_ => <MyDocument activities={activities} /> } />
+      <Route path="/add" render={ props => <AddActivityForm {...props} activities={activities} setActivities={setActivities} />} />
+      <Route path="/doc" render={ _ => <MyDocument activities={activities} /> } />
     </div>
   );
 };

@@ -23,7 +23,7 @@ import { useForm, FormContext } from 'react-hook-form';
 import DateSelector from '../DateSelector';
 import NewActivityPreview from './NewActivityPreview';
 
-const AddActivityForm = () => {
+const AddActivityForm = ({activities, setActivities}) => {
     const methods = useForm();
     const { handleSubmit, errors, register, formState } = methods;
     const toast = useToast();
@@ -78,6 +78,7 @@ const AddActivityForm = () => {
             .then(res => {
                 console.log(res)
                 setPreview(res.data[0])
+                setActivities([res.data[0], ...activities])
             })
             .catch(err => {
                 console.log(err)
@@ -102,6 +103,7 @@ const AddActivityForm = () => {
             .then(res => {
                 console.log({res})
                 setPreview(res.data[0])
+                setActivities([res.data[0], ...activities])
             })
             .catch(err => {
                 console.log(err)
