@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Page,
+  Font,
   Text,
   View,
   Document,
@@ -9,6 +10,10 @@ import {
   BlobProvider
 } from "@react-pdf/renderer";
 import moment from 'moment';
+import "../App.css";
+
+
+
 
 // ----------------------STYLES-----------------------------------------
 const style = StyleSheet.create({
@@ -30,26 +35,26 @@ const style = StyleSheet.create({
     alignSelf: "right",
     width: 200,
   },
-  header: {
+  title: {
     fontSize: 16,
     paddingTop: 20,
     marginBottom: 20,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'Times-Roman',
+    fontFamily: 'Helvetica',
     textDecoration: 'underline'
   },
   subtitle: {
     fontSize: 12,
     textAlign: 'center',
     margin: 5,
-    fontFamily: 'Times-Roman'
+    fontFamily: 'Helvetica'
   },
   text: {
     margin: 16,
     fontSize: 14,
     textAlign: 'justify',
-    fontFamily: 'Times-Roman'
+    fontFamily: 'Helvetica'
   },
   image: {
     marginVertical: 15,
@@ -61,14 +66,15 @@ const style = StyleSheet.create({
 // Create Document Component
 const MyDocument = ({ activities }) => {
 
-
   function timechange(num){ 
   var hours = Math.floor(num / 60);  
   var minutes = num % 60;
   return hours + "h " + minutes + "m";         
-}
+  };
 
+ 
   const PdfPortfolio = (
+  
     <Document style={style.doc} title={""}>
       <Page size="A4" style={style.page}>
         <View >
@@ -77,7 +83,7 @@ const MyDocument = ({ activities }) => {
             let durtime = timechange(a.duration);
             return (
               <View key={a.id} className='section'>
-                <Text style={style.header}>{a.name}</Text>
+                <Text style={style.title}>{a.name}</Text>
                 <Text style={style.subtitle}>Date: {subdate}      Subject: {a.subject}     Duration: {durtime}</Text>
               <Text style={style.text}>{a.description}</Text>
                 {a.photo && <Image src={a.photo} style={style.image} />}
@@ -87,9 +93,11 @@ const MyDocument = ({ activities }) => {
         </View>
       </Page>
     </Document>
-  )
+
+  );
 
   return (
+
     <BlobProvider document={PdfPortfolio}>
       {({ url }) => <a href={url} target="_blank">Link to PDF</a>}
     </BlobProvider>
