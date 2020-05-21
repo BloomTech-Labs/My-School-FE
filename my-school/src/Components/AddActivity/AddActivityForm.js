@@ -29,11 +29,9 @@ const AddActivityForm = ({activities, setActivities}) => {
     const toast = useToast();
 
     const [image, setImage] = useState('');
-    console.log(image)
 
     // Preview state...will get passed to Preview component
     const [preview, setPreview] = useState();
-    console.log({preview})
 
     // Gets subject value options from db
     const [subjects, setSubjects] = useState([]);
@@ -54,7 +52,6 @@ const AddActivityForm = ({activities, setActivities}) => {
 
     // Submit handler: 2 different endpoints based on whether or not user wants to include a photo
     function onSubmit(data) {
-        console.log({data})
         // converts user's duration input into minutes
         const duration = Number(data.hours) * 60 + Number(data.minutes) || null;
         // adds leading zero to day & month values to ensure completion_date is correct format
@@ -76,7 +73,6 @@ const AddActivityForm = ({activities, setActivities}) => {
 
             axios.post("https://my-school-v1.herokuapp.com/api/activities/attachimg", formData)
             .then(res => {
-                console.log(res)
                 setPreview(res.data[0])
                 setActivities([res.data[0], ...activities])
             })
@@ -101,7 +97,6 @@ const AddActivityForm = ({activities, setActivities}) => {
             }
             axios.post("https://my-school-v1.herokuapp.com/api/activities", activity)
             .then(res => {
-                console.log({res})
                 setPreview(res.data[0])
                 setActivities([res.data[0], ...activities])
             })

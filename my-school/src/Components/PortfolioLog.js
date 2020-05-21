@@ -8,10 +8,10 @@ import '../App.css';
 import ReactGA from "react-ga"
 
 const PortfolioLog = ({activities, getAllActivitiesForUser}) => {
-  // const { id } = useParams;
   const [sortedActivities, setSortedActivities] = useState([]);
 
       useEffect( _ => {
+        ReactGA.initialize("UA-156199574-5")
         ReactGA.pageview("/portfolio")
       },[])
 
@@ -23,7 +23,7 @@ const PortfolioLog = ({activities, getAllActivitiesForUser}) => {
       useEffect(()=>{
         const sorted = activities.sort((a,b)=> b.id - a.id);
         setSortedActivities(sorted)
-      })
+      },[activities] )
     return(
         <div className='portfolio-list'>
           {sortedActivities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />))}

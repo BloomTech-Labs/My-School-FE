@@ -22,7 +22,7 @@ const NewActivityPreview = ({ preview }) => {
             isClosable: true,
             position: "top-right"
         })
-    }, [])
+    }, [toast, preview.name])
 
     // Formats duration into hours and minutes for display
     const hours = Math.floor(preview.duration / 60);
