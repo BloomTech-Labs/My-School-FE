@@ -242,10 +242,10 @@ function ActivityCard(props)  {
                                         </NumberInput>
                                     </FormControl>
                                 </Flex>
-                                <h3 style={{ fontWeight: "bold", width: '100%', paddingTop: '1rem', paddingBottom: '.5rem' }}>Date Completed:</h3>
+                                {/* <h3 style={{ fontWeight: "bold", width: '100%', paddingTop: '1rem', paddingBottom: '.5rem' }}>Date Completed:</h3>
                                 <Flex flexWrap='wrap' borderWidth="1px" rounded="lg" w='300px' padding='1rem' w='400px' justifyContent='center' >
                                     <div><DateSelector w="100%" /></div>
-                                </Flex>
+                                </Flex> */}
                             </Box>
                             <ModalCloseButton />
                             <ModalBody>

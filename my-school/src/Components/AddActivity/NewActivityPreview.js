@@ -8,20 +8,20 @@ import {
     useToast
 } from '@chakra-ui/core';
 
-const NewActivityPreview = ({ preview }) => {
+const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
     // console.log("preview props:", props)
     const toast = useToast();
 
     // Displays success toast when page loads
     useEffect(() => {
-        toast({
-            title: "Success!",
-            description: `${preview.name} added to your portfolio`,
-            status: "success",
-            duration: 6000,
-            isClosable: true,
-            position: "top-right"
-        })
+            toast({
+                title: "Success!",
+                description: `${preview.name} added to your portfolio`,
+                status: "success",
+                duration: 6000,
+                isClosable: true,
+                position: "top-right"
+            })
     }, [])
 
     // Formats duration into hours and minutes for display
