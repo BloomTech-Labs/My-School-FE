@@ -28,7 +28,8 @@ import {
     Flex,
     Image,
     Text,
-    useToast
+    useToast,
+    FormErrorMessage
 } from '@chakra-ui/core';
 import { useForm, FormContext } from 'react-hook-form';
 import PlaceholderImg from '../assets/placeholder_img.png';
@@ -79,6 +80,7 @@ const EditActivityModal = (props) => {
         const completionDate = `${data.year}-${monthLeadingZero}-${dayLeadingZero}`;
 
         if (image) {
+            // Updates activity without a new photo
             const formData = new FormData();
             formData.append('photo', image, image.name);
             formData.set('name', data.name);
@@ -89,6 +91,7 @@ const EditActivityModal = (props) => {
 
             props.editActivity(props.activity.id, formData, 3);
         } else {
+            //Updates activity with a new photo
             const updatedActivity = {
                 name: data.name,
                 description: data.description,
@@ -100,13 +103,6 @@ const EditActivityModal = (props) => {
             props.editActivityWithoutPhoto(props.activity.id, updatedActivity, 3);
         }
 
-        const updatedActivity = {
-            name: data.name,
-            description: data.description,
-            subject_id: parseInt(data.subject),
-            duration: duration,
-            completion_date: completionDate
-        };
         onClose();
         toast({
             title: "Success!",
@@ -116,6 +112,18 @@ const EditActivityModal = (props) => {
             isClosable: true,
             position: "top-right"
         })
+    }
+
+    // Form validation for title input
+    function validateTitle(value) {
+        let error;
+        if (value.length === 0) {
+            error = "A title is required";
+        } else if (value.length < 3) {
+            error = "Title must be at least 3 characters long";
+        }
+        console.log(error)
+        return error || true;
     }
 
     return (
@@ -161,10 +169,12 @@ const EditActivityModal = (props) => {
                                             type="text"
                                             id="name"
                                             name="name"
-                                            ref={register} //VALIDATE TITLE
+                                            ref={register({ validate: validateTitle })} //VALIDATE TITLE
                                             defaultValue={props.activity.name}
                                         />
-                                        {/* ADD ERROR MESSAGE BASED ON NAME VALIDATION */}
+                                        <FormErrorMessage>
+                                            {errors.name && errors.name.message}
+                                        </FormErrorMessage>
                                     </FormControl>
 
                                     {/* ACTIVITY SUBJECT */}
@@ -264,7 +274,6 @@ const EditActivityModal = (props) => {
                             <Button
                                 type="submit"
                                 onClick={handleSubmit(onSubmit)}
-                                // isLoading={formState.isSubmitting}
                             >
                                 Save
                             </Button>
