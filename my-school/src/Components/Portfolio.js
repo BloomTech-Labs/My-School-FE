@@ -15,7 +15,6 @@ const Portfolio = () => {
     useEffect(() => {
         axios.get('https://my-school-v1.herokuapp.com/api/activities')
         .then(res => {
-            console.log(res.data)
             setActivities(res.data)
         })
         .catch(err => {
