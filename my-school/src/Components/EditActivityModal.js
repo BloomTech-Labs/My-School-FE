@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { editActivity, editActivityWithoutPhoto } from '../actions/actions-portfolio.js';
 import {
     Button,
     Input,
@@ -52,6 +54,16 @@ const EditActivityModal = (props) => {
     // Submit handler
     function onSubmit(data) {
         console.log("Hello!!! This button works", data)
+        const updatedActivity = {
+            name: data.name,
+            description: data.description,
+            subject_id: parseInt(data.subject),
+            duration: 60,
+            // completion_date: "2020-04-30"
+        };
+        console.log(updatedActivity)
+        props.editActivityWithoutPhoto(props.activity.id, updatedActivity, 3);
+        onClose();
     }
 
     return (
@@ -171,11 +183,12 @@ const EditActivityModal = (props) => {
 
                                     {/* DATE COMPLETED --> DateSelector component here */}
 
-
+                                    
                                     {/* IMAGE UPLOAD */}
+                                    <Text fontWeight="500">Image</Text>
 
                                     {/* IMAGE PREVIEW */}
-                                    <Image src={props.activity.photo} alt={props.activity.name} fallbackSrc={PlaceholderImg} height="300px" mx="auto" />
+                                    <Image src={props.activity.photo} alt={props.activity.name} fallbackSrc={PlaceholderImg} maxHeight="250px" mx="auto" />
 
 
                                 </form>
@@ -202,4 +215,11 @@ const EditActivityModal = (props) => {
     )
 }
 
-export default EditActivityModal;
+const mapStateToProps = (state) => {
+    return {
+        isLoading: state.portfolioReducer.isLoading,
+        error: state.portfolioReducer.error,
+    };
+};
+
+export default connect(mapStateToProps, { editActivity, editActivityWithoutPhoto })(EditActivityModal);
