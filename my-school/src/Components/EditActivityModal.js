@@ -27,7 +27,8 @@ import {
     Box,
     Flex,
     Image,
-    Text
+    Text,
+    useToast
 } from '@chakra-ui/core';
 import { useForm, FormContext } from 'react-hook-form';
 import PlaceholderImg from '../assets/placeholder_img.png';
@@ -37,6 +38,7 @@ const EditActivityModal = (props) => {
     // console.log("These are the edit activity modal's props:", props)
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
+    const toast = useToast();
 
     const methods = useForm();
     const { handleSubmit, errors, register, formState } = methods;
@@ -106,6 +108,14 @@ const EditActivityModal = (props) => {
             completion_date: completionDate
         };
         onClose();
+        toast({
+            title: "Success!",
+            description: `${data.name} was updated successfully`,
+            status: "success",
+            duration: 6000,
+            isClosable: true,
+            position: "top-right"
+        })
     }
 
     return (
