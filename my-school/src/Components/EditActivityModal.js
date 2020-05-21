@@ -41,6 +41,8 @@ const EditActivityModal = (props) => {
     const methods = useForm();
     const { handleSubmit, errors, register, formState } = methods;
 
+    const [image, setImage] = useState('');
+
     // Subject value options
     const [subjects, setSubjects] = useState([]);
     useEffect(() => {
@@ -58,10 +60,43 @@ const EditActivityModal = (props) => {
     const defaultDate = moment(props.activity.completion_date).date();
     const defaultYear = moment(props.activity.completion_date).year();
 
+    // Photo upload change handler
+    const handleImageUpload = e => {
+        setImage(e.target.files[0]);
+    }
+
     // Submit handler
     function onSubmit(data) {
-        console.log("Hello!!! This button works", data)
+        console.log("Hello!!! This button works", {data})
+        // converts user's duration input into minutes
         const duration = Number(data.hours) * 60 + Number(data.minutes) || null; 
+        // adds leading zero to day & month values to ensure completion_date is correct format
+        const monthLeadingZero = data.month < 10 ? "0" + String(data.month) : String(data.month);
+        const dayLeadingZero = data.day < 10 ? "0" + String(data.day) : String(data.day);
+        // formats completion Date in YYYY-MM-DD format
+        const completionDate = `${data.year}-${monthLeadingZero}-${dayLeadingZero}`;
+
+        if (image) {
+            const formData = new FormData();
+            formData.append('photo', image, image.name);
+            formData.set('name', data.name);
+            formData.set('description', data.description);
+            formData.set('duration', duration);
+            formData.set('subject_id', parseInt(data.subject));
+            formData.set('completion_date', completionDate);
+
+            props.editActivity(props.activity.id, formData, 3);
+        } else {
+            const updatedActivity = {
+                name: data.name,
+                description: data.description,
+                subject_id: parseInt(data.subject),
+                duration: duration,
+                completion_date: completionDate
+            };
+
+            props.editActivityWithoutPhoto(props.activity.id, updatedActivity, 3);
+        }
 
         const updatedActivity = {
             name: data.name,
@@ -70,8 +105,6 @@ const EditActivityModal = (props) => {
             duration: duration,
             completion_date: completionDate
         };
-        console.log(updatedActivity)
-        props.editActivityWithoutPhoto(props.activity.id, updatedActivity, 3);
         onClose();
     }
 
@@ -87,7 +120,7 @@ const EditActivityModal = (props) => {
             variant="solid"
             variantColor="teal"
             ref={btnRef}
-            onClick={onOpen} //may need to handle filling in form values here (see handleDuration in ActivityCard)
+            onClick={onOpen}
         >
             Edit
         </Button>
@@ -199,6 +232,13 @@ const EditActivityModal = (props) => {
 
                                     {/* IMAGE UPLOAD */}
                                     <Text fontWeight="500">Image</Text>
+                                    <Input 
+                                        type="file"
+                                        name="image"
+                                        id="image"
+                                        placeholder="Upload an image"
+                                        onChange={handleImageUpload}
+                                    />
 
                                     {/* IMAGE PREVIEW */}
                                     <Image src={props.activity.photo} alt={props.activity.name} fallbackSrc={PlaceholderImg} maxHeight="250px" mx="auto" />
