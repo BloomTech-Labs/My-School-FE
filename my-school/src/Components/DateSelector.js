@@ -13,7 +13,8 @@ import {
     NumberDecrementStepper,
 } from '@chakra-ui/core';
 
-const DateSelector = (props) => {
+const DateSelector = ({ defaultMonth, defaultDate, defaultYear }) => {
+    // console.log("Date selector props:", props)
     const methods = useFormContext();
 
     // Gets current date values...used to set default value in input fields
@@ -52,7 +53,7 @@ const DateSelector = (props) => {
                 <Select 
                     id="month" 
                     name="month" 
-                    defaultValue={month ? month.num : 1} 
+                    defaultValue={defaultMonth || month.num} 
                     onChange={handleMonthChange} 
                     ref={methods.register} 
                 >
@@ -67,7 +68,7 @@ const DateSelector = (props) => {
             <FormControl w="30%" pr="1rem">
                 <FormLabel htmlFor="day">Day</FormLabel>
                 <NumberInput 
-                    defaultValue={currentDate} 
+                    defaultValue={defaultDate || currentDate} 
                     min={1} 
                     max={month ? month.length : 31}
                 >
@@ -86,7 +87,7 @@ const DateSelector = (props) => {
             <FormControl w="30%">
                 <FormLabel htmlFor="year">Year</FormLabel>
                 <NumberInput 
-                    defaultValue={currentYear} 
+                    defaultValue={defaultYear || currentYear} 
                     max={currentYear + 10}
                     min={currentYear - 100}
                 >
