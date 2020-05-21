@@ -27,8 +27,10 @@ import {
     Text
 } from '@chakra-ui/core';
 import { useForm, FormContext } from 'react-hook-form';
+import PlaceholderImg from '../Assets/placeholder_img.png';
 
-const EditActivityModal = () => {
+const EditActivityModal = (props) => {
+    // console.log("These are the edit activity modal's props:", props)
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
 
@@ -46,6 +48,11 @@ const EditActivityModal = () => {
             console.log(err)
         })
     }, [])
+
+    // Submit handler
+    function onSubmit(data) {
+        console.log("Hello!!! This button works", data)
+    }
 
     return (
         <>
@@ -72,21 +79,17 @@ const EditActivityModal = () => {
                     finalFocusRef={btnRef}
                     isOpen={true}
                     scrollBehavior="inside"
+                    size="xl"
                 >
                     <ModalOverlay opacity={styles.opacity} />
                     <ModalContent pb={5} {...styles} >
-                        <ModalHeader>**Activity Name**</ModalHeader>
+                        <ModalHeader>{props.activity.name}</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
                             {/* START MODAL BODY */}
-                            {/* IMAGE PREVIEW */}
-                            <Image /> 
-
                             {/* START FORM */}
                             <FormContext {...methods}>
-                                <form> {/* need onSubmit */}
-                                    {/* IMAGE UPLOAD */}
-
+                                <form onSubmit={handleSubmit(onSubmit)}> 
                                     {/* ACTIVITY NAME */}
                                     <FormControl>
                                         <FormLabel htmlFor="name">Title<span style={{color: "#e53e3e", margin: "4px"}}>*</span></FormLabel>
@@ -95,6 +98,7 @@ const EditActivityModal = () => {
                                             id="name"
                                             name="name"
                                             ref={register} //VALIDATE TITLE
+                                            defaultValue={props.activity.name}
                                         />
                                         {/* ADD ERROR MESSAGE BASED ON NAME VALIDATION */}
                                     </FormControl>
@@ -106,6 +110,7 @@ const EditActivityModal = () => {
                                             id="subject"
                                             name="subject"
                                             ref={register}
+                                            defaultValue={props.activity.subject_id}
                                         >
                                             {subjects.map(s => {
                                                 return (
@@ -122,6 +127,7 @@ const EditActivityModal = () => {
                                             id="description"
                                             name="description"
                                             ref={register}
+                                            defaultValue={props.activity.description}
                                         />
                                     </FormControl>
 
@@ -164,6 +170,14 @@ const EditActivityModal = () => {
                                     </Box>
 
                                     {/* DATE COMPLETED --> DateSelector component here */}
+
+
+                                    {/* IMAGE UPLOAD */}
+
+                                    {/* IMAGE PREVIEW */}
+                                    <Image src={props.activity.photo} alt={props.activity.name} fallbackSrc={PlaceholderImg} height="300px" mx="auto" />
+
+
                                 </form>
                             </FormContext>
                             {/* END FORM */}
@@ -171,7 +185,13 @@ const EditActivityModal = () => {
                             {/* END MODAL BODY */}
                         </ModalBody>
                         <ModalFooter>
-                            <Button>Save</Button>
+                            <Button
+                                type="submit"
+                                onClick={handleSubmit(onSubmit)}
+                                // isLoading={formState.isSubmitting}
+                            >
+                                Save
+                            </Button>
                         </ModalFooter>
                     </ModalContent>
 
