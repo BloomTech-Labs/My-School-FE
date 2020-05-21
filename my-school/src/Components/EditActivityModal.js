@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { editActivity, editActivityWithoutPhoto } from '../actions/actions-portfolio.js';
 import {
@@ -30,6 +31,7 @@ import {
 } from '@chakra-ui/core';
 import { useForm, FormContext } from 'react-hook-form';
 import PlaceholderImg from '../Assets/placeholder_img.png';
+import DateSelector from './DateSelector';
 
 const EditActivityModal = (props) => {
     // console.log("These are the edit activity modal's props:", props)
@@ -50,6 +52,11 @@ const EditActivityModal = (props) => {
             console.log(err)
         })
     }, [])
+
+    // Date values to pass to DateSelector to autopopulate w/activity's submission date
+    const defaultMonth = moment(props.activity.completion_date).month() + 1;
+    const defaultDate = moment(props.activity.completion_date).date();
+    const defaultYear = moment(props.activity.completion_date).year();
 
     // Submit handler
     function onSubmit(data) {
@@ -184,8 +191,12 @@ const EditActivityModal = (props) => {
                                     </Box>
 
                                     {/* DATE COMPLETED --> DateSelector component here */}
+                                    <DateSelector 
+                                        defaultMonth={defaultMonth}
+                                        defaultDate={defaultDate}
+                                        defaultYear={defaultYear}
+                                    />
 
-                                    
                                     {/* IMAGE UPLOAD */}
                                     <Text fontWeight="500">Image</Text>
 
