@@ -54,11 +54,13 @@ const EditActivityModal = (props) => {
     // Submit handler
     function onSubmit(data) {
         console.log("Hello!!! This button works", data)
+        const duration = Number(data.hours) * 60 + Number(data.minutes) || null; 
+
         const updatedActivity = {
             name: data.name,
             description: data.description,
             subject_id: parseInt(data.subject),
-            duration: 60,
+            duration: duration,
             // completion_date: "2020-04-30"
         };
         console.log(updatedActivity)
@@ -95,7 +97,7 @@ const EditActivityModal = (props) => {
                 >
                     <ModalOverlay opacity={styles.opacity} />
                     <ModalContent pb={5} {...styles} >
-                        <ModalHeader>{props.activity.name}</ModalHeader>
+                        <ModalHeader>Edit Activity</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
                             {/* START MODAL BODY */}
@@ -150,11 +152,11 @@ const EditActivityModal = (props) => {
                                             {/* HOURS */}
                                             <FormControl>
                                                 <FormLabel htmlFor="hours">Hours</FormLabel>
-                                                <NumberInput w="120px" mr="32px">
+                                                <NumberInput defaultValue={props.defaultHour} w="120px" mr="32px">
                                                     <NumberInputField 
                                                         id="hours"
                                                         name="hours"
-                                                        ref="register"
+                                                        ref={register}
                                                     />
                                                     <NumberInputStepper>
                                                         <NumberIncrementStepper />
@@ -166,11 +168,11 @@ const EditActivityModal = (props) => {
                                             {/* MINUTES */}
                                             <FormControl>
                                                 <FormLabel htmlFor="minutes">Minutes</FormLabel>
-                                                <NumberInput max={59} w="120px">
+                                                <NumberInput defaultValue={props.defaultMin} max={59} w="120px">
                                                     <NumberInputField 
                                                         id="minutes"
                                                         name="minutes"
-                                                        ref="register"
+                                                        ref={register}
                                                     />
                                                     <NumberInputStepper>
                                                         <NumberIncrementStepper />
