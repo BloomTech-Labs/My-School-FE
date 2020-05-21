@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button, Heading, Flex } from "@chakra-ui/core";
+import { Heading, Flex } from "@chakra-ui/core";
 import axios from "axios";
+import HeaderButton from "./Button";
 
 const PortfolioHeader = () => {
   const [title, setTitle] = useState("");
@@ -28,20 +29,10 @@ const PortfolioHeader = () => {
         <Heading as="h2">{title}</Heading>
       </Link>
       <Flex width="25%" justify="space-evenly">
-        <Link to="/add">
-          <Button leftIcon="add" variantColor="teal" variant="solid">
-            Add Activity
-          </Button>
-        </Link>
-
+        <HeaderButton text="Add Activity" icon="add" location="/add" />
         {/*  EXPORT BUTTON -- PARENTS ONLY? */}
-        <Link to="/doc">
-          <Button leftIcon="download" variantColor="teal" variant="solid">
-            Convert to PDF
-          </Button>
-        </Link>
+        <HeaderButton text="Convert to PDF" icon="download" location="/doc" />
       </Flex>
-
       {/*  Start with opening in another tab, then download. */}
       {/*SEARCH BOX AND SORT/FILTER FEATUREs WILL GO HERE*/}
       {/* future -- activity tracker? */}
