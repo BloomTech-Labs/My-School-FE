@@ -30,7 +30,7 @@ import {
     Text
 } from '@chakra-ui/core';
 import { useForm, FormContext } from 'react-hook-form';
-import PlaceholderImg from '../Assets/placeholder_img.png';
+import PlaceholderImg from '../assets/placeholder_img.png';
 import DateSelector from './DateSelector';
 
 const EditActivityModal = (props) => {
@@ -68,7 +68,7 @@ const EditActivityModal = (props) => {
             description: data.description,
             subject_id: parseInt(data.subject),
             duration: duration,
-            // completion_date: "2020-04-30"
+            completion_date: completionDate
         };
         console.log(updatedActivity)
         props.editActivityWithoutPhoto(props.activity.id, updatedActivity, 3);
