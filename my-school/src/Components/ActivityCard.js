@@ -27,7 +27,7 @@ import {
     Flex
 } from '@chakra-ui/core';
 import '../App.css';
-import DateSelector from './DateSelector.js'
+// import DateSelector from './DateSelector.js'
 
 function ActivityCard(props)  {
     const [input, setInput]= useState({});
@@ -220,7 +220,7 @@ function ActivityCard(props)  {
                             </FormControl>
                             <Box p='1rem' w='400px'>
                                 <p style={{ fontWeight: "bold", marginTop: '-1.7rem' }}>Duration:</p>
-                                <Flex borderWidth="1px" rounded="lg" w='300px' padding='1rem 11rem' w='400px' justifyContent='center' >
+                                <Flex borderWidth="1px" rounded="lg" padding='1rem 11rem' w='400px' justifyContent='center' >
                                     <FormControl handeChange={handleInput} >
                                         <FormLabel htmlFor="hours">Hours</FormLabel>
                                         <NumberInput id="hours" defaultValue={input.hours} w="120px" mr="32px" onChange={handleHours}>
@@ -242,9 +242,10 @@ function ActivityCard(props)  {
                                         </NumberInput>
                                     </FormControl>
                                 </Flex>
+
                                 <h3 style={{ fontWeight: "bold", width: '100%', paddingTop: '1rem', paddingBottom: '.5rem' }}>Date Completed:</h3>
-                                <Flex flexWrap='wrap' borderWidth="1px" rounded="lg" w='300px' padding='1rem' w='400px' justifyContent='center' >
-                                    <div><DateSelector w="100%" /></div>
+                                <Flex flexWrap='wrap' borderWidth="1px" rounded="lg" padding='1rem' w='400px' justifyContent='center' >
+                                    {/* <div><DateSelector w="100%" /></div> */}
                                 </Flex>
                             </Box>
                             <ModalCloseButton />

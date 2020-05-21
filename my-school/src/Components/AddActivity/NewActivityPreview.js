@@ -8,7 +8,7 @@ import {
     useToast
 } from '@chakra-ui/core';
 
-const NewActivityPreview = ({ preview }) => {
+const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
     // console.log("preview props:", props)
     const toast = useToast();
 
@@ -22,7 +22,7 @@ const NewActivityPreview = ({ preview }) => {
             isClosable: true,
             position: "top-right"
         })
-    }, [])
+    }, [toast, preview.name])
 
     // Formats duration into hours and minutes for display
     const hours = Math.floor(preview.duration / 60);

@@ -8,7 +8,9 @@ export const getAllActivitiesForUser = (id) => {
         dispatch({type: FETCHING_ACTIVITES})
         axios.get(`https://my-school-v1.herokuapp.com/api/users/${id}/activities`)
         .then(res => {
-            dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
+            setTimeout(()=> {
+                dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
+            }, 2000)
         })
         .catch(err => {
             console.log(err)
@@ -24,7 +26,9 @@ export const editActivityWithoutPhoto  = (id, changes, userId) => {
             dispatch({type: FETCHING_ACTIVITES})
             axios.get(`https://my-school-v1.herokuapp.com/api/users/${userId}/activities`)
             .then(res => {
-                dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
+                setTimeout(()=> {
+                    dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
+                }, 2000)
             })
             .catch(err => {
                 dispatch({type: ACTIVITES_FAILURE, payload: err})
@@ -43,7 +47,9 @@ export const editActivity = (id, formData, userId) => {
             dispatch({type: FETCHING_ACTIVITES})
             axios.get(`https://my-school-v1.herokuapp.com/api/users/${userId}/activities`)
             .then(res => {
-                dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
+                setTimeout(()=> {
+                    dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
+                }, 2000)
             })
             .catch(err => {
                 dispatch({type: ACTIVITES_FAILURE, payload: err})
@@ -62,7 +68,9 @@ export const deleteActivity = (id, user_id) => {
             dispatch({type: FETCHING_ACTIVITES})
             axios.get(`https://my-school-v1.herokuapp.com/api/users/${user_id}/activities`)
             .then(res => {
-                dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
+                setTimeout(()=> {
+                    dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
+                }, 2000)
             })
             .catch(err => {
                 dispatch({type: ACTIVITES_FAILURE, payload: err})

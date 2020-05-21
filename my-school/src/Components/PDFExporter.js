@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Page,
   Text,
@@ -8,10 +8,6 @@ import {
   Image,
   BlobProvider
 } from "@react-pdf/renderer";
-import {Link} from "react-router-dom";
-import axios from "axios";
-
-// import ActivityCard from "./ActivityCard";
 
 // Create styles
 const styles = StyleSheet.create({
@@ -40,8 +36,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
 // Create Document Component
 const MyDocument = ({ activities }) => {
 
@@ -67,7 +61,7 @@ const MyDocument = ({ activities }) => {
 
   return (
     <BlobProvider document={PdfPortfolio}>
-      {({ url }) => <a href={url} target="_blank">Link to PDF</a>}
+      {({ url }) => <a href={url} target="_blank" rel="noopener noreferrer">Link to PDF</a>}
     </BlobProvider>
   );
 };
