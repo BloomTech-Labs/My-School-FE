@@ -29,15 +29,13 @@ import {
     Image,
     Text,
     useToast,
-    FormErrorMessage,
-    FormHelperText
+    FormErrorMessage
 } from '@chakra-ui/core';
 import { useForm, FormContext } from 'react-hook-form';
 import PlaceholderImg from '../assets/placeholder_img.png';
 import DateSelector from './DateSelector';
 
 const EditActivityModal = (props) => {
-    // console.log("These are the edit activity modal's props:", props)
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
     const toast = useToast();
@@ -71,7 +69,6 @@ const EditActivityModal = (props) => {
 
     // Submit handler
     function onSubmit(data) {
-        console.log("Hello!!! This button works", {data})
         // converts user's duration input into minutes
         const duration = Number(data.hours) * 60 + Number(data.minutes) || null; 
         // adds leading zero to day & month values to ensure completion_date is correct format
@@ -123,7 +120,6 @@ const EditActivityModal = (props) => {
         } else if (value.length < 3) {
             error = "Title must be at least 3 characters long";
         }
-        console.log(error)
         return error || true;
     }
 
@@ -170,15 +166,12 @@ const EditActivityModal = (props) => {
                                             type="text"
                                             id="name"
                                             name="name"
-                                            ref={register({ validate: validateTitle })} //VALIDATE TITLE
+                                            ref={register({ validate: validateTitle })} 
                                             defaultValue={props.activity.name}
                                         />
-                                        <FormErrorMessage>
+                                        <FormErrorMessage> 
                                             {errors.name && errors.name.message}
                                         </FormErrorMessage>
-                                        <FormHelperText>
-                                            Hello Required
-                                        </FormHelperText>
                                     </FormControl>
 
                                     {/* ACTIVITY SUBJECT */}
@@ -247,7 +240,7 @@ const EditActivityModal = (props) => {
                                         </Flex>
                                     </Box>
 
-                                    {/* DATE COMPLETED --> DateSelector component here */}
+                                    {/* DATE COMPLETED / DateSelector */}
                                     <DateSelector 
                                         defaultMonth={defaultMonth}
                                         defaultDate={defaultDate}
