@@ -7,7 +7,8 @@ import {
   StyleSheet,
   Image,
   BlobProvider
-} from "@react-pdf/renderer";;
+} from "@react-pdf/renderer";
+import moment from 'moment';
 
 // ----------------------STYLES-----------------------------------------
 const style = StyleSheet.create({
@@ -16,10 +17,11 @@ const style = StyleSheet.create({
     paddingBottom: 65,
     paddingHorizontal: 35,
     backgroundColor: "white",
+    margin: 10,
   },
   page: {
     flexFlow: "row wrap",
-    backgroundColor: "#E4E4E4",
+    backgroundColor: "white",
   },
   section: {
     margin: 10,
@@ -30,14 +32,17 @@ const style = StyleSheet.create({
   },
   header: {
     fontSize: 16,
+    paddingTop: 20,
     marginBottom: 20,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'Times-Roman'
+    fontFamily: 'Times-Roman',
+    textDecoration: 'underline'
   },
   subtitle: {
-    fontSize: 18,
-    margin: 12,
+    fontSize: 12,
+    textAlign: 'center',
+    margin: 5,
     fontFamily: 'Times-Roman'
   },
   text: {
@@ -49,22 +54,31 @@ const style = StyleSheet.create({
   image: {
     marginVertical: 15,
     marginHorizontal: 100,
-    width: '150px'
+    width: 100,
   },
 });
 // ----------------------/STYLES-----------------------------------------
 // Create Document Component
 const MyDocument = ({ activities }) => {
 
+
+  function timechange(num){ 
+  var hours = Math.floor(num / 60);  
+  var minutes = num % 60;
+  return hours + "h " + minutes + "m";         
+}
+
   const PdfPortfolio = (
     <Document style={style.doc} title={""}>
       <Page size="A4" style={style.page}>
         <View >
           {activities.map((a) => {
+            let subdate = moment(a.completion_date).format('MMMM Do YYYY');
+            let durtime = timechange(a.duration);
             return (
               <View key={a.id} className='section'>
                 <Text style={style.header}>{a.name}</Text>
-                <Text style={style.subtitle}>Date: {a.completion_date}  Subject: {a.subject} Duration:{a.duration}"</Text>
+                <Text style={style.subtitle}>Date: {subdate}      Subject: {a.subject}     Duration: {durtime}</Text>
               <Text style={style.text}>{a.description}</Text>
                 {a.photo && <Image src={a.photo} style={style.image} />}
               </View>
