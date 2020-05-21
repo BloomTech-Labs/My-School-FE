@@ -8,7 +8,7 @@ import {
     useToast
 } from '@chakra-ui/core';
 
-const NewActivityPreview = ({ preview }) => {
+const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
     // console.log("preview props:", props)
     const toast = useToast();
 
