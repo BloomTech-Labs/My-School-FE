@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button, Heading, Flex, Icon } from "@chakra-ui/core";
+import { Button, Heading, Flex } from "@chakra-ui/core";
 import axios from "axios";
 
 const PortfolioHeader = () => {
