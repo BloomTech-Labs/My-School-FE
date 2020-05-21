@@ -99,7 +99,7 @@ const MyDocument = ({ activities }) => {
   return (
 
     <BlobProvider document={PdfPortfolio}>
-      {({ url }) => <a href={url} target="_blank">Link to PDF</a>}
+      {({ url }) => <a href={url} target="_blank" rel="noopener noreferrer">Link to PDF</a>}
     </BlobProvider>
   );
 };

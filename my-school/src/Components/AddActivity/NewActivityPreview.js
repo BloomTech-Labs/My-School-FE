@@ -14,15 +14,15 @@ const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
 
     // Displays success toast when page loads
     useEffect(() => {
-            toast({
-                title: "Success!",
-                description: `${preview.name} added to your portfolio`,
-                status: "success",
-                duration: 6000,
-                isClosable: true,
-                position: "top-right"
-            })
-    }, [])
+        toast({
+            title: "Success!",
+            description: `${preview.name} added to your portfolio`,
+            status: "success",
+            duration: 6000,
+            isClosable: true,
+            position: "top-right"
+        })
+    }, [toast, preview.name])
 
     // Formats duration into hours and minutes for display
     const hours = Math.floor(preview.duration / 60);

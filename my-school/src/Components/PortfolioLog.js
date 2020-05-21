@@ -10,13 +10,13 @@ import ReactGA from "react-ga";
 import { css } from "@emotion/core";
 
 const PortfolioLog = ({activities, getAllActivitiesForUser, isLoading}) => {
-  // const { id } = useParams;
       const [sortedActivities, setSortedActivities] = useState([]);
       const override = css`
       margin-top: 10rem;
       `
       
       useEffect( _ => {
+        ReactGA.initialize("UA-156199574-5")
         ReactGA.pageview("/portfolio")
       },[])
 
@@ -28,7 +28,7 @@ const PortfolioLog = ({activities, getAllActivitiesForUser, isLoading}) => {
       useEffect(()=>{
         const sorted = activities.sort((a,b)=> b.id - a.id);
         setSortedActivities(sorted)
-      },[activities])
+      },[activities] )
 
     return(
         <div className='portfolio-list'>
