@@ -29,7 +29,8 @@ import {
     Image,
     Text,
     useToast,
-    FormErrorMessage
+    FormErrorMessage,
+    FormHelperText
 } from '@chakra-ui/core';
 import { useForm, FormContext } from 'react-hook-form';
 import PlaceholderImg from '../assets/placeholder_img.png';
@@ -175,6 +176,9 @@ const EditActivityModal = (props) => {
                                         <FormErrorMessage>
                                             {errors.name && errors.name.message}
                                         </FormErrorMessage>
+                                        <FormHelperText>
+                                            Hello Required
+                                        </FormHelperText>
                                     </FormControl>
 
                                     {/* ACTIVITY SUBJECT */}
@@ -274,6 +278,7 @@ const EditActivityModal = (props) => {
                             <Button
                                 type="submit"
                                 onClick={handleSubmit(onSubmit)}
+                                isLoading={formState.isSubmitting}
                             >
                                 Save
                             </Button>
