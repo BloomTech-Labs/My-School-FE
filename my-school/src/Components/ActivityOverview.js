@@ -8,7 +8,6 @@ import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 
 
-
 const ActivityOverview = ({ activities, getAllActivitiesForUser, isLoading }) => {
 
     const history = useHistory();
@@ -58,7 +57,7 @@ const ActivityOverview = ({ activities, getAllActivitiesForUser, isLoading }) =>
             <Loader color={'#329795'} css={override}/> 
         </div>
         :  
-        <Flex justifyContent='center'> 
+        <Flex justifyContent='space-around' flexWrap='wrap' > 
             {sortedActivities.map(act => (<OverviewCard key={act.id} activity={act} index={sortedActivities.indexOf(act)} pusher={pusher} puller={puller} arrLength={arrLength}/>))}
         </Flex>}
         </>
