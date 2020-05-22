@@ -23,7 +23,7 @@ const PortfolioLog = ({activities, getAllActivitiesForUser}) => {
       useEffect(()=>{
         const sorted = activities.sort((a,b)=> b.id - a.id);
         setSortedActivities(sorted)
-      })
+      },[activities])
     return(
         <div className='portfolio-list'>
           {sortedActivities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />))}

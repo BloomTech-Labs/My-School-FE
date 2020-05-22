@@ -27,7 +27,9 @@ import {
     Flex
 } from '@chakra-ui/core';
 import '../App.css';
-import DateSelector from './DateSelector.js'
+import DateSelector from './DateSelector.js';
+import { useHistory } from 'react-router-dom';
+
 
 function ActivityCard(props)  {
     const [input, setInput]= useState({});
@@ -39,7 +41,7 @@ function ActivityCard(props)  {
     const [selectedFile, setSelectedFile] = useState(null)
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = useRef();
-
+    const history = useHistory();
 
     useEffect(() => {
         if (props.activity.duration !== null) {
@@ -171,9 +173,13 @@ function ActivityCard(props)  {
         })
     }
 
+    const pushToOverview = id => {
+        history.push(`/activity/${id}`)
+    }
+
     return (
         <div className='activity-card'>
-            <p>{props.activity.name}</p>
+            <a className='link' onClick={()=> pushToOverview(props.activity.id)}><p>{props.activity.name}</p></a>
             <p>{hour}hrs {min}m</p>
             <Tag variantColor="red" rounded="full">{props.activity.subject}</Tag>
             <p>{month} {day}, {year}</p>

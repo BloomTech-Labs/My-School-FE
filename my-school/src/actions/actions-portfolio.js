@@ -73,3 +73,4 @@ export const deleteActivity = (id, user_id) => {
         })
     }
 }
+

@@ -6,6 +6,7 @@ import {
 
 const initialState= {
     activities: [],
+    singleActivity: [],
     isLoading: false,
     err: ''
 }

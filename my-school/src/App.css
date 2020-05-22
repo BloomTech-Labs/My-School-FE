@@ -35,3 +35,7 @@
   align-items: center;
   text-align:center ;
 }
+
+.link:hover{
+  text-decoration: underline;
+}
