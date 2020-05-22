@@ -24,7 +24,7 @@ const OverviewCard = props => {
         {props.activity.id === Number(id) && (
         <>
             <Flex justifyContent='space-around' alignItems='center' w='60%' h='100%' m='10rem'>
-                <Button backgroundColor={'#329795'} color='white' onClick={()=> handlePrevious(props.index)}>{`\u25C0`}</Button>
+                <Button backgroundColor={'#375E97'} color='white' onClick={()=> handlePrevious(props.index)}>{`\u25C0`}</Button>
                 <Flex justifyContent='center' flexDirection='column' borderWidth='1px' p='1rem' w='70%' textAlign='center' maxWidth='100%'>
                     <Text>{props.index + 1} of {props.arrLength}</Text>
                     <Text>{props.activity.name}{props.index}</Text>
@@ -36,11 +36,11 @@ const OverviewCard = props => {
                         </Flex>
                     </Flex>
                     <Flex>
-                        <Text>Needs to be syled better and we need to include subject, duration, creationdate and completion date</Text>
+                        <Text>Needs to be styled better and we need to include subject, duration, creationdate and completion date</Text>
                     </Flex>
-                    <Button backgroundColor={'#329795'} color='white' onClick={handlePortfolioReturn}>Back To Portfolio</Button>
+                    <Button backgroundColor={'#375E97'} color='white' onClick={handlePortfolioReturn}>Back To Portfolio</Button>
                 </Flex>
-                <Button  backgroundColor={'#329795'} color='white' onClick={() => handleNext(props.index)}>{`\u25B6`}</Button> 
+                <Button  backgroundColor={'#375E97'} color='white' onClick={() => handleNext(props.index)}>{`\u25B6`}</Button> 
             </Flex>
         </>
         )}

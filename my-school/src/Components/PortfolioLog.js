@@ -6,7 +6,7 @@ import {
 import ActivityCard from './ActivityCard';
 import '../App.css';
 import ReactGA from "react-ga";
-// import Loader from "react-spinners/ClimbingBoxLoader";
+import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 
 const PortfolioLog = ({activities, getAllActivitiesForUser, isLoading}) => {
@@ -31,8 +31,8 @@ const PortfolioLog = ({activities, getAllActivitiesForUser, isLoading}) => {
       }, [activities])
     return(
         <div className='portfolio-list'>
-          {/* {isLoading === true ? <Loader color={'#329795'} css={override}/> : */}
-         { sortedActivities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />))} 
+          {isLoading === true ? <Loader color={'#329795'} css={override}/> : 
+          (sortedActivities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />))) }
         </div>
     )
 };

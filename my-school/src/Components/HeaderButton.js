@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 const HeaderButton = ({ text, icon, location }) => {
   return (
     <Link to={location}>
-    <Button leftIcon={icon} variantColor="teal" variant="solid">
+    <Button leftIcon={icon} color="white" margin="10px" bg="#375E97" variant="solid">
       {text}
     </Button>
     </Link>
