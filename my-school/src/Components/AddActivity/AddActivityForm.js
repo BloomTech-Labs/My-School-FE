@@ -7,7 +7,6 @@ import {
     FormErrorMessage,
     FormLabel,
     FormControl,
-    FormHelperText,
     Input,
     Select,
     Textarea,
@@ -130,10 +129,10 @@ const AddActivityForm = ({activities, setActivities}) => {
         <FormContext {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
         {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
-        <Flex>
-            <Box w={1/2} px={20}>
-                <Text fontSize="lg" fontWeight="500" pb="37px">Add an Activity</Text>
-                <FormControl isInvalid={errors.name}>
+        <Flex px={20}>
+            <Box w={1/2} px={16} pb={32}>
+                <Text fontSize="lg" fontWeight="500" pt="16px" pb="36px">Add an Activity</Text>
+                <FormControl isInvalid={errors.name} mb="20px">
                     <FormLabel htmlFor="name">Title<span style={{color: "#e53e3e", margin: "4px"}}>*</span></FormLabel>
                     <Input 
                         type="text" 
@@ -147,7 +146,7 @@ const AddActivityForm = ({activities, setActivities}) => {
                     </FormErrorMessage>
                 </FormControl>
 
-                <FormControl>
+                <FormControl my="20px">
                     <FormLabel htmlFor="subject">Subject</FormLabel>
                     <Select id="subject" name="subject" placeholder="Select..." ref={register} >
                         {subjects.map(s => {
@@ -156,19 +155,18 @@ const AddActivityForm = ({activities, setActivities}) => {
                             )
                         })}
                     </Select>
-                    <FormHelperText>Note: Automatically sets subject to "Other" if nothing is selected.</FormHelperText>
                 </FormControl>
 
-                <FormControl>
+                <FormControl my="20px">
                     <FormLabel htmlFor="description">Description</FormLabel>
                     <Textarea id="description" name="description" placeholder="Tell us all about what you did in this activity!" ref={register} />
                 </FormControl>
 
                 <p style={{fontWeight: "bold"}}>How long did it take to complete this activity?</p>
-                <Box borderWidth="1px" borderColor="#D4D4D4" rounded="4px" p="32px">
+                <Box borderWidth="1px" borderColor="#D4D4D4" rounded="4px" p="32px" m="8px 0 16px">
                     <p style={{fontWeight: "bold"}}>Duration</p>
                     <Flex>
-                        <FormControl>
+                        <FormControl mt="8px">
                             <FormLabel htmlFor="hours">Hours</FormLabel>
                             <NumberInput mr="20px" defaultValue={0}>
                                 <NumberInputField id="hours" name="hours"  w="120px" ref={register} mr="0px" />
@@ -179,7 +177,7 @@ const AddActivityForm = ({activities, setActivities}) => {
                             </NumberInput>
                         </FormControl>
 
-                        <FormControl>
+                        <FormControl mt="8px">
                             <FormLabel htmlFor="minutes">Minutes</FormLabel>
                             <NumberInput max={59}defaultValue={0}>
                                 <NumberInputField id="minutes" name="minutes"   w="120px" ref={register} />
@@ -192,20 +190,21 @@ const AddActivityForm = ({activities, setActivities}) => {
                     </Flex>
                 </Box>
 
-                <p style={{fontWeight: "bold"}}>Confirm Submission Date</p>
-                <Flex align="flex-end" justify="space-between"  flexWrap="wrap">
+                <p style={{fontWeight: "bold"}} mt="20px">Confirm Submission Date</p>
+                <Flex align="flex-end" justify="space-between"  flexWrap="wrap" my="8px">
                     <DateSelector onSubmit/>
                     <Button 
                         type="submit" 
                         w="120px" 
+                        mt="16px"
                         isLoading={formState.isSubmitting}
                         // isDisabled={!name ? true : false}
                     >Submit</Button>
                 </Flex>
 
             </Box>
-            <Box w={1/2} px={20}>
-                <Text fontSize="lg" fontWeight="500" pb="61px">Upload an Activity Photo</Text>
+            <Box w={1/2} px={16}>
+                <Text fontSize="lg" fontWeight="500" pt="16px" pb="36px">Upload an Activity Photo</Text>
                 <Button>Choose File</Button>
                 <Input 
                     type="file" 
