@@ -6,7 +6,7 @@ import PortfolioLog from "./PortfolioLog";
 import MyDocument from "./PDFExporter";
 import axios from 'axios'
 import AddActivityForm from './AddActivity/AddActivityForm';
-import ActivityOverview from './AcitvityOverview'
+import ActivityOverview from './ActivityOverview'
 
 
 const Portfolio = () => {
