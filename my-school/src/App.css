@@ -33,7 +33,7 @@
   text-align:center ;
 }
 
-.link{
-  cursor: pointer;
+
+.link:hover{
   text-decoration: underline;
 }

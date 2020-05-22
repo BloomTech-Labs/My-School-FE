@@ -28,8 +28,7 @@ const PortfolioLog = ({activities, getAllActivitiesForUser, isLoading}) => {
       useEffect(()=>{
         const sorted = activities.sort((a,b)=> b.id - a.id);
         setSortedActivities(sorted)
-      },[activities] )
-
+      }, [activities])
     return(
         <div className='portfolio-list'>
           {isLoading === true ? <Loader color={'#329795'} css={override}/> : sortedActivities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />))}

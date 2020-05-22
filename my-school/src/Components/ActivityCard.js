@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import DeleteEntryButton from "./DeleteEntryButton";
 import EditActivityModal from "./EditActivityModal";
 // styling
+
 import { Tag, Grid, Box } from "@chakra-ui/core";
 import "../App.css";
 
@@ -12,6 +13,7 @@ function ActivityCard(props) {
   const [hour, setHour] = useState();
   const [min, setMin] = useState();
   const history = useHistory();
+
 
   useEffect(() => {
     if (props.activity.duration !== null) {
@@ -24,6 +26,7 @@ function ActivityCard(props) {
       setMin(0);
     }
   }, [props.activity.duration]);
+
 
   const pushToOverview = (id) => {
     history.push(`/activity/${id}`);
