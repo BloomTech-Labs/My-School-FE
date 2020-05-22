@@ -10,27 +10,43 @@ import {
   BlobProvider
 } from "@react-pdf/renderer";
 import moment from 'moment';
+import fontN from "../assets/Nunito_Sans/Nunito Sans Regular.ttf"
+import fontP from "../assets/Pridi/Pridi Light.ttf"
+import fontR from "../assets/Raleway/Raleway Medium.ttf"
 import "../App.css";
 
+Font.register({
+  family: "Nunito",
+  src: fontN
+})
 
+Font.register({
+  family: "Pridi",
+  src: fontP
+})
+
+Font.register({
+  family: "Raleway",
+  src: fontR
+})
 
 
 // ----------------------STYLES-----------------------------------------
 const style = StyleSheet.create({
   body: {
-    paddingTop: 35,
+    paddingTop: 45,
     paddingBottom: 65,
     paddingHorizontal: 35,
     backgroundColor: "white",
     margin: 10,
   },
   page: {
-    flexFlow: "row wrap",
+    flexDirection: "row",
     backgroundColor: "white",
   },
   section: {
-    margin: 10,
-    padding: 10,
+    margin: 25,
+    padding: 15,
     flexGrow: 1,
     alignSelf: "right",
     width: 200,
@@ -41,20 +57,20 @@ const style = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
     color: 'black',
-    fontFamily: 'Helvetica',
+    fontFamily: 'Raleway',
     textDecoration: 'underline'
   },
   subtitle: {
     fontSize: 12,
     textAlign: 'center',
     margin: 5,
-    fontFamily: 'Helvetica'
+    fontFamily: 'Raleway'
   },
   text: {
-    margin: 16,
+    margin: 25,
     fontSize: 14,
     textAlign: 'justify',
-    fontFamily: 'Helvetica'
+    fontFamily: 'Pridi'
   },
   image: {
     marginVertical: 15,
@@ -82,7 +98,7 @@ const MyDocument = ({ activities }) => {
             let subdate = moment(a.completion_date).format('MMMM Do YYYY');
             let durtime = timechange(a.duration);
             return (
-              <View key={a.id} className='section'>
+              <View key={a.id} className='section' wrap={false}>
                 <Text style={style.title}>{a.name}</Text>
                 <Text style={style.subtitle}>Date: {subdate}      Subject: {a.subject}     Duration: {durtime}</Text>
               <Text style={style.text}>{a.description}</Text>
