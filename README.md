@@ -8,7 +8,7 @@
 
 # MySchool
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+1️⃣ You can find the deployed project [here](https://master.d1t4t6k77hfkhl.amplifyapp.com/).
 
 ## Contributors
 
@@ -36,9 +36,9 @@
 
 1️⃣ [Trello Board](https://trello.com/b/WYUdZyhy/labs24-myschool)
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+1️⃣ [Product Canvas](https://www.notion.so/MySchool-6aef93cf287145198bba482c3fd59dbd)
 
-1️⃣ [UX Design files](🚫add link to design files here) - 🚫 delete if not applicable
+1️⃣ [UX Design files](https://www.figma.com/file/Sgu1fXMYuWxf7leP5I0NAg/My-School-Marc?node-id=122%3A2) - 🚫 delete if not applicable
 
 🚫 Replace lorem ipsum with a description of your project
 

@@ -3,6 +3,7 @@ import { theme } from '@chakra-ui/core';
 const customTheme = {
     ...theme, 
     colors: {
+        ...theme.colors,
         black: "#000",
         white: "#FFF",
         darkgray01: "#101010",
@@ -25,13 +26,7 @@ const customTheme = {
         light: 300,
         regular: 400,
         bold: 700
-    },
-    fontSizes: {
-        xs: "12px",
-        s: "14px",
-        m: "16px",
-        l: "18px",
-        xl: "24px",
-        "2xl": "36px"
     }
 }
+
+export default customTheme;

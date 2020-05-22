@@ -5,6 +5,7 @@ import TopNav from './Components/TopNav';
 import Portfolio from './Components/Portfolio';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
+import customTheme from './Styles/theme';
 import ReactGA from "react-ga"
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
   },[])
 
   return (
-        <ThemeProvider>
+        <ThemeProvider theme={customTheme} >
           <CSSReset />
           <div className="App">
             <Router>
