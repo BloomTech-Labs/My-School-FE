@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Heading, Flex } from "@chakra-ui/core";
 import axios from "axios";
-import HeaderButton from "./Button";
+import HeaderButton from "./HeaderButton";
 
 const PortfolioHeader = () => {
   const [title, setTitle] = useState("");
