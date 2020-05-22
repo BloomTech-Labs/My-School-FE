@@ -4,7 +4,6 @@ import {
   getAllActivitiesForUser
 } from '../actions/actions-portfolio.js';
 import ActivityCard from './ActivityCard';
-import Labels from './Labels';
 import '../App.css';
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
@@ -32,7 +31,6 @@ const PortfolioLog = ({activities, getAllActivitiesForUser, isLoading}) => {
       }, [activities])
     return(
         <div className='portfolio-list'>
-          <Labels />
           {isLoading === true ? <Loader color={'#329795'} css={override}/> : 
           (sortedActivities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />)))}
         </div>

@@ -14,6 +14,7 @@ import fontP from "../assets/Pridi/Pridi Light.ttf"
 import fontR from "../assets/Raleway/Raleway Medium.ttf"
 import "../App.css";
 import style from "./PDFExporterStyles.js";
+import { Button, Box, Flex } from '@chakra-ui/core';
 
 Font.register({
   family: "Nunito",
@@ -72,10 +73,17 @@ const MyDocument = ({ activities }) => {
   );
 
   return (
-
-    <BlobProvider document={PdfPortfolio}>
-      {({ url }) => <a href={url} target="_blank" rel="noopener noreferrer">Link to PDF</a>}
-    </BlobProvider>
+    <Box w="100%">
+      <Flex direction="row"
+          align="center"
+          justify="center">
+        <Button>  
+          <BlobProvider document={PdfPortfolio}>
+            {({ url }) => <a href={url} target="_blank" rel="noopener noreferrer">Link to PDF</a>}
+            </BlobProvider>
+        </Button>
+      </Flex>
+    </Box>
   );
 };
 
