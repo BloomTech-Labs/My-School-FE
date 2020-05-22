@@ -21,13 +21,10 @@
 }
 
 .activity-card{
-  width:90%;
+  width:80%;
   height: 10%;
   border-bottom: grey solid 1px;
-  padding: 1rem;
-  display:flex;
-  align-items: center;
-  justify-content: space-evenly;
+  padding: .75rem;
 }
 
 .photo{
@@ -38,4 +35,10 @@
   flex-direction: column;
   align-items: center;
   text-align:center ;
+}
+
+
+.link:hover{
+  text-decoration: underline;
+  cursor: pointer;
 }

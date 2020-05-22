@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Heading, Flex } from "@chakra-ui/core";
 import axios from "axios";
 import HeaderButton from "./HeaderButton";
 
 const PortfolioHeader = () => {
   const [title, setTitle] = useState("");
+  let { pathname } = useLocation();
+
+  const isButton = () => {
+    return pathname === "/portfolio" ? false : true;
+  };
 
   useEffect(() => {
     axios
@@ -25,9 +30,15 @@ const PortfolioHeader = () => {
   return (
     <Flex margin="2% 4%" justify="space-between">
       {/* TITLE  -- based on user type and name*/}
-      <Link to="/portfolio">
+      {isButton() ? (
+        <HeaderButton
+          text="Go To My Portfolio"
+          icon="arrow-right"
+          location="/portfolio"
+        />
+      ) : (
         <Heading as="h2">{title}</Heading>
-      </Link>
+      )}
       <Flex width="25%" justify="space-evenly">
         <HeaderButton text="Add Activity" icon="add" location="/add" />
         {/*  EXPORT BUTTON -- PARENTS ONLY? */}

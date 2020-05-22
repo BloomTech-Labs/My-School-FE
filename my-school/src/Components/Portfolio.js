@@ -6,6 +6,7 @@ import PortfolioLog from "./PortfolioLog";
 import MyDocument from "./PDFExporter";
 import axios from 'axios'
 import AddActivityForm from './AddActivity/AddActivityForm';
+import ActivityOverview from './ActivityOverview'
 
 
 const Portfolio = () => {
@@ -24,9 +25,10 @@ const Portfolio = () => {
   return (
     <div>
       <PortfolioHeader />
-      <Route path="/portfolio" component={PortfolioLog} />     
-      <Route path="/add" render={ props => <AddActivityForm {...props} activities={activities} setActivities={setActivities} />} />
-      <Route path="/doc" render={ _ => <MyDocument activities={activities} /> } />
+      <Route exact path="/portfolio" component={PortfolioLog} />     
+      <Route exact path="/add" render={ props => <AddActivityForm {...props} activities={activities} setActivities={setActivities} />} />
+      <Route exact path="/doc" render={ _ => <MyDocument activities={activities} /> } />
+      <Route path='/activity/:id' render={props => <ActivityOverview activities={activities}/>}/>
     </div>
   );
 };
