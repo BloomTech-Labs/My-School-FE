@@ -1,5 +1,7 @@
 # MySchool
-
+![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
+![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
+![Maintainability](https://api.codeclimate.com/v1/badges/6f9a7f7c33c8b6f27b3e/maintainability)(https://codeclimate.com/github/Lambda-School-Labs/My-School-FE/maintainability)
 You can find the deployed project [here](https://master.d1t4t6k77hfkhl.amplifyapp.com/).
 
 ## Contributors
@@ -13,13 +15,6 @@ You can find the deployed project [here](https://master.d1t4t6k77hfkhl.amplifyap
 
 <br>
 <br>
-
-🚫 4️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project
-
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
-![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
-
-🚫 more info on using badges [here](https://github.com/badges/shields)
 
 ## Project Overview
 
@@ -41,40 +36,34 @@ MySchool is a portfolio-building app for parents and students participating in h
 -    Activity monitoring graphic to quickly note progress on portfolio creation
 -    Notifications to users to keep portfolio maintenance on track
 
-## 1️⃣ Tech Stack
+## Tech Stack
 
 ### Front end built using:
+-   React
+-   Chakra UI
 
-#### _Front end framework goes here_
+-    React was chosen for its ease of developer onboarding and large external library availability.
+-   Chakra UI was chosen for its focus on accessibility friendly components.
+    -   Accessibility is always an important consideration, even more so when it comes to applications in the realm of education.
 
-🚫 Why did you choose this framework?
-
--    point one
--    point two
--    point three
--    point four
-
-🚫List the rest of the front end features and libraries in the same format as the framework above.
 
 #### Front end deployed to AWS Amplify
 
 #### [Back end](https://my-school-v1.herokuapp.com/) built using:
 
-#### 🚫 back end framework goes here
+### Framework : Express
+-    Allows for rapid implementation
+-    No onboarding time concerns, all members were familiar with Express
+-    Excellent documentation and other sources available
+-    Stable, has been around for a while
 
--    point one
--    point two
--    point three
-
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
-
-# APIs
+<!-- # APIs
 
 ## 2️⃣ Authentication API here
 
 🚫Replace text below with a description of the API
 
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good. -->
 
 # Environment Variables
 
@@ -88,16 +77,15 @@ In order for the app to function correctly, the user must set up their own envir
     *  CLOUDINARY_API_SECRET - this is generated in your Cloudinary account
    
 
-# 4️⃣ Testing
+<!-- # 4️⃣ Testing
 
-🚫Document what you used for testing and why
+🚫Document what you used for testing and why -->
 
 # 4️⃣ Installation Instructions
 
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+1. Run npm install or yarn install to install all dependencies.
 
 ## Other Scripts
-
 
 build - creates a build of the application
 start - starts the production server after a build is created
