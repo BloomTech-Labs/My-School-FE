@@ -161,7 +161,7 @@ const EditActivityModal = (props) => {
                             <FormContext {...methods}>
                                 <form onSubmit={handleSubmit(onSubmit)}> 
                                     {/* ACTIVITY NAME */}
-                                    <FormControl>
+                                    <FormControl isInvalid={errors.name}>
                                         <FormLabel htmlFor="name">Title<span style={{color: "#e53e3e", margin: "4px"}}>*</span></FormLabel>
                                         <Input 
                                             type="text"
