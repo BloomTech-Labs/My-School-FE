@@ -43,7 +43,7 @@ const MyDocument = ({ activities }) => {
 
   function noNull(item){
     if(item==="null"){
-      let item = "";
+      item = "";
     } else {
       return(item)
     }
