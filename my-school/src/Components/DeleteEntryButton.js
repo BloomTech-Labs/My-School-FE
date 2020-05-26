@@ -29,12 +29,13 @@ const DeleteEntryButton= (props) => {
         <Button
             _hover={{
                 bg: "white",
-                color: " teal"
+                color: "#FB6542"
             }}
             _focus={{ boxShadow: "outline" }}
             lefticon="delete"
             variant="solid"
-            variantColor="teal"
+            bg="#FB6542"
+            color= "white"
             onClick={() => {
                 setIsOpenDialogue(true);
             }}
@@ -61,7 +62,7 @@ const DeleteEntryButton= (props) => {
                     <Button ref={cancelRef} onClick={onCloseDialogue}>
                         Cancel
                     </Button>
-                    <Button variantColor="red" onClick={() => {
+                    <Button bg="#FF5656" color="white" onClick={() => {
                         onCloseDialogue();
                         deleteEntry(props.activity.id, 3);
                         toast({

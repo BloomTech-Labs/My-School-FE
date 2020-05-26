@@ -1,68 +1,89 @@
 import React from "react";
 import {
   Page,
+  Font,
   Text,
   View,
   Document,
-  StyleSheet,
   Image,
   BlobProvider
 } from "@react-pdf/renderer";
+import moment from 'moment';
+import fontN from "../assets/Nunito_Sans/Nunito Sans Regular.ttf"
+import fontP from "../assets/Pridi/Pridi Light.ttf"
+import fontR from "../assets/Raleway/Raleway Medium.ttf"
+import "../App.css";
+import style from "./PDFExporterStyles.js";
+import { Button, Box, Flex } from '@chakra-ui/core';
 
-// Create styles
-const styles = StyleSheet.create({
-  body: {
-    paddingTop: 35,
-    paddingBottom: 65,
-    paddingHorizontal: 35,
-  },
-  page: {
-    flexDirection: "row",
-    backgroundColor: "#E4E4E4",
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-  text: {
-    margin: 12,
-    fontSize: 14,
-    textAlign: "justify",
-    fontFamily: "Times-Roman",
-  },
-  image: {
-    width: '150px'
-  },
-});
+Font.register({
+  family: "Nunito",
+  src: fontN
+})
+
+Font.register({
+  family: "Pridi",
+  src: fontP
+})
+
+Font.register({
+  family: "Raleway",
+  src: fontR
+})
+
 
 // Create Document Component
 const MyDocument = ({ activities }) => {
 
-  const student = [activities.studentsName] + "'s Portfolio";
+  function timechange(num){ 
+  var hours = Math.floor(num / 60);  
+  var minutes = num % 60;
+  return hours + "h " + minutes + "m";         
+  };
 
+  function noNull(item){
+    if(item==="null"){
+      let item = "";
+    } else {
+      return(item)
+    }
+  }
+ 
   const PdfPortfolio = (
-    <Document title={student}>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section} >
+    <Document style={style.doc} title={""}>
+      <Page size="A4" style={style.page}>
+        <View >
           {activities.map((a) => {
+            let subdate = moment(a.completion_date).format('MMMM Do YYYY');
+            let durtime = timechange(a.duration);
+         
             return (
-              <View key={a.id}>
-                <Text>{a.name}</Text>
-                <Text>{a.description}</Text>
-                {a.photo && <Image src={a.photo} style={styles.image}/>}
+              <View key={a.id} className='section' wrap={false}>
+                <Text style={style.title}>{a.name}</Text>
+                <Text style={style.subtitle}>Date: {subdate}      Subject: {a.subject}     Duration: {durtime}</Text>
+              <Text style={style.text}>{noNull(a.description)}</Text>
+                {a.photo && <Image src={a.photo} style={style.image} />}
               </View>
             );
           })}
         </View>
       </Page>
     </Document>
-  )
+
+  );
 
   return (
-    <BlobProvider document={PdfPortfolio}>
-      {({ url }) => <a href={url} target="_blank" rel="noopener noreferrer">Link to PDF</a>}
-    </BlobProvider>
+    <Box w="100%">
+      <Flex direction="row"
+          align="center"
+          justify="center">
+        <Button>  
+          <BlobProvider document={PdfPortfolio}>
+            {({ url }) => <a href={url} target="_blank" rel="noopener noreferrer">Link to PDF</a>}
+            </BlobProvider>
+        </Button>
+      </Flex>
+    </Box>
   );
 };
 

@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import DeleteEntryButton from "./DeleteEntryButton";
 import EditActivityModal from "./EditActivityModal";
 // styling
-
+import fontN from "../assets/Nunito_Sans/Nunito Sans Regular.ttf";
 import { Tag, Grid, Box } from "@chakra-ui/core";
 import "../App.css";
 
@@ -60,6 +60,7 @@ function ActivityCard(props) {
       templateColumns=".75fr .25fr 1fr .5fr .25fr .25fr"
       alignItems='center'
       className="activity-card"
+      fontFamily= {fontN}
     >
       <Box width="100%" fontSize='1.2rem' fontWeight='500'>
         <p className="link" onClick={() => pushToOverview(props.activity.id)}>

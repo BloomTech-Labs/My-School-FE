@@ -31,7 +31,8 @@ const PortfolioLog = ({activities, getAllActivitiesForUser, isLoading}) => {
       }, [activities])
     return(
         <div className='portfolio-list'>
-          {isLoading === true ? <Loader color={'#329795'} css={override}/> : sortedActivities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />))}
+          {isLoading === true ? <Loader color={'#329795'} css={override}/> : 
+          (sortedActivities.map(activity =>(<ActivityCard key={activity.id} activity={activity} className='card' />)))}
         </div>
     )
 };

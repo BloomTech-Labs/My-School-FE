@@ -128,12 +128,13 @@ const EditActivityModal = (props) => {
         <Button
             _hover={{
                 bg: "white",
-                color: " teal"
+                color: "#FFBB00"
             }}
             _focus={{ boxShadow: "outline" }}
             lefticon="edit"
             variant="solid"
-            variantColor="teal"
+            bg="#FFBB00"
+            color="white"
             ref={btnRef}
             onClick={onOpen}
         >
