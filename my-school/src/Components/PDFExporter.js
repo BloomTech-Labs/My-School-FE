@@ -62,7 +62,7 @@ const MyDocument = ({ activities }) => {
                 <Text style={style.title}>{a.name}</Text>
                 <Text style={style.subtitle}>Date: {subdate}      Subject: {a.subject}     Duration: {durtime}</Text>
               <Text style={style.text}>{noNull(a.description)}</Text>
-                {a.photo && <Image src={a.photo} style={style.image} />}
+                {a.photo && <Image src={`https${a.photo.slice(4, a.photo.length)}`} style={style.image} />}
               </View>
             );
           })}
