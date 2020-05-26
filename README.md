@@ -2,6 +2,7 @@
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
 ![Maintainability](https://api.codeclimate.com/v1/badges/6f9a7f7c33c8b6f27b3e/maintainability)
+![Test Coverage](https://api.codeclimate.com/v1/badges/6f9a7f7c33c8b6f27b3e/test_coverage)
 
 
 You can find the deployed project [here](https://master.d1t4t6k77hfkhl.amplifyapp.com/).
