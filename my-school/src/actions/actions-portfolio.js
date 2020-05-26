@@ -10,7 +10,7 @@ export const getAllActivitiesForUser = (id) => {
         .then(res => {
             setTimeout(()=> {
                 dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
-            }, 2000)
+            }, 1000)
         })
         .catch(err => {
             console.log(err)
@@ -28,7 +28,7 @@ export const editActivityWithoutPhoto  = (id, changes, userId) => {
             .then(res => {
                 setTimeout(()=> {
                     dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
-                }, 2000)
+                }, 1000)
             })
             .catch(err => {
                 dispatch({type: ACTIVITES_FAILURE, payload: err})
@@ -49,7 +49,7 @@ export const editActivity = (id, formData, userId) => {
             .then(res => {
                 setTimeout(()=> {
                     dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
-                }, 2000)
+                }, 1000)
             })
             .catch(err => {
                 dispatch({type: ACTIVITES_FAILURE, payload: err})
@@ -70,7 +70,7 @@ export const deleteActivity = (id, user_id) => {
             .then(res => {
                 setTimeout(()=> {
                     dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
-                }, 2000)
+                }, 1000)
             })
             .catch(err => {
                 dispatch({type: ACTIVITES_FAILURE, payload: err})
