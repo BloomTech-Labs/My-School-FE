@@ -22,7 +22,7 @@ import { useForm, FormContext } from 'react-hook-form';
 import DateSelector from '../DateSelector';
 import NewActivityPreview from './NewActivityPreview';
 
-const AddActivityForm = ({activities, setActivities}) => {
+const AddActivityForm = () => {
     const methods = useForm();
     const { handleSubmit, errors, register, formState } = methods;
     const toast = useToast();
@@ -73,7 +73,6 @@ const AddActivityForm = ({activities, setActivities}) => {
             axios.post("https://my-school-v1.herokuapp.com/api/activities/attachimg", formData)
             .then(res => {
                 setPreview(res.data[0])
-                setActivities([res.data[0], ...activities])
             })
             .catch(err => {
                 console.log(err)
@@ -97,7 +96,6 @@ const AddActivityForm = ({activities, setActivities}) => {
             axios.post("https://my-school-v1.herokuapp.com/api/activities", activity)
             .then(res => {
                 setPreview(res.data[0])
-                setActivities([res.data[0], ...activities])
             })
             .catch(err => {
                 console.log(err)
