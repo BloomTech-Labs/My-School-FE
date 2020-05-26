@@ -83,7 +83,7 @@ In order for the app to function correctly, the user must set up their own envir
 
 🚫Document what you used for testing and why -->
 
-# 4️⃣ Installation Instructions
+# Installation Instructions
 
 1. Run npm install or yarn install to install all dependencies.
 
