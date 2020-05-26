@@ -1,6 +1,6 @@
 # MySchool
 
-1️⃣ You can find the deployed project [here](https://master.d1t4t6k77hfkhl.amplifyapp.com/).
+You can find the deployed project [here](https://master.d1t4t6k77hfkhl.amplifyapp.com/).
 
 ## Contributors
 
@@ -23,16 +23,16 @@
 
 ## Project Overview
 
-1️⃣ [Trello Board](https://trello.com/b/WYUdZyhy/labs24-myschool)
+[Trello Board](https://trello.com/b/WYUdZyhy/labs24-myschool)
 
-1️⃣ [Product Canvas](https://www.notion.so/MySchool-6aef93cf287145198bba482c3fd59dbd)
+[Product Canvas](https://www.notion.so/MySchool-6aef93cf287145198bba482c3fd59dbd)
 
-1️⃣ [UX Design files](https://www.figma.com/file/Sgu1fXMYuWxf7leP5I0NAg/My-School-Marc?node-id=122%3A2) 
+[UX Design files](https://www.figma.com/file/Sgu1fXMYuWxf7leP5I0NAg/My-School-Marc?node-id=122%3A2) 
 
 MySchool is a portfolio-building app for parents and students participating in homeschooling activities. We make it quick and easy to add schoolwork examples or activity information to a printable PDF. Based on the Maryland state requirements for homeschoolers, MySchool keeps materials organized for a successful submission to educational authorities. 
 
 
-### 4️⃣ Key Features
+### Key Features
 
 -    A searchable record of portfolio articles -- one portfolio per student, organized by subject and date
 -    Administrative access for parents or teachers for all student portfolios associated with a family or group
@@ -76,7 +76,7 @@ MySchool is a portfolio-building app for parents and students participating in h
 
 Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
 
-# 3️⃣ Environment Variables
+# Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
