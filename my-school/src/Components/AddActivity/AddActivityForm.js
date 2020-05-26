@@ -7,7 +7,6 @@ import {
     FormErrorMessage,
     FormLabel,
     FormControl,
-    FormHelperText,
     Input,
     Select,
     Textarea,
@@ -124,54 +123,75 @@ const AddActivityForm = ({activities, setActivities}) => {
     }
 
     return (
-        <>
+        <Box pb={32} px={20}>
         { preview ? <NewActivityPreview preview={preview} /> 
         : 
         <FormContext {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} >
         {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
-        <Flex>
-            <Box w={1/2} px={20}>
-                <Text fontSize="lg" fontWeight="500" pb="37px">Add an Activity</Text>
-                <FormControl isInvalid={errors.name}>
-                    <FormLabel htmlFor="name">Title<span style={{color: "#e53e3e", margin: "4px"}}>*</span></FormLabel>
+        <Flex wrap="wrap" justify="space-around">
+            <Box w={["100%, 100%, 100%, 46%"]} >
+                <Text fontSize="lg" fontWeight="500" pt="16px" pb="36px">Add an Activity</Text>
+                <FormControl isInvalid={errors.name} mb="20px" fontFamily="'Nunito'">
+                    <FormLabel htmlFor="name">Title<Box as="span" color="warningred" m="4px">*</Box></FormLabel>
                     <Input 
                         type="text" 
                         id="name"
                         name="name" 
                         placeholder="What's the name of the activity you completed?" 
                         ref={register({ validate: validateTitle })}
+                        errorBorderColor="warningred"
+                        focusBorderColor="myschoolblue"
                     />
-                    <FormErrorMessage>
+                    <FormErrorMessage color="warningred">
                         {errors.name && errors.name.message}
                     </FormErrorMessage>
                 </FormControl>
 
-                <FormControl>
+                <FormControl my="20px" fontFamily="'Nunito'">
                     <FormLabel htmlFor="subject">Subject</FormLabel>
-                    <Select id="subject" name="subject" placeholder="Select..." ref={register} >
+                    <Select 
+                        id="subject" 
+                        name="subject" 
+                        placeholder="Select..." 
+                        ref={register} 
+                        focusBorderColor="myschoolblue"
+                    >
                         {subjects.map(s => {
                             return (
                                 <option value={s.id} key={s.id}>{s.name}</option>
                             )
                         })}
                     </Select>
-                    <FormHelperText>Note: Automatically sets subject to "Other" if nothing is selected.</FormHelperText>
                 </FormControl>
 
-                <FormControl>
+                <FormControl my="20px" fontFamily="'Nunito'">
                     <FormLabel htmlFor="description">Description</FormLabel>
-                    <Textarea id="description" name="description" placeholder="Tell us all about what you did in this activity!" ref={register} />
+                    <Textarea 
+                        id="description" 
+                        name="description" 
+                        placeholder="Tell us all about what you did in this activity!" 
+                        ref={register} 
+                        focusBorderColor="myschoolblue"
+                    />
                 </FormControl>
 
-                <p style={{fontWeight: "bold"}}>How long did it take to complete this activity?</p>
-                <Box borderWidth="1px" borderColor="#D4D4D4" rounded="4px" p="32px">
-                    <p style={{fontWeight: "bold"}}>Duration</p>
+                <Text fontWeight="bold">How long did it take to complete this activity?</Text>
+                <Box borderWidth="1px" borderColor="#D4D4D4" rounded="4px" p="32px" m="8px 0 16px">
+                    <Text fontWeight="bold">Duration</Text>
                     <Flex>
-                        <FormControl>
+                        <FormControl mt="8px" fontFamily="'Nunito'">
                             <FormLabel htmlFor="hours">Hours</FormLabel>
-                            <NumberInput mr="20px" defaultValue={0}>
-                                <NumberInputField id="hours" name="hours"  w="120px" ref={register} mr="0px" />
+                            <NumberInput mr="20px" min={0} defaultValue={0} >
+                                <NumberInputField 
+                                    id="hours" 
+                                    name="hours"  
+                                    w="120px"  
+                                    mr="0px" 
+                                    errorBorderColor="warningred" 
+                                    focusBorderColor="myschoolblue" 
+                                    ref={register}
+                                />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
@@ -179,10 +199,17 @@ const AddActivityForm = ({activities, setActivities}) => {
                             </NumberInput>
                         </FormControl>
 
-                        <FormControl>
+                        <FormControl mt="8px" fontFamily="'Nunito'">
                             <FormLabel htmlFor="minutes">Minutes</FormLabel>
-                            <NumberInput max={59}defaultValue={0}>
-                                <NumberInputField id="minutes" name="minutes"   w="120px" ref={register} />
+                            <NumberInput max={59} min={0} defaultValue={0}>
+                                <NumberInputField 
+                                    id="minutes" 
+                                    name="minutes"   
+                                    w="120px"  
+                                    errorBorderColor="warningred" 
+                                    focusBorderColor="myschoolblue" 
+                                    ref={register}
+                                />
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
@@ -192,34 +219,39 @@ const AddActivityForm = ({activities, setActivities}) => {
                     </Flex>
                 </Box>
 
-                <p style={{fontWeight: "bold"}}>Confirm Submission Date</p>
-                <Flex align="flex-end" justify="space-between"  flexWrap="wrap">
+                <Text fontWeight="bold" mt="20px">Confirm Submission Date</Text>
+                <Flex align="flex-end" justify="space-between"  flexWrap="wrap" my="8px">
                     <DateSelector onSubmit/>
                     <Button 
                         type="submit" 
                         w="120px" 
+                        mt="16px"
                         isLoading={formState.isSubmitting}
+                        color="white"
+                        bg="myschoolblue"
+                        _hover={{ bg: "#28456F" }}
+                        rounded="14px"
                         // isDisabled={!name ? true : false}
                     >Submit</Button>
                 </Flex>
 
             </Box>
-            <Box w={1/2} px={20}>
-                <Text fontSize="lg" fontWeight="500" pb="61px">Upload an Activity Photo</Text>
-                <Button>Choose File</Button>
-                <Input 
-                    type="file" 
-                    name="image" 
-                    id="image"
-                    placeholder="Upload an image"
-                    onChange={handleImageUpload}
-                />
+            <Box w="492px">
+                    <Text fontSize="lg" fontWeight="500" pt="16px" pb="36px">Upload an Activity Photo</Text>
+                    <Input 
+                        type="file" 
+                        name="image" 
+                        id="image"
+                        placeholder="Upload an image"
+                        onChange={handleImageUpload}
+                        fontFamily="'Nunito'"
+                    />
             </Box>
             </Flex>
         </form>
         </FormContext>
         }
-        </>
+        </Box>
     )
 }
 
