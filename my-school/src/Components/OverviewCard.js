@@ -13,7 +13,7 @@ const OverviewCard = props => {
     useEffect(() =>{
         setHours(Math.floor(props.activity.duration / 60))
         setMins(props.activity.duration % 60)
-    }, [ hours, mins ])
+    }, [ hours, mins, props.activity.duration ])
 
     const handlePrevious = index => {
         props.puller(index)
