@@ -1,36 +1,36 @@
 
-import React, {useEffect, useState} from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { getAllActivitiesForUser } from "../actions/actions-portfolio";
+// Components
 import PortfolioHeader from "./PortfolioHeader";
 import PortfolioLog from "./PortfolioLog";
 import MyDocument from "./PDFExporter";
-import axios from 'axios'
 import AddActivityForm from './AddActivity/AddActivityForm';
-import ActivityOverview from './ActivityOverview'
+import ActivityOverview from './ActivityOverview';
 
-
-const Portfolio = () => {
-    const [activities, setActivities] = useState([]);
+const Portfolio = ({ activities, getAllActivitiesForUser }) => {
 
     useEffect(() => {
-        axios.get('https://my-school-v1.herokuapp.com/api/activities')
-        .then(res => {
-            setActivities(res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }, [])
+      getAllActivitiesForUser(3)
+    }, [getAllActivitiesForUser])
 
   return (
     <div>
       <PortfolioHeader />
       <Route exact path="/portfolio" component={PortfolioLog} />     
-      <Route exact path="/add" render={ props => <AddActivityForm {...props} activities={activities} setActivities={setActivities} />} />
+      <Route exact path="/add" render={ props => <AddActivityForm />} />
       <Route exact path="/doc" render={ _ => <MyDocument activities={activities} /> } />
       <Route path='/activity/:id' render={props => <ActivityOverview activities={activities}/>}/>
     </div>
   );
 };
 
-export default Portfolio;
+const mapStateToProps = (state) => {
+  return {
+    activities: state.portfolioReducer.activities
+  };
+};
+
+export default connect(mapStateToProps, { getAllActivitiesForUser }) (Portfolio);
