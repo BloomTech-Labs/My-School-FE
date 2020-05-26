@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getAllActivitiesForUser } from "../actions/actions-portfolio.js";
 import ActivityCard from "./ActivityCard";
-import "../App.css";
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
