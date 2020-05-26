@@ -1,7 +1,6 @@
 import React from 'react';
-// import './App.css';
+import './App.css';
 import TopNav from './Components/TopNav';
-// import ActivityContainer from './Components/ActivityContainer';
 import Portfolio from './Components/Portfolio';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";

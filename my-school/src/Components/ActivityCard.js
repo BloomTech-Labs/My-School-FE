@@ -7,7 +7,6 @@ import EditActivityModal from "./EditActivityModal";
 // styling
 import fontN from "../assets/Nunito_Sans/Nunito Sans Regular.ttf";
 import { Tag, Grid, Box } from "@chakra-ui/core";
-import "../App.css";
 
 function ActivityCard(props) {
   const [hour, setHour] = useState();

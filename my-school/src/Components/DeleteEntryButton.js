@@ -11,7 +11,6 @@ import {
     AlertDialogOverlay,
     useToast,
 } from '@chakra-ui/core';
-import '../App.css';
 
 const DeleteEntryButton= (props) => {
 
