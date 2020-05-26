@@ -2,10 +2,11 @@ import React from 'react';
 import './App.css';
 import TopNav from './Components/TopNav';
 import Portfolio from './Components/Portfolio';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
 import customTheme from './Styles/theme';
-import ReactGA from "react-ga"
+import ReactGA from "react-ga";
+import Login from './Components/login.js'
 
 function App() {
 
@@ -19,10 +20,15 @@ function App() {
           <CSSReset />
           <div className="App">
             <Router>
-              <TopNav />
-              <Box>
-                <Portfolio />
-              </Box>
+              <Route path='/login'>
+                <Login/>
+              </Route>
+              <Route path='/dashboard/:id'>
+                <TopNav />
+                <Box>
+                  <Portfolio />
+                </Box>
+              </Route>
             </Router>
           </div>
         </ThemeProvider>
