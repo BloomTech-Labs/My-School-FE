@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: 
           npm install
-        working-directory: ./my-school
+        working-directory: my-school
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
