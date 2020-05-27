@@ -10,6 +10,7 @@ import rootReducer from './Redux/Reducers/rootReducer';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
+// Exception monitoring
 Sentry.init({dsn: "https://a1ae3e3658b84f849266ede630f96caf@o347185.ingest.sentry.io/5255546"});
 
 ReactDOM.render(
