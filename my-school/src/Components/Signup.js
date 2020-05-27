@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
     Text,
     Box,
@@ -10,7 +11,8 @@ import {
     Select,
     Checkbox,
     Icon,
-    Button
+    Button,
+    Link
 } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 
@@ -136,6 +138,7 @@ const Signup = () => {
                     fontSize="1.125rem"
                 >Submit</Button>
             </form>
+            <Text>Already have an account? <Link as={RouterLink} to="/login">Log in.</Link></Text>
             </Box>
         </Box>
     )

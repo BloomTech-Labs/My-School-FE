@@ -10,11 +10,20 @@ const AuthPage = ({ login }) => {
     return (
         <Flex>
             {login ? <Login /> : <Signup />}
+            
             <Box
                 bg="myschoolblue"
                 w={2/3}
                 h="100vh"
-            ></Box>
+            >
+                <svg height="100vh" width="100%" position="absolute" margin="0">
+                    <circle cx="50vw" cy="130vh" r="359" fill="#FFBB00" />
+                </svg>
+{/* 
+                <svg height="100vh" width="100%" position="absolute" margin="0" zIndex="10">
+                    <circle cx="10vw" cy="1vh" r="435" fill="#FB6542"/>
+                </svg> */}
+            </Box>
         </Flex>
     )
 }
