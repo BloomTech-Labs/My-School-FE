@@ -7,8 +7,6 @@ import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
 import customTheme from './Styles/theme';
 import ReactGA from "react-ga";
 import Landing from './Components/Landing';
-import Login from './Components/login.js';
-import Signup from './Components/Signup';
 import AuthPage from './Components/AuthPage';
 
 function App() {
