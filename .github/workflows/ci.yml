@@ -32,7 +32,8 @@ jobs:
           node-version: "12"
 
       # Run the NPM install command before proceeding
-      - run: cd my-school
+      - name: install 
+        working-directory: ./myschool
       - run: npm install
 
       # A GitHub action for running tests and publishing coverage
