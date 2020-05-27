@@ -6,17 +6,34 @@ const customTheme = {
         ...theme.colors,
         black: "#000",
         white: "#FFF",
-        darkgray01: "#101010",
-        gray01: "#4E4E4E",
-        gray02: "#A4A4A4",
-        lightgray01: "#C8C8C8",
-        lightgray02: "#FAFAFF",
         lightblue: "#DBE8FB",
         myschoolblue: "#375E97",
         myschoolyellow: "#FFBB00",
         myschoolorange: "#FB6542",
         systemgreen: "#49C281",
-        warningred: "#FF5656"
+        warningred: "#FF5656",
+        gray: {
+            100: "#F7FAFC",
+            200: "#EDF2F7",
+            300: "#E2E8F0",
+            400: "#CBD5E0",
+            500: "#A0AEC0",
+            600: "#718096",
+            700: "#4A5568",
+            800: "#2D3748",
+            900: "#1A202C"
+        },
+        blue: {
+            100: "#EBF8FF",
+            200: "#BEE3F8",
+            300: "#90CDF4",
+            400: "#63B3ED",
+            500: "#4299E1",
+            600: "#3182CE",
+            700: "#2B6CB0",
+            800: "#2C5282",
+            900: "#2A4365"
+        }
     },
     fonts: {
         heading: "'Nunito', sans-serif",
