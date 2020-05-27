@@ -6,8 +6,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
 import customTheme from './Styles/theme';
 import ReactGA from "react-ga";
-import Login from './Components/login.js'
-import Register from './Components/RegistrationForm.js'
+import Login from './Components/login.js';
+import Signup from './Components/Signup';
+import AuthPage from './Components/AuthPage';
 
 function App() {
 
@@ -22,19 +23,17 @@ function App() {
           <div className="App">
             <Router>
               <Route path='/login'>
-                <Login/>
+                <AuthPage login={true} />
               </Route>
-              <Switch>
-                <Route path = '/register'>
-                  <Register />
-                </Route>
+              <Route path='/signup'>
+                <AuthPage login={false} />
+              </Route>
               <Route exact path='/'>
                 <TopNav />
                 <Box>
                   <Portfolio />
                 </Box>
               </Route>
-              </Switch>
             </Router>
           </div>
         </ThemeProvider>
