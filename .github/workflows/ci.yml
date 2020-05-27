@@ -1,5 +1,3 @@
-  
-  
 # The name of the workflow
 name: build
 
@@ -15,14 +13,15 @@ on:
 jobs:
   # A job to generate and publish code coverage
   coverage:
-# A more descriptive name of the job
+		# A more descriptive name of the job
     name: Test and publish test coverage
 
     # The OS on which the job will run
     runs-on: ubuntu-latest
 
     # The steps for the job, executed in sequence
-    steps:	
+    steps:
+			
       # A GitHub action for checking out the current branch
       - uses: actions/checkout@master
 
@@ -32,19 +31,13 @@ jobs:
           node-version: "12"
 
       # Run the NPM install command before proceeding
-      - name: Install dependencies
-        run: 
-          npm install
-        working-directory: my-school
+      - run: npm install
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
         env:
           # An environment variable, the value is a GitHub repo secret
-          CC_TEST_REPORTER_ID: 61647e1c28d8dc30d82cdd55099ae5eca4f2635aea3f7651471bd60d7d4e04c0
-          NAME: ${{ secrets.NAME }}
-          API_KEY: ${{ secrets.API_KEY }}
-          API_SECRET: ${{ secrets.API_SECRET }} 
+          CC_TEST_REPORTER_ID: ${{ secrets.CodeClimateReporterId }}
         with:
           # Run our `coverage` script in our `package.json`
           coverageCommand: npm run coverage
