@@ -3,7 +3,7 @@ import {
     ADDING_USERS,
     USERS_SUCCESS,
     USERS_FAILURE,
-} from '../../actions/actions-users';
+} from '../../actions/actions-users.js';
 
 const initialState= {
     users: [],

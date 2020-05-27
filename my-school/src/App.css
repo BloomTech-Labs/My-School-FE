@@ -40,3 +40,40 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+
+/* .stripe1 {
+  width: 300px;
+  height: 47px;
+  background-color: #FB6542;
+  transform: rotate(-45deg);
+  border: none;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.stripe2 {
+  width: 260px;
+  height: 47px;
+  background-color: #FFBB00;
+  transform: rotate(-45deg);
+  border: none;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+} */
+
+
+.landing {
+  background: linear-gradient(
+    -45deg,
+    #375E97,
+    #375E97 80px,
+    #FFBB00 80px,
+    #FFBB00 115px,
+    #FB6542 115px,
+    #FB6542 135px,
+    #375E97 135px
+    );
+}

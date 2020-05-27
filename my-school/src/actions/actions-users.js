@@ -8,11 +8,11 @@ export const USERS_FAILURE = 'USERS_FAILURE';
 export const getAllChildrenForFamily= (fam_id) => {
     return dispatch => {
         dispatch({type: FETCHING_USERS})
-        axios.get(`https://my-school-v1.herokuapp.com/api/families/${fam_id}/`)
+        axios.get(`https://my-school-v1.herokuapp.com/api/families/${fam_id}`)
         .then(res => {
             setTimeout(()=> {
                 dispatch({type: USERS_SUCCESS, payload: res.data})
-            }, 2000)
+            }, 2000);
         })
         .catch(err => {
             console.log(err)
