@@ -32,9 +32,10 @@ jobs:
           node-version: "12"
 
       # Run the NPM install command before proceeding
-      - name: install 
-        working-directory: ./myschool
-      - run: npm install
+      - name: Install dependencies
+        working-directory: my-school
+        run: |
+          npm install
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
