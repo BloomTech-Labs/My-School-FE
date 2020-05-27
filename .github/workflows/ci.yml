@@ -33,7 +33,7 @@ jobs:
 
       # Run the NPM install command before proceeding
       - name: Install dependencies
-        working-directory: my-school
+        working-directory: ../../my-school
         run: |
           npm install
 
