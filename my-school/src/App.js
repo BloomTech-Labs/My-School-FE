@@ -28,7 +28,7 @@ function App() {
               <Route path='/signup'>
                 <AuthPage login={false} />
               </Route>
-              <Route exact path='/'>
+              <Route path='/'>
                 <TopNav />
                 <Box>
                   <Portfolio />
