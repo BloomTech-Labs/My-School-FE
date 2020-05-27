@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import TopNav from './Components/TopNav';
 import Portfolio from './Components/Portfolio';
+import { Settings } from './Components/Settings';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
 import customTheme from './Styles/theme';
@@ -21,7 +22,7 @@ function App() {
           <CSSReset />
           <div className="App">
             <Router>
-              <Route path = '/landing'>
+              <Route exact path = '/'>
                 <Landing />
               </Route>
               <Route path='/login'>
@@ -30,11 +31,14 @@ function App() {
               <Route path='/signup'>
                 <AuthPage login={false} />
               </Route>
-              <Route exact path='/'>
+              <Route path='/portfolio'>
                 <TopNav />
                 <Box>
                   <Portfolio />
                 </Box>
+              </Route>
+              <Route path = '/settings'>
+                <Settings />
               </Route>
             </Router>
           </div>

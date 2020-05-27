@@ -1,5 +1,6 @@
 import React from "react";
-import {
+import { Settings } from './Settings'
+;import {
   Menu,
   MenuButton,
   Button,
@@ -7,6 +8,7 @@ import {
   MenuList,
   MenuItem,
   Icon,
+  MenuGroup,
 } from "@chakra-ui/core";
 
 const NavMenu = ({ user }) => {
@@ -17,16 +19,18 @@ const NavMenu = ({ user }) => {
       </MenuButton>
       <MenuList>
         <MenuItem>
-          <Icon
-            aria-label="Account Settings"
-            name="settings"
-            size="18px"
-            color="darkgray"
-            margin="10px"
-          />
-          Settings
+        <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
+          {user.name}
         </MenuItem>
+        <MenuGroup>
+        <MenuItem>{/* Family Name */}</MenuItem>
+        <MenuItem>{/* child avatar, name,*/}<Button>Manage</Button></MenuItem>
+        <MenuItem></MenuItem>{/* add new button */}
+        </MenuGroup>
+        <MenuItem as={Button} >Sign Out</MenuItem>
+        
       </MenuList>
+
     </Menu>
   );
 };

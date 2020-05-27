@@ -1,6 +1,6 @@
 
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { getAllActivitiesForUser } from "../actions/actions-portfolio";
 // Components
@@ -19,10 +19,12 @@ const Portfolio = ({ activities, getAllActivitiesForUser }) => {
   return (
     <div>
       <PortfolioHeader />
-      <Route exact path="/portfolio" component={PortfolioLog} />     
+      <Switch>
+      <Route path="/portfolio" component={PortfolioLog} />     
       <Route exact path="/add" render={ props => <AddActivityForm />} />
       <Route exact path="/doc" render={ _ => <MyDocument activities={activities} /> } />
       <Route path='/activity/:id' render={props => <ActivityOverview activities={activities}/>}/>
+      </Switch>
     </div>
   );
 };
