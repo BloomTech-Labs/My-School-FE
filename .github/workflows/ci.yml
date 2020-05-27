@@ -33,8 +33,8 @@ jobs:
 
       # Run the NPM install command before proceeding
       - name: Install dependencies
-        working-directory: ../../my-school
-        run: |
+        working-directory: ../my-school
+        run: 
           npm install
 
       # A GitHub action for running tests and publishing coverage
