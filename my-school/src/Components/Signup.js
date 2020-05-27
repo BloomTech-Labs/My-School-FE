@@ -24,7 +24,6 @@ const Signup = () => {
     }
 
     return (
-        <Flex>
         <Box w={1/3}>
             <Text
                 fontSize="1.5rem"
@@ -84,8 +83,6 @@ const Signup = () => {
             </form>
             </Box>
         </Box>
-        <Box>Pretty Stuff</Box>
-        </Flex>
     )
 }
 

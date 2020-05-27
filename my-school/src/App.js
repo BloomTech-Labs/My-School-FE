@@ -8,6 +8,7 @@ import customTheme from './Styles/theme';
 import ReactGA from "react-ga";
 import Login from './Components/login.js';
 import Signup from './Components/Signup';
+import AuthPage from './Components/AuthPage';
 
 function App() {
 
@@ -22,12 +23,12 @@ function App() {
           <div className="App">
             <Router>
               <Route path='/login'>
-                <Login/>
+                <AuthPage login={true} />
               </Route>
               <Route path='/signup'>
-                <Signup />
+                <AuthPage login={false} />
               </Route>
-              <Route path='/dashboard/:id'>
+              <Route exact path='/'>
                 <TopNav />
                 <Box>
                   <Portfolio />
