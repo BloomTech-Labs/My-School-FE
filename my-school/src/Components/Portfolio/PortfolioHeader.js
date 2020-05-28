@@ -12,9 +12,11 @@ const PortfolioHeader = () => {
     return pathname === "/portfolio" ? false : true;
   };
 
+  const id = 3
+
   useEffect(() => {
     axios
-      .get("https://my-school-v1.herokuapp.com/api/users/3")
+      .get(`https://my-school-v1.herokuapp.com/api/users/${id}`)
       .then((response) => {
         if (response.user_type_id === 1) {
           setTitle([response.data.name] + "'s Portfolio");
@@ -40,7 +42,7 @@ const PortfolioHeader = () => {
         <Heading as="h2">{title}</Heading>
       )}
       <Flex width="25%" justify="space-evenly">
-        <HeaderButton text="Add Activity" icon="add" location="/portfolio/:id/add" />
+        <HeaderButton text="Add Activity" icon="add" location={`/portfolio/${id}/add`} />
         {/*  EXPORT BUTTON -- PARENTS ONLY? */}
         <HeaderButton text="Convert to PDF" icon="download" location="/doc" />
       </Flex>
