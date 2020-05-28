@@ -12,7 +12,6 @@ import {
     Flex,
     Text
 } from '@chakra-ui/core';
-import { axiosWithAuth } from '../utils/axiosWithAuth.js';
 import axios from 'axios'
 
 const Login = () => {
