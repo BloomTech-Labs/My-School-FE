@@ -23,7 +23,7 @@ function App() {
               <Route path='/login'>
                 <Login/>
               </Route>
-              <Route path='/dashboard/:id'>
+              <Route path='/try'>
                 <TopNav />
                 <Box>
                   <Portfolio />
