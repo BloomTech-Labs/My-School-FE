@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, Link, useHistory} from 'react-router-dom';
-import StudentRegistration from '../../studentRegister';
+import { useHistory} from 'react-router-dom';
 import {
   Menu,
   MenuButton,
@@ -11,7 +10,6 @@ import {
   MenuItem,
   MenuGroup,
 } from "@chakra-ui/core";
-import TopNav from "./TopNav";
 
 const NavMenu = ({ user }) => {
   const history = useHistory();
@@ -28,6 +26,7 @@ const NavMenu = ({ user }) => {
   const handleLogout = e => {
     e.preventDefault();
     localStorage.clear();
+    history.push('/login');
   }
   
   if(user.user_type_id === 1){

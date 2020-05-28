@@ -20,14 +20,19 @@ const Login = () => {
 
     const methods = useForm();
     const [invalid, setInvalid] = useState(false);
+    const [ checked, setChecked ] = useState(false)
     const { register, handleSubmit, errors } = useForm();
     const history = useHistory();
 
     const handleLogin = (data) => {
-        console.log(data)
-        axios.post(`https://my-school-v1.herokuapp.com/api/auth/login`, data)
+        console.log(checked, 'inside the login function')
+        const user = {
+            ...data,
+            rememberMe: checked
+        }
+        axios.post(`https://my-school-v1.herokuapp.com/api/auth/login`, user)
         .then(res => {
-
+            console.log(res)
             const user = res.data.user;
             localStorage.setItem('auth', user.user_type_id);
             localStorage.setItem('userId' , user.id);
@@ -48,7 +53,9 @@ const Login = () => {
             return null
         }
     };
- 
+    const handleChecked = () => {
+        setChecked(!checked)
+    }
     return (
         <Flex flexDirection='column' w='33.33%' border='black solid 2px' h='100vh' alignItems='center'>
             <h1>My School</h1>
@@ -83,9 +90,7 @@ const Login = () => {
                     {invalid === true && <Text p='.5rem' color="red"><span style={{color: 'red'}}>*Invalid Crudentials*</span></Text>}
                     <FormControl isInvalid={errors.password}>
                         <FormLabel htmlFor="remember"></FormLabel>
-                        <Stack spacing={10} isInline>
-                            <Checkbox size="md" variantColor="green">Remember me</Checkbox>
-                        </Stack>
+                        <Checkbox size="md" variantColor="green" onChange={handleChecked}>Remember me</Checkbox>
                     </FormControl>
                     <Button variantColor="green" type='submit'>Login</Button>
                 </form>
