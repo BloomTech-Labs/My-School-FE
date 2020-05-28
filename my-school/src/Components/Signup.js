@@ -38,7 +38,7 @@ const Signup = () => {
         const newFam = {
             name: data.family
         };
-
+        // Creates new family, so we can grab family_id when creating new parent admin user
         axios.post("https://my-school-v1.herokuapp.com/api/families", newFam)
         .then(res => {
             console.log("Family created", res.data)
@@ -51,7 +51,7 @@ const Signup = () => {
                 family_id: famId,
                 user_type_id: 1
             };
-
+            // Creates new parent admin user account
             axios.post("https://my-school-v1.herokuapp.com/api/auth/registration", newUser)
             .then(res => {
                 console.log("Success! User created", res.data)
