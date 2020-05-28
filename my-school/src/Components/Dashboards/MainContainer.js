@@ -17,7 +17,7 @@ const MainContainer = () => {
       .get("https://my-school-v1.herokuapp.com/api/users/3")
       .then((res) => {
         setUser(res.data);
-        getFamilyName(user.family_id);
+        getFamilyName(res.data.family_id);
       })
       .catch((err) => console.log(err));
   }, []);

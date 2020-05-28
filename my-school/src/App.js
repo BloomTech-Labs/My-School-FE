@@ -12,6 +12,7 @@ import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActi
 import PortfolioContainer from "./Components/Portfolio/PortfolioContainer";
 import PDFExporter from './Components/Portfolio/PDFExporter'
 import ActivityOverview from "./Components/Portfolio/Activity/ActivityOverview";
+import StudentRegistration from './Components/studentRegister';
 
 function App() {
   React.useEffect((_) => {
@@ -56,6 +57,10 @@ function App() {
           <Route path='/activity/:id'>
             <TopNav />
             <ActivityOverview />
+          </Route>
+          <Route path='/addstudent'>
+            <TopNav/>
+            <StudentRegistration/>
           </Route>
         </Router>
       </div>
