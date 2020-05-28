@@ -26,7 +26,7 @@ const NavMenu = ({ user }) => {
         </MenuItem>
 
         {/* THIS IS THE SETTINGS BUTTON THAT REDIRECTS THE ACTIVITYCONTAINER TO SETTINGS COMPONENT */}
-        <MenuItem as={Button}location='/settings'>Account Settings</MenuItem>
+        <MenuItem as={Button} location='/settings'>Account Settings</MenuItem>
 
         <MenuGroup>
           <MenuItem>
