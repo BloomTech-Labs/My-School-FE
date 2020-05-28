@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import axios from 'axios';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import {
+    Flex,
     Text,
     Box,
     FormErrorMessage,
@@ -10,9 +11,15 @@ import {
     Input,
     Select,
     Checkbox,
-    Icon,
+    IconButton,
     Button,
-    Link
+    Link,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverBody,
+    PopoverArrow,
+    PopoverCloseButton
 } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 
@@ -55,7 +62,7 @@ const Signup = () => {
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('family_id', user.family_id);
 
-                history.push('/portfolio')
+                history.push('/portfolio') //PLACEHOLDER -- need to update once parent dashboard & routes are in place OR email verification!
             })
             .catch(err => {
                 console.log("Error creating new user acct", err)
@@ -79,34 +86,50 @@ const Signup = () => {
                 <Text
                     fontSize="1.125rem"
                     fontWeight="700"
-                    color="gray01"
+                    color="gray.800"
                     textAlign="center"
+                    mb="32px"
                 >Sign Up</Text>
 
                 {/* FAMILY NAME */}
-                <FormControl isInvalid={errors.family}>
-                    <FormLabel htmlFor="family">Family name</FormLabel>
-                    <Input 
-                        id="family"
-                        name="family"
-                        placeholder="Last name works best"
-                        focusBorderColor="myschoolblue"
-                        ref={register({
-                            required: "You must specify a family name",
-                            minLength: {
-                                value: 2,
-                                message: "Family name must be at least 2 characters"
-                            }
-                        })}
-                    />
-                    <Icon name="info-outline" />
-                    {/* Should icon be popover or tooltip? */}
+                <FormControl isInvalid={errors.family} mb="32px">
+                    <FormLabel htmlFor="family" fontWeight="700" color="gray.800">Family name</FormLabel>
+                    <Flex flexDirection="row" align="center">
+                        <Input 
+                            id="family"
+                            name="family"
+                            placeholder="Last name works best"
+                            focusBorderColor="myschoolblue"
+                            ref={register({
+                                required: "You must specify a family name",
+                                minLength: {
+                                    value: 2,
+                                    message: "Family name must be at least 2 characters"
+                                }
+                            })}
+                            w="300px"
+                            borderColor="gray.400"
+                        />
+                        {/* NEEDS STYLING! */}
+                        <Popover>
+                            <PopoverTrigger>
+                                <IconButton aria-label="family name information" icon="info-outline" color="#9BAFCB" ml="29px"/>
+                            </PopoverTrigger>
+                            <PopoverContent>
+                                <PopoverArrow />
+                                <PopoverCloseButton />
+                                <PopoverBody>
+                                    This will be used to identify members of your family, so we can associate their accounts with yours.
+                                </PopoverBody>
+                            </PopoverContent>
+                        </Popover>
+                    </Flex>
                     <FormErrorMessage>{errors.family && errors.family.message}</FormErrorMessage>
                 </FormControl>
 
                 {/* EMAIL (will be username; can possibly be updated later) */}
-                <FormControl isInvalid={errors.email}>
-                    <FormLabel htmlFor="email">Email</FormLabel>
+                <FormControl isInvalid={errors.email} mb="32px">
+                    <FormLabel htmlFor="email" fontWeight="700" color="gray.800">Email</FormLabel>
                     <Input 
                         id="email"
                         name="email"
@@ -118,13 +141,15 @@ const Signup = () => {
                                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                                 message: "Please enter a valid email address"
                             }
-                          })}
+                        })}
+                        w="300px"
+                        borderColor="gray.400"
                     />
                     <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
                 </FormControl>
                 {/* PASSWORD */}
-                <FormControl isInvalid={errors.password}>
-                    <FormLabel htmlFor="password">Password</FormLabel>
+                <FormControl isInvalid={errors.password} mb="32px">
+                    <FormLabel htmlFor="password" fontWeight="700" color="gray.800">Password</FormLabel>
                     <Input 
                         type="password" 
                         id="password"
@@ -137,12 +162,14 @@ const Signup = () => {
                                 message: "Your password must have at least 8 characters"
                             }
                         })}
+                        w="300px"
+                        borderColor="gray.400"
                     />
                     <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
                 </FormControl>
                 {/* PASSWORD CONFIRMATION */}
-                <FormControl isInvalid={errors.password_confirm}>
-                    <FormLabel htmlFor="password_confirm">Confirm Password</FormLabel>
+                <FormControl isInvalid={errors.password_confirm} mb="32px">
+                    <FormLabel htmlFor="password_confirm" fontWeight="700" color="gray.800">Confirm Password</FormLabel>
                     <Input 
                         type="password" 
                         id="password_confirm"
@@ -152,20 +179,34 @@ const Signup = () => {
                             validate: value => 
                                 value === password.current || "The passwords do not match"
                         })}
+                        w="300px"
+                        borderColor="gray.400"
                     />
                     <FormErrorMessage>{errors.password_confirm && errors.password_confirm.message}</FormErrorMessage>
                 </FormControl>
                 {/* STATE? */}
-                <FormControl>
-                    <FormLabel>State</FormLabel>
-                    <Select>
+                <FormControl mb="32px">
+                    <FormLabel fontWeight="700" color="gray.800">State</FormLabel>
+                    <Select w="300px" borderColor="gray.400">
                         <option value="maryland">Maryland</option>
                     </Select>
                 </FormControl>
                 {/* CHECKBOX */}
                 <FormControl>
-                    <Checkbox>I am the parent of a child being homeschooled.</Checkbox><Icon name="info-outline" />
-                    {/* Should icon be popover or tooltip? */}
+                    <Checkbox>I am the parent or guardian of a child being homeschooled.</Checkbox>
+                    {/* NEEDS STYLING! */}
+                    <Popover>
+                        <PopoverTrigger>
+                            <IconButton aria-label="not a parent information" icon="info-outline" color="#9BAFCB" ml="19px"/>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                            <PopoverArrow />
+                            <PopoverCloseButton />
+                            <PopoverBody>
+                                If you're a student, please ask your parent or guardian to create an account for you.
+                            </PopoverBody>
+                        </PopoverContent>
+                    </Popover>
                 </FormControl>
                 <Button
                     type="submit"
@@ -174,9 +215,10 @@ const Signup = () => {
                     p="8px 16px"
                     borderRadius="999px"
                     fontSize="1.125rem"
+                    my="24px"
                 >Submit</Button>
             </form>
-            <Text>Already have an account? <Link as={RouterLink} to="/login">Log in.</Link></Text>
+            <Text fontSize=".875rem">Already have an account? <Link as={RouterLink} to="/login">Log in.</Link></Text>
             </Box>
         </Box>
     )
