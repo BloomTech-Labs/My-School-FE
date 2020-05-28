@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory} from 'react-router-dom';
 import {
   Menu,
   MenuButton,
@@ -12,12 +13,19 @@ import {
 
 const NavMenu = ({ user }) => {
 
+  const history = useHistory();
+
+  const handleAddStudent = () => {
+    history.push('/addstudent')
+  }
+
   // Logout click handler...currently removes everything in localstorage but could be updated to be more specific
   const handleLogout = e => {
     e.preventDefault();
     localStorage.clear();
+    history.push('/login');
   }
-  
+
   return (
     <Menu>
 
@@ -47,7 +55,7 @@ const NavMenu = ({ user }) => {
             <Button>Manage</Button>
           </MenuItem>
 
-          <MenuItem as={Box}>
+          <MenuItem as={Box} onClick={handleAddStudent}>
            {/* THIS IS THE BUTTON TO ADD ANOTHER CHILD TO THE FAMILY LIST */}
            + Add A New Student
           </MenuItem>
