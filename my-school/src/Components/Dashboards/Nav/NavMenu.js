@@ -11,6 +11,12 @@ import {
 } from "@chakra-ui/core";
 
 const NavMenu = ({ user }) => {
+
+  const handleLogout = e => {
+    e.preventDefault();
+    localStorage.clear();
+  }
+  
   return (
     <Menu>
 
@@ -47,7 +53,9 @@ const NavMenu = ({ user }) => {
         </MenuGroup>
 
         {/* THIS IS THE LOG OUT BUTTON */}
-        <MenuItem as={Box}><Button  rightIcon='arrow-forward'>Log Out</Button></MenuItem>
+        <MenuItem as={Box}>
+          <Button onClick={handleLogout} rightIcon='arrow-forward'>Log Out</Button>
+        </MenuItem>
         
       </MenuList>
 

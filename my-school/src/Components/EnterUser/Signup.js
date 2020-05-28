@@ -62,7 +62,7 @@ const Signup = () => {
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('family_id', user.family_id);
 
-                history.push('/portfolio') //PLACEHOLDER -- need to update once parent dashboard & routes are in place OR email verification!
+                history.push('/dashboard')
             })
             .catch(err => {
                 console.log("Error creating new user acct", err)
