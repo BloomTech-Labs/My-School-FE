@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
     Text,
     Box,
-    Flex,
     FormErrorMessage,
     FormLabel,
-    FormHelperText,
     FormControl,
     Input,
     Select,
     Checkbox,
     Icon,
-    Button
+    Button,
+    Link
 } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
 
 const Signup = () => {
-    const { handleSubmit } = useForm();
+    const { handleSubmit, errors, register, watch } = useForm();
+
+    // Watches password value, used to validate password_confirm field
+    const password = useRef({});
+    password.current = watch("password", "");
 
     // Submit handler
     function onSubmit(data) {
@@ -39,26 +43,78 @@ const Signup = () => {
                     color="gray01"
                     textAlign="center"
                 >Sign Up</Text>
+
                 {/* FAMILY NAME */}
-                <FormControl>
-                    <FormLabel>Family name</FormLabel>
-                    <Input /><Icon name="info-outline" />
+                <FormControl isInvalid={errors.family}>
+                    <FormLabel htmlFor="family">Family name</FormLabel>
+                    <Input 
+                        id="family"
+                        name="family"
+                        placeholder="Last name works best"
+                        focusBorderColor="myschoolblue"
+                        ref={register({
+                            required: "You must specify a family name",
+                            minLength: {
+                                value: 2,
+                                message: "Family name must be at least 2 characters"
+                            }
+                        })}
+                    />
+                    <Icon name="info-outline" />
                     {/* Should icon be popover or tooltip? */}
+                    <FormErrorMessage>{errors.family && errors.family.message}</FormErrorMessage>
                 </FormControl>
+
                 {/* EMAIL (will be username; can possibly be updated later) */}
-                <FormControl>
-                    <FormLabel>Email</FormLabel>
-                    <Input />
+                <FormControl isInvalid={errors.email}>
+                    <FormLabel htmlFor="email">Email</FormLabel>
+                    <Input 
+                        id="email"
+                        name="email"
+                        placeholder="You'll use this email to log in"
+                        focusBorderColor="myschoolblue"
+                        ref={register({
+                            required: "You must enter an email",
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                message: "Please enter a valid email address"
+                            }
+                          })}
+                    />
+                    <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
                 </FormControl>
                 {/* PASSWORD */}
-                <FormControl>
-                    <FormLabel>Password</FormLabel>
-                    <Input />
+                <FormControl isInvalid={errors.password}>
+                    <FormLabel htmlFor="password">Password</FormLabel>
+                    <Input 
+                        type="password" 
+                        id="password"
+                        name="password"
+                        placeholder="Enter a strong password"
+                        ref={register({
+                            required: "You must enter a password",
+                            minLength: {
+                                value: 8,
+                                message: "Your password must have at least 8 characters"
+                            }
+                        })}
+                    />
+                    <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
                 </FormControl>
                 {/* PASSWORD CONFIRMATION */}
-                <FormControl>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <Input />
+                <FormControl isInvalid={errors.password_confirm}>
+                    <FormLabel htmlFor="password_confirm">Confirm Password</FormLabel>
+                    <Input 
+                        type="password" 
+                        id="password_confirm"
+                        name="password_confirm"
+                        placeholder="Enter the same password as above"
+                        ref={register({
+                            validate: value => 
+                                value === password.current || "The passwords do not match"
+                        })}
+                    />
+                    <FormErrorMessage>{errors.password_confirm && errors.password_confirm.message}</FormErrorMessage>
                 </FormControl>
                 {/* STATE? */}
                 <FormControl>
@@ -81,6 +137,7 @@ const Signup = () => {
                     fontSize="1.125rem"
                 >Submit</Button>
             </form>
+            <Text>Already have an account? <Link as={RouterLink} to="/login">Log in.</Link></Text>
             </Box>
         </Box>
     )
