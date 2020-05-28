@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import DeleteEntryButton from "./DeleteEntryButton";
 import EditActivityModal from "./EditActivityModal";
 // styling
-import fontN from "../assets/Nunito_Sans/Nunito Sans Regular.ttf";
+import fontN from "../../../assets/Nunito_Sans/Nunito Sans Regular.ttf";
 import { Tag, Grid, Box } from "@chakra-ui/core";
 
 function ActivityCard(props) {

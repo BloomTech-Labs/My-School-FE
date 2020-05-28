@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Flex, Text, Button, Image }from "@chakra-ui/core";
-import PlaceholderImg from '../assets/placeholder_img.png';
+import PlaceholderImg from '../../../assets/placeholder_img.png';
 import moment from 'moment'
 
 const OverviewCard = props => {
