@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getAllActivitiesForUser } from "../actions/actions-portfolio.js";
-import ActivityCard from "./ActivityCard";
+import { getAllActivitiesForUser } from "../../actions/actions-portfolio.js";
+import ActivityCard from "./Activity/ActivityCard";
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 
-const PortfolioLog = ({ activities, getAllActivitiesForUser, isLoading }) => {
+const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading }) => {
   const [sortedActivities, setSortedActivities] = useState([]);
   const override = css`
     margin-top: 10rem;
@@ -54,5 +54,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { getAllActivitiesForUser })(
-  PortfolioLog
+  PortfolioBody
 );

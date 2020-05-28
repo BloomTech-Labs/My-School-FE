@@ -3,7 +3,7 @@ import {
     Flex,
     Box
 } from '@chakra-ui/core';
-import Login from './login';
+import Login from './Login';
 import Signup from './Signup';
 
 const AuthPage = ({ login }) => {

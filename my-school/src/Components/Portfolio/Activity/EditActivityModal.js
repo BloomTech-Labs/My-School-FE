@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { editActivity, editActivityWithoutPhoto } from '../actions/actions-portfolio.js';
+import { editActivity, editActivityWithoutPhoto } from '../../../actions/actions-portfolio.js';
 import {
     Button,
     Input,
@@ -32,7 +32,7 @@ import {
     FormErrorMessage
 } from '@chakra-ui/core';
 import { useForm, FormContext } from 'react-hook-form';
-import PlaceholderImg from '../assets/placeholder_img.png';
+import PlaceholderImg from '../../../assets/placeholder_img.png';
 import DateSelector from './DateSelector';
 
 const EditActivityModal = (props) => {

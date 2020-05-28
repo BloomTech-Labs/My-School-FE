@@ -1,14 +1,13 @@
 import React from 'react';
 import './App.css';
-import TopNav from './Components/TopNav';
-import Portfolio from './Components/Portfolio';
-import { Settings } from './Components/Settings';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
+import TopNav from './Components/Dashboards/Nav/TopNav';
+import MainContainer from './Components/Dashboards/MainContainer';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import customTheme from './Styles/theme';
 import ReactGA from "react-ga";
-import Landing from './Components/Landing';
-import AuthPage from './Components/AuthPage';
+import Landing from './Components/EnterUser/Landing';
+import AuthPage from './Components/EnterUser/AuthPage';
 
 function App() {
 
@@ -22,7 +21,7 @@ function App() {
           <CSSReset />
           <div className="App">
             <Router>
-              <Route exact path = '/'>
+              <Route exact path= '/' >
                 <Landing />
               </Route>
               <Route path='/login'>
@@ -31,19 +30,14 @@ function App() {
               <Route path='/signup'>
                 <AuthPage login={false} />
               </Route>
-              <Route path='/portfolio'>
+              <Route path='/dashboard'>
                 <TopNav />
-                <Box>
-                  <Portfolio />
-                </Box>
-              </Route>
-              <Route path = '/settings'>
-                <Settings />
+                <MainContainer />
               </Route>
             </Router>
           </div>
         </ThemeProvider>
   );
-}
+};
 
 export default App;

@@ -7,7 +7,7 @@ import {
 
 const initialState= {
     users: [],
-    singleUser: [],
+    singleUser: {},
     isLoading: false,
     err: ''
 }
@@ -28,7 +28,7 @@ case USERS_SUCCESS:
     return {
         ...state,
         isLoading: false,
-        activities: action.payload,
+        users: action.payload,
         error: "",
     };
     case USERS_FAILURE:

@@ -4,8 +4,23 @@ export const ADDING_USERS = 'ADDING_USERS';
 export const USERS_SUCCESS =  'USERS_SUCCESS';
 export const USERS_FAILURE = 'USERS_FAILURE';
 
+export const getUser = (id) => {
+    return dispatch => {
+        dispatch({type: FETCHING_USERS})
+        axios.get(`https://my-school-v1.herokuapp.com/api/users/${id}`)
+        .then(res => {
+            setTimeout(()=> {
+                dispatch({type: USERS_SUCCESS, payload: res.data})
+            }, 2000);
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({type: USERS_FAILURE, payload: err})
+        })
+    }
+}
 
-export const getAllChildrenForFamily= (fam_id) => {
+export const getFamilyName = (fam_id) => {
     return dispatch => {
         dispatch({type: FETCHING_USERS})
         axios.get(`https://my-school-v1.herokuapp.com/api/families/${fam_id}`)
@@ -21,7 +36,24 @@ export const getAllChildrenForFamily= (fam_id) => {
     }
 }
 
-export const addNewChild = (fam_id) => {
+
+export const getAllStudentsForFamily= (fam_id) => {
+    return dispatch => {
+        dispatch({type: FETCHING_USERS})
+        axios.get(`https://my-school-v1.herokuapp.com/api/families/${fam_id}`)
+        .then(res => {
+            setTimeout(()=> {
+                dispatch({type: USERS_SUCCESS, payload: res.data})
+            }, 2000);
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({type: USERS_FAILURE, payload: err})
+        })
+    }
+}
+
+export const addNewStudent = (fam_id) => {
     return dispatch => {
         dispatch({type: ADDING_USERS})
         axios.post(`https://my-school-v1.herokuapp.com/api/families/${fam_id}`)
@@ -38,7 +70,7 @@ export const addNewChild = (fam_id) => {
 }
 
 
-export const deleteChild = (fam_id, student_id) => {
+export const deleteStudent = (fam_id, student_id) => {
     return dispatch => {
         axios.delete(`https://my-school-v1.herokuapp.com/api/users/${student_id}/`)
         .then(res => {
