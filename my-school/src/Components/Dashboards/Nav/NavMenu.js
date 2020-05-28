@@ -25,6 +25,7 @@ const NavMenu = ({ user }) => {
   const handleLogout = e => {
     e.preventDefault();
     localStorage.clear();
+    history.push('/login');
   }
 
   return (
