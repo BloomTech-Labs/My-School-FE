@@ -12,7 +12,8 @@ import {
     Flex,
     Text
 } from '@chakra-ui/core';
-import axios from 'axios'
+import axios from 'axios';
+import validateCredentials from '../../utils/validateCredentials'
 
 const Login = () => {
 
@@ -44,13 +45,6 @@ const Login = () => {
         })
     };
 
-    const validatecrudentials = (value) => {
-        if(value <= 0 ){
-            return 'must provide a crudentials'
-        }else{
-            return null
-        }
-    };
     const handleChecked = () => {
         setChecked(!checked)
     }
@@ -65,7 +59,7 @@ const Login = () => {
                             type="text"
                             id="username"
                             name="username"
-                            ref={register({ validate: validatecrudentials })} 
+                            ref={register({ validate: validateCredentials })} 
                             defaultValue={''}
                         />
                         <FormErrorMessage> 
@@ -78,7 +72,7 @@ const Login = () => {
                             type="password"
                             id="password"
                             name="password"
-                            ref={register({ validate: validatecrudentials })} 
+                            ref={register({ validate: validateCredentials })} 
                             defaultValue={''}
                         />
                         <FormErrorMessage> 

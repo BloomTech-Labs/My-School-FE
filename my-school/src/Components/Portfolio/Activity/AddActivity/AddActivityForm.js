@@ -21,6 +21,7 @@ import {
 import { useForm, FormContext } from 'react-hook-form';
 import DateSelector from '../DateSelector';
 import NewActivityPreview from './NewActivityPreview';
+import validateTitle from '../../../../utils/validateTitle'
 
 const AddActivityForm = () => {
     const methods = useForm();
@@ -109,19 +110,8 @@ const AddActivityForm = () => {
         }
     }
 
-    // Form validation for title input
-    function validateTitle(value) {
-        let error;
-        if (value.length === 0) {
-            error = "A title is required";
-        } else if (value.length < 3)  {
-            error = "Title must be at least 3 characters long";
-        }
-        return error || true;
-    }
 
     return (
-        
         <Box pb={32} px={20}>
             {console.log("add form")}
         { preview ? <NewActivityPreview preview={preview} /> 
