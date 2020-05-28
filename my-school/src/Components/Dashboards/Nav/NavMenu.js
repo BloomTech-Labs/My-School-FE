@@ -2,6 +2,7 @@ import React from "react";
 import {
   Menu,
   MenuButton,
+  Box,
   Button,
   Avatar,
   MenuList,
@@ -24,7 +25,7 @@ const NavMenu = ({ user }) => {
         </MenuItem>
 
         {/* THIS IS THE SETTINGS BUTTON THAT REDIRECTS THE ACTIVITYCONTAINER TO SETTINGS COMPONENT */}
-        <MenuItem as={Button} location='/settings'>Account Settings</MenuItem>
+        <MenuItem as={Button}location='/settings'>Account Settings</MenuItem>
 
         <MenuGroup>
           <MenuItem>
@@ -32,8 +33,8 @@ const NavMenu = ({ user }) => {
             Family #{user.family_id}
           </MenuItem>
 
-          <MenuItem>
-            {/* THIS IS A CHILD ITEM --- MAP FOR ALL CHILDREN OF FAMIY ID */}
+          <MenuItem as={Box}>
+            {/* THIS IS A CHILD ITEM --- MAP FOR ALL STUDENTS OF FAMILY ID */}
             <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
             JimBob
             <Button>Manage</Button>
@@ -45,7 +46,7 @@ const NavMenu = ({ user }) => {
         </MenuGroup>
 
         {/* THIS IS THE LOG OUT BUTTON */}
-        <MenuItem ><Button  rightIcon='arrow-forward'>Log Out</Button></MenuItem>
+        <MenuItem as={Box}><Button  rightIcon='arrow-forward'>Log Out</Button></MenuItem>
         
       </MenuList>
 

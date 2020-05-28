@@ -6,11 +6,11 @@ import PortfolioContainer from "../Portfolio/PortfolioContainer";
 import  AdminDash  from './AdminDash';
 import { Settings } from '../EnterUser/Settings';
 
-const MainContainer = ({ user, students, families }) => {
-
+const MainContainer = () => {
+  const id = 3;
   useEffect(() => {
-    getUser(user.id)
-    getFamilyName(user.family_id)
+    getUser(id)
+    // getFamilyName(user.family_id)
   }, [])
 
   return(
