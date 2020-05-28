@@ -8,6 +8,7 @@ import customTheme from "./Styles/theme";
 import ReactGA from "react-ga";
 import Landing from "./Components/EnterUser/Landing";
 import AuthPage from "./Components/EnterUser/AuthPage";
+import { Settings } from './Components/EnterUser/Settings';
 import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActivityForm";
 import PortfolioContainer from "./Components/Portfolio/PortfolioContainer";
 import PDFExporter from './Components/Portfolio/PDFExporter'
@@ -40,7 +41,7 @@ function App() {
           </Route>
           <Route path='/settings'>
             <TopNav />
-            {/*Account settings*/}
+            <Settings />
           </Route>
           <Route exact path='/portfolio/:id'>
             <TopNav />

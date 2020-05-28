@@ -16,6 +16,10 @@ import TopNav from "./TopNav";
 const NavMenu = ({ user }) => {
   const history = useHistory();
 
+  const handleAdminSettings = () => {
+    history.push('/settings')
+  }
+
   const handleAddStudent = () => {
     history.push('/addstudent')
   }
@@ -40,7 +44,7 @@ const NavMenu = ({ user }) => {
         </MenuItem>
 
         {/* THIS IS THE SETTINGS BUTTON THAT REDIRECTS THE ACTIVITYCONTAINER TO SETTINGS COMPONENT */}
-        <MenuItem as={Button} location='/settings'>Account Settings</MenuItem>
+        <MenuItem as={Button} onClick={handleAdminSettings}>Account Settings</MenuItem>
 
         <MenuGroup>
           <MenuItem>
