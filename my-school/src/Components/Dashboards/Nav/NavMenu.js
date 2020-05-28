@@ -1,5 +1,6 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
+import { Route, Link, useHistory} from 'react-router-dom';
+import StudentRegisteration from '../../studentRegister';
 import {
   Menu,
   MenuButton,
@@ -10,8 +11,14 @@ import {
   MenuItem,
   MenuGroup,
 } from "@chakra-ui/core";
+import TopNav from "./TopNav";
 
 const NavMenu = ({ user }) => {
+  const history = useHistory();
+
+  const handleAddStudent = () => {
+    history.push('/addstudent')
+  }
   return (
     <Menu>
 
@@ -41,9 +48,9 @@ const NavMenu = ({ user }) => {
             <Button>Manage</Button>
           </MenuItem>
 
-          <MenuItem as={Box}>
+          <MenuItem as={Box} onClick={handleAddStudent}>
            {/* THIS IS THE BUTTON TO ADD ANOTHER CHILD TO THE FAMILY LIST */}
-           <Button as={NavLink} location={`/settings/${user.id}/addstudent`}>+ Add A New Student</Button>
+           + Add A New Student
           </MenuItem>
         </MenuGroup>
 

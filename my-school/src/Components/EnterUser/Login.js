@@ -33,11 +33,7 @@ const Login = () => {
             localStorage.setItem('userId' , user.id);
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('family_id', user.family_id);
-                if(Number(localStorage.getItem('auth')) === 1){
-                    history.push(`/dashboard/${user.id}`)
-                }else{
-                    history.push(`/try/portfolio/${user.id}`)
-                }
+            history.push('/dashboard')
         })
         .catch(err => {
             console.log(err)
