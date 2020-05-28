@@ -12,6 +12,7 @@ import {
 
 const NavMenu = ({ user }) => {
 
+  // Logout click handler...currently removes everything in localstorage but could be updated to be more specific
   const handleLogout = e => {
     e.preventDefault();
     localStorage.clear();
