@@ -40,7 +40,7 @@ const PortfolioHeader = () => {
         <Heading as="h2">{title}</Heading>
       )}
       <Flex width="25%" justify="space-evenly">
-        <HeaderButton text="Add Activity" icon="add" location="/add" />
+        <HeaderButton text="Add Activity" icon="add" location="/portfolio/:id/add" />
         {/*  EXPORT BUTTON -- PARENTS ONLY? */}
         <HeaderButton text="Convert to PDF" icon="download" location="/doc" />
       </Flex>
