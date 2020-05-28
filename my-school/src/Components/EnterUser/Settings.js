@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Box, Avatar } from '@chakra-ui/core';
 
-export const Settings = (user) => {
+export const Settings = ({user}) => {
 
     const handleUpdate = () => {
         axios.put('')
