@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Link, useHistory} from 'react-router-dom';
-import StudentRegisteration from '../../studentRegister';
+import StudentRegistration from '../../studentRegister';
 import {
   Menu,
   MenuButton,
@@ -30,6 +30,7 @@ const NavMenu = ({ user }) => {
     localStorage.clear();
   }
   
+  if(user.user_type_id === 1){
   return (
     <Menu>
 
@@ -73,7 +74,20 @@ const NavMenu = ({ user }) => {
       </MenuList>
 
     </Menu>
-  );
+  )} else {
+    return(
+      <Menu>
+        <MenuButton as={Button} bg="lightblue" color="black">
+        <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
+       </MenuButton>
+        <MenuList>
+        <MenuItem as={Box}>
+          <Button onClick={handleLogout} rightIcon='arrow-forward'>Log Out</Button>
+        </MenuItem>
+        </MenuList>
+      </Menu>
+    )
+  }
 };
 
 export default NavMenu;
