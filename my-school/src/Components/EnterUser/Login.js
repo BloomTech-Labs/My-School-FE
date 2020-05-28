@@ -15,10 +15,6 @@ import {
 import { axiosWithAuth } from '../utils/axiosWithAuth.js';
 import axios from 'axios'
 
-
-<<<<<<< HEAD:my-school/src/Components/EnterUser/Login.js
-const Login = props => {
-=======
 const Login = () => {
 
     const methods = useForm();
@@ -56,7 +52,6 @@ const Login = () => {
         }
     };
  
->>>>>>> master:my-school/src/Components/login.js
     return (
         <Flex flexDirection='column' w='33.33%' border='black solid 2px' h='100vh' alignItems='center'>
             <h1>My School</h1>
@@ -101,9 +96,6 @@ const Login = () => {
         </Flex>
     )
 }
-<<<<<<< HEAD:my-school/src/Components/EnterUser/Login.js
 
 export default Login;
-=======
- export default Login;
->>>>>>> master:my-school/src/Components/login.js
+
