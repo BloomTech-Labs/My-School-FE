@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
 import {
   Menu,
   MenuButton,
@@ -42,7 +43,7 @@ const NavMenu = ({ user }) => {
 
           <MenuItem as={Box}>
            {/* THIS IS THE BUTTON TO ADD ANOTHER CHILD TO THE FAMILY LIST */}
-           + Add A New Student
+           <Button as={NavLink} location={`/settings/${user.id}/addstudent`}>+ Add A New Student</Button>
           </MenuItem>
         </MenuGroup>
 

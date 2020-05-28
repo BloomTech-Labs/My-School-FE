@@ -24,7 +24,7 @@ const PortfolioContainer = ({ activities, getAllActivitiesForUser, user }) => {
     
     <PortfolioBody />     
     <Route path="/add" render={ props => <AddActivityForm />} />
-    <Route exact path="/doc" render={ _ => <MyDocument activities={activities} /> } />
+    <Route exact path="/export" render={ _ => <MyDocument activities={activities} /> } />
     <Route path='/activity/:id' render={props => <ActivityOverview activities={activities}/>}/>
  
   </div>
