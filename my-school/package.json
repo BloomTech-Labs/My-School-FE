@@ -7,8 +7,8 @@
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@react-pdf/renderer": "^1.6.8",
+    "@sentry/browser": "^5.15.5",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "emotion": "^10.0.27",
@@ -23,6 +23,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-spinners": "^0.8.3",
+    "react-test-renderer": "^16.13.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
@@ -30,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "coverage": "CI=true yarn test --coverage --watchAll=false || true"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,6 +47,21 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^9.5.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/database/**",
+      "!**/tests/**",
+      "!**/spec/**",
+      "!**/*.spec.{js,jsx}",
+      "!**/coverage/**"
     ]
   }
 }
