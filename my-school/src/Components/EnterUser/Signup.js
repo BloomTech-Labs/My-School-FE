@@ -119,7 +119,7 @@ const Signup = () => {
                                 <PopoverArrow />
                                 <PopoverCloseButton />
                                 <PopoverBody>
-                                    This will be used to identify members of your family, so we can associate their accounts with yours.
+                                    This will be used to identify members of your family, so we can associate their accounts with yours. As an admin, you will be able to create accounts for multiple students &amp; manage them from your account. 
                                 </PopoverBody>
                             </PopoverContent>
                         </Popover>
@@ -192,8 +192,13 @@ const Signup = () => {
                     </Select>
                 </FormControl>
                 {/* CHECKBOX */}
-                <FormControl>
-                    <Checkbox>I am the parent or guardian of a child being homeschooled.</Checkbox>
+                <FormControl isInvalid={errors.parent_confirm}>
+                    <Checkbox 
+                        name="parent_confirm"
+                        ref={register({
+                            required: "You must be a parent or guardian to create an account. If you're a student, please ask your parent or guardian to create an account for you."
+                        })}
+                    >I am the parent of a child being homeschooled.</Checkbox>
                     {/* NEEDS STYLING! */}
                     <Popover>
                         <PopoverTrigger>
@@ -203,10 +208,11 @@ const Signup = () => {
                             <PopoverArrow />
                             <PopoverCloseButton />
                             <PopoverBody>
-                                If you're a student, please ask your parent or guardian to create an account for you.
+                                This sign up form creates a parent admin account. Student accounts can only be created by a parent admin from their Account Setting menu.
                             </PopoverBody>
                         </PopoverContent>
                     </Popover>
+                    <FormErrorMessage>{errors.parent_confirm && errors.parent_confirm.message}</FormErrorMessage>
                 </FormControl>
                 <Button
                     type="submit"
