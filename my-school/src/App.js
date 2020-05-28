@@ -32,7 +32,12 @@ function App() {
               </Route>
               <Route path='/dashboard'>
                 <TopNav />
+                <Route>
                 <MainContainer />
+                </Route>
+                <Route>
+                  <PortfolioContainer />
+                </Route>
               </Route>
             </Router>
           </div>

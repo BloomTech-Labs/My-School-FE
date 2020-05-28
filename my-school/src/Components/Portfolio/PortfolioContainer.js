@@ -1,6 +1,6 @@
 
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import { connect } from "react-redux";
 import { getAllActivitiesForUser } from "../../actions/actions-portfolio";
 // Components
@@ -13,16 +13,20 @@ import ActivityOverview from './Activity/ActivityOverview';
 const PortfolioContainer = ({ activities, getAllActivitiesForUser, user }) => {
 
     useEffect(() => {
-      getAllActivitiesForUser(user.id)
-    }, [getAllActivitiesForUser, user.id])
+      console.log(user)
+      if(user){
+      getAllActivitiesForUser(user.id)}
+    }, [user])
 
   return (
     <div>
     <PortfolioHeader />
-    <Route exact path="/portfolio" component={PortfolioBody} />     
-    <Route exact path="/add" render={ props => <AddActivityForm />} />
+    
+    <PortfolioBody />     
+    <Route path="/add" render={ props => <AddActivityForm />} />
     <Route exact path="/doc" render={ _ => <MyDocument activities={activities} /> } />
     <Route path='/activity/:id' render={props => <ActivityOverview activities={activities}/>}/>
+ 
   </div>
   );
 };

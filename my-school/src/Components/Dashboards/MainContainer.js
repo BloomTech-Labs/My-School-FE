@@ -1,33 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
-import { getUser, getFamilyName, } from '../../actions/actions-users';
+import axios from 'axios';
 //components
 import PortfolioContainer from "../Portfolio/PortfolioContainer";
 import  AdminDash  from './AdminDash';
 import { Settings } from '../EnterUser/Settings';
+import { getFamilyName } from "../../actions/actions-users";
 
 const MainContainer = () => {
-  const id = 3;
+
+  const [user, setUser] = useState();
+
   useEffect(() => {
-    getUser(id)
-    // getFamilyName(user.family_id)
-  }, [])
+    //the user will not be hard coded once we add dynamic routes and logins
+    axios
+      .get("https://my-school-v1.herokuapp.com/api/users/1")
+      .then((res) => {
+        setUser(res.data);
+        getFamilyName(user.family_id);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-  return(
-    <div>
-      
-        <Route exact path='/family/:user.family_id}' component={AdminDash} />
-        {/* ^parent login default -- requires parent type*/}
-
-        <Route exact path="/portfolio" component={PortfolioContainer} />
-        {/* ^ student login default -- viewable by student and parent*/}
-
+    
+      if(user && user.user_type_id === 1){
+        return(
+         <div>
+        <AdminDash user={user}/>
         <Route exact path='/settings' component={Settings} />
-        {/*  ^ replaces portfolio -- parent can adjust settings -- requires parent type */}
-     
-    </div>
+        </div> 
+        // {/*  ^ replaces portfolio -- parent can adjust settings -- requires parent type */}
+      )
+        // {/* ^parent login default -- requires parent type*/}
+      } else {
+        return(
+        <PortfolioContainer user={user}/>)
+        // {/* ^ student login default -- viewable by student and parent*/}
+      }
 
-  );
+        
+
 }
 
 export default MainContainer;

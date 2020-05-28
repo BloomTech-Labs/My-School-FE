@@ -40,8 +40,9 @@ const NavMenu = ({ user }) => {
             <Button>Manage</Button>
           </MenuItem>
 
-          <MenuItem>
+          <MenuItem as={Box}>
            {/* THIS IS THE BUTTON TO ADD ANOTHER CHILD TO THE FAMILY LIST */}
+           + Add A New Student
           </MenuItem>
         </MenuGroup>
 
