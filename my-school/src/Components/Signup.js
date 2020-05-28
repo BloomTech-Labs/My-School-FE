@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import axios from 'axios';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import {
     Text,
     Box,
@@ -16,6 +17,7 @@ import {
 import { useForm } from 'react-hook-form';
 
 const Signup = () => {
+    const history = useHistory();
     const { handleSubmit, errors, register, watch } = useForm();
 
     // Watches password value, used to validate password_confirm field
@@ -25,6 +27,43 @@ const Signup = () => {
     // Submit handler
     function onSubmit(data) {
         console.log("Hello, sign up form has been submitted", data)
+
+        const newFam = {
+            name: data.family
+        };
+
+        axios.post("https://my-school-v1.herokuapp.com/api/families", newFam)
+        .then(res => {
+            console.log("Family created", res.data)
+            const famId = res.data.id;
+
+            const newUser = {
+                username: data.email,
+                email: data.email,
+                password: data.password,
+                family_id: famId,
+                user_type_id: 1
+            };
+
+            axios.post("https://my-school-v1.herokuapp.com/api/auth/registration", newUser)
+            .then(res => {
+                console.log("Success! User created", res.data)
+
+                const user = res.data.user;
+                localStorage.setItem('auth', user.user_type_id);
+                localStorage.setItem('userId' , user.id);
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('family_id', user.family_id);
+
+                history.push('/portfolio')
+            })
+            .catch(err => {
+                console.log("Error creating new user acct", err)
+            })
+        })
+        .catch(err => {
+            console.log("Error creating family acct", err)
+        })
     }
 
     return (
