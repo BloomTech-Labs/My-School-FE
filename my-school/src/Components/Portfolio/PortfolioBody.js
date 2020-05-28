@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getAllActivitiesForUser } from "../actions/actions-portfolio.js";
-import ActivityCard from "./ActivityCard";
+import { getAllActivitiesForUser } from "../../actions/actions-portfolio.js";
+import ActivityCard from "./Activity/ActivityCard";
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 
-const PortfolioLog = ({ activities, getAllActivitiesForUser, isLoading }) => {
+const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading }) => {
   const [sortedActivities, setSortedActivities] = useState([]);
   const override = css`
     margin-top: 10rem;
@@ -20,7 +20,7 @@ const PortfolioLog = ({ activities, getAllActivitiesForUser, isLoading }) => {
   useEffect(() => {
     //the paramter passed in will not be hard coded once we make user login and dynamic routes
     getAllActivitiesForUser(3);
-  }, [getAllActivitiesForUser]);
+  }, []);
 
   useEffect(() => {
     const sorted = activities.sort((a, b) => b.id - a.id);
@@ -54,5 +54,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { getAllActivitiesForUser })(
-  PortfolioLog
+  PortfolioBody
 );

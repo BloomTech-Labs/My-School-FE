@@ -12,9 +12,7 @@ import {
     Flex,
     Text
 } from '@chakra-ui/core';
-import { axiosWithAuth } from '../utils/axiosWithAuth.js';
 import axios from 'axios'
-
 
 const Login = () => {
 
@@ -97,4 +95,6 @@ const Login = () => {
         </Flex>
     )
 }
- export default Login;
+
+export default Login;
+

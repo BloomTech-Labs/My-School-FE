@@ -121,7 +121,9 @@ const AddActivityForm = () => {
     }
 
     return (
+        
         <Box pb={32} px={20}>
+            {console.log("add form")}
         { preview ? <NewActivityPreview preview={preview} /> 
         : 
         <FormContext {...methods}>
