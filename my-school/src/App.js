@@ -13,6 +13,7 @@ import PortfolioContainer from "./Components/Portfolio/PortfolioContainer";
 import PDFExporter from './Components/Portfolio/PDFExporter'
 import ActivityOverview from "./Components/Portfolio/Activity/ActivityOverview";
 import StudentRegistration from './Components/studentRegister';
+import MainLayout from "./Components/MainLayout";
 
 function App() {
   React.useEffect((_) => {
@@ -35,32 +36,26 @@ function App() {
             <AuthPage login={false} />
           </Route>
           <Route path='/dashboard'>
-            <TopNav />
-            <MainContainer />
+            <MainLayout page={<MainContainer />} />
           </Route>
           <Route path='/settings'>
-            <TopNav />
             {/*Account settings*/}
+            {/* <MainLayout page={PUT PAGE HERE} /> */}
           </Route>
           <Route exact path='/portfolio/:id'>
-            <TopNav />
-            <PortfolioContainer />
+            <MainLayout page={<PortfolioContainer />} />
           </Route>
           <Route path='/portfolio/:id/add'>
-            <TopNav />
-            <AddActivityForm />
+            <MainLayout page={<AddActivityForm />} />
           </Route>
           <Route path='/portfolio/:id/export'>
-            <TopNav />
-            <PDFExporter />
+            <MainLayout page={<PDFExporter />} />
           </Route>
           <Route path='/activity/:id'>
-            <TopNav />
-            <ActivityOverview />
+            <MainLayout page={<ActivityOverview />} />
           </Route>
           <Route path='/addstudent'>
-            <TopNav/>
-            <StudentRegistration/>
+            <MainLayout page={<StudentRegistration/>} />
           </Route>
         </Router>
       </div>
