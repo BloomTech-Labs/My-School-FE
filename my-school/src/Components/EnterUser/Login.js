@@ -12,7 +12,8 @@ import {
     Flex,
     Text
 } from '@chakra-ui/core';
-import axios from 'axios'
+import axios from 'axios';
+import validateCredentials from '../../utils/validateCredentials'
 
 const Login = () => {
 
@@ -44,53 +45,55 @@ const Login = () => {
         })
     };
 
-    const validatecrudentials = (value) => {
-        if(value <= 0 ){
-            return 'must provide a crudentials'
-        }else{
-            return null
-        }
-    };
     const handleChecked = () => {
         setChecked(!checked)
     }
     return (
-        <Flex flexDirection='column' w='33.33%' border='black solid 2px' h='100vh' alignItems='center'>
-            <h1>My School</h1>
+        <Flex flexDirection='column' w='33.33%' h='100vh' p='4rem'>
+            <Text
+                fontSize="1.5rem"
+                fontWeight="700"
+                color="myschoolblue"
+                p='1rem 0rem'
+            >MySchool</Text>
             <FormContext {...methods} >
                 <form onSubmit={handleSubmit(handleLogin)}> 
-                    <FormControl isInvalid={errors.username}>
+                    <FormControl isInvalid={errors.username} p='1rem 0rem'>
                         <FormLabel htmlFor="username">Username</FormLabel>
                         <Input 
                             type="text"
                             id="username"
                             name="username"
-                            ref={register({ validate: validatecrudentials })} 
+                            ref={register({ validate: validateCredentials })} 
                             defaultValue={''}
+                            w='70%'
                         />
                         <FormErrorMessage> 
                             {errors.username && errors.username.message}
                         </FormErrorMessage>
                     </FormControl>
-                    <FormControl isInvalid={errors.password}>
+                    <FormControl isInvalid={errors.password} p='1rem 0rem'>
                         <FormLabel htmlFor="password">Password</FormLabel>
                         <Input 
                             type="password"
                             id="password"
                             name="password"
-                            ref={register({ validate: validatecrudentials })} 
+                            ref={register({ validate: validateCredentials })} 
                             defaultValue={''}
+                            w='70%'
                         />
                         <FormErrorMessage> 
                             {errors.password && errors.password.message}
                         </FormErrorMessage>
                     </FormControl>
                     {invalid === true && <Text p='.5rem' color="red"><span style={{color: 'red'}}>*Invalid Crudentials*</span></Text>}
-                    <FormControl isInvalid={errors.password}>
-                        <FormLabel htmlFor="remember"></FormLabel>
-                        <Checkbox size="md" variantColor="green" onChange={handleChecked}>Remember me</Checkbox>
-                    </FormControl>
-                    <Button variantColor="green" type='submit'>Login</Button>
+                    <Flex alignItems='baseline'>
+                        <FormControl isInvalid={errors.password} p='1rem 8rem 0rem 0rem'>
+                            <FormLabel htmlFor="remember"></FormLabel>
+                            <Checkbox size="md" variantColor="green" onChange={handleChecked}>Remember me</Checkbox>
+                        </FormControl>
+                        <Button variantColor="green" type='submit'>Login</Button>
+                    </Flex>
                 </form>
             </FormContext>
         </Flex>

@@ -14,6 +14,7 @@ import fontP from "../../assets/Pridi/Pridi Light.ttf"
 import fontR from "../../assets/Raleway/Raleway Medium.ttf"
 import style from "./PDFExporterStyles.js";
 import { Button, Box, Flex } from '@chakra-ui/core';
+import timechange from '../../utils/timeChange'
 
 Font.register({
   family: "Nunito",
@@ -33,12 +34,6 @@ Font.register({
 
 // Create Document Component
 const MyDocument = ({ activities }) => {
-
-  function timechange(num){ 
-  var hours = Math.floor(num / 60);  
-  var minutes = num % 60;
-  return hours + "h " + minutes + "m";         
-  };
 
   function noNull(item){
     if(item==="null"){
