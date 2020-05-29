@@ -49,7 +49,7 @@ const Login = () => {
         setChecked(!checked)
     }
     return (
-        <Flex flexDirection='column' w='33.33%' border='black solid 2px' h='100vh' p='4rem'>
+        <Flex flexDirection='column' w='33.33%' h='100vh' p='4rem'>
             <Text
                 fontSize="1.5rem"
                 fontWeight="700"
