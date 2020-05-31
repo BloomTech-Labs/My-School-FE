@@ -44,7 +44,7 @@ const NavMenu = ({ user }) => {
         </MenuItem>
 
         {/* THIS IS THE SETTINGS BUTTON THAT REDIRECTS THE ACTIVITYCONTAINER TO SETTINGS COMPONENT */}
-        <MenuItem as={Button} onClick={handleAdminSettings}>Account Settings</MenuItem>
+        <MenuItem onClick={handleAdminSettings}>Account Settings</MenuItem>
 
         <MenuGroup>
           <MenuItem>
@@ -88,5 +88,6 @@ const NavMenu = ({ user }) => {
     )
   }
 };
+
 
 export default NavMenu;

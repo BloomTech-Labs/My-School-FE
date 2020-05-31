@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { getAllStudentsForFamily, addNewStudent, deleteStudent } from '../../actions/actions-users';
+import { getFamilyByID, deleteStudent } from '../../actions/actions-users';
 import StudentCard from './StudentCard';
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
+import StudentRegister from '../studentRegister';
 
-const AdminDash = ({user, isLoading}) => {
+const AdminDash = ({user, isLoading, getFamilyByID, deleteStudent}) => {
       const [students, setStudents] = useState([]);
       const override = css`
       margin-top: 10rem;
@@ -17,12 +18,12 @@ const AdminDash = ({user, isLoading}) => {
       },[])
 
       useEffect(() => {
-        getAllStudentsForFamily(3); 
+        getFamilyByID(3); 
         if(user.type_id === 2){
         setStudents(user)} else {
           console.log( "No students")
         }
-      }, [user]);
+      }, [getFamilyByID, user]);
       
     return(
       <div>
@@ -31,7 +32,7 @@ const AdminDash = ({user, isLoading}) => {
           (students.map(student =>(<StudentCard key={student.id} student={student} className='card' />)))}
         </div>
         <div>This is the Admin Dash which will be a list of kids portfolios</div>
-        <div onClick={addNewStudent}>Add new student</div>
+        <div onClick={StudentRegister}>Add new student</div>
         <div onClick={deleteStudent}>Delete Portfolio</div>
         </div>
         
@@ -46,4 +47,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps , { getAllStudentsForFamily })(AdminDash);
+export default connect(mapStateToProps , { getFamilyByID, deleteStudent })(AdminDash);

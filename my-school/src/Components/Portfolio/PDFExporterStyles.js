@@ -6,7 +6,7 @@ const style = StyleSheet.create({
     paddingBottom: 65,
     paddingHorizontal: 35,
     backgroundColor: "white",
-    margin: 10,
+    margin: 15,
   },
   page: {
     flexDirection: "row",
@@ -35,7 +35,6 @@ const style = StyleSheet.create({
     fontFamily: 'Raleway'
   },
   text: {
-    margin: 25,
     fontSize: 14,
     textAlign: 'justify',
     fontFamily: 'Pridi'
@@ -44,7 +43,7 @@ const style = StyleSheet.create({
     marginVertical: 15,
     marginLeft: 100,
     alignSelf: "right",
-    width: 100,
+    width: '100%'
   },
 });
 /* ----------------------/STYLES----------------------------------------- */

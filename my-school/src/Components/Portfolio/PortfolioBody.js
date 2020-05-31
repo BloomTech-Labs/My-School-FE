@@ -6,7 +6,7 @@ import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 
-const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading }) => {
+const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user }) => {
   const [sortedActivities, setSortedActivities] = useState([]);
   const override = css`
     margin-top: 10rem;
@@ -20,7 +20,7 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading }) => {
   useEffect(() => {
     //the paramter passed in will not be hard coded once we make user login and dynamic routes
     getAllActivitiesForUser(3);
-  }, []);
+  }, [getAllActivitiesForUser, user]);
 
   useEffect(() => {
     const sorted = activities.sort((a, b) => b.id - a.id);

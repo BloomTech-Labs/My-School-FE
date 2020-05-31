@@ -11,7 +11,7 @@ export default function TopNav() {
   useEffect(() => {
     //the user will not be hard coded once we add dynamic routes and logins
     axios
-      .get("https://my-school-v1.herokuapp.com/api/users/1")
+      .get("https://my-school-v1.herokuapp.com/api/users/3")
       .then((res) => {
         setUser(res.data);
       })
@@ -31,6 +31,7 @@ export default function TopNav() {
           <Flex align="center">
             <NavMenu user={user} />
             <NavName user={user} />
+             
           </Flex>
         </Flex>
       </Box>

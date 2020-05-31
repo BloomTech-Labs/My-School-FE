@@ -8,7 +8,7 @@ import customTheme from "./Styles/theme";
 import ReactGA from "react-ga";
 import Landing from "./Components/EnterUser/Landing";
 import AuthPage from "./Components/EnterUser/AuthPage";
-import { Settings } from './Components/EnterUser/Settings';
+import Settings from './Components/EnterUser/Settings';
 import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActivityForm";
 import PortfolioContainer from "./Components/Portfolio/PortfolioContainer";
 import PDFExporter from './Components/Portfolio/PDFExporter'

@@ -1,32 +1,23 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import fontN from "../../assets/Nunito_Sans/Nunito Sans Regular.ttf";
 import { Image, Grid, Box, Heading } from "@chakra-ui/core";
-import axios from 'axios';
 
-function StudentCard({student}) {
-  const [ family, setFamily ] = useState("")
+
+function StudentCard({student, getFamilyName}) {
+  
+  const [ surname, setSurname] = useState('');
   const history = useHistory();
-
+  setSurname(student.family_id);
 
   const pushToPortfolio = (id) => {
-    history.push(`/portfolio/${student.id}`);
+    history.push(`/portfolio/${id}`);
   };
-
-  const getFamilyName = (id) => {
-    axios.get(`https://my-school-v1.herokuapp.com/api/families/${student.family_id}`)
-    .then(res => {
-      console.log(res.data)
-      setFamily(res.data.name)})
-      .catch(err => {
-        console.log(err, 'student card error')
-      })
-  }
  
 
   return (
       <Box>
-      <Heading>{family} Family</Heading>
+      <Heading>{surname} Family</Heading>
     <Grid
       templateColumns=".75fr .25fr 1fr .5fr .25fr .25fr"
       alignItems='left'

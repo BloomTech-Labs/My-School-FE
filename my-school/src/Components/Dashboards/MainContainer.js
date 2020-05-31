@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Route } from "react-router-dom";
+import { connect } from 'react-redux';
 import axios from 'axios';
 //components
 import PortfolioContainer from "../Portfolio/PortfolioContainer";
 import  AdminDash  from './AdminDash';
-import { Settings } from '../EnterUser/Settings';
-import { getFamilyName } from "../../actions/actions-users";
+import { getUserByID, getFamilyName, getFamilyByID, deleteStudent } from "../../actions/actions-users";
 
 const MainContainer = () => {
 
@@ -14,10 +13,11 @@ const MainContainer = () => {
   useEffect(() => {
     //the user will not be hard coded once we add dynamic routes and logins
     axios
-      .get("https://my-school-v1.herokuapp.com/api/users/1")
+      .get("https://my-school-v1.herokuapp.com/api/users/3")
       .then((res) => {
+        console.log(res.data)
         setUser(res.data);
-        getFamilyName(res.data.family_id);
+        // getFamilyByID(res.data.family_id)
       })
       .catch((err) => console.log(err));
   }, []);
@@ -27,20 +27,26 @@ const MainContainer = () => {
         return(
          <div>
         <AdminDash user={user}/>
-        <Route exact path='/settings' component={Settings} />
+        {/* ^parent login default -- requires parent type */}
         </div> 
         // {/*  ^ replaces portfolio -- parent can adjust settings -- requires parent type */}
       )
-        // {/* ^parent login default -- requires parent type*/}
+        
       } else {
         return(
         <PortfolioContainer user={user}/>)
         // {/* ^ student login default -- viewable by student and parent*/}
       }
-
-        
-
 }
 
-export default MainContainer;
+const mapStateToProps = (state) => {
+  return {
+    users: state.usersReducer.users,
+    user: state.usersReducer.user,
+    family: state.usersReducer.family,
+    familyName: state.usersReducer.familyName
+  };
+};
+
+export default connect(mapStateToProps, { getUserByID, getFamilyName, getFamilyByID, deleteStudent }) (MainContainer);
 
