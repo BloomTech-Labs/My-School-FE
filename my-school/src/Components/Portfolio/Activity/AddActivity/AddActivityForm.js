@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
+    SimpleGrid,
     Box,
     Flex,
     Text,
@@ -119,15 +120,16 @@ const AddActivityForm = () => {
 
 
     return (
-        <Box pb={32} px={20}>
+        <Box mt="36px">
             {console.log("add form")}
         { preview ? <NewActivityPreview preview={preview} /> 
         : 
         <FormContext {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} >
         {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
-        <Flex wrap="wrap" justify="space-around">
-            <Box w={["100%, 100%, 100%, 46%"]} >
+        {/* <Flex wrap="wrap" m="32px auto"> */}
+        <SimpleGrid columns={[1, 1, 1, 2]} spacing={["20px", "20px", "20px", "128px"]} mx={["8px", "20px", "32px", "100px"]}>
+            <Box w={["100%, 100%, 100%, 50%"]} >
                 <FormControl isInvalid={errors.name} mb="20px" fontFamily="'Nunito'">
                     <FormLabel htmlFor="name" fontWeight="bold">Title<Box as="span" color="warningred" m="4px">*</Box></FormLabel>
                     <Input 
@@ -136,6 +138,7 @@ const AddActivityForm = () => {
                         name="name" 
                         placeholder="What would you like to name your activity?" 
                         ref={register({ validate: validateTitle })}
+                        borderColor="gray.400"
                         errorBorderColor="warningred"
                         focusBorderColor="myschoolblue"
                     />
@@ -151,6 +154,7 @@ const AddActivityForm = () => {
                         name="subject" 
                         placeholder="Select..." 
                         ref={register} 
+                        borderColor="gray.400"
                         focusBorderColor="myschoolblue"
                     >
                         {subjects.map(s => {
@@ -168,22 +172,24 @@ const AddActivityForm = () => {
                         name="description" 
                         placeholder="Tell us all about what you did in this activity!" 
                         ref={register} 
+                        borderColor="gray.400"
                         focusBorderColor="myschoolblue"
                     />
                 </FormControl>
 
                 <Text fontWeight="bold">How long did it take to complete this activity?</Text>
-                <Box borderWidth="1px" borderColor="#D4D4D4" rounded="4px" p="32px" m="8px 0 16px">
+                <Box borderWidth="1px" borderColor="gray.400" rounded="4px" py="32px" pl="32px" m="8px 0 16px">
                     <Text fontWeight="bold">Duration</Text>
                     <Flex>
                         <FormControl mt="8px" fontFamily="'Nunito'">
-                            <FormLabel htmlFor="hours">Hours</FormLabel>
+                            <FormLabel htmlFor="hours" textTransform="uppercase" fontSize="0.625rem" color="gray.700">Hours</FormLabel>
                             <NumberInput mr="20px" min={0} defaultValue={0} >
                                 <NumberInputField 
                                     id="hours" 
                                     name="hours"  
-                                    w="120px"  
+                                    w="72px"  
                                     mr="0px" 
+                                    borderColor="gray.400"
                                     errorBorderColor="warningred" 
                                     focusBorderColor="myschoolblue" 
                                     ref={register}
@@ -196,12 +202,13 @@ const AddActivityForm = () => {
                         </FormControl>
 
                         <FormControl mt="8px" fontFamily="'Nunito'">
-                            <FormLabel htmlFor="minutes">Minutes</FormLabel>
+                            <FormLabel htmlFor="minutes" textTransform="uppercase" fontSize="0.625rem" color="gray.700">Minutes</FormLabel>
                             <NumberInput max={59} min={0} defaultValue={0}>
                                 <NumberInputField 
                                     id="minutes" 
                                     name="minutes"   
-                                    w="120px"  
+                                    w="72px"  
+                                    borderColor="gray.400"
                                     errorBorderColor="warningred" 
                                     focusBorderColor="myschoolblue" 
                                     ref={register}
@@ -215,9 +222,9 @@ const AddActivityForm = () => {
                     </Flex>
                 </Box>
 
-                </Box>
-                <Box w="492px">
-                        <Text fontSize="lg" fontWeight="500" pt="16px" pb="36px">Upload Activity Photo</Text>
+            </Box>
+            <Box w={["100%, 100%, 100%, 50%"]}>
+                        <Text fontSize="lg" fontWeight="700" pb="24px">Upload Activity Photo</Text>
                         <FormLabel htmlFor="image" style={{ cursor: "pointer"}}>
                             <Flex align="center" mb="12px">
                                 <Box bg="gray.600" p="8px 16px" borderRadius="4px" color="white" fontSize="lg" mr="8px">Choose File</Box>
@@ -236,7 +243,7 @@ const AddActivityForm = () => {
                             style={{ display: "none", cursor: "pointer" }}
                         />
 
-                        <Box h="280px" border="1px" borderRadius="8px" borderColor="gray.400" p="24px">
+                        <Box h="280px" border="1px" borderRadius="8px" borderColor="gray.400" p="24px" w="100%">
                             <Text fontSize="sm" color="gray.600" pb="22px">Attached photo:</Text>
                             {image.preview ? 
                                 <Image 
@@ -263,8 +270,9 @@ const AddActivityForm = () => {
                                 // isDisabled={!name ? true : false}
                             >Submit</Button>
                         </Flex>
-                </Box>
-            </Flex>
+            </Box>
+            {/* </Flex> */}
+            </SimpleGrid>
         </form>
         </FormContext>
         }
