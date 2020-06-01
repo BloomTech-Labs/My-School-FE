@@ -41,6 +41,9 @@
   cursor: pointer;
 }
 
+.hover-label:hover{
+  cursor: pointer;
+}
 
 /* .stripe1 {
   width: 300px;

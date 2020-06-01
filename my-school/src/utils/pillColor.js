@@ -1,22 +1,22 @@
-module.exports = function pillColor(subject){
+export function pillColor(subject){
     switch (subject) {
       case "English":
-        return "red";
+        return "red.300";
       case "Math":
-        return "orange";
+        return "blue.300";
       case "Science":
-        return "yellow";
+        return "green.300";
       case "Social Studies":
-        return "green";
+        return "orange.300";
       case "Art":
-        return "teal";
+        return "purple.300";
       case "Music":
-        return "blue";
+        return "pink.300";
       case "Health":
-        return "cyan";
+        return "teal.100";
       case "Physical Education":
-        return "purple";
+        return "yellow.300";
       default:
-        return "pink";
+        return "cyan.300";
     }
   };
