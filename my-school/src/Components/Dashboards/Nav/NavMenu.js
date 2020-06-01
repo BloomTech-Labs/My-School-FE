@@ -49,7 +49,7 @@ const NavMenu = ({ user, family }) => {
         <MenuGroup>
           <MenuItem>
             {/*  THIS WILL BE THE FAMILY NAME */}
-            {family.name}
+           
           </MenuItem>
 
           <MenuItem as={Box}>

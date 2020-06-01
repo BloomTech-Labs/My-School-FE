@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import {  getUserByID, getFamilyByID } from '../../actions/actions-users';
-import { Box, Avatar } from '@chakra-ui/core';
+import { Box, Button, Avatar } from '@chakra-ui/core';
 
 const Settings = ({ user, getFamilyByID}) => {
 
@@ -29,8 +29,12 @@ const Settings = ({ user, getFamilyByID}) => {
             </Box>
             <Box>
                 Email: {user.email} <span onClick={handleUpdate} value='email'>Update</span>
+            </Box>
+            <Box>
                 Password:  {user.password} <span onClick={handleUpdate} value='password'>Update</span>
-                <span onClick={handleDeleteAccount}>Delete Account</span>
+            </Box>
+            <Box>
+                <Button onClick={handleDeleteAccount}>Delete Account</Button>
             </Box>
         </Box>
     )
