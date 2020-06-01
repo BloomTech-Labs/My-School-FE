@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ReactGA from 'react-ga';
 import {
     SimpleGrid,
     Box,
@@ -26,6 +27,10 @@ import NewActivityPreview from './NewActivityPreview';
 import validateTitle from '../../../../utils/validateTitle'
 
 const AddActivityForm = () => {
+    React.useEffect(() => {
+        ReactGA.event({ category: "App", action: "Adding activity" });
+    }, [])
+
     const methods = useForm();
     const { handleSubmit, errors, register, formState } = methods;
     const toast = useToast();
