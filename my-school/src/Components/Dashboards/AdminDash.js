@@ -45,9 +45,9 @@ const AdminDash = ({ user, isLoading, getFamilyByID, deleteStudent}) => {
       };
       
 
-      if(family.length > 0){
+      
         return(
-        <div className='student-list'> */}
+        <div className='student-list'>
           {isLoading === true ? <Loader color={'#329795'} /> : 
           (family.map(student =>{
           return(<StudentCard 
@@ -55,11 +55,7 @@ const AdminDash = ({ user, isLoading, getFamilyByID, deleteStudent}) => {
           student={student} 
           family={family} 
           className='card' />)}))} 
-        </div>
-        );
-      } else {
-    return(
-      <div>
+       
         <Box as={Button} onClick={addStudent}> + Add new student</Box>
         <Button
             _hover={{
@@ -114,7 +110,7 @@ const AdminDash = ({ user, isLoading, getFamilyByID, deleteStudent}) => {
         </AlertDialog>
         </Button>
         </div>
-    )}
+    )
 };
 
 const mapStateToProps = (state) => {

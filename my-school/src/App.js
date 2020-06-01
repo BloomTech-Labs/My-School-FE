@@ -7,18 +7,14 @@ import ReactGA from "react-ga";
 //Components
 import Landing from "./Components/EnterUser/Landing";
 import AuthPage from "./Components/EnterUser/AuthPage";
-<<<<<<< HEAD
-import Settings from './Components/EnterUser/Settings';
-import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActivityForm";
-=======
 import MainLayout from "./Components/MainLayout";
 import MainContainer from "./Components/Dashboards/MainContainer";
->>>>>>> 7bf6afd759aaa66cda8ef91b0083db4f5ed6c088
 import PortfolioContainer from "./Components/Portfolio/PortfolioContainer";
 import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActivityForm";
 import PDFExporter from './Components/Portfolio/PDFExporter'
 import ActivityOverview from "./Components/Portfolio/Activity/ActivityOverview";
 import StudentRegistration from './Components/studentRegister';
+import Settings from './Components/EnterUser/Settings';
 
 function App() {
   React.useEffect((_) => {
@@ -31,45 +27,6 @@ function App() {
       <CSSReset />
       <div className="App">
         <Router >
-<<<<<<< HEAD
-          <Route exact path='/'>
-            <Landing />
-          </Route>
-          <Route path = '/login'>
-            <AuthPage login={true} />
-          </Route>
-          <Route path='/signup'>
-            <AuthPage login={false} />
-          </Route>
-          <Route path='/dashboard'>
-            <TopNav />
-            <MainContainer />
-          </Route>
-          <Route path='/settings'>
-            <TopNav />
-            <Settings />
-          </Route>
-          <Route exact path='/portfolio/:id'>
-            <TopNav />
-            <PortfolioContainer />
-          </Route>
-          <Route path='/portfolio/:id/add'>
-            <TopNav />
-            <AddActivityForm />
-          </Route>
-          <Route path='/portfolio/:id/export'>
-            <TopNav />
-            <PDFExporter />
-          </Route>
-          <Route path='/activity/:id'>
-            <TopNav />
-            <ActivityOverview />
-          </Route>
-          <Route path='/addstudent'>
-            <TopNav/>
-            <StudentRegistration/>
-          </Route>
-=======
           <Switch>
             <Route exact path='/'>
               <Landing />
@@ -84,8 +41,7 @@ function App() {
               <MainLayout page={<MainContainer />} />
             </Route>
             <Route path='/settings'>
-              {/*Account settings*/}
-              {/* <MainLayout page={PUT PAGE HERE} /> */}
+              <MainLayout page={<Settings />} />
             </Route>
             <Route exact path='/portfolio/:id'>
               <MainLayout page={<PortfolioContainer />} />
@@ -103,7 +59,6 @@ function App() {
               <MainLayout page={<StudentRegistration/>} />
             </Route>
           </Switch>
->>>>>>> 7bf6afd759aaa66cda8ef91b0083db4f5ed6c088
         </Router>
       </div>
     </ThemeProvider>
