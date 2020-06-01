@@ -34,7 +34,7 @@ Font.register({
 
 
 // Create Document Component
-const MyDocument = ({ activities, getAllActivitiesForUser, isLoading }) => {
+const MyDocument = ({ activities, getAllActivitiesForUser }) => {
 
   useEffect(() =>{
     getAllActivitiesForUser(3);

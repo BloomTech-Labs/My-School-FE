@@ -14,7 +14,7 @@ const PortfolioContainer = ({ activities, getAllActivitiesForUser, user}) => {
 
     useEffect(() => {
       if(user){
-      getAllActivitiesForUser(3)}
+      getAllActivitiesForUser(1)}
     }, [getAllActivitiesForUser, user])
 
   return (

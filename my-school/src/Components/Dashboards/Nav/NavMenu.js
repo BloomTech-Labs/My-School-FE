@@ -11,7 +11,7 @@ import {
   MenuGroup,
 } from "@chakra-ui/core";
 
-const NavMenu = ({ user }) => {
+const NavMenu = ({ user, family }) => {
   const history = useHistory();
 
   const handleAdminSettings = () => {
@@ -49,7 +49,7 @@ const NavMenu = ({ user }) => {
         <MenuGroup>
           <MenuItem>
             {/*  THIS WILL BE THE FAMILY NAME */}
-            Family #{user.family_id}
+            {family.name}
           </MenuItem>
 
           <MenuItem as={Box}>

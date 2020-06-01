@@ -9,14 +9,16 @@ import { getUserByID, getFamilyName, getFamilyByID, deleteStudent } from "../../
 const MainContainer = () => {
 
   const [user, setUser] = useState();
+  const [ family, setFamily ] = useState();
 
   useEffect(() => {
     //the user will not be hard coded once we add dynamic routes and logins
     axios
-      .get("https://my-school-v1.herokuapp.com/api/users/3")
+      .get("https://my-school-v1.herokuapp.com/api/users/1")
       .then((res) => {
         console.log(res.data)
         setUser(res.data);
+        setFamily(res.data.family_id)
         // getFamilyByID(res.data.family_id)
       })
       .catch((err) => console.log(err));
