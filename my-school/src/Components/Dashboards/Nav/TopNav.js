@@ -29,8 +29,9 @@ export default function TopNav() {
         >
           <NavLeft />
           <Flex align="center">
-            <NavMenu user={user} />
-            <NavName user={user} />
+         
+          <NavMenu user={user} />
+            
           </Flex>
         </Flex>
       </Box>
