@@ -47,8 +47,8 @@ const DateSelector = ({ defaultMonth, defaultDate, defaultYear }) => {
     }
 
     return (
-        <Flex w="372px">
-            <FormControl w="40%" pr="1rem">
+        <Flex maxWidth="372px">
+            <FormControl w="40%" pr="8px">
                 <FormLabel htmlFor="month">Month</FormLabel>
                 <Select 
                     id="month" 
@@ -56,6 +56,7 @@ const DateSelector = ({ defaultMonth, defaultDate, defaultYear }) => {
                     defaultValue={defaultMonth || month.num} 
                     onChange={handleMonthChange} 
                     ref={methods.register} 
+                    borderColor="gray.400"
                 >
                     {months.map(month => {
                         return (
@@ -65,7 +66,7 @@ const DateSelector = ({ defaultMonth, defaultDate, defaultYear }) => {
                 </Select>
             </FormControl>
 
-            <FormControl w="30%" pr="1rem">
+            <FormControl w="25%" pr="8px">
                 <FormLabel htmlFor="day">Day</FormLabel>
                 <NumberInput 
                     defaultValue={defaultDate || currentDate} 
@@ -76,6 +77,9 @@ const DateSelector = ({ defaultMonth, defaultDate, defaultYear }) => {
                         id="day" 
                         name="day"
                         ref={methods.register}
+                        borderColor="gray.400"
+                        errorBorderColor="warningred" 
+                        focusBorderColor="myschoolblue"
                     />
                     <NumberInputStepper>
                         <NumberIncrementStepper />
@@ -84,7 +88,7 @@ const DateSelector = ({ defaultMonth, defaultDate, defaultYear }) => {
                 </NumberInput>
             </FormControl>
 
-            <FormControl w="30%">
+            <FormControl w="25%">
                 <FormLabel htmlFor="year">Year</FormLabel>
                 <NumberInput 
                     defaultValue={defaultYear || currentYear} 
@@ -95,6 +99,9 @@ const DateSelector = ({ defaultMonth, defaultDate, defaultYear }) => {
                         id="year" 
                         name="year"
                         ref={methods.register}
+                        borderColor="gray.400"
+                        errorBorderColor="warningred" 
+                        focusBorderColor="myschoolblue"
                     />
                     <NumberInputStepper>
                         <NumberIncrementStepper />
