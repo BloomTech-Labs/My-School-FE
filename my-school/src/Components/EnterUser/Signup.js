@@ -19,9 +19,11 @@ import {
     PopoverContent,
     PopoverBody,
     PopoverArrow,
-    PopoverCloseButton
+    PopoverCloseButton,
+    Image
 } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
+import Logo from '../../assets/logo_white_bg.png';
 
 const Signup = () => {
     const history = useHistory();
@@ -69,14 +71,9 @@ const Signup = () => {
     }
 
     return (
-        <Box w={["100%", "100%", "50%", "40%"]} h="100vh">
-            <Text
-                fontSize="1.5rem"
-                fontWeight="700"
-                color="myschoolblue"
-                m="37px 52px"
-            >MySchool</Text>
-            <Box m="36px 65px 0">
+        <>
+            <Image src={Logo} alt="MySchool logo" mt="32px" />
+            <Box m="36px 0">
             <form onSubmit={handleSubmit(onSubmit)} data-testid='form-submit'>
                 <Text
                     fontSize="1.125rem"
@@ -87,7 +84,7 @@ const Signup = () => {
                 >Sign Up</Text>
 
                 {/* FAMILY NAME */}
-                <FormControl isInvalid={errors.family} mb="24px">
+                <FormControl isInvalid={errors.family} mb="24px" >
                     <FormLabel htmlFor="family" fontWeight="700" color="gray.800">Family name</FormLabel>
                     <Flex flexDirection="row" align="center">
                         <Input 
@@ -102,9 +99,9 @@ const Signup = () => {
                                     message: "Family name must be at least 2 characters"
                                 }
                             })}
-                            w="300px"
                             borderColor="gray.400"
                             data-testid='family'
+                            w="85%"
                         />
                         {/* NEEDS STYLING! */}
                         <Popover>
@@ -112,8 +109,10 @@ const Signup = () => {
                                 <IconButton 
                                     aria-label="family name information" 
                                     icon="info-outline"
-                                    ml="29px" 
+                                    ml="5%" 
                                     fontSize="1.4rem"
+                                    w="5%"
+                                    minW="0"
                                     bg="none"
                                     color="gray.400"
                                     _hover={{ color: "gray.500" }} 
@@ -133,7 +132,8 @@ const Signup = () => {
                 </FormControl>
 
                 {/* EMAIL (will be username; can possibly be updated later) */}
-                <FormControl isInvalid={errors.email} mb="24px">
+                <FormControl isInvalid={errors.email} mb="24px" w=
+                "85%">
                     <FormLabel htmlFor="email" fontWeight="700" color="gray.800">Email</FormLabel>
                     <Input 
                         id="email"
@@ -147,14 +147,14 @@ const Signup = () => {
                                 message: "Please enter a valid email address"
                             }
                         })}
-                        w="300px"
                         borderColor="gray.400"
                         data-testid='email'
+                        w="100%"
                     />
                     <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
                 </FormControl>
                 {/* PASSWORD */}
-                <FormControl isInvalid={errors.password} mb="24px">
+                <FormControl isInvalid={errors.password} mb="24px" w="85%">
                     <FormLabel htmlFor="password" fontWeight="700" color="gray.800">Password</FormLabel>
                     <Input 
                         type="password" 
@@ -168,14 +168,13 @@ const Signup = () => {
                                 message: "Your password must have at least 8 characters"
                             }
                         })}
-                        w="300px"
                         borderColor="gray.400"
                         data-testid='password'
                     />
                     <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
                 </FormControl>
                 {/* PASSWORD CONFIRMATION */}
-                <FormControl isInvalid={errors.password_confirm} mb="24px">
+                <FormControl isInvalid={errors.password_confirm} mb="24px" w="85%">
                     <FormLabel htmlFor="password_confirm" fontWeight="700" color="gray.800">Confirm Password</FormLabel>
                     <Input 
                         type="password" 
@@ -186,16 +185,15 @@ const Signup = () => {
                             validate: value => 
                                 value === password.current || "The passwords do not match"
                         })}
-                        w="300px"
                         borderColor="gray.400"
                         data-testid='password2'
                     />
                     <FormErrorMessage>{errors.password_confirm && errors.password_confirm.message}</FormErrorMessage>
                 </FormControl>
                 {/* STATE? */}
-                <FormControl mb="24px">
+                <FormControl mb="24px" w="85%">
                     <FormLabel fontWeight="700" color="gray.800">State</FormLabel>
-                    <Select w="300px" borderColor="gray.400" data-testid='state'>
+                    <Select borderColor="gray.400" data-testid='state'>
                         <option value="maryland">Maryland</option>
                     </Select>
                 </FormControl>
@@ -204,6 +202,8 @@ const Signup = () => {
                     <Flex>
                     <Checkbox 
                         name="parent_confirm"
+                        borderColor="gray.400"
+                        variantColor="green"
                         ref={register({
                             required: "You must be a parent or guardian to create an account. If you're a student, please ask your parent or guardian to create an account for you."
                         })}
@@ -215,12 +215,14 @@ const Signup = () => {
                             <IconButton 
                                 aria-label="not a parent information" 
                                 icon="info-outline" 
-                                ml="16px" 
+                                ml="5%" 
                                 fontSize="1.4rem"
+                                w="5%"
+                                minW="0"
                                 bg="none"
                                 color="gray.400"
                                 _hover={{ color: "gray.500" }} 
-                                _active={{ color: "gray.500"}} 
+                                _active={{ color: "gray.500"}}  
                             />
                         </PopoverTrigger>
                         <PopoverContent>
@@ -237,17 +239,18 @@ const Signup = () => {
                 <Button
                     type="submit"
                     color="white"
-                    bg="systemgreen"
+                    bg="green.600"
                     p="8px 16px"
                     borderRadius="999px"
                     fontSize="1.125rem"
                     my="16px"
                     data-testid='submit'
+                    _hover={{bg: "green.700"}}
                 >Submit</Button>
             </form>
             <Text fontSize=".875rem">Already have an account? <Link as={RouterLink} to="/login">Log in.</Link></Text>
             </Box>
-        </Box>
+        </>
     )
 }
 

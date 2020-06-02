@@ -11,19 +11,21 @@ import AuthPageImg from '../../assets/authPageImg.png';
 
 const AuthPage = ({ login }) => {
     return (
-        <Flex >
-            {login ? <Login  /> : <Signup />}
-            
+        <Flex h="100vh">
+            <Box w={["100%", "100%", "40%", "35%"]} mx="5%">
+                {login ? <Login  /> : <Signup />}
+            </Box>
+
             <Box
                 bg="myschoolblue"
-                w={["0", "0", "50%", "60%"]}
+                w={["0", "0", "50%", "55%"]}
             >
                 {!login ? 
                 <Text 
                     fontSize={["0", "0", "2rem", "2.25rem"]} 
                     color="white" 
                     width="40%" 
-                    position="absolute" 
+                    position="fixed" 
                     top="30%" 
                     left={["0", "0", "56%", "52%"]}
                     zIndex="100"
@@ -31,7 +33,7 @@ const AuthPage = ({ login }) => {
                     Finally, a portfolio builder that isn't a glorified spreadsheet
                 </Text> : null}
 
-                <Image src={AuthPageImg}  w={["0", "0", "50%", "60%"]} alt="blue background design with red and yellow circles" position="fixed"  bottom="0" right="0" />
+                <Image src={AuthPageImg}  w={["0", "0", "50%", "55%"]} alt="blue background design with red and yellow circles" position="fixed"  bottom="0" right="0" />
             </Box>
         </Flex>
     )
