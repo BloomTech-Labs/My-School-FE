@@ -327,9 +327,8 @@ const EditActivityModal = (props) => {
 
                     <Button
                       variant="solid"
-                      bg="gray.600"
-                      color="white"
                       border="none"
+                      variantColor='btnGray'
                     >
                       <label htmlFor="image" className="hover-label">
                         Upload A File

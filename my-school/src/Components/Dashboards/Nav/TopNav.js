@@ -20,7 +20,7 @@ export default function TopNav() {
 
   return (
     <nav className="top-nav">
-      <Box bg="lightblue" w="100%">
+      <Box bg="blue.900" w="100%">
         <Flex
           direction="row"
           align="center"
