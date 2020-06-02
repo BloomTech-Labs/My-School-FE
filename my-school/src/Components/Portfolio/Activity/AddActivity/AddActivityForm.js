@@ -43,13 +43,17 @@ const AddActivityForm = () => {
     // Gets subject value options from db
     const [subjects, setSubjects] = useState([]);
     useEffect(() => {
+        let isMounted = true;
         axios.get("https://my-school-v1.herokuapp.com/api/subjects")
         .then(res => {
-            setSubjects(res.data)
+            if (isMounted) setSubjects(res.data);
         })
         .catch(err => {
             console.log(err)
         })
+        return () => {
+            isMounted = false
+        }
     }, [])
 
     // Photo upload change handler
@@ -126,11 +130,10 @@ const AddActivityForm = () => {
 
     return (
         <Box mt="36px">
-            {console.log("add form")}
         { preview ? <NewActivityPreview preview={preview} /> 
         : 
         <FormContext {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)} >
+        <form onSubmit={handleSubmit(onSubmit)} data-testid='form-submit'>
         {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
         {/* <Flex wrap="wrap" m="32px auto"> */}
         <SimpleGrid columns={[1, 1, 1, 2]} spacing={["20px", "20px", "20px", "128px"]} mx={["8px", "20px", "32px", "100px"]}>
@@ -146,6 +149,7 @@ const AddActivityForm = () => {
                         borderColor="gray.400"
                         errorBorderColor="warningred"
                         focusBorderColor="myschoolblue"
+                        data-testid='name'
                     />
                     <FormErrorMessage color="warningred">
                         {errors.name && errors.name.message}
@@ -153,7 +157,8 @@ const AddActivityForm = () => {
                 </FormControl>
 
                 <FormControl my="20px" fontFamily="'Nunito'">
-                    <FormLabel htmlFor="subject" fontWeight="bold">Subject</FormLabel>
+
+                    <FormLabel htmlFor="subject" fontWeight="bold" data-testid='subjects-label'>Subject</FormLabel>
                     <Select 
                         id="subject" 
                         name="subject" 
@@ -161,6 +166,7 @@ const AddActivityForm = () => {
                         ref={register} 
                         borderColor="gray.400"
                         focusBorderColor="myschoolblue"
+                        data-testid='subjects'
                     >
                         {subjects.map(s => {
                             return (
@@ -179,6 +185,7 @@ const AddActivityForm = () => {
                         ref={register} 
                         borderColor="gray.400"
                         focusBorderColor="myschoolblue"
+                        data-testid='description'
                     />
                 </FormControl>
 
@@ -187,7 +194,7 @@ const AddActivityForm = () => {
                     <Text fontWeight="bold">Duration</Text>
                     <Flex>
                         <FormControl mt="8px" fontFamily="'Nunito'">
-                            <FormLabel htmlFor="hours" textTransform="uppercase" fontSize="0.625rem" color="gray.700">Hours</FormLabel>
+                            <FormLabel htmlFor="hours" textTransform="uppercase" fontSize="0.625rem" color="gray.700" data-testid='hours'>Hours</FormLabel>
                             <NumberInput mr="20px" min={0} defaultValue={0} >
                                 <NumberInputField 
                                     id="hours" 
@@ -208,7 +215,7 @@ const AddActivityForm = () => {
 
                         <FormControl mt="8px" fontFamily="'Nunito'">
                             <FormLabel htmlFor="minutes" textTransform="uppercase" fontSize="0.625rem" color="gray.700">Minutes</FormLabel>
-                            <NumberInput max={59} min={0} defaultValue={0}>
+                            <NumberInput max={59} min={0} defaultValue={0} data-testid='minutes>
                                 <NumberInputField 
                                     id="minutes" 
                                     name="minutes"   
@@ -226,7 +233,6 @@ const AddActivityForm = () => {
                         </FormControl>
                     </Flex>
                 </Box>
-
             </Box>
             <Box w={["100%, 100%, 100%, 50%"]}>
                         <Text fontSize="lg" fontWeight="700" pb="24px">Upload Activity Photo</Text>
@@ -246,8 +252,8 @@ const AddActivityForm = () => {
                             onChange={handleImageUpload}
                             fontFamily="'Nunito'"
                             style={{ display: "none", cursor: "pointer" }}
+                            data-testid='image'
                         />
-
                         <Box h="280px" border="1px" borderRadius="8px" borderColor="gray.400" p="24px" w="100%">
                             <Text fontSize="sm" color="gray.600" pb="22px">Attached photo:</Text>
                             {image.preview ? 
@@ -273,9 +279,10 @@ const AddActivityForm = () => {
                                 borderRadius="4px"
                                 fontSize="1.125rem"
                                 // isDisabled={!name ? true : false}
+                                data-testid='submit'
                             >Submit</Button>
                         </Flex>
-            </Box>
+              </Box>
             {/* </Flex> */}
             </SimpleGrid>
         </form>

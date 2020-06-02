@@ -15,7 +15,7 @@ import {
 import axios from 'axios';
 import validateCredentials from '../../utils/validateCredentials'
 
-const Login = () => {
+const Login = props => {
 
     const methods = useForm();
     const [invalid, setInvalid] = useState(false);
@@ -24,14 +24,13 @@ const Login = () => {
     const history = useHistory();
 
     const handleLogin = (data) => {
-        console.log(checked, 'inside the login function')
         const user = {
             ...data,
             rememberMe: checked
         }
+        
         axios.post(`https://my-school-v1.herokuapp.com/api/auth/login`, user)
         .then(res => {
-            console.log(res)
             const user = res.data.user;
             localStorage.setItem('auth', user.user_type_id);
             localStorage.setItem('userId' , user.id);
@@ -57,7 +56,7 @@ const Login = () => {
                 p='1rem 0rem'
             >MySchool</Text>
             <FormContext {...methods} >
-                <form onSubmit={handleSubmit(handleLogin)}> 
+                <form onSubmit={props.onSubmit || handleSubmit(handleLogin)} data-testid='form-submit' > 
                     <FormControl isInvalid={errors.username} p='1rem 0rem'>
                         <FormLabel htmlFor="username">Username</FormLabel>
                         <Input 
@@ -67,6 +66,7 @@ const Login = () => {
                             ref={register({ validate: validateCredentials })} 
                             defaultValue={''}
                             w='70%'
+                            data-testid='username'
                         />
                         <FormErrorMessage> 
                             {errors.username && errors.username.message}
@@ -81,6 +81,7 @@ const Login = () => {
                             ref={register({ validate: validateCredentials })} 
                             defaultValue={''}
                             w='70%'
+                            data-testid='password'
                         />
                         <FormErrorMessage> 
                             {errors.password && errors.password.message}
@@ -90,9 +91,9 @@ const Login = () => {
                     <Flex alignItems='baseline'>
                         <FormControl isInvalid={errors.password} p='1rem 8rem 0rem 0rem'>
                             <FormLabel htmlFor="remember"></FormLabel>
-                            <Checkbox size="md" variantColor="green" onChange={handleChecked}>Remember me</Checkbox>
+                            <Checkbox size="md" variantColor="green" onChange={handleChecked} data-testid='checked'>Remember me</Checkbox>
                         </FormControl>
-                        <Button variantColor="green" type='submit'>Login</Button>
+                        <Button variantColor="green" type='submit' data-testid='submit' >Login</Button>
                     </Flex>
                 </form>
             </FormContext>
