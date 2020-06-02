@@ -10,6 +10,7 @@ import {
   MenuItem,
   MenuGroup,
 } from "@chakra-ui/core";
+import NavName from './NavName'
 
 const NavMenu = ({ user }) => {
 
@@ -29,10 +30,11 @@ const NavMenu = ({ user }) => {
   return (
     <Menu>
 
-      <MenuButton as={Button} bg="lightblue" color="black">
-        <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
+      <MenuButton as={Button} bg='transparent' color="black" variantColor='btnBlue' >
+          <NavName user={user}/>
       </MenuButton>
 
+      <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
       <MenuList>
         <MenuItem>
           {/*  THIS IS THE USERS IMAGE AND NAME */}
