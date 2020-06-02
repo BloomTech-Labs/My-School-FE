@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
+import {pillColor} from '../../../utils/pillColor'
 // components
 import DeleteEntryButton from "./DeleteEntryButton";
 import EditActivityModal from "./EditActivityModal";
@@ -31,29 +32,6 @@ function ActivityCard(props) {
     history.push(`/activity/${id}`);
   };
 
-  const pillColor = (subject) => {
-    switch (subject) {
-      case "English":
-        return "red";
-      case "Math":
-        return "orange";
-      case "Science":
-        return "yellow";
-      case "Social Studies":
-        return "green";
-      case "Art":
-        return "teal";
-      case "Music":
-        return "blue";
-      case "Health":
-        return "cyan";
-      case "Physical Education":
-        return "purple";
-      default:
-        return "pink";
-    }
-  };
-
   return (
     <Grid
       templateColumns=".75fr .25fr 1fr .5fr .25fr .25fr"
@@ -63,16 +41,16 @@ function ActivityCard(props) {
     >
       <Box width="100%" fontSize='1.2rem' fontWeight='500'>
         <p className="link" onClick={() => pushToOverview(props.activity.id)}>
-          {props.activity.name.length < 35
+          {props.activity.name.length < 29
             ? props.activity.name
-            : `${props.activity.name.slice(0, 31)}...`}
+            : `${props.activity.name.slice(0, 25)}...`}
         </p>
       </Box>
       <Box>
         {hour}hrs {min}m
       </Box>
       <Box textAlign="center">
-        <Tag variantColor={pillColor(props.activity.subject)} rounded="full">
+        <Tag bg={pillColor(props.activity.subject)} color={pillColor(props.activity.subject).split('.')[0]+'.800'} rounded="full">
           {props.activity.subject}
         </Tag>
       </Box>

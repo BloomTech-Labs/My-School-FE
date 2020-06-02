@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ReactGA from 'react-ga';
 import {
+    SimpleGrid,
     Box,
     Flex,
     Text,
+    Image,
     FormErrorMessage,
     FormLabel,
     FormControl,
@@ -24,11 +27,15 @@ import NewActivityPreview from './NewActivityPreview';
 import validateTitle from '../../../../utils/validateTitle'
 
 const AddActivityForm = () => {
+    React.useEffect(() => {
+        ReactGA.event({ category: "App", action: "Adding activity" });
+    }, [])
+
     const methods = useForm();
     const { handleSubmit, errors, register, formState } = methods;
     const toast = useToast();
 
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState({ preview: '', raw: ''});
 
     // Preview state...will get passed to Preview component
     const [preview, setPreview] = useState();
@@ -51,8 +58,14 @@ const AddActivityForm = () => {
 
     // Photo upload change handler
     const handleImageUpload = e => {
-        setImage(e.target.files[0])
+        if (e.target.files.length) {
+            setImage({
+                preview: URL.createObjectURL(e.target.files[0]),
+                raw: e.target.files[0]
+            })
+        }
     }
+    console.log({image})
 
     // Submit handler: 2 different endpoints based on whether or not user wants to include a photo
     function onSubmit(data) {
@@ -66,7 +79,7 @@ const AddActivityForm = () => {
 
         if (image) {
             const formData = new FormData();
-            formData.append('photo', image, image.name);
+            formData.append('photo', image.raw, image.raw.name);
             formData.set('student_id', 3); //hardcoded...change later
             formData.set('name', data.name);
             formData.set('description', data.description || null);
@@ -116,23 +129,24 @@ const AddActivityForm = () => {
 
 
     return (
-        <Box pb={32} px={20}>
+        <Box mt="36px">
         { preview ? <NewActivityPreview preview={preview} /> 
         : 
         <FormContext {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} data-testid='form-submit'>
         {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
-        <Flex wrap="wrap" justify="space-around">
-            <Box w={["100%, 100%, 100%, 46%"]} >
-                <Text fontSize="lg" fontWeight="500" pt="16px" pb="36px">Add an Activity</Text>
+        {/* <Flex wrap="wrap" m="32px auto"> */}
+        <SimpleGrid columns={[1, 1, 1, 2]} spacing={["20px", "20px", "20px", "128px"]} mx={["8px", "20px", "32px", "100px"]}>
+            <Box w={["100%, 100%, 100%, 50%"]} >
                 <FormControl isInvalid={errors.name} mb="20px" fontFamily="'Nunito'">
-                    <FormLabel htmlFor="name">Title<Box as="span" color="warningred" m="4px">*</Box></FormLabel>
+                    <FormLabel htmlFor="name" fontWeight="bold">Title<Box as="span" color="warningred" m="4px">*</Box></FormLabel>
                     <Input 
                         type="text" 
                         id="name"
                         name="name" 
-                        placeholder="What's the name of the activity you completed?" 
+                        placeholder="What would you like to name your activity?" 
                         ref={register({ validate: validateTitle })}
+                        borderColor="gray.400"
                         errorBorderColor="warningred"
                         focusBorderColor="myschoolblue"
                         data-testid='name'
@@ -143,12 +157,14 @@ const AddActivityForm = () => {
                 </FormControl>
 
                 <FormControl my="20px" fontFamily="'Nunito'">
-                    <FormLabel htmlFor="subject" data-testid='subjects-label'>Subject</FormLabel>
+
+                    <FormLabel htmlFor="subject" fontWeight="bold" data-testid='subjects-label'>Subject</FormLabel>
                     <Select 
                         id="subject" 
                         name="subject" 
                         placeholder="Select..." 
                         ref={register} 
+                        borderColor="gray.400"
                         focusBorderColor="myschoolblue"
                         data-testid='subjects'
                     >
@@ -161,29 +177,31 @@ const AddActivityForm = () => {
                 </FormControl>
 
                 <FormControl my="20px" fontFamily="'Nunito'">
-                    <FormLabel htmlFor="description">Description</FormLabel>
+                    <FormLabel htmlFor="description" fontWeight="bold">Description</FormLabel>
                     <Textarea 
                         id="description" 
                         name="description" 
                         placeholder="Tell us all about what you did in this activity!" 
                         ref={register} 
+                        borderColor="gray.400"
                         focusBorderColor="myschoolblue"
                         data-testid='description'
                     />
                 </FormControl>
 
                 <Text fontWeight="bold">How long did it take to complete this activity?</Text>
-                <Box borderWidth="1px" borderColor="#D4D4D4" rounded="4px" p="32px" m="8px 0 16px">
+                <Box borderWidth="1px" borderColor="gray.400" rounded="4px" py="32px" pl="32px" m="8px 0 16px">
                     <Text fontWeight="bold">Duration</Text>
                     <Flex>
                         <FormControl mt="8px" fontFamily="'Nunito'">
-                            <FormLabel htmlFor="hours">Hours</FormLabel>
-                            <NumberInput mr="20px" min={0} defaultValue={0} data-testid='hours' >
+                            <FormLabel htmlFor="hours" textTransform="uppercase" fontSize="0.625rem" color="gray.700" data-testid='hours'>Hours</FormLabel>
+                            <NumberInput mr="20px" min={0} defaultValue={0} >
                                 <NumberInputField 
                                     id="hours" 
                                     name="hours"  
-                                    w="120px"  
+                                    w="72px"  
                                     mr="0px" 
+                                    borderColor="gray.400"
                                     errorBorderColor="warningred" 
                                     focusBorderColor="myschoolblue" 
                                     ref={register}
@@ -196,12 +214,13 @@ const AddActivityForm = () => {
                         </FormControl>
 
                         <FormControl mt="8px" fontFamily="'Nunito'">
-                            <FormLabel htmlFor="minutes">Minutes</FormLabel>
-                            <NumberInput max={59} min={0} defaultValue={0} data-testid='minutes'>
+                            <FormLabel htmlFor="minutes" textTransform="uppercase" fontSize="0.625rem" color="gray.700">Minutes</FormLabel>
+                            <NumberInput max={59} min={0} defaultValue={0} data-testid='minutes>
                                 <NumberInputField 
                                     id="minutes" 
                                     name="minutes"   
-                                    w="120px"  
+                                    w="72px"  
+                                    borderColor="gray.400"
                                     errorBorderColor="warningred" 
                                     focusBorderColor="myschoolblue" 
                                     ref={register}
@@ -214,38 +233,58 @@ const AddActivityForm = () => {
                         </FormControl>
                     </Flex>
                 </Box>
-
-                <Text fontWeight="bold" mt="20px">Confirm Submission Date</Text>
-                <Flex align="flex-end" justify="space-between"  flexWrap="wrap" my="8px">
-                    <DateSelector onSubmit/>
-                    <Button 
-                        type="submit" 
-                        w="120px" 
-                        mt="16px"
-                        isLoading={formState.isSubmitting}
-                        color="white"
-                        bg="myschoolblue"
-                        _hover={{ bg: "#28456F" }}
-                        rounded="14px"
-                        // isDisabled={!name ? true : false}
-                        data-testid='submit '
-                    >Submit</Button>
-                </Flex>
-
             </Box>
-            <Box w="492px">
-                    <Text fontSize="lg" fontWeight="500" pt="16px" pb="36px">Upload an Activity Photo</Text>
-                    <Input 
-                        type="file" 
-                        name="image" 
-                        id="image"
-                        placeholder="Upload an image"
-                        onChange={handleImageUpload}
-                        fontFamily="'Nunito'"
-                        data-testid='image'
-                    />
-            </Box>
-            </Flex>
+            <Box w={["100%, 100%, 100%, 50%"]}>
+                        <Text fontSize="lg" fontWeight="700" pb="24px">Upload Activity Photo</Text>
+                        <FormLabel htmlFor="image" style={{ cursor: "pointer"}}>
+                            <Flex align="center" mb="12px">
+                                <Box bg="gray.600" p="8px 16px" borderRadius="4px" color="white" fontSize="lg" mr="8px">Choose File</Box>
+                                <Text fontSize="lg" color="gray.700">
+                                    {image.raw ? `${image.raw.name}` : `No file selected`}
+                                </Text>
+                            </Flex>
+                        </FormLabel>
+                        <Input 
+                            type="file" 
+                            name="image" 
+                            id="image"
+                            placeholder="Upload an image"
+                            onChange={handleImageUpload}
+                            fontFamily="'Nunito'"
+                            style={{ display: "none", cursor: "pointer" }}
+                            data-testid='image'
+                        />
+                        <Box h="280px" border="1px" borderRadius="8px" borderColor="gray.400" p="24px" w="100%">
+                            <Text fontSize="sm" color="gray.600" pb="22px">Attached photo:</Text>
+                            {image.preview ? 
+                                <Image 
+                                src={image.preview} 
+                                alt="preview of image selected to upload" 
+                                maxHeight="200px" 
+                                pb="22px"/> 
+                            : null}
+                        </Box>
+
+                        <Text fontWeight="bold" mt="20px">Confirm Submission Date</Text>
+                        <Flex align="flex-end" justify="space-between"  flexWrap="wrap" my="8px">
+                            <DateSelector onSubmit/>
+                            <Button 
+                                type="submit" 
+                                p="8px 16px"
+                                mt="16px"
+                                isLoading={formState.isSubmitting}
+                                color="white"
+                                bg="green.500"
+                                _hover={{ bg: "green.600" }}
+                                borderRadius="4px"
+                                fontSize="1.125rem"
+                                // isDisabled={!name ? true : false}
+                                data-testid='submit'
+                            >Submit</Button>
+                        </Flex>
+              </Box>
+            {/* </Flex> */}
+            </SimpleGrid>
         </form>
         </FormContext>
         }
