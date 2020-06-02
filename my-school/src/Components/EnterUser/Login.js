@@ -48,7 +48,7 @@ const Login = props => {
         setChecked(!checked)
     }
     return (
-        <Flex flexDirection='column' w='33.33%' h='100vh' p='4rem'>
+        <Flex flexDirection='column' w={["100%", "100%", "50%", "40%"]} h='100vh' p='4rem'>
             <Text
                 fontSize="1.5rem"
                 fontWeight="700"

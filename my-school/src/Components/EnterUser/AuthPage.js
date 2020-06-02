@@ -1,28 +1,24 @@
 import React from 'react';
 import {
     Flex,
-    Box
+    Box,
+    Image
 } from '@chakra-ui/core';
 import Login from './Login';
 import Signup from './Signup';
+import AuthPageImg from '../../assets/authPageImg.png';
 
 const AuthPage = ({ login }) => {
     return (
-        <Flex>
+        <Flex >
             {login ? <Login  /> : <Signup />}
             
             <Box
                 bg="myschoolblue"
-                w={2/3}
+                w={["0", "0", "50%", "60%"]}
                 h="100vh"
             >
-                <svg height="100vh" width="100%" position="absolute" margin="0">
-                    <circle cx="50vw" cy="130vh" r="359" fill="#FFBB00" />
-                </svg>
-{/* 
-                <svg height="100vh" width="100%" position="absolute" margin="0" zIndex="10">
-                    <circle cx="10vw" cy="1vh" r="435" fill="#FB6542"/>
-                </svg> */}
+                <Image src={AuthPageImg} h="100vh" w="100%" alt="blue background design with red and yellow circles" />
             </Box>
         </Flex>
     )

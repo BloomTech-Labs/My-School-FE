@@ -74,7 +74,7 @@ const Signup = () => {
     }
 
     return (
-        <Box w={1/3}>
+        <Box w={["100%", "100%", "50%", "40%"]}>
             <Text
                 fontSize="1.5rem"
                 fontWeight="700"
