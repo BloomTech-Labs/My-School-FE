@@ -215,7 +215,7 @@ const AddActivityForm = () => {
 
                         <FormControl mt="8px" fontFamily="'Nunito'">
                             <FormLabel htmlFor="minutes" textTransform="uppercase" fontSize="0.625rem" color="gray.700">Minutes</FormLabel>
-                            <NumberInput max={59} min={0} defaultValue={0} data-testid='minutes>
+                            <NumberInput max={59} min={0} defaultValue={0} data-testid='minutes'>
                                 <NumberInputField 
                                     id="minutes" 
                                     name="minutes"   
