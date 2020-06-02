@@ -74,7 +74,7 @@ const Signup = () => {
     }
 
     return (
-        <Box w={["100%", "100%", "50%", "40%"]}>
+        <Box w={["100%", "100%", "50%", "40%"]} h="100vh">
             <Text
                 fontSize="1.5rem"
                 fontWeight="700"
@@ -114,7 +114,16 @@ const Signup = () => {
                         {/* NEEDS STYLING! */}
                         <Popover>
                             <PopoverTrigger>
-                                <IconButton aria-label="family name information" icon="info-outline" color="#9BAFCB" ml="29px"/>
+                                <IconButton 
+                                    aria-label="family name information" 
+                                    icon="info-outline"
+                                    ml="29px" 
+                                    fontSize="1.4rem"
+                                    bg="none"
+                                    color="gray.400"
+                                    _hover={{ color: "gray.500" }} 
+                                    _active={{ color: "gray.500"}} 
+                                />
                             </PopoverTrigger>
                             <PopoverContent>
                                 <PopoverArrow />
@@ -197,6 +206,7 @@ const Signup = () => {
                 </FormControl>
                 {/* CHECKBOX */}
                 <FormControl isInvalid={errors.parent_confirm}>
+                    <Flex>
                     <Checkbox 
                         name="parent_confirm"
                         ref={register({
@@ -207,7 +217,16 @@ const Signup = () => {
                     {/* NEEDS STYLING! */}
                     <Popover>
                         <PopoverTrigger>
-                            <IconButton aria-label="not a parent information" icon="info-outline" color="#9BAFCB" ml="19px"/>
+                            <IconButton 
+                                aria-label="not a parent information" 
+                                icon="info-outline" 
+                                ml="16px" 
+                                fontSize="1.4rem"
+                                bg="none"
+                                color="gray.400"
+                                _hover={{ color: "gray.500" }} 
+                                _active={{ color: "gray.500"}} 
+                            />
                         </PopoverTrigger>
                         <PopoverContent>
                             <PopoverArrow />
@@ -218,6 +237,7 @@ const Signup = () => {
                         </PopoverContent>
                     </Popover>
                     <FormErrorMessage>{errors.parent_confirm && errors.parent_confirm.message}</FormErrorMessage>
+                    </Flex>
                 </FormControl>
                 <Button
                     type="submit"
