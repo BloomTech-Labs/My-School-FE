@@ -35,7 +35,8 @@ const AddActivityForm = () => {
     const { handleSubmit, errors, register, formState } = methods;
     const toast = useToast();
 
-    const [image, setImage] = useState({ preview: '', raw: ''});
+    const [image, setImage] = useState('');
+    const [thumbnail, setThumbnail] = useState('');
 
     // Preview state...will get passed to Preview component
     const [preview, setPreview] = useState();
@@ -58,19 +59,14 @@ const AddActivityForm = () => {
 
     // Photo upload change handler
     const handleImageUpload = e => {
-        if (e.target.files.length) {
-            setImage({
-                preview: URL.createObjectURL(e.target.files[0]),
-                raw: e.target.files[0]
-            })
-        }
+        setImage(e.target.files[0])
+        setThumbnail(URL.createObjectURL(e.target.files[0]))
     }
-    console.log({image})
 
     // Submit handler: 2 different endpoints based on whether or not user wants to include a photo
     function onSubmit(data) {
         // converts user's duration input into minutes
-        const duration = Number(data.hours) * 60 + Number(data.minutes) || null;
+        const duration = Number(data.hours) * 60 + Number(data.minutes) || 0;
         // adds leading zero to day & month values to ensure completion_date is correct format
         const monthLeadingZero = data.month < 10 ? "0" + String(data.month) : String(data.month);
         const dayLeadingZero = data.day < 10 ? "0" + String(data.day) : String(data.day);
@@ -79,14 +75,13 @@ const AddActivityForm = () => {
 
         if (image) {
             const formData = new FormData();
-            formData.append('photo', image.raw, image.raw.name);
+            formData.append('photo', image, image.name);
             formData.set('student_id', 3); //hardcoded...change later
             formData.set('name', data.name);
             formData.set('description', data.description || null);
             formData.set('duration', duration);
             formData.set('subject_id', parseInt(data.subject) || 9);
             formData.set('completion_date', completionDate);
-            formData.set('activity_type_id', 4)
 
             axios.post("https://my-school-v1.herokuapp.com/api/activities/attachimg", formData)
             .then(res => {
@@ -256,9 +251,9 @@ const AddActivityForm = () => {
                         />
                         <Box h="280px" border="1px" borderRadius="8px" borderColor="gray.400" p="24px" w="100%">
                             <Text fontSize="sm" color="gray.600" pb="22px">Attached photo:</Text>
-                            {image.preview ? 
+                            {thumbnail ? 
                                 <Image 
-                                src={image.preview} 
+                                src={thumbnail} 
                                 alt="preview of image selected to upload" 
                                 maxHeight="200px" 
                                 pb="22px"/> 
