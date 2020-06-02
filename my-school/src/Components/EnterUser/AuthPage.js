@@ -17,7 +17,6 @@ const AuthPage = ({ login }) => {
             <Box
                 bg="myschoolblue"
                 w={["0", "0", "50%", "60%"]}
-                h="100vh"
             >
                 {!login ? 
                 <Text 
@@ -27,11 +26,12 @@ const AuthPage = ({ login }) => {
                     position="absolute" 
                     top="30%" 
                     left={["0", "0", "56%", "52%"]}
+                    zIndex="100"
                 >
                     Finally, a portfolio builder that isn't a glorified spreadsheet
                 </Text> : null}
 
-                <Image src={AuthPageImg} h="100vh" w="100%" alt="blue background design with red and yellow circles" />
+                <Image src={AuthPageImg}  w={["0", "0", "50%", "60%"]} alt="blue background design with red and yellow circles" position="fixed"  bottom="0" right="0" />
             </Box>
         </Flex>
     )

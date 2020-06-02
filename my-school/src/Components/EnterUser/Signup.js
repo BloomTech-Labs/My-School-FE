@@ -33,15 +33,12 @@ const Signup = () => {
 
     // Submit handler
     function onSubmit(data) {
-        console.log("Hello, sign up form has been submitted", data)
-
         const newFam = {
             name: data.family
         };
         // Creates new family, so we can grab family_id when creating new parent admin user
         axios.post("https://my-school-v1.herokuapp.com/api/families", newFam)
         .then(res => {
-            console.log("Family created", res.data)
             const famId = res.data.id;
 
             const newUser = {
@@ -54,8 +51,6 @@ const Signup = () => {
             // Creates new parent admin user account
             axios.post("https://my-school-v1.herokuapp.com/api/auth/registration", newUser)
             .then(res => {
-                console.log("Success! User created", res.data)
-
                 const user = res.data.user;
                 localStorage.setItem('auth', user.user_type_id);
                 localStorage.setItem('userId' , user.id);
@@ -81,7 +76,7 @@ const Signup = () => {
                 color="myschoolblue"
                 m="37px 52px"
             >MySchool</Text>
-            <Box m="76px 65px">
+            <Box m="36px 65px 0">
             <form onSubmit={handleSubmit(onSubmit)} data-testid='form-submit'>
                 <Text
                     fontSize="1.125rem"
@@ -92,7 +87,7 @@ const Signup = () => {
                 >Sign Up</Text>
 
                 {/* FAMILY NAME */}
-                <FormControl isInvalid={errors.family} mb="32px">
+                <FormControl isInvalid={errors.family} mb="24px">
                     <FormLabel htmlFor="family" fontWeight="700" color="gray.800">Family name</FormLabel>
                     <Flex flexDirection="row" align="center">
                         <Input 
@@ -138,7 +133,7 @@ const Signup = () => {
                 </FormControl>
 
                 {/* EMAIL (will be username; can possibly be updated later) */}
-                <FormControl isInvalid={errors.email} mb="32px">
+                <FormControl isInvalid={errors.email} mb="24px">
                     <FormLabel htmlFor="email" fontWeight="700" color="gray.800">Email</FormLabel>
                     <Input 
                         id="email"
@@ -159,7 +154,7 @@ const Signup = () => {
                     <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
                 </FormControl>
                 {/* PASSWORD */}
-                <FormControl isInvalid={errors.password} mb="32px">
+                <FormControl isInvalid={errors.password} mb="24px">
                     <FormLabel htmlFor="password" fontWeight="700" color="gray.800">Password</FormLabel>
                     <Input 
                         type="password" 
@@ -180,7 +175,7 @@ const Signup = () => {
                     <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
                 </FormControl>
                 {/* PASSWORD CONFIRMATION */}
-                <FormControl isInvalid={errors.password_confirm} mb="32px">
+                <FormControl isInvalid={errors.password_confirm} mb="24px">
                     <FormLabel htmlFor="password_confirm" fontWeight="700" color="gray.800">Confirm Password</FormLabel>
                     <Input 
                         type="password" 
@@ -198,7 +193,7 @@ const Signup = () => {
                     <FormErrorMessage>{errors.password_confirm && errors.password_confirm.message}</FormErrorMessage>
                 </FormControl>
                 {/* STATE? */}
-                <FormControl mb="32px">
+                <FormControl mb="24px">
                     <FormLabel fontWeight="700" color="gray.800">State</FormLabel>
                     <Select w="300px" borderColor="gray.400" data-testid='state'>
                         <option value="maryland">Maryland</option>
@@ -246,7 +241,7 @@ const Signup = () => {
                     p="8px 16px"
                     borderRadius="999px"
                     fontSize="1.125rem"
-                    my="24px"
+                    my="16px"
                     data-testid='submit'
                 >Submit</Button>
             </form>
