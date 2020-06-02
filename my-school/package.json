@@ -50,7 +50,10 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react": "^9.5.0"
+    "@testing-library/react": "^9.5.0",
+    "mutation-observer": "^1.0.3",
+    "mutationobserver-shim": "^0.3.5",
+    "react-select-event": "^4.1.4"
   },
   "jest": {
     "collectCoverageFrom": [

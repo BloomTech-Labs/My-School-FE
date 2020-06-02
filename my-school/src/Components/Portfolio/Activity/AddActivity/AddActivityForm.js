@@ -36,13 +36,17 @@ const AddActivityForm = () => {
     // Gets subject value options from db
     const [subjects, setSubjects] = useState([]);
     useEffect(() => {
+        let isMounted = true;
         axios.get("https://my-school-v1.herokuapp.com/api/subjects")
         .then(res => {
-            setSubjects(res.data)
+            if (isMounted) setSubjects(res.data);
         })
         .catch(err => {
             console.log(err)
         })
+        return () => {
+            isMounted = false
+        }
     }, [])
 
     // Photo upload change handler
@@ -113,11 +117,10 @@ const AddActivityForm = () => {
 
     return (
         <Box pb={32} px={20}>
-            {console.log("add form")}
         { preview ? <NewActivityPreview preview={preview} /> 
         : 
         <FormContext {...methods}>
-        <form onSubmit={handleSubmit(onSubmit)} >
+        <form onSubmit={handleSubmit(onSubmit)} data-testid='form-submit'>
         {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
         <Flex wrap="wrap" justify="space-around">
             <Box w={["100%, 100%, 100%, 46%"]} >
@@ -132,6 +135,7 @@ const AddActivityForm = () => {
                         ref={register({ validate: validateTitle })}
                         errorBorderColor="warningred"
                         focusBorderColor="myschoolblue"
+                        data-testid='name'
                     />
                     <FormErrorMessage color="warningred">
                         {errors.name && errors.name.message}
@@ -139,13 +143,14 @@ const AddActivityForm = () => {
                 </FormControl>
 
                 <FormControl my="20px" fontFamily="'Nunito'">
-                    <FormLabel htmlFor="subject">Subject</FormLabel>
+                    <FormLabel htmlFor="subject" data-testid='subjects-label'>Subject</FormLabel>
                     <Select 
                         id="subject" 
                         name="subject" 
                         placeholder="Select..." 
                         ref={register} 
                         focusBorderColor="myschoolblue"
+                        data-testid='subjects'
                     >
                         {subjects.map(s => {
                             return (
@@ -163,6 +168,7 @@ const AddActivityForm = () => {
                         placeholder="Tell us all about what you did in this activity!" 
                         ref={register} 
                         focusBorderColor="myschoolblue"
+                        data-testid='description'
                     />
                 </FormControl>
 
@@ -172,7 +178,7 @@ const AddActivityForm = () => {
                     <Flex>
                         <FormControl mt="8px" fontFamily="'Nunito'">
                             <FormLabel htmlFor="hours">Hours</FormLabel>
-                            <NumberInput mr="20px" min={0} defaultValue={0} >
+                            <NumberInput mr="20px" min={0} defaultValue={0} data-testid='hours' >
                                 <NumberInputField 
                                     id="hours" 
                                     name="hours"  
@@ -191,7 +197,7 @@ const AddActivityForm = () => {
 
                         <FormControl mt="8px" fontFamily="'Nunito'">
                             <FormLabel htmlFor="minutes">Minutes</FormLabel>
-                            <NumberInput max={59} min={0} defaultValue={0}>
+                            <NumberInput max={59} min={0} defaultValue={0} data-testid='minutes'>
                                 <NumberInputField 
                                     id="minutes" 
                                     name="minutes"   
@@ -222,6 +228,7 @@ const AddActivityForm = () => {
                         _hover={{ bg: "#28456F" }}
                         rounded="14px"
                         // isDisabled={!name ? true : false}
+                        data-testid='submit '
                     >Submit</Button>
                 </Flex>
 
@@ -235,6 +242,7 @@ const AddActivityForm = () => {
                         placeholder="Upload an image"
                         onChange={handleImageUpload}
                         fontFamily="'Nunito'"
+                        data-testid='image'
                     />
             </Box>
             </Flex>

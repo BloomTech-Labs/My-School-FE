@@ -82,7 +82,7 @@ const Signup = () => {
                 m="37px 52px"
             >MySchool</Text>
             <Box m="76px 65px">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} data-testid='form-submit'>
                 <Text
                     fontSize="1.125rem"
                     fontWeight="700"
@@ -109,6 +109,7 @@ const Signup = () => {
                             })}
                             w="300px"
                             borderColor="gray.400"
+                            data-testid='family'
                         />
                         {/* NEEDS STYLING! */}
                         <Popover>
@@ -144,6 +145,7 @@ const Signup = () => {
                         })}
                         w="300px"
                         borderColor="gray.400"
+                        data-testid='email'
                     />
                     <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
                 </FormControl>
@@ -164,6 +166,7 @@ const Signup = () => {
                         })}
                         w="300px"
                         borderColor="gray.400"
+                        data-testid='password'
                     />
                     <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
                 </FormControl>
@@ -181,13 +184,14 @@ const Signup = () => {
                         })}
                         w="300px"
                         borderColor="gray.400"
+                        data-testid='password2'
                     />
                     <FormErrorMessage>{errors.password_confirm && errors.password_confirm.message}</FormErrorMessage>
                 </FormControl>
                 {/* STATE? */}
                 <FormControl mb="32px">
                     <FormLabel fontWeight="700" color="gray.800">State</FormLabel>
-                    <Select w="300px" borderColor="gray.400">
+                    <Select w="300px" borderColor="gray.400" data-testid='state'>
                         <option value="maryland">Maryland</option>
                     </Select>
                 </FormControl>
@@ -198,6 +202,7 @@ const Signup = () => {
                         ref={register({
                             required: "You must be a parent or guardian to create an account. If you're a student, please ask your parent or guardian to create an account for you."
                         })}
+                        data-testid='checked'
                     >I am the parent of a child being homeschooled.</Checkbox>
                     {/* NEEDS STYLING! */}
                     <Popover>
@@ -222,6 +227,7 @@ const Signup = () => {
                     borderRadius="999px"
                     fontSize="1.125rem"
                     my="24px"
+                    data-testid='submit'
                 >Submit</Button>
             </form>
             <Text fontSize=".875rem">Already have an account? <Link as={RouterLink} to="/login">Log in.</Link></Text>

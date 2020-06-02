@@ -9,7 +9,7 @@ import Signup from './Signup';
 const AuthPage = ({ login }) => {
     return (
         <Flex>
-            {login ? <Login /> : <Signup />}
+            {login ? <Login  /> : <Signup />}
             
             <Box
                 bg="myschoolblue"
