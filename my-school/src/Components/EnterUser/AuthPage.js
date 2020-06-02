@@ -27,7 +27,9 @@ const AuthPage = ({ login }) => {
                         color="gray.800"
                         textAlign="center"
                         mb="32px"
-                    >{login ? `${formTitle.login}` : `${formTitle.signup}`}</Text>
+                    >
+                        {login ? formTitle.login : formTitle.signup}
+                    </Text>
                     {login ? <Login  /> : <Signup />}
                 </Box>
                 {/* {login ? <Login  /> : <Signup />} */}

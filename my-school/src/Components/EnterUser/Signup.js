@@ -16,6 +16,7 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
+    PopoverHeader,
     PopoverBody,
     PopoverArrow,
     PopoverCloseButton
@@ -106,9 +107,19 @@ const Signup = () => {
                                     _active={{ color: "gray.500"}} 
                                 />
                             </PopoverTrigger>
-                            <PopoverContent>
+                            <PopoverContent
+                                zIndex="10" 
+                                bg="gray.100" 
+                                color="gray.700" 
+                                borderColor="gray.400" 
+                                fontSize="sm" 
+                                borderRadius="8px"
+                            >
                                 <PopoverArrow />
                                 <PopoverCloseButton />
+                                <PopoverHeader fontWeight="bold">
+                                    About Family Name
+                                </PopoverHeader>
                                 <PopoverBody>
                                     This will be used to identify members of your family, so we can associate their accounts with yours. As an admin, you will be able to create accounts for multiple students &amp; manage them from your account. 
                                 </PopoverBody>
@@ -212,9 +223,16 @@ const Signup = () => {
                                 _active={{ color: "gray.500"}}  
                             />
                         </PopoverTrigger>
-                        <PopoverContent>
+                        <PopoverContent 
+                            zIndex="10" 
+                            bg="gray.100" 
+                            color="gray.700" 
+                            borderColor="gray.400" 
+                            fontSize="sm" 
+                            borderRadius="8px"
+                        >
                             <PopoverArrow />
-                            <PopoverCloseButton />
+                            <PopoverCloseButton color="gray.700"/>
                             <PopoverBody>
                                 This sign up form creates a parent admin account. Student accounts can only be created by a parent admin from their Account Setting menu.
                             </PopoverBody>
