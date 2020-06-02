@@ -4,7 +4,6 @@ import { Link as RouterLink, useHistory } from 'react-router-dom';
 import {
     Flex,
     Text,
-    Box,
     FormErrorMessage,
     FormLabel,
     FormControl,
@@ -19,11 +18,9 @@ import {
     PopoverContent,
     PopoverBody,
     PopoverArrow,
-    PopoverCloseButton,
-    Image
+    PopoverCloseButton
 } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
-import Logo from '../../assets/logo_white_bg.png';
 
 const Signup = () => {
     const history = useHistory();
@@ -72,17 +69,7 @@ const Signup = () => {
 
     return (
         <>
-            <Image src={Logo} alt="MySchool logo" mt="32px" />
-            <Box m="36px 0">
             <form onSubmit={handleSubmit(onSubmit)} data-testid='form-submit'>
-                <Text
-                    fontSize="1.125rem"
-                    fontWeight="700"
-                    color="gray.800"
-                    textAlign="center"
-                    mb="32px"
-                >Sign Up</Text>
-
                 {/* FAMILY NAME */}
                 <FormControl isInvalid={errors.family} mb="24px" >
                     <FormLabel htmlFor="family" fontWeight="700" color="gray.800">Family name</FormLabel>
@@ -249,7 +236,6 @@ const Signup = () => {
                 >Submit</Button>
             </form>
             <Text fontSize=".875rem">Already have an account? <Link as={RouterLink} to="/login">Log in.</Link></Text>
-            </Box>
         </>
     )
 }

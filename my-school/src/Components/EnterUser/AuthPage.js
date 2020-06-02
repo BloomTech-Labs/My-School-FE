@@ -8,12 +8,29 @@ import {
 import Login from './Login';
 import Signup from './Signup';
 import AuthPageImg from '../../assets/authPageImg.png';
+import Logo from '../../assets/logo_white_bg.png';
 
 const AuthPage = ({ login }) => {
+    const formTitle = {
+        login: "Log In",
+        signup: "Sign Up"
+    };
+
     return (
         <Flex h="100vh">
             <Box w={["100%", "100%", "40%", "35%"]} mx="5%">
-                {login ? <Login  /> : <Signup />}
+                <Image src={Logo} alt="MySchool logo" mt="32px" />
+                <Box m="36px 0">
+                    <Text
+                        fontSize="1.125rem"
+                        fontWeight="700"
+                        color="gray.800"
+                        textAlign="center"
+                        mb="32px"
+                    >{login ? `${formTitle.login}` : `${formTitle.signup}`}</Text>
+                    {login ? <Login  /> : <Signup />}
+                </Box>
+                {/* {login ? <Login  /> : <Signup />} */}
             </Box>
 
             <Box

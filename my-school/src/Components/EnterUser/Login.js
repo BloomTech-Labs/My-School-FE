@@ -9,14 +9,11 @@ import {
     FormErrorMessage,
     Checkbox,
     Flex,
-    Box,
     Text,
-    Image,
     Link
 } from '@chakra-ui/core';
 import axios from 'axios';
 import validateCredentials from '../../utils/validateCredentials';
-import Logo from '../../assets/logo_white_bg.png';
 
 const Login = props => {
 
@@ -51,16 +48,7 @@ const Login = props => {
     }
     return (
         <>
-            <Image src={Logo} alt="MySchool logo" mt="32px" />
-            <Box m="36px 0">
             <form onSubmit={props.onSubmit || handleSubmit(handleLogin)} data-testid='form-submit' >
-                <Text
-                    fontSize="1.125rem"
-                    fontWeight="700"
-                    color="gray.800"
-                    textAlign="center"
-                    mb="32px"
-                >Log In</Text>
                 {/* USERNAME/EMAIL */}
                 <FormControl isInvalid={errors.username} w="85%" mb="24px">
                     <FormLabel htmlFor="username" fontWeight="700" color="gray.800">Username</FormLabel>
@@ -118,10 +106,19 @@ const Login = props => {
                             Remember me
                         </Checkbox>
                     </FormControl>
-                    <Button variantColor="green" type='submit' data-testid='submit' >Login</Button>
+                    <Button 
+                        type='submit' 
+                        data-testid='submit' 
+                        color="white"
+                        bg="green.600"
+                        p="8px 16px"
+                        borderRadius="4px"
+                        fontSize="1.125rem"
+                        _hover={{bg: "green.700"}}
+                        my="16px"
+                    >Login</Button>
                 </Flex>
             </form>
-            </Box>
             <Text fontSize=".875rem">New to MySchool? <Link as={RouterLink} to="/signup">Create an account.</Link></Text>
         </>
     )
