@@ -2,7 +2,8 @@ import React from 'react';
 import {
     Flex,
     Box,
-    Image
+    Image,
+    Text
 } from '@chakra-ui/core';
 import Login from './Login';
 import Signup from './Signup';
@@ -18,6 +19,18 @@ const AuthPage = ({ login }) => {
                 w={["0", "0", "50%", "60%"]}
                 h="100vh"
             >
+                {!login ? 
+                <Text 
+                    fontSize={["0", "0", "2rem", "2.25rem"]} 
+                    color="white" 
+                    width="40%" 
+                    position="absolute" 
+                    top="30%" 
+                    left={["0", "0", "56%", "52%"]}
+                >
+                    Finally, a portfolio builder that isn't a glorified spreadsheet
+                </Text> : null}
+
                 <Image src={AuthPageImg} h="100vh" w="100%" alt="blue background design with red and yellow circles" />
             </Box>
         </Flex>
