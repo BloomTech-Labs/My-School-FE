@@ -21,18 +21,19 @@ import PlusIcon from '../../../assets/icons/plus_icon.png';
 
 const NavMenu = ({user, family}) => {
   // console.log({user});
+  // console.log({family})
 
   const history = useHistory();
   const [ students, setStudents ] = useState([]);
 
   useEffect(() =>{
-        //the user will not be hard coded once we add dynamic routes and logins
-
-    axios.get(`https://my-school-v1.herokuapp.com/api/families/4`)
-    .then( res=> {
-      console.log('navmenu', res.data.people)
-      setStudents(res.data.people.filter(p => p.user_type_id === 2))
-    })
+    axios.get(`https://my-school-v1.herokuapp.com/api/families/${family}`)
+      .then( res=> {
+        setStudents(res.data.people.filter(p => p.user_type_id === 2))
+      })
+      .catch(err => {
+        console.log("error getting family info", err)
+      })
   }, []);
 
   const handleAdminSettings = () => {
@@ -100,7 +101,7 @@ const NavMenu = ({user, family}) => {
                 )
               })
               
-              : <Text fontSize="sm" color="gray.700" py="8px" my="12px">No students have been added to your family yet</Text> } 
+              : <Text fontSize="sm" color="gray.700" py="8px" my="12px" px="24px">No students have been added to your family yet</Text> } 
 
               {/* ADD STUDENT */}
               <MenuItem onClick={handleAddStudent} mt="8px" mb="56px" px="24px" py="8px">
