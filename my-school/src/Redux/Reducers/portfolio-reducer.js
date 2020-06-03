@@ -6,7 +6,6 @@ import {
 
 const initialState= {
     activities: [],
-    singleActivity: [],
     isLoading: false,
     err: ''
 }
@@ -29,7 +28,7 @@ export const portfolioReducer = (state = initialState, action) => {
         return {
           ...state,
           isLoading: false,
-          error: action.payload,
+          err: action.payload,
         };
       default:
         return state;

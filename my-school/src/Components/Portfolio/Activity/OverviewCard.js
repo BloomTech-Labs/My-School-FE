@@ -22,12 +22,11 @@ const OverviewCard = props => {
     const handleNext = index => {
         props.pusher(index)
     }
-
     return (
         <>
         {props.activity.id === Number(id) && (
         <>
-            <Flex flexWrap='wrap' justifyContent='space-around'  h='70vh' p='1rem'>
+            <Flex flexWrap='wrap' justifyContent='space-around'  h='70vh' p='1rem' data-testid='activities'>
                 <Flex flexDirection='column' w='20vw' textAlign='left' alignItems='flex-end' p='3rem'>
                     <Flex flexDirection='column' lineHeight='2.5rem'>
                         <Image w='300px' h='200px' src={props.activity.photo} borderRadius='2rem' fallbackSrc={PlaceholderImg}/>

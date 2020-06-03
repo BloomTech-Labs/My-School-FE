@@ -48,7 +48,7 @@ const ActivityOverview = ({ activities, getAllActivitiesForUser, isLoading }) =>
             history.push(`/activity/${sortedActivities[neededIndex].id}`)
         }
     }
-
+console.log(sortedActivities)
     return (
         <>
         {isLoading === true 

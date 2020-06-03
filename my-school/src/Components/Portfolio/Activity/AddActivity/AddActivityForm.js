@@ -65,7 +65,6 @@ const AddActivityForm = () => {
             })
         }
     }
-    console.log({image})
 
     // Submit handler: 2 different endpoints based on whether or not user wants to include a photo
     function onSubmit(data) {
@@ -77,7 +76,7 @@ const AddActivityForm = () => {
         // formats completion Date in YYYY-MM-DD format
         const completionDate = `${data.year}-${monthLeadingZero}-${dayLeadingZero}`;
 
-        if (image) {
+        if (image.raw) {
             const formData = new FormData();
             formData.append('photo', image.raw, image.raw.name);
             formData.set('student_id', 3); //hardcoded...change later
@@ -194,8 +193,8 @@ const AddActivityForm = () => {
                     <Text fontWeight="bold">Duration</Text>
                     <Flex>
                         <FormControl mt="8px" fontFamily="'Nunito'">
-                            <FormLabel htmlFor="hours" textTransform="uppercase" fontSize="0.625rem" color="gray.700" data-testid='hours'>Hours</FormLabel>
-                            <NumberInput mr="20px" min={0} defaultValue={0} >
+                            <FormLabel htmlFor="hours" textTransform="uppercase" fontSize="0.625rem" color="gray.700" >Hours</FormLabel>
+                            <NumberInput mr="20px" min={0} defaultValue={0} data-testid='hours'>
                                 <NumberInputField 
                                     id="hours" 
                                     name="hours"  

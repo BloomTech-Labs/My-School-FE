@@ -7,7 +7,6 @@ import {
 
 const initialState= {
     users: [],
-    singleUser: {},
     isLoading: false,
     err: ''
 }
@@ -24,18 +23,18 @@ export const usersReducer = (state = initialState, action) => {
             ...state,
             isLoading: true,
         };
-case USERS_SUCCESS:
+    case USERS_SUCCESS:
     return {
         ...state,
         isLoading: false,
         users: action.payload,
-        error: "",
+        err: "",
     };
     case USERS_FAILURE:
         return {
           ...state,
           isLoading: false,
-          error: action.payload,
+          err: action.payload,
         };
     default:
         return state;
