@@ -59,10 +59,9 @@ const NavMenu = ({user, family}) => {
     <Menu>
 
       <MenuButton as={Button} bg='transparent' color="black" variantColor='btnBlue' >
-          <NavName user={user}/>
+      <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
       </MenuButton>
 
-      <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
       <MenuList>
         <MenuItem>
 {/*  THIS IS THE USERS IMAGE AND NAME */}

@@ -5,7 +5,7 @@ import {  getUserByID } from '../../actions/actions-users';
 import { Box, Button, ButtonGroup, IconButton, Avatar, Flex, Editable,Text, EditableInput, EditablePreview, Heading, Divider} from '@chakra-ui/core';
 
 const Settings = () => {
-
+//need the user info to be either the admin(Addcount Settings) or the student (Manage)
     const [ user, setUser ] = useState({});
     const [ id, setID ] = useState();
 
@@ -18,14 +18,14 @@ const Settings = () => {
         })
     }, []);
 
-    const handleUpdate = (id, newInfo) => {
-        axios.put(`https://my-school-v1.herokuapp.com/api/users/${id}`, newInfo)
+    const handleUpdate = (newInfo) => {
+        axios.put(`https://my-school-v1.herokuapp.com/api/users/${user.id}`, newInfo)
         .then( res => getUserByID(user.id))
         .catch()
     };
 
-    const handleDeleteAccount = (id) => {
-        axios.delete(`https://my-school-v1.herokuapp.com/api/users/${id}`)
+    const handleDeleteAccount = () => {
+        axios.delete(`https://my-school-v1.herokuapp.com/api/users/${user.id}`)
         .then( res => getUserByID(user.id))
         .catch()
     };
@@ -45,9 +45,9 @@ const Settings = () => {
 
     return(
         <Flex direction='column'>
-            <Flex direction='row'>
+            <Flex direction='row' margin='20px'>
                 <Box>  
-                    <Avatar src={user.profile_picture}/>
+                    <Avatar src={user.profile_picture} margin='10px'/>
                 </Box>
                 <Box>
                    <Heading>{user.username}</Heading> 
