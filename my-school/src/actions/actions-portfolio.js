@@ -2,9 +2,9 @@ import axios from 'axios';
 export const FETCHING_ACTIVITES = 'FETCHING_ACTIVITIES';
 export const ACTIVITES_SUCCESS =  'ACTIVITES_SUCCESS';
 export const ACTIVITES_FAILURE = 'ACTIVITES_FAILURE';
+const ACTIVITIES_POSTING = 'ACTIVITY_POSTING'
 
-export const getAllActivitiesForUser = (id) => {
-    return dispatch => {
+export const getAllActivitiesForUser = (id) => dispatch => {
         dispatch({type: FETCHING_ACTIVITES})
         axios.get(`https://my-school-v1.herokuapp.com/api/users/${id}/activities`)
         .then(res => {
@@ -13,10 +13,8 @@ export const getAllActivitiesForUser = (id) => {
             }, 1000)
         })
         .catch(err => {
-            // console.log(err)
             dispatch({type: ACTIVITES_FAILURE, payload: err})
         })
-    }
 }
 
 export const editActivityWithoutPhoto  = (id, changes, userId) => {

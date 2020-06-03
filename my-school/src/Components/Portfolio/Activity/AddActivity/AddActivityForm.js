@@ -59,8 +59,10 @@ const AddActivityForm = () => {
 
     // Photo upload change handler
     const handleImageUpload = e => {
-        setImage(e.target.files[0])
-        setThumbnail(URL.createObjectURL(e.target.files[0]))
+        if(e.target.files[0]){
+            setImage(e.target.files[0])
+            setThumbnail(URL.createObjectURL(e.target.files[0]))
+        }
     }
 
     // Submit handler: 2 different endpoints based on whether or not user wants to include a photo
@@ -235,7 +237,7 @@ const AddActivityForm = () => {
                             <Flex align="center" mb="12px">
                                 <Box bg="gray.600" p="8px 16px" borderRadius="4px" color="white" fontSize="lg" mr="8px">Choose File</Box>
                                 <Text fontSize="lg" color="gray.700">
-                                    {image.raw ? `${image.raw.name}` : `No file selected`}
+                                    {image && image.raw ? `${image.raw.name}` : `No file selected`}
                                 </Text>
                             </Flex>
                         </FormLabel>
