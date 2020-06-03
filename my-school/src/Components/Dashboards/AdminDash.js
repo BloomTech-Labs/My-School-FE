@@ -6,6 +6,7 @@ import { getFamilyByID } from '../../actions/actions-users';
 import StudentCard from './StudentCard';
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
+
 import { Box, Button, Heading } from '@chakra-ui/core';
 
 const AdminDash = ({ user, isLoading }) => {
@@ -14,13 +15,13 @@ const AdminDash = ({ user, isLoading }) => {
   const [ familyName, setFamilyName ] = useState('');
   const id = localStorage.getItem('family_id')
 
+
   useEffect( _ => {
     ReactGA.initialize("UA-156199574-5")
     ReactGA.pageview("/dashboard")
   },[])
 
   useEffect(() =>{
-    //the user will not be hard coded once we add dynamic routes and logins
     axios.get(`https://my-school-v1.herokuapp.com/api/families/${id}`)
     .then( res=> {
       setFamilyName(res.data.family.name)
@@ -58,6 +59,7 @@ const AdminDash = ({ user, isLoading }) => {
       <Box as={Button} onClick={addStudent}> + Add new student</Box>
       </div>
       </>
+
     )
   } else {
 

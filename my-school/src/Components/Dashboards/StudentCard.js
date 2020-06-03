@@ -1,65 +1,113 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import { useHistory } from 'react-router-dom';
+import { deleteStudent} from '../../actions/actions-users';
 import fontN from "../../assets/Nunito_Sans/Nunito Sans Regular.ttf";
-import { Image, Grid, Box, Heading, Text, Flex, Icon } from "@chakra-ui/core";
-import axios from "axios";
-import { connect } from "react-redux";
-import {getAllActivitiesForUser} from '../../actions/actions-portfolio'
+import {  Image,
+          Grid,
+          Box,
+          Heading,
+          Button, 
+          AlertDialog,
+          AlertDialogBody,
+          AlertDialogFooter,
+          AlertDialogHeader,
+          AlertDialogContent,
+          AlertDialogOverlay,
+          useToast, } from '@chakra-ui/core';
 
-function StudentCard({ student, familyName, ...props }) {
+
+function StudentCard({student, family}) {
+  
+  const toast = useToast();
+  const [isOpenDialogue, setIsOpenDialogue] = useState();
+  const onCloseDialogue = () => setIsOpenDialogue(false);
+  const cancelRef = useRef();
   const history = useHistory();
-  const {getAllActivitiesForUser} = props
 
   const pushToPortfolio = (id) => {
-    history.push(`/portfolio/${student.id}`);
+    history.push(`/portfolio/${id}`);
+  };
+ 
+  function handleDelete(student_id){
+    deleteStudent(student_id);
   };
 
-  useEffect(() => {
-    getAllActivitiesForUser(student.id)
-    console.log('running')
-  }, [ getAllActivitiesForUser])
 
   return (
-    // <Box border='1px solid black' width='33%'>
-    //   <Grid
-    //     templateColumns=".75fr .25fr 1fr .5fr .25fr .25fr"
-    //     alignItems="left"
-    //     className="student-cards"
-    //     fontFamily={fontN}
-    //   >
-    //     <Box>
-    //       <Box
-    //         onClick={() => pushToPortfolio(student.id)}
-    //         width="100%"
-    //         fontSize="1.2rem"
-    //         fontWeight="500"
-    //       >
-    //         <Image src="" />
-    //         <Text fontSize='1.5rem'>{student.name}'s Portfolio</Text>
-    //         <p>Child_Name`</p>
-    //       </Box>
+      <Box>
+      <Heading>{student.familyName}</Heading>
+    <Grid
+      templateColumns=".75fr .25fr 1fr .5fr .25fr .25fr"
+      alignItems='left'
+      className="student-cards"
+      fontFamily= {fontN}
+    >
+      <Box>
+          <Box onClick={() => pushToPortfolio(student.id)} width="100%" fontSize='1.2rem' fontWeight='500' className='card'>
+              <Image src='' />
+          <Heading>{student.name}'s Portfolio </Heading>
+          <p>{student.name}</p>
+          </Box>
 
-    //       <Box textAlign="left">
-    //         LAST ACTIVITY: Submitted_date SUBMITTED submitted_title
-    //       </Box>
-    //     </Box>
-    //   </Grid>
-    // </Box>
-    <Flex width='33%' border='1px solid black'>
-      <Box width='90%'>
-      <Heading as='h3' fontSize='1.7rem'>
-      {student.name}'s Portfolio
-      </Heading>
-      <Text>
-        {`${student.name} ${familyName}`}
-      </Text>
-      <Heading as='h4' fontSize='1.2rem'>
-        LAST ACTIVITY
-      </Heading>
-      <Text>{props.activities.length ? props.activities[0].date_completed : 'No Activities Logged Yet'}</Text>
+          <Box textAlign="left">
+              LAST ACTIVITY:
+              Submitted_date SUBMITTED submitted_title
+          </Box>
+          <Button
+            _hover={{
+                bg: "white",
+                color: "#FB6542"
+            }}
+            _focus={{ boxShadow: "outline" }}
+            iconLeft="delete"
+            variant="solid"
+            bg="#FB6542"
+            color= "white"
+            onClick={() => {
+                setIsOpenDialogue(true);
+            }}
+        >
+        <AlertDialog
+            isOpen={isOpenDialogue}
+            leastDestructiveRef={cancelRef}
+            onClose={onCloseDialogue}
+        >
+            <AlertDialogOverlay />
+            <AlertDialogContent>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    Delete Portfolio
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                    You're deleting an entire portfolio and student account -- permanently.
+                    Are you quite certain?
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                    <Button ref={cancelRef} onClick={onCloseDialogue}>
+                        Cancel
+                    </Button>
+                    <Button bg="#FF5656" color="white" onClick={() => {
+                        onCloseDialogue();
+                        handleDelete();
+                        toast({
+                            position: "top",
+                            title: "Student Deleted.",
+                            description: "That portfolio is donesies.",
+                            status: "success",
+                            duration: 5000,
+                            isClosable: true,
+                        });
+                    }}
+                    >
+                    </Button>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
+        </Button>
       </Box>
-      <Icon name='arrow-right' alignSelf='flex-end' my='25px'/>
-    </Flex>
+    </Grid>
+    </Box>
   );
 }
 

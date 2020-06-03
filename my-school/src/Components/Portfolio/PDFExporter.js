@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from 'react-redux';
 import {
   Page,
   Font,
@@ -13,6 +14,7 @@ import fontN from "../../assets/Nunito_Sans/Nunito Sans Regular.ttf"
 import fontP from "../../assets/Pridi/Pridi Light.ttf"
 import fontR from "../../assets/Raleway/Raleway Medium.ttf"
 import style from "./PDFExporterStyles.js";
+import { getAllActivitiesForUser } from '../../actions/actions-portfolio';
 import { Button, Box, Flex } from '@chakra-ui/core';
 import timechange from '../../utils/timeChange'
 
@@ -33,7 +35,11 @@ Font.register({
 
 
 // Create Document Component
-const MyDocument = ({ activities }) => {
+const MyDocument = ({ activities, getAllActivitiesForUser }) => {
+
+  useEffect(() =>{
+    getAllActivitiesForUser(3);
+  }, [getAllActivitiesForUser])
 
   function noNull(item){
     if(item==="null"){
@@ -81,4 +87,12 @@ const MyDocument = ({ activities }) => {
   );
 };
 
-export default MyDocument;
+const mapStateToProps = (state) => {
+  return {
+      activities: state.portfolioReducer.activities,
+      isLoading: state.portfolioReducer.isLoading,
+      error: state.portfolioReducer.error,
+  };
+};
+
+export default connect(mapStateToProps, { getAllActivitiesForUser })(MyDocument);

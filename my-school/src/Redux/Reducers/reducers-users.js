@@ -1,43 +1,56 @@
 import {
     FETCHING_USERS,
     ADDING_USERS,
+    DELETING_USER,
     USERS_SUCCESS,
     USERS_FAILURE,
 } from '../../actions/actions-users.js';
 
 const initialState= {
     users: [],
-    singleUser: {},
+    user: {},
+    family: [],
+    familyName:'',
     isLoading: false,
     err: ''
 }
 
 export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        
     case FETCHING_USERS:
         return {
           ...state,
           isLoading: true,
         };
+
     case ADDING_USERS:
         return {
             ...state,
             isLoading: true,
         };
-case USERS_SUCCESS:
-    return {
-        ...state,
-        isLoading: false,
-        users: action.payload,
-        error: "",
-    };
-    case USERS_FAILURE:
+
+    case DELETING_USER:
+        return{
+            ...state,
+            isLoading: true
+        }
+        
+    case USERS_SUCCESS:
         return {
-          ...state,
-          isLoading: false,
-          error: action.payload,
+            ...state,
+            isLoading: false,
+            users: action.payload,
+            error: "",
         };
-    default:
-        return state;
-    }
+
+        case USERS_FAILURE:
+            return {
+            ...state,
+            isLoading: false,
+            error: action.payload,
+            };
+        default:
+            return state;
+        }
   };

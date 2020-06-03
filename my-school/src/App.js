@@ -14,6 +14,7 @@ import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActi
 import PDFExporter from './Components/Portfolio/PDFExporter'
 import ActivityOverview from "./Components/Portfolio/Activity/ActivityOverview";
 import StudentRegistration from './Components/studentRegister';
+import Settings from './Components/EnterUser/Settings';
 
 function App() {
   React.useEffect((_) => {
@@ -40,8 +41,7 @@ function App() {
               <MainLayout page={<MainContainer />} />
             </Route>
             <Route path='/settings'>
-              {/*Account settings*/}
-              {/* <MainLayout page={PUT PAGE HERE} /> */}
+              <MainLayout page={<Settings />} />
             </Route>
             <Route exact path='/portfolio/:id'>
               <MainLayout page={<PortfolioContainer />} />

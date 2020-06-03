@@ -1,35 +1,35 @@
-const pillColor = require('../utils/pillColor.js')
+const { pillColor } = require('../utils/pillColor.js')
 const validateCredentials = require('../utils/validateCredentials.js')
 const validateTitle = require('../utils/validateTitle')
 const timeChange = require('../utils/timeChange.js')
 
 describe('pillColor', () => {
     it('should return pink if no subject is given', () => {
-        expect(pillColor()).toBe('pink')
+        expect(pillColor()).toBe('cyan.300')
     })
     it('should return red if subject is English', () => {
-        expect(pillColor('English')).toBe('red')
+        expect(pillColor('English')).toBe('red.300')
     })
     it('should return orange if subject is Math', () => {
-        expect(pillColor('Math')).toBe('orange')
+        expect(pillColor('Math')).toBe('blue.300')
     })
     it('should return yellow if subject is Science', () => {
-        expect(pillColor('Science')).toBe('yellow')
+        expect(pillColor('Science')).toBe('green.300')
     })
     it('should return green if subject is Social Studies', () => {
-        expect(pillColor('Social Studies')).toBe('green')
+        expect(pillColor('Social Studies')).toBe('orange.300')
     })
     it('should return teal if subject is Art', () => {
-        expect(pillColor('Art')).toBe('teal')
+        expect(pillColor('Art')).toBe('purple.300')
     })
     it('should return blue if subject is Music', () => {
-        expect(pillColor('Music')).toBe('blue')
+        expect(pillColor('Music')).toBe('pink.300')
     })
     it('should return cyan if subject is Health', () => {
-        expect(pillColor('Health')).toBe('cyan')
+        expect(pillColor('Health')).toBe('teal.100')
     })
     it('should return purple if subject is Physical Education', () => {
-        expect(pillColor('Physical Education')).toBe('purple')
+        expect(pillColor('Physical Education')).toBe('yellow.300')
     })
 })
 

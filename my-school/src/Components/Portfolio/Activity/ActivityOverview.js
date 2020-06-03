@@ -48,6 +48,7 @@ const ActivityOverview = ({
     } else {
       history.push(`/activity/${sortedActivities[neededIndex].id}`);
     }
+
   };
 
   return (

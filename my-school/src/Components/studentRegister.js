@@ -47,9 +47,9 @@ const StudentRegister = props => {
         .catch(err => console.log(err.message))
     };
 
-    const validateCrudentials = (value) => {
+    const validateCredentials = (value) => {
         if(value <= 0 ){
-            return 'must provide a crudentials'
+            return 'must provide credentials'
         }else{
             return null
         }
@@ -69,7 +69,7 @@ const StudentRegister = props => {
                                 id="username"
                                 name="username"
                                 placeholder="This is what they will use to log in"
-                                ref={register({ validate: validateCrudentials })} 
+                                ref={register({ validate: validateCredentials })} 
                                 defaultValue={''}
                                 w='55%'
                                 data-testid='username'
@@ -108,7 +108,7 @@ const StudentRegister = props => {
                                     }
                                   })} 
                                 defaultValue={''}
-                                placeholder={`Your child's password`}
+                                placeholder={`Your student's password`}
                                 w='55%'
                                 data-testid='password'
                             />
@@ -123,7 +123,7 @@ const StudentRegister = props => {
                                 id="firstname"
                                 name="firstname"
                                 placeholder={`What is the student's first name?`}
-                                ref={register({ validate: validateCrudentials })} 
+                                ref={register({ validate: validateCredentials })} 
                                 defaultValue={''}
                                 w='60%'
                                 data-testid='fName'
@@ -138,7 +138,7 @@ const StudentRegister = props => {
                                 type="password"
                                 id="passwordconfirmation"
                                 name="passwordconfirmation"
-                                placeholder={`Confirm your Child's password`}
+                                placeholder={`Confirm your student's password`}
                                 ref={register({
                                     validate: value =>
                                       value === password.current || "The passwords do not match"
@@ -158,7 +158,7 @@ const StudentRegister = props => {
                                 id="lastname"
                                 name="lastname"
                                 placeholder={`What is the student's last name?`}
-                                ref={register({ validate: validateCrudentials })} 
+                                ref={register({ validate: validateCredentials })} 
                                 defaultValue={''}
                                 w='60%'
                                 data-testid='lName'

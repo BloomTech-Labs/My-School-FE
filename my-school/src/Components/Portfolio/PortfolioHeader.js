@@ -36,7 +36,7 @@ const PortfolioHeader = () => {
         <HeaderButton
           text="Go To My Portfolio"
           icon="arrow-right"
-          location="/portfolio"
+          location="/dashboard"
         />
       ) : (
         <Heading as="h2">{title}</Heading>
@@ -44,7 +44,7 @@ const PortfolioHeader = () => {
       <Flex width="25%" justify="space-evenly">
         <HeaderButton text="Add Activity" icon="add" location={`/portfolio/${id}/add`} />
         {/*  EXPORT BUTTON -- PARENTS ONLY? */}
-        <HeaderButton text="Convert to PDF" icon="download" location="/doc" />
+        <HeaderButton text="Convert to PDF" icon="download" location={`/portfolio/${id}/export`} />
       </Flex>
       {/*  Start with opening in another tab, then download. */}
       {/*SEARCH BOX AND SORT/FILTER FEATUREs WILL GO HERE*/}
