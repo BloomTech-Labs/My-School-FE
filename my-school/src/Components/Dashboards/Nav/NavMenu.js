@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory} from 'react-router-dom';
 import {
   Menu,
@@ -9,12 +9,37 @@ import {
   MenuList,
   MenuItem,
   MenuGroup,
+  MenuDivider,
 } from "@chakra-ui/core";
+import axios from 'axios';
 import NavName from './NavName'
 
-const NavMenu = ({ user }) => {
+const NavMenu = ({user, family}) => {
 
   const history = useHistory();
+  const [ students, setStudents ] = useState([]);
+
+
+  useEffect(() =>{
+        //the user will not be hard coded once we add dynamic routes and logins
+
+    axios.get(`https://my-school-v1.herokuapp.com/api/families/4`)
+    .then( res=> {
+      console.log('navmenu', res.data.people)
+      setStudents(res.data.people)
+    })
+  }, []);
+
+  const handleAdminSettings = () => {
+    history.push('/settings')
+  }
+
+  const manageStudent =(e) => { 
+    e.preventDefault();
+    const id = e.target.value;
+    //You get what I'mtrying to do here, yeah?
+    history.push(`settings/${id}`)
+  }
 
   const handleAddStudent = () => {
     history.push('/addstudent')
@@ -26,44 +51,52 @@ const NavMenu = ({ user }) => {
     localStorage.clear();
     history.push('/login');
   }
+  
 
+  // If user is admin type, can see full menu; if user is student type, can only log out
+  if(user.user_type_id === 1){
   return (
     <Menu>
 
       <MenuButton as={Button} bg='transparent' color="black" variantColor='btnBlue' >
-          <NavName user={user}/>
+      <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
       </MenuButton>
 
-      <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
       <MenuList>
         <MenuItem>
-          {/*  THIS IS THE USERS IMAGE AND NAME */}
+{/*  THIS IS THE USERS IMAGE AND NAME */}
           <Avatar size="sm" src={user.profile_picture} alt="user avatar" />{user.name}
         </MenuItem>
 
-        {/* THIS IS THE SETTINGS BUTTON THAT REDIRECTS THE ACTIVITYCONTAINER TO SETTINGS COMPONENT */}
-        <MenuItem as={Button}location='/settings'>Account Settings</MenuItem>
+{/* THIS IS THE SETTINGS BUTTON THAT REDIRECTS THE ACTIVITYCONTAINER TO SETTINGS COMPONENT */}
+        <MenuItem onClick={handleAdminSettings}>Account Settings</MenuItem>
+        <MenuDivider />
+        <MenuGroup title={user.familyName}>
 
-        <MenuGroup>
-          <MenuItem>
-            {/*  THIS WILL BE THE FAMILY NAME */}
-            Family #{user.family_id}
-          </MenuItem>
+{/* MAP FOR ALL STUDENTS OF FAMILY ID */}
+          {students.map(s => {
+            if(s.user_type_id === 2){
+              return(
+                <MenuItem as={Box} key={s.id}> 
+                  <Avatar size="sm" src={s.profile_picture} alt="user avatar" />
+                  {s.name}
+                  <Button onClick={manageStudent} >Manage</Button>
+                </MenuItem>
+                ) 
+            } else {
+               return(
+                 <div key={s.id}></div>
+            )
+          }})}
+       
 
-          <MenuItem as={Box}>
-            {/* THIS IS A CHILD ITEM --- MAP FOR ALL STUDENTS OF FAMILY ID */}
-            <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
-            JimBob
-            <Button>Manage</Button>
-          </MenuItem>
-
+{/* THIS IS THE BUTTON TO ADD ANOTHER CHILD TO THE FAMILY LIST */}
           <MenuItem as={Box} onClick={handleAddStudent}>
-           {/* THIS IS THE BUTTON TO ADD ANOTHER CHILD TO THE FAMILY LIST */}
            + Add A New Student
           </MenuItem>
         </MenuGroup>
-
-        {/* THIS IS THE LOG OUT BUTTON */}
+        <MenuDivider />
+{/* THIS IS THE LOG OUT BUTTON */}
         <MenuItem as={Box}>
           <Button onClick={handleLogout} rightIcon='arrow-forward'>Log Out</Button>
         </MenuItem>
@@ -71,7 +104,22 @@ const NavMenu = ({ user }) => {
       </MenuList>
 
     </Menu>
-  );
+  )} else {
+    return(
+      // Student dropdown
+      <Menu>
+        <MenuButton as={Button} bg="lightblue" color="black">
+        <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
+       </MenuButton>
+        <MenuList>
+        <MenuItem as={Box}>
+          <Button onClick={handleLogout} rightIcon='arrow-forward'>Log Out</Button>
+        </MenuItem>
+        </MenuList>
+      </Menu>
+    )
+  }
 };
+
 
 export default NavMenu;

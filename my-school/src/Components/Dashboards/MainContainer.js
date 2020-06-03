@@ -4,7 +4,7 @@ import axios from 'axios';
 //components
 import PortfolioContainer from "../Portfolio/PortfolioContainer";
 import  AdminDash  from './AdminDash';
-import { Settings } from '../EnterUser/Settings';
+import Settings from '../EnterUser/Settings';
 import { getFamilyName } from "../../actions/actions-users";
 
 const MainContainer = () => {
@@ -14,7 +14,7 @@ const MainContainer = () => {
   useEffect(() => {
     //the user will not be hard coded once we add dynamic routes and logins
     axios
-      .get("https://my-school-v1.herokuapp.com/api/users/3")
+      .get("https://my-school-v1.herokuapp.com/api/users/6")
       .then((res) => {
         setUser(res.data);
         getFamilyName(res.data.family_id);
@@ -43,4 +43,3 @@ const MainContainer = () => {
 }
 
 export default MainContainer;
-

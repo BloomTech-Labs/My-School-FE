@@ -6,7 +6,7 @@ import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 
-const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading }) => {
+const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user }) => {
   const [sortedActivities, setSortedActivities] = useState([]);
   const override = css`
     margin-top: 10rem;
