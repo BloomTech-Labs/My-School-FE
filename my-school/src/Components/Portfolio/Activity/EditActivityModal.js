@@ -50,6 +50,7 @@ const EditActivityModal = (props) => {
 
   // Subject value options
   const [subjects, setSubjects] = useState([]);
+  const [hover, setHover] = useState(false)
   useEffect(() => {
     axios
       .get("https://my-school-v1.herokuapp.com/api/subjects")
@@ -132,17 +133,14 @@ const EditActivityModal = (props) => {
   return (
     <>
       <Button
-        _hover={{
-          bg: "white",
-          color: "#FFBB00",
-        }}
-        _focus={{ boxShadow: "outline" }}
-        lefticon="edit"
-        variant="solid"
-        bg="#FFBB00"
-        color="white"
+        _focus={{ boxShadow: "outline"}}
+        variant={hover ? 'outline' : 'solid'}
+        variantColor="btnYellow"
         ref={btnRef}
         onClick={onOpen}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+
       >
         Edit
       </Button>
@@ -327,9 +325,8 @@ const EditActivityModal = (props) => {
 
                     <Button
                       variant="solid"
-                      bg="gray.600"
-                      color="white"
                       border="none"
+                      variantColor='btnGray'
                     >
                       <label htmlFor="image" className="hover-label">
                         Upload A File

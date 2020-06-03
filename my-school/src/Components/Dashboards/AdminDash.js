@@ -27,7 +27,7 @@ const AdminDash = ({user, isLoading}) => {
     return(
       <div>
         <div className='student-list'>
-          {isLoading === true ? <Loader color={'#329795'} css={override}/> : 
+          {isLoading === true ? <Loader color={'#375E97'} css={override}/> : 
           (students.map(student =>(<StudentCard key={student.id} student={student} className='card' />)))}
         </div>
         <div>This is the Admin Dash which will be a list of kids portfolios</div>

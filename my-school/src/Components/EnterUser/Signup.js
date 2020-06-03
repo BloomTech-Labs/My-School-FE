@@ -4,7 +4,6 @@ import { Link as RouterLink, useHistory } from 'react-router-dom';
 import {
     Flex,
     Text,
-    Box,
     FormErrorMessage,
     FormLabel,
     FormControl,
@@ -17,6 +16,7 @@ import {
     Popover,
     PopoverTrigger,
     PopoverContent,
+    PopoverHeader,
     PopoverBody,
     PopoverArrow,
     PopoverCloseButton
@@ -33,15 +33,12 @@ const Signup = () => {
 
     // Submit handler
     function onSubmit(data) {
-        console.log("Hello, sign up form has been submitted", data)
-
         const newFam = {
             name: data.family
         };
         // Creates new family, so we can grab family_id when creating new parent admin user
         axios.post("https://my-school-v1.herokuapp.com/api/families", newFam)
         .then(res => {
-            console.log("Family created", res.data)
             const famId = res.data.id;
 
             const newUser = {
@@ -54,8 +51,6 @@ const Signup = () => {
             // Creates new parent admin user account
             axios.post("https://my-school-v1.herokuapp.com/api/auth/registration", newUser)
             .then(res => {
-                console.log("Success! User created", res.data)
-
                 const user = res.data.user;
                 localStorage.setItem('auth', user.user_type_id);
                 localStorage.setItem('userId' , user.id);
@@ -74,25 +69,10 @@ const Signup = () => {
     }
 
     return (
-        <Box w={1/3}>
-            <Text
-                fontSize="1.5rem"
-                fontWeight="700"
-                color="myschoolblue"
-                m="37px 52px"
-            >MySchool</Text>
-            <Box m="76px 65px">
+        <>
             <form onSubmit={handleSubmit(onSubmit)} data-testid='form-submit'>
-                <Text
-                    fontSize="1.125rem"
-                    fontWeight="700"
-                    color="gray.800"
-                    textAlign="center"
-                    mb="32px"
-                >Sign Up</Text>
-
                 {/* FAMILY NAME */}
-                <FormControl isInvalid={errors.family} mb="32px">
+                <FormControl isInvalid={errors.family} mb="24px" >
                     <FormLabel htmlFor="family" fontWeight="700" color="gray.800">Family name</FormLabel>
                     <Flex flexDirection="row" align="center">
                         <Input 
@@ -107,18 +87,39 @@ const Signup = () => {
                                     message: "Family name must be at least 2 characters"
                                 }
                             })}
-                            w="300px"
                             borderColor="gray.400"
                             data-testid='family'
+                            w="85%"
                         />
                         {/* NEEDS STYLING! */}
                         <Popover>
                             <PopoverTrigger>
-                                <IconButton aria-label="family name information" icon="info-outline" color="#9BAFCB" ml="29px"/>
+                                <IconButton 
+                                    aria-label="family name information" 
+                                    icon="info-outline"
+                                    ml="5%" 
+                                    fontSize="1.4rem"
+                                    w="5%"
+                                    minW="0"
+                                    bg="none"
+                                    color="gray.400"
+                                    _hover={{ color: "gray.500" }} 
+                                    _active={{ color: "gray.500"}} 
+                                />
                             </PopoverTrigger>
-                            <PopoverContent>
+                            <PopoverContent
+                                zIndex="10" 
+                                bg="gray.100" 
+                                color="gray.700" 
+                                borderColor="gray.400" 
+                                fontSize="sm" 
+                                borderRadius="8px"
+                            >
                                 <PopoverArrow />
                                 <PopoverCloseButton />
+                                <PopoverHeader fontWeight="bold">
+                                    About Family Name
+                                </PopoverHeader>
                                 <PopoverBody>
                                     This will be used to identify members of your family, so we can associate their accounts with yours. As an admin, you will be able to create accounts for multiple students &amp; manage them from your account. 
                                 </PopoverBody>
@@ -129,7 +130,8 @@ const Signup = () => {
                 </FormControl>
 
                 {/* EMAIL (will be username; can possibly be updated later) */}
-                <FormControl isInvalid={errors.email} mb="32px">
+                <FormControl isInvalid={errors.email} mb="24px" w=
+                "85%">
                     <FormLabel htmlFor="email" fontWeight="700" color="gray.800">Email</FormLabel>
                     <Input 
                         id="email"
@@ -143,14 +145,14 @@ const Signup = () => {
                                 message: "Please enter a valid email address"
                             }
                         })}
-                        w="300px"
                         borderColor="gray.400"
                         data-testid='email'
+                        w="100%"
                     />
                     <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
                 </FormControl>
                 {/* PASSWORD */}
-                <FormControl isInvalid={errors.password} mb="32px">
+                <FormControl isInvalid={errors.password} mb="24px" w="85%">
                     <FormLabel htmlFor="password" fontWeight="700" color="gray.800">Password</FormLabel>
                     <Input 
                         type="password" 
@@ -164,14 +166,13 @@ const Signup = () => {
                                 message: "Your password must have at least 8 characters"
                             }
                         })}
-                        w="300px"
                         borderColor="gray.400"
                         data-testid='password'
                     />
                     <FormErrorMessage>{errors.password && errors.password.message}</FormErrorMessage>
                 </FormControl>
                 {/* PASSWORD CONFIRMATION */}
-                <FormControl isInvalid={errors.password_confirm} mb="32px">
+                <FormControl isInvalid={errors.password_confirm} mb="24px" w="85%">
                     <FormLabel htmlFor="password_confirm" fontWeight="700" color="gray.800">Confirm Password</FormLabel>
                     <Input 
                         type="password" 
@@ -182,23 +183,25 @@ const Signup = () => {
                             validate: value => 
                                 value === password.current || "The passwords do not match"
                         })}
-                        w="300px"
                         borderColor="gray.400"
                         data-testid='password2'
                     />
                     <FormErrorMessage>{errors.password_confirm && errors.password_confirm.message}</FormErrorMessage>
                 </FormControl>
                 {/* STATE? */}
-                <FormControl mb="32px">
+                <FormControl mb="24px" w="85%">
                     <FormLabel fontWeight="700" color="gray.800">State</FormLabel>
-                    <Select w="300px" borderColor="gray.400" data-testid='state'>
+                    <Select borderColor="gray.400" data-testid='state'>
                         <option value="maryland">Maryland</option>
                     </Select>
                 </FormControl>
                 {/* CHECKBOX */}
                 <FormControl isInvalid={errors.parent_confirm}>
+                    <Flex>
                     <Checkbox 
                         name="parent_confirm"
+                        borderColor="gray.400"
+                        variantColor="green"
                         ref={register({
                             required: "You must be a parent or guardian to create an account. If you're a student, please ask your parent or guardian to create an account for you."
                         })}
@@ -207,32 +210,51 @@ const Signup = () => {
                     {/* NEEDS STYLING! */}
                     <Popover>
                         <PopoverTrigger>
-                            <IconButton aria-label="not a parent information" icon="info-outline" color="#9BAFCB" ml="19px"/>
+                            <IconButton 
+                                aria-label="not a parent information" 
+                                icon="info-outline" 
+                                ml="5%" 
+                                fontSize="1.4rem"
+                                w="5%"
+                                minW="0"
+                                bg="none"
+                                color="gray.400"
+                                _hover={{ color: "gray.500" }} 
+                                _active={{ color: "gray.500"}}  
+                            />
                         </PopoverTrigger>
-                        <PopoverContent>
+                        <PopoverContent 
+                            zIndex="10" 
+                            bg="gray.100" 
+                            color="gray.700" 
+                            borderColor="gray.400" 
+                            fontSize="sm" 
+                            borderRadius="8px"
+                        >
                             <PopoverArrow />
-                            <PopoverCloseButton />
+                            <PopoverCloseButton color="gray.700"/>
                             <PopoverBody>
                                 This sign up form creates a parent admin account. Student accounts can only be created by a parent admin from their Account Setting menu.
                             </PopoverBody>
                         </PopoverContent>
                     </Popover>
                     <FormErrorMessage>{errors.parent_confirm && errors.parent_confirm.message}</FormErrorMessage>
+                    </Flex>
                 </FormControl>
                 <Button
                     type="submit"
                     color="white"
-                    bg="systemgreen"
+                    bg="green.600"
                     p="8px 16px"
                     borderRadius="999px"
                     fontSize="1.125rem"
-                    my="24px"
+                    my="16px"
                     data-testid='submit'
+                    _hover={{bg: "green.700"}}
                 >Submit</Button>
             </form>
             <Text fontSize=".875rem">Already have an account? <Link as={RouterLink} to="/login">Log in.</Link></Text>
-            </Box>
-        </Box>
+        </>
     )
 }
 
