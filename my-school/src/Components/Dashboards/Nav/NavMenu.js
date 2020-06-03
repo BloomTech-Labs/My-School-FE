@@ -9,6 +9,7 @@ import {
   MenuList,
   MenuItem,
   MenuGroup,
+  MenuDivider,
 } from "@chakra-ui/core";
 import axios from 'axios';
 
@@ -67,29 +68,32 @@ const NavMenu = ({user, family}) => {
 
 {/* THIS IS THE SETTINGS BUTTON THAT REDIRECTS THE ACTIVITYCONTAINER TO SETTINGS COMPONENT */}
         <MenuItem onClick={handleAdminSettings}>Account Settings</MenuItem>
+        <MenuDivider />
+        <MenuGroup title={user.familyName}>
 
-        <MenuGroup>
-          <MenuItem>
-            {/*  THIS WILL BE THE GROUP NAME */}
-            {user.familyName}
-          </MenuItem>
-
-
-        {students.map(s=> {
-          return(
-          <MenuItem as={Box} key={s.id}> 
 {/* MAP FOR ALL STUDENTS OF FAMILY ID */}
-           <Avatar size="sm" src={s.profile_picture} alt="user avatar" />
-            {s.name}
-            <Button onClick={manageStudent} >Manage</Button>
-          </MenuItem>)})}
+          {students.map(s => {
+            if(s.user_type_id === 2){
+              return(
+                <MenuItem as={Box} key={s.id}> 
+                  <Avatar size="sm" src={s.profile_picture} alt="user avatar" />
+                  {s.name}
+                  <Button onClick={manageStudent} >Manage</Button>
+                </MenuItem>
+                ) 
+            } else {
+               return(
+                 <div key={s.id}></div>
+            )
+          }})}
+       
 
 {/* THIS IS THE BUTTON TO ADD ANOTHER CHILD TO THE FAMILY LIST */}
           <MenuItem as={Box} onClick={handleAddStudent}>
            + Add A New Student
           </MenuItem>
         </MenuGroup>
-
+        <MenuDivider />
 {/* THIS IS THE LOG OUT BUTTON */}
         <MenuItem as={Box}>
           <Button onClick={handleLogout} rightIcon='arrow-forward'>Log Out</Button>

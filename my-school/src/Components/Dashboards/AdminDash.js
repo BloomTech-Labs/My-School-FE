@@ -1,124 +1,75 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getFamilyByID, deleteStudent, getFamilyName } from '../../actions/actions-users';
+import axios from 'axios';
+import { getFamilyByID } from '../../actions/actions-users';
 import StudentCard from './StudentCard';
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
-import { Box,
-        Button, 
-        AlertDialog,
-        AlertDialogBody,
-        AlertDialogFooter,
-        AlertDialogHeader,
-        AlertDialogContent,
-        AlertDialogOverlay,
-        useToast, } from '@chakra-ui/core';
+import { Box, Button } from '@chakra-ui/core';
 
-const AdminDash = ({ user, isLoading, getFamilyByID, deleteStudent}) => {
+const AdminDash = ({ user, isLoading }) => {
      
-      const toast = useToast();
-      const [isOpenDialogue, setIsOpenDialogue] = useState();
-      const onCloseDialogue = () => setIsOpenDialogue(false);
-      const cancelRef = useRef();
-      const history = useHistory();
+  const history = useHistory();
+
+  const [ students, setStudents ] = useState([]);
+
+  useEffect( _ => {
+    ReactGA.initialize("UA-156199574-5")
+    ReactGA.pageview("/dashboard")
+  },[])
+
+  useEffect(() =>{
+    //the user will not be hard coded once we add dynamic routes and logins
+    axios.get(`https://my-school-v1.herokuapp.com/api/families/4`)
+    .then( res=> {
+      console.log('admindash', res.data.people)
+      const family = res.data.people;
+      setStudents(family.filter(s => s.user_type_id=2))
+    })
+  }, []);
+
+
+  const addStudent = () => {
+    history.push('/addstudent')
+  };
+  
+
+  if(students.length > 0){        
+    return(
+      <div className='student-list'>
+
+        {isLoading === true ? <Loader color={'#329795'} /> : 
+
+        (students.map(student =>{
+          if(student.user_type_id === 2){}
+          return(
+            <StudentCard 
+            key={student.id} 
+            student={student} 
+            className='card' />
+          )} 
+        ))
+      } 
     
-      const [ family, setFamily ] = useState([]);
-
-      useEffect( _ => {
-        ReactGA.initialize("UA-156199574-5")
-        ReactGA.pageview("/dashboard")
-      },[])
-
-      useEffect(() => {
-        getFamilyByID(user.family_id);
-        getFamilyName(user.family_id);
-      }, [user]);
-
-
-      const addStudent = () => {
-        history.push('/addstudent')
-      };
-
-      function handleDelete(student_id){
-        deleteStudent(student_id);
-      };
-      
-
-      
-        return(
-        <div className='student-list'>
-          {isLoading === true ? <Loader color={'#329795'} /> : 
-          (family.map(student =>{
-          return(<StudentCard 
-          key={student.id} 
-          student={student} 
-          family={family} 
-          className='card' />)}))} 
-       
-        <Box as={Button} onClick={addStudent}> + Add new student</Box>
-        <Button
-            _hover={{
-                bg: "white",
-                color: "#FB6542"
-            }}
-            _focus={{ boxShadow: "outline" }}
-            iconLeft="delete"
-            variant="solid"
-            bg="#FB6542"
-            color= "white"
-            onClick={() => {
-                setIsOpenDialogue(true);
-            }}
-        >
-        <AlertDialog
-            isOpen={isOpenDialogue}
-            leastDestructiveRef={cancelRef}
-            onClose={onCloseDialogue}
-        >
-            <AlertDialogOverlay />
-            <AlertDialogContent>
-                <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                    Delete Portfolio
-                </AlertDialogHeader>
-
-                <AlertDialogBody>
-                    You're deleting an entire portfolio and student account -- permanently.
-                    Are you quite certain?
-                </AlertDialogBody>
-
-                <AlertDialogFooter>
-                    <Button ref={cancelRef} onClick={onCloseDialogue}>
-                        Cancel
-                    </Button>
-                    <Button bg="#FF5656" color="white" onClick={() => {
-                        onCloseDialogue();
-                        handleDelete();
-                        toast({
-                            position: "top",
-                            title: "Student Deleted.",
-                            description: "That portfolio is donesies.",
-                            status: "success",
-                            duration: 5000,
-                            isClosable: true,
-                        });
-                    }}
-                    >
-                    </Button>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
-        </Button>
-        </div>
+      <Box as={Button} onClick={addStudent}> + Add new student</Box>
+      </div>
     )
+  } else {
+
+    return(
+      <Box as={Button} onClick={addStudent}> + Add new student</Box>
+    )
+  }
 };
 
 const mapStateToProps = (state) => {
   return {
+    user: state.usersReducer.user,
     family: state.usersReducer.family,
     isLoading: state.usersReducer.isLoading,
     error: state.usersReducer.error,
   };
 };
 
-export default connect(mapStateToProps , { getFamilyByID, deleteStudent })(AdminDash);
+export default connect(mapStateToProps , { getFamilyByID })(AdminDash);

@@ -13,7 +13,7 @@ export default function TopNav() {
   useEffect(() => {
     //the user will not be hard coded once we add dynamic routes and logins
     axios
-      .get("https://my-school-v1.herokuapp.com/api/users/1")
+      .get("https://my-school-v1.herokuapp.com/api/users/6")
       .then((res) => {
         console.log('topnav', res.data)
         setUser(res.data);
