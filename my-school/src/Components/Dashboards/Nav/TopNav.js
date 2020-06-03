@@ -7,11 +7,11 @@ import NavLeft from "./NavLeft";
 
 export default function TopNav() {
   const [user, setUser] = useState({});
+  const id = localStorage.getItem('userId')
 
   useEffect(() => {
-    //the user will not be hard coded once we add dynamic routes and logins
     axios
-      .get("https://my-school-v1.herokuapp.com/api/users/2")
+      .get(`https://my-school-v1.herokuapp.com/api/users/${id}`)
       .then((res) => {
         setUser(res.data);
       })
