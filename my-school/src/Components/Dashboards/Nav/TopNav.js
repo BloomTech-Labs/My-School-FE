@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Flex } from "@chakra-ui/core";
 import NavMenu from "./NavMenu";
-import NavName from "./NavName";
 import NavLeft from "./NavLeft";
 
 export default function TopNav() {
@@ -36,7 +35,6 @@ export default function TopNav() {
           <NavLeft />
           <Flex align="center">
             <NavMenu user={user} family={family}/>
-            <NavName user={user} />
              
           </Flex>
         </Flex>
