@@ -25,6 +25,7 @@ const AdminDash = ({ user, isLoading }) => {
     .then( res=> {
       console.log('admindash', res.data.people)
       const family = res.data.people;
+      //What am I doing wrong here.....
       setStudents(family.filter(s => s.user_type_id=2))
     })
   }, []);
@@ -49,6 +50,8 @@ const AdminDash = ({ user, isLoading }) => {
               student={student} 
               className='card' />
             )
+          } else if(student.user_type_id === 1){
+            return null
           }
         }))
       }
