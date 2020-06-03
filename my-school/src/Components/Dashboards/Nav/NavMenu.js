@@ -70,7 +70,7 @@ const NavMenu = ({user, family}) => {
           <Flex flexDirection="row" w="100%" pt="24px" px="24px" bg="white" align="center">
               <Avatar size="md" src={user.profile_picture} alt="Your profile picture" border="2px" borderColor="myschoolblue" mr="12px"/>
               <Flex flexDirection="column">
-                <Text fontSize="1.125" fontWeight="bold" color="myschoolblue">{user.name}</Text>
+                <Text fontSize="1.125" fontWeight="bold" color="myschoolblue">{user.name !== null ? `${user.name}` : `Your Account`}</Text>
                 <Text fontSize="0.625rem" color="gray.600" textTransform="uppercase">{user.user_type_id === 1 ? `Primary Account` : `Student Account`}</Text>
               </Flex>
             </Flex>
@@ -87,13 +87,15 @@ const NavMenu = ({user, family}) => {
               {students.length > 0 ? 
               students.map(s => {
                 return (
-                  <MenuItem key={s.id} py="8px" pl="24px">
+                  <MenuItem key={s.id} value={s.id} py="8px" pl="24px" onClick={manageStudent}>
                     <Avatar size="sm" src={s.profile_picture} alt={`${s.name} profile picture`} />
                     <Flex flexDirection="column" ml="12px">
                       <Text fontSize="md" fontWeight="bold" color="gray.700">{s.name}</Text>
                       <Text fontSize="0.625rem" color="gray.500" textTransform="uppercase">Student Account</Text>
                     </Flex>
-                    <Box as={Button} onClick={manageStudent} value={s.id} fontSize="0.625rem" color="myschoolblue" textTransform="uppercase" border="1px" borderColor="myschoolblue" borderRadius="4px" h="24px" w="56px" bg="white" ml="52px">Manage</Box>
+                    <Box fontSize="0.625rem" color="myschoolblue" textTransform="uppercase" border="1px" borderColor="myschoolblue" borderRadius="4px" h="24px" w="56px" bg="white" ml="52px">
+                      <Text pt="4px" pl="5px">Manage</Text>
+                    </Box>
                   </MenuItem>
                 )
               })
