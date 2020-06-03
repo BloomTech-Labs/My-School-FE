@@ -4,12 +4,6 @@ import Login from '../Components/EnterUser/Login';
 
 describe('Login component', () => {
 
-    it('mySchool title renders', () => {
-        const { getByText } = render(<Login/>);
-        const title = getByText(/myschool/i)
-        expect(title).toBeTruthy();
-    })
-
     it('renders right label and input change for username', async () => {
        const { getByTestId } = render(<Login/>);
        const username = getByTestId('username');

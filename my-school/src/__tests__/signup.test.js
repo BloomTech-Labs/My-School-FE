@@ -5,18 +5,6 @@ import Signup from '../Components/EnterUser/Signup';
 
 describe('signup component', () => {
 
-    it('mySchool title renders', () => {
-        const { getByText } = render(<Signup/>);
-        const title = getByText(/myschool/i)
-        expect(title).toBeTruthy();
-    })
-
-    it('mySchool title renders', () => {
-        const { getByText } = render(<Signup/>);
-        const sign = getByText(/sign up/i)
-        expect(sign).toBeTruthy();
-    })
-
     it('renders right label and input change for family', async () => {
        const { getByTestId } = render(<Signup/>);
        const family = getByTestId('family');

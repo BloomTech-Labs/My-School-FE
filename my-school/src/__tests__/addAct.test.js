@@ -10,7 +10,6 @@ describe('Add Activity component', () => {
     })
 
     it('Upload An Activity photo title renders', () => {
-
         const { getByText } = render(<AddActivityForm />);
         const title = getByText(/upload activity photo/i)
         expect(title).toBeTruthy();
