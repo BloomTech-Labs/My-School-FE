@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { deleteStudent} from '../../actions/actions-users';
+import { getAllActivitiesForUser } from '../../actions/actions-portfolio';
 import fontN from "../../assets/Nunito_Sans/Nunito Sans Regular.ttf";
 import {  Image,
           Grid,
