@@ -13,7 +13,7 @@ export const getAllActivitiesForUser = (id) => {
             }, 1000)
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
             dispatch({type: ACTIVITES_FAILURE, payload: err})
         })
     }

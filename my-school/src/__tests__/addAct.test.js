@@ -1,18 +1,18 @@
 import React from 'react';
 import { render, fireEvent, act} from '../test-utils/test-utils';
 import AddActivityForm from '../Components/Portfolio/Activity/AddActivity/AddActivityForm';
+import ReactGA from 'react-ga';
 
 describe('Add Activity component', () => {
 
-    it('Add An Activity title renders', () => {
-        const { getByText } = render(<AddActivityForm />);
-        const title = getByText(/add an activity/i)
-        expect(title).toBeTruthy();
+    beforeAll(()=>{
+        ReactGA.initialize('foo', { testMode: true });
     })
 
     it('Upload An Activity photo title renders', () => {
+
         const { getByText } = render(<AddActivityForm />);
-        const title = getByText(/upload an activity photo/i)
+        const title = getByText(/upload activity photo/i)
         expect(title).toBeTruthy();
     })
 
@@ -77,12 +77,12 @@ describe('Add Activity component', () => {
      })
 
     it('renders submit button and runs upon clicking', async () => {
-        const onSubmit = jest.fn(e => e.preventDefault())
+        const onSubmit = jest.fn()
         const { getByTestId } = render(<AddActivityForm/>);
         //verifing the button it displayed
         const submitButton = getByTestId('submit');;
         expect(submitButton).toBeTruthy();
-        //mocking the submit button
+        //mocking the submit button without image upload
         const name = getByTestId('name');
         const description =getByTestId('description');
         const submit = getByTestId('form-submit');
@@ -96,5 +96,27 @@ describe('Add Activity component', () => {
         })
         expect(onSubmit).toHaveBeenCalled();
      })
-
+     
+     it('renders submit button and runs upon clicking', async () => {
+        const onSubmit = jest.fn()
+        const { getByTestId } = render(<AddActivityForm/>);
+        //verifing the button it displayed
+        const submitButton = getByTestId('submit');;
+        expect(submitButton).toBeTruthy();
+        //mocking the submit button with image upload
+        const name = getByTestId('name');
+        const description =getByTestId('description');
+        const image = getByTestId('image')
+        const submit = getByTestId('form-submit');
+        await act(async ()=>{
+            fireEvent.change(name, {target: {name: 'name' , value:'dylan'}});
+            fireEvent.change(description, {target: {name: 'description' , value: 'this is a description'}});
+            fireEvent.change(image, {target: {name: 'image' , value: ''}});
+        })
+        submit.addEventListener('submit', onSubmit)
+        await act( async ()=>{
+        fireEvent.submit(submit)
+        })
+        expect(onSubmit).toHaveBeenCalled();
+     })
 })
