@@ -37,6 +37,7 @@ const NavMenu = ({user, family}) => {
   const manageStudent =(e) => { 
     e.preventDefault();
     const id = e.target.value;
+    //You get what I'mtrying to do here, yeah?
     history.push(`settings/${id}`)
   }
 

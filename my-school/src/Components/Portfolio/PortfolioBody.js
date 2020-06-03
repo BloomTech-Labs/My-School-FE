@@ -20,11 +20,7 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
   useEffect(() => {
     //the paramter passed in will not be hard coded once we make user login and dynamic routes
     getAllActivitiesForUser(3);
-<<<<<<< HEAD
-  }, [getAllActivitiesForUser, user]);
-=======
   }, [getAllActivitiesForUser]);
->>>>>>> 376bece09737ff7a8868c450d0bac9a990faa06f
 
   useEffect(() => {
     const sorted = activities.sort((a, b) => b.id - a.id);

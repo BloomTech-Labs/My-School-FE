@@ -106,7 +106,7 @@ function StudentCard({student, family}) {
             </AlertDialogContent>
         </AlertDialog>
         </Button>
-      </Box>)
+      </Box>
     </Grid>
     </Box>
   );

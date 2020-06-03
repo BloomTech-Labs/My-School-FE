@@ -39,18 +39,20 @@ const AdminDash = ({ user, isLoading }) => {
     return(
       <div className='student-list'>
 
-        {isLoading === true ? <Loader color={'#329795'} /> : 
+      {isLoading === true ? <Loader color={'#329795'} /> : 
 
         (students.map(student =>{
-          if(student.user_type_id === 2){}
-          return(
-            <StudentCard 
-            key={student.id} 
-            student={student} 
-            className='card' />
-          )} 
-        ))
-      } 
+          if(student.user_type_id === 2){
+            return(
+              <StudentCard 
+              key={student.id} 
+              student={student} 
+              className='card' />
+            )
+          }
+        }))
+      }
+      
     
       <Box as={Button} onClick={addStudent}> + Add new student</Box>
       </div>
