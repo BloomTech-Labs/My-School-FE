@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { deleteStudent} from '../../actions/actions-users';
+import { getAllActivitiesForUser } from '../../actions/actions-portfolio';
 import fontN from "../../assets/Nunito_Sans/Nunito Sans Regular.ttf";
 import {  Image,
           Grid,
@@ -23,7 +25,6 @@ function StudentCard({student, family}) {
   const onCloseDialogue = () => setIsOpenDialogue(false);
   const cancelRef = useRef();
   const history = useHistory();
- 
 
   const pushToPortfolio = (id) => {
     history.push(`/portfolio/${id}`);
@@ -106,10 +107,17 @@ function StudentCard({student, family}) {
             </AlertDialogContent>
         </AlertDialog>
         </Button>
-      </Box>)
+      </Box>
     </Grid>
     </Box>
   );
 }
 
-export default StudentCard;
+const mapStateToProps = (state) => {
+  return {
+    activities: state.portfolioReducer.activities
+  }
+}
+
+export default connect(mapStateToProps, {getAllActivitiesForUser})(StudentCard)
+

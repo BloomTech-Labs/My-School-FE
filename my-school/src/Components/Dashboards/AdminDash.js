@@ -6,13 +6,15 @@ import { getFamilyByID } from '../../actions/actions-users';
 import StudentCard from './StudentCard';
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
-import { Box, Button } from '@chakra-ui/core';
+
+import { Box, Button, Heading } from '@chakra-ui/core';
 
 const AdminDash = ({ user, isLoading }) => {
-     
   const history = useHistory();
-
   const [ students, setStudents ] = useState([]);
+  const [ familyName, setFamilyName ] = useState('');
+  const id = localStorage.getItem('family_id')
+
 
   useEffect( _ => {
     ReactGA.initialize("UA-156199574-5")
@@ -20,14 +22,13 @@ const AdminDash = ({ user, isLoading }) => {
   },[])
 
   useEffect(() =>{
-    //the user will not be hard coded once we add dynamic routes and logins
-    axios.get(`https://my-school-v1.herokuapp.com/api/families/4`)
+    axios.get(`https://my-school-v1.herokuapp.com/api/families/${id}`)
     .then( res=> {
-      console.log('admindash', res.data.people)
-      const family = res.data.people;
-      setStudents(family.filter(s => s.user_type_id=2))
+      setFamilyName(res.data.family.name)
+      setStudents(res.data.people.filter(s => s.user_type_id===2))
+      
     })
-  }, []);
+  }, [id]);
 
 
   const addStudent = () => {
@@ -35,25 +36,30 @@ const AdminDash = ({ user, isLoading }) => {
   };
   
 
-  if(students.length > 0){        
+  if(students.length > 0){
     return(
+      <>
+      <Heading>{familyName || 'Your' } Family</Heading>
       <div className='student-list'>
-
-        {isLoading === true ? <Loader color={'#329795'} /> : 
+      
+      {isLoading === true ? <Loader color={'#329795'} /> : 
 
         (students.map(student =>{
-          if(student.user_type_id === 2){}
-          return(
-            <StudentCard 
-            key={student.id} 
-            student={student} 
-            className='card' />
-          )} 
-        ))
-      } 
+            return(
+              <StudentCard 
+              key={student.id} 
+              student={student} 
+              className='card' 
+              familyName={familyName}/>
+             )
+        }))
+      }
+      
     
       <Box as={Button} onClick={addStudent}> + Add new student</Box>
       </div>
+      </>
+
     )
   } else {
 

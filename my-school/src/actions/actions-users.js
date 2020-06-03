@@ -77,6 +77,7 @@ export const deleteStudent = (fam_id, student_id) => {
     }
 }
 
+
 export const deleteAccount = (id) => {
     return dispatch => {
         dispatch({type: DELETING_USER})
@@ -95,3 +96,4 @@ export const deleteAccount = (id) => {
 
             }
     }
+
