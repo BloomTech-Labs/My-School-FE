@@ -20,7 +20,11 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
   useEffect(() => {
     //the paramter passed in will not be hard coded once we make user login and dynamic routes
     getAllActivitiesForUser(3);
+<<<<<<< HEAD
   }, [getAllActivitiesForUser, user]);
+=======
+  }, [getAllActivitiesForUser]);
+>>>>>>> 376bece09737ff7a8868c450d0bac9a990faa06f
 
   useEffect(() => {
     const sorted = activities.sort((a, b) => b.id - a.id);
@@ -29,7 +33,9 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
   return (
     <div className="portfolio-list">
       {isLoading === true ? (
-        <Loader color={"#329795"} css={override} />
+        <div style={{display:'flex', justifyContent:'center', alignItems: 'center', height:'40vh'}}>
+        <Loader color={'#375E97'} css={override} height='75vh'/>
+        </div>
       ) : (
         sortedActivities.map((activity) => {
           return (

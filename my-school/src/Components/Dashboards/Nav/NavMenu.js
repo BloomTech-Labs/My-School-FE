@@ -12,6 +12,7 @@ import {
   MenuDivider,
 } from "@chakra-ui/core";
 import axios from 'axios';
+import NavName from './NavName'
 
 const NavMenu = ({user, family}) => {
 
@@ -56,10 +57,11 @@ const NavMenu = ({user, family}) => {
   return (
     <Menu>
 
-      <MenuButton as={Button} bg="lightblue" color="black">
-        <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
+      <MenuButton as={Button} bg='transparent' color="black" variantColor='btnBlue' >
+          <NavName user={user}/>
       </MenuButton>
 
+      <Avatar size="sm" src={user.profile_picture} alt="user avatar" />
       <MenuList>
         <MenuItem>
 {/*  THIS IS THE USERS IMAGE AND NAME */}

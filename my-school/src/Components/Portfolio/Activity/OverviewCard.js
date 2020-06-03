@@ -1,56 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Flex, Text, Button, Image }from "@chakra-ui/core";
-import PlaceholderImg from '../../../assets/placeholder_img.png';
-import moment from 'moment'
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Flex, Text, Heading } from "@chakra-ui/core";
+import OverviewCardGrid from "./OverviewCardGrid";
+import OverviewCardButton from "./OverviewCardButton";
+import OverviewImageBox from "./OverviewImageBox";
 
-const OverviewCard = props => {
+const OverviewCard = (props) => {
+  const { id } = useParams();
+  const [hours, setHours] = useState();
+  const [mins, setMins] = useState();
 
-    const { id } = useParams();
-    const [ hours ,setHours ] = useState();
-    const [ mins, setMins ] = useState();
+  useEffect(() => {
+    setHours(Math.floor(props.activity.duration / 60));
+    setMins(props.activity.duration % 60);
+  }, [hours, mins, props.activity.duration]);
 
-    useEffect(() =>{
-        setHours(Math.floor(props.activity.duration / 60))
-        setMins(props.activity.duration % 60)
-    }, [ hours, mins, props.activity.duration ])
+  const handlePrevious = (index) => {
+    props.puller(index);
+  };
 
-    const handlePrevious = index => {
-        props.puller(index)
-    }
-    
-    const handleNext = index => {
-        props.pusher(index)
-    }
+  const handleNext = (index) => {
+    props.pusher(index);
+  };
 
-    return (
+  return (
+    <>
+      {props.activity.id === Number(id) && (
         <>
-        {props.activity.id === Number(id) && (
-        <>
-            <Flex flexWrap='wrap' justifyContent='space-around'  h='70vh' p='1rem'>
-                <Flex flexDirection='column' w='20vw' textAlign='left' alignItems='flex-end' p='3rem'>
-                    <Flex flexDirection='column' lineHeight='2.5rem'>
-                        <Image w='300px' h='200px' src={props.activity.photo} borderRadius='2rem' fallbackSrc={PlaceholderImg}/>
-                        <Text paddingTop='1rem' >Subject: {props.activity.subject}</Text>
-                        <Text>Duration: {hours}hr {mins}m</Text>
-                        <Text>Created: {moment(props.activity.created_at).format('ll').toUpperCase()}</Text>
-                        <Text>Submitted: {moment(props.activity.completion_date).format('ll').toUpperCase()}</Text>
-                    </Flex>
-                </Flex>
-                <Flex flexDirection='column' w='65vw' p='4rem' paddingTop='5.5rem' lineHeight='2rem'>
-                    <h2 style={{ fontWeight:'bold'}}>{props.activity.name}</h2>
-                    <Text paddingTop='1rem'>Description:</Text>
-                    <Text paddingTop='.5rem'>{props.activity.description}</Text>
-                </Flex>
+          <Flex align="center" justify="flex-start" margin="5vh auto 0 5vw">
+            <Heading as="h2">{props.activity.name}</Heading>
+          </Flex>
+
+          <Flex direction="column">
+            <Flex
+              direction="row-reverse"
+              justify="space-between"
+              align="center"
+              height="50vh"
+              width="90vw"
+              margin="0 auto"
+            >
+              <OverviewImageBox props={props} />
+              <OverviewCardGrid props={props} hours={hours} mins={mins} />
             </Flex>
-            <Flex w='100%' justifyContent='center' alignItems='baseline' flexWrap='wrap' p='1rem'>
-                <Button backgroundColor={'#329795'} color='white' onClick={()=> handlePrevious(props.index)}>{`\u25C0`}</Button>
-                <Text paddingLeft='.5rem' paddingRight='.5rem'>{props.index + 1} of {props.arrLength}</Text>
-                <Button  backgroundColor={'#329795'} color='white' onClick={() => handleNext(props.index)}>{`\u25B6`}</Button> 
+            <Flex justify="center">
+              <OverviewCardButton
+                handleClick={handlePrevious}
+                props={props}
+                icon="chevron-left"
+              />
+              <Text paddingLeft=".5rem" paddingRight=".5rem">
+                {props.index + 1} of {props.arrLength}
+              </Text>
+              <OverviewCardButton
+                handleClick={handleNext}
+                props={props}
+                icon="chevron-right"
+              />
             </Flex>
+          </Flex>
         </>
-        )}
-        </>
-    )
-}
+      )}
+    </>
+  );
+};
 export default OverviewCard;

@@ -61,7 +61,7 @@ const StudentRegister = props => {
             <h3 style={{ fontWeight:'bold'}}>New account setup</h3>
             <FormContext {...methods} >
                 <form onSubmit={handleSubmit(handleStudentRegister)}> 
-                    <Flex w='80vw' flexWrap='wrap' p='1.5rem 1.5rem 1.5rem 0rem' h='50vh' >
+                    <Flex w='80vw' flexWrap='wrap' p='1.5rem 1.5rem 1.5rem 0rem' h='50vh' data-testid='form-submit'>
                         <FormControl isInvalid={errors.username} w='39%'>
                             <FormLabel htmlFor="username">Username</FormLabel>
                             <Input 
@@ -72,6 +72,7 @@ const StudentRegister = props => {
                                 ref={register({ validate: validateCredentials })} 
                                 defaultValue={''}
                                 w='55%'
+                                data-testid='username'
                             />
                             <FormErrorMessage> 
                                 {errors.username && errors.username.message}
@@ -87,6 +88,7 @@ const StudentRegister = props => {
                                 ref={register()} 
                                 defaultValue={''}
                                 w='60%'
+                                data-testid='portName'
                             />
                             <FormErrorMessage> 
                                 {errors.portfolioname && errors.portfolioname.message}
@@ -108,6 +110,7 @@ const StudentRegister = props => {
                                 defaultValue={''}
                                 placeholder={`Your student's password`}
                                 w='55%'
+                                data-testid='password'
                             />
                             <FormErrorMessage> 
                                 {errors.password && errors.password.message}
@@ -123,6 +126,7 @@ const StudentRegister = props => {
                                 ref={register({ validate: validateCredentials })} 
                                 defaultValue={''}
                                 w='60%'
+                                data-testid='fName'
                             />
                             <FormErrorMessage> 
                                 {errors.firstname && errors.firstname.message}
@@ -141,6 +145,7 @@ const StudentRegister = props => {
                                   })} 
                                 defaultValue={''}
                                 w='55%'
+                                data-testid='password2'
                             />
                             <FormErrorMessage> 
                                 {errors.passwordconfirmation && errors.passwordconfirmation.message}
@@ -156,13 +161,14 @@ const StudentRegister = props => {
                                 ref={register({ validate: validateCredentials })} 
                                 defaultValue={''}
                                 w='60%'
+                                data-testid='lName'
                             />
                             <FormErrorMessage> 
                                 {errors.lastname && errors.lastname.message}
                             </FormErrorMessage>
                         </FormControl>
                         <Text w='60%'></Text>
-                        <Button variantColor="green"w='7vw' type='submit'>Submit </Button>
+                        <Button variantColor="green"w='7vw' type='submit' data-testid='submit'>Submit </Button>
                     </Flex>
                 </form>
             </FormContext>

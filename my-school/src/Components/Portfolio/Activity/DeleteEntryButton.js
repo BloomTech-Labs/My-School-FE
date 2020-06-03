@@ -16,6 +16,7 @@ const DeleteEntryButton= (props) => {
 
     const toast = useToast();
     const [isOpenDialogue, setIsOpenDialogue] = useState();
+    const [hover, setHover] = useState(false)
     const onCloseDialogue = () => setIsOpenDialogue(false);
     const cancelRef = useRef();
 
@@ -26,18 +27,14 @@ const DeleteEntryButton= (props) => {
 
     return (
         <Button
-            _hover={{
-                bg: "white",
-                color: "#FB6542"
-            }}
-            _focus={{ boxShadow: "outline" }}
-            lefticon="delete"
-            variant="solid"
-            bg="#FB6542"
-            color= "white"
+        _focus={{ boxShadow: "outline"}}
             onClick={() => {
-                setIsOpenDialogue(true);
-            }}
+                setIsOpenDialogue(true)}}
+
+            variant={hover ? 'outline' : 'solid'}
+            variantColor="red"
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
         >
 
             Delete

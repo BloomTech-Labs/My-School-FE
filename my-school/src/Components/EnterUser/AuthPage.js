@@ -1,28 +1,58 @@
 import React from 'react';
 import {
     Flex,
-    Box
+    Box,
+    Image,
+    Text
 } from '@chakra-ui/core';
 import Login from './Login';
 import Signup from './Signup';
+import AuthPageImg from '../../assets/authPageImg.png';
+import Logo from '../../assets/logo_white_bg.png';
 
 const AuthPage = ({ login }) => {
+    const formTitle = {
+        login: "Log In",
+        signup: "Sign Up"
+    };
+
     return (
-        <Flex>
-            {login ? <Login /> : <Signup />}
-            
+        <Flex h="100vh">
+            <Box w={["100%", "100%", "40%", "35%"]} mx="5%">
+                <Image src={Logo} alt="MySchool logo" mt="32px" />
+                <Box m="36px 0">
+                    <Text
+                        fontSize="1.125rem"
+                        fontWeight="700"
+                        color="gray.800"
+                        textAlign="center"
+                        mb="32px"
+                    >
+                        {login ? formTitle.login : formTitle.signup}
+                    </Text>
+                    {login ? <Login  /> : <Signup />}
+                </Box>
+                {/* {login ? <Login  /> : <Signup />} */}
+            </Box>
+
             <Box
                 bg="myschoolblue"
-                w={2/3}
-                h="100vh"
+                w={["0", "0", "50%", "55%"]}
             >
-                <svg height="100vh" width="100%" position="absolute" margin="0">
-                    <circle cx="50vw" cy="130vh" r="359" fill="#FFBB00" />
-                </svg>
-{/* 
-                <svg height="100vh" width="100%" position="absolute" margin="0" zIndex="10">
-                    <circle cx="10vw" cy="1vh" r="435" fill="#FB6542"/>
-                </svg> */}
+                {!login ? 
+                <Text 
+                    fontSize={["0", "0", "2rem", "2.25rem"]} 
+                    color="white" 
+                    width="40%" 
+                    position="fixed" 
+                    top="30%" 
+                    left={["0", "0", "56%", "52%"]}
+                    zIndex="100"
+                >
+                    Finally, a portfolio builder that isn't a glorified spreadsheet
+                </Text> : null}
+
+                <Image src={AuthPageImg}  w={["0", "0", "50%", "55%"]} alt="blue background design with red and yellow circles" position="fixed"  bottom="0" right="0" />
             </Box>
         </Flex>
     )
