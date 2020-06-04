@@ -9,6 +9,8 @@ import {Grid, Text} from '@chakra-ui/core'
 
 const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user }) => {
   const [sortedActivities, setSortedActivities] = useState([]);
+  const isParent = localStorage.getItem('student_id') ? true : false;
+  const gridTemplateColumns = isParent ? ".75fr .25fr 1fr .5fr .25fr .25fr" : "1.25fr .25fr .25fr .25fr"
   const override = css`
     margin-top: 10rem;
   `;
@@ -38,15 +40,16 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
       ) : (
         <>
         <Grid
-        templateColumns=".75fr .25fr 1fr .5fr .25fr .25fr"
+        templateColumns={gridTemplateColumns}
         alignItems='center'
         className="activity-card"
         fontWeight='800'
       >
-          <Text>Activity</Text>
-          <Text>Duration</Text>
-          <Text textAlign='center'>Subject</Text>
+          <Text>Name</Text>
+          <Text>Subject</Text>
+          <Text textAlign='center'>Duration</Text>
           <Text>Date</Text>
+          {isParent && <Text>Options</Text>}
         </Grid>
         {sortedActivities.map((activity) => {
           return (
