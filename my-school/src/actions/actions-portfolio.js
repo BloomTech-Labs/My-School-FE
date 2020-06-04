@@ -11,11 +11,11 @@ export const getAllActivitiesForUser = (id) => dispatch => {
         axios.get(`https://my-school-v1.herokuapp.com/api/users/${id}/activities`)
         .then(res => {
             setTimeout(()=> {
-                dispatch({type: ACTIVITES_SUCCESS, payload: res.data})
+                dispatch({type: ACTIVITIES_SUCCESS, payload: res.data})
             }, 1000)
         })
         .catch(err => {
-            dispatch({type: ACTIVITES_FAILURE, payload: err})
+            dispatch({type: ACTIVITIES_FAILURE, payload: err})
         })
 }
 
@@ -54,7 +54,7 @@ export const editActivity = (id, formData, userId) => {
                 }, 1000)
             })
             .catch(err => {
-                dispatch({type: ACTIVITES_FAILURE, payload: err})
+                dispatch({type: ACTIVITIES_FAILURE, payload: err})
             })
         })
         .catch(err => {
