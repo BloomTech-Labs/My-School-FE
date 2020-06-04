@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
+import { pillColor } from '../../../../utils/pillColor';
 import {
     SimpleGrid,
     Box,
     Flex,
     Text,
     Image,
+    Tag,
     useToast
 } from '@chakra-ui/core';
 
 const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
-    console.log("preview props:", preview)
     const toast = useToast();
 
     // Displays success toast when page loads
@@ -36,7 +37,7 @@ const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
                 <Text fontSize="1.125rem" fontWeight="bold" color="gray.800" pb="32px">{preview.name}</Text>
                 <Flex pb="24px" align="center">
                     <Text fontSize="xs" textTransform="uppercase" color="gray.800" w="35%">Subject: </Text>
-                    <Text w="65%">{preview.subject}</Text>
+                    <Tag bg={pillColor(preview.subject)} color={pillColor(preview.subject).split('.')[0] + '.800'} rounded="full" fontSize="xs">{preview.subject}</Tag>
                 </Flex>
                 <Flex pb="24px" align="flex-start">
                     <Text fontSize="xs" textTransform="uppercase" w="35%">Description: </Text>
