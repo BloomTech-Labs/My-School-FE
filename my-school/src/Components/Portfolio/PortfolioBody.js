@@ -67,6 +67,7 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
         {sortedActivities.length === 0 && isLoading === false ? 
         <Text textAlign='center' color='blue.900'>You currently have no entries in you're portfolio <br/> It's time to get to work!</Text>
         : ''}
+      </>
     </div>
   );
 };
