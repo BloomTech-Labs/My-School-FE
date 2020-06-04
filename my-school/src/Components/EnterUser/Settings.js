@@ -7,14 +7,12 @@ import { Box, Button, ButtonGroup, IconButton, Avatar, Flex, Editable,Text, Edit
 const Settings = () => {
 //need the user info to be either the admin(Addcount Settings) or the student (Manage)
     const [ user, setUser ] = useState({});
-    const [ id, setID ] = useState();
 
     useEffect (() => {
         axios.get(`https://my-school-v1.herokuapp.com/api/users/1`)
         .then(res => {
             console.log(res.data)
             setUser(res.data)
-            setID(res.data.id)
         })
     }, []);
 
