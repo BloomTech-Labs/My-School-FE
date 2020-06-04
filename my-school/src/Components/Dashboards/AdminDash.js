@@ -7,7 +7,7 @@ import StudentCard from './StudentCard';
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 
-import { Box, Button, Heading } from '@chakra-ui/core';
+import { Box, Button, Heading, SimpleGrid } from '@chakra-ui/core';
 
 const AdminDash = ({ user, isLoading }) => {
   const history = useHistory();
@@ -39,8 +39,8 @@ const AdminDash = ({ user, isLoading }) => {
   if(students.length > 0){
     return(
       <>
-      <Heading>{familyName || 'Your' } Family</Heading>
-      <div className='student-list'>
+      <Heading as='h3' margin='10'>{familyName || 'Your' } Family</Heading>
+      <SimpleGrid className='student-list' minChildWidth='120px' min spacing='25px'>
       
       {isLoading === true ? <Loader color={'#329795'} /> : 
 
@@ -56,8 +56,8 @@ const AdminDash = ({ user, isLoading }) => {
       }
       
     
-      <Box as={Button} onClick={addStudent}> + Add new student</Box>
-      </div>
+      <Box as={Button} onClick={addStudent} className='card' minHeight='150px'> + Add new student</Box>
+      </SimpleGrid>
       </>
 
     )

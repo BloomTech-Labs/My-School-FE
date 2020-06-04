@@ -11,6 +11,7 @@ const style = StyleSheet.create({
   page: {
     flexDirection: "row",
     backgroundColor: "white",
+    margin: 25
   },
   section: {
     margin: 25,
@@ -36,14 +37,16 @@ const style = StyleSheet.create({
   },
   text: {
     fontSize: 14,
+    marginLeft: 75,
+    marginRight: 75,
     textAlign: 'justify',
     fontFamily: 'Pridi'
   },
   image: {
     marginVertical: 15,
-    marginLeft: 100,
+    marginLeft: 75,
     alignSelf: "right",
-    width: '100%'
+    maxWidth: 300
   },
 });
 /* ----------------------/STYLES----------------------------------------- */

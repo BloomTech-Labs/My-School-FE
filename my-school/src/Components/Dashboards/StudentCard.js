@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { deleteStudent} from '../../actions/actions-users';
 import { getAllActivitiesForUser } from '../../actions/actions-portfolio';
 import fontN from "../../assets/Nunito_Sans/Nunito Sans Regular.ttf";
-import {  Image,
-          Grid,
+import {  Avatar,
           Box,
-          Heading,
+          Text,
           Button, 
+          IconButton,
           AlertDialog,
           AlertDialogBody,
           AlertDialogFooter,
@@ -37,79 +37,71 @@ function StudentCard({student, family}) {
 
 
   return (
-      <Box>
-      <Heading>{student.familyName}</Heading>
-    <Grid
-      templateColumns=".75fr .25fr 1fr .5fr .25fr .25fr"
-      alignItems='left'
-      className="student-cards"
-      fontFamily= {fontN}
-    >
-      <Box>
-          <Box width="100%" fontSize='1.2rem' fontWeight='500' className='card'>
-              <Image src='' />
-          <Heading>{student.name}'s Portfolio </Heading>
-          <p>{student.name}</p>
-          </Box>
-          <Box textAlign="left">
-              LAST ACTIVITY:
-              Submitted_date SUBMITTED submitted_title
-          </Box>
-          <Button onClick={() => pushToPortfolio(student.id)}>view portfolio</Button>
-          <Button
-            _hover={{
-                bg: "white",
-                color: "#FB6542"
-            }}
-            _focus={{ boxShadow: "outline" }}
-            iconLeft="delete"
-            variant="solid"
-            bg="#FB6542"
-            color= "white"
-            onClick={() => {
-                setIsOpenDialogue(true);
-            }}
-        >
-        <AlertDialog
-            isOpen={isOpenDialogue}
-            leastDestructiveRef={cancelRef}
-            onClose={onCloseDialogue}
-        >
-            <AlertDialogOverlay />
-            <AlertDialogContent>
-                <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                    Delete Portfolio
-                </AlertDialogHeader>
+    <Box>
+        <Box width="100%" fontSize='1.2rem' fontWeight='500' className='card'>
+            <Avatar size='xl' src={student.profile_picture} />
+        <Text fontSize='2xl'>{student.name}'s Portfolio </Text>
+        <Text fontSize='lg'>{student.username}</Text>
+        </Box>
+        <Box textAlign="left">
+           <Text>LAST ACTIVITY: submitted_title</Text>
+           
+            <Text>SUBMITTED:  Submitted_date </Text>
+        </Box>
+        <Button onClick={() => pushToPortfolio(student.id)}>View Portfolio</Button>
+        <IconButton
+          _hover={{
+              bg: "white",
+              color: "#FB6542"
+          }}
+          _focus={{ boxShadow: "outline" }}
+          icon="delete"
+          aria-label="Delete Portfolio"
+          variant="solid"
+          bg="#FB6542"
+          color= "white"
+          onClick={() => {
+              setIsOpenDialogue(true);
+          }}
+      >
+      <AlertDialog
+          isOpen={isOpenDialogue}
+          leastDestructiveRef={cancelRef}
+          onClose={onCloseDialogue}
+      >
+          <AlertDialogOverlay />
+          <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                  Delete Portfolio
+              </AlertDialogHeader>
 
-                <AlertDialogBody>
-                    You're deleting an entire portfolio and student account -- permanently.
-                    Are you quite certain?
-                </AlertDialogBody>
+              <AlertDialogBody>
+                  You're deleting an entire portfolio and student account -- permanently.
+                  Are you quite certain?
+              </AlertDialogBody>
 
-                <AlertDialogFooter>
-                    <Button ref={cancelRef} onClick={onCloseDialogue}>
-                        Cancel
-                    </Button>
-                    <Button bg="#FF5656" color="white" onClick={() => {
-                        onCloseDialogue();
-                        handleDelete();
-                        toast({
-                            position: "top",
-                            title: "Student Deleted.",
-                            description: "That portfolio is donesies.",
-                            status: "success",
-                            duration: 5000,
-                            isClosable: true,
-                        });
-                    }}
-                    >
-                    </Button>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
-        </Button>
-      </Box>
-    </Grid>
+              <AlertDialogFooter>
+                  <Button ref={cancelRef} onClick={onCloseDialogue}>
+                      Cancel
+                  </Button>
+                  <Button bg="#FF5656" color="white" onClick={() => {
+                      onCloseDialogue();
+                      handleDelete();
+                      toast({
+                          position: "top",
+                          title: "Student Deleted.",
+                          description: "That portfolio is donesies.",
+                          status: "success",
+                          duration: 5000,
+                          isClosable: true,
+                      });
+                  }}
+                  >
+                  </Button>
+              </AlertDialogFooter>
+          </AlertDialogContent>
+      </AlertDialog>
+      </IconButton>
     </Box>
   );
 }
