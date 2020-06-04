@@ -11,6 +11,42 @@ describe('Add student component', () => {
         expect(title).toBeTruthy();
     })
 
+    it('should have username title', () => {
+        const { getByText } = render(<AddStudent/>)
+        const username = getByText(/username/i);
+        expect(username).toBeTruthy();
+    });
+
+    it('should have password title', () => {
+        const { getByText } = render(<AddStudent/>)
+        const password = getByText(`Password`);
+        expect(password).toBeTruthy();
+    });
+
+    it('should have confirm password title', () => {
+        const { getByText } = render(<AddStudent/>)
+        const password2 = getByText(`Password (Confirmation)`);
+        expect(password2).toBeTruthy();
+    });
+
+    it('should have port name title', () => {
+        const { getByText } = render(<AddStudent/>)
+        const port = getByText(`Portfolio name (optional)`);
+        expect(port).toBeTruthy();
+    });
+    
+    it('should have first name title', () => {
+        const { getByText } = render(<AddStudent/>)
+        const fname = getByText(/first name/i);
+        expect(fname).toBeTruthy();
+    });
+
+    it('should have last name title', () => {
+        const { getByText } = render(<AddStudent/>)
+        const lname = getByText(/last name/i);
+        expect(lname).toBeTruthy();
+    });
+
     it('renders right label and input change for username', async () => {
        const { getByTestId } = render(<AddStudent/>);
        const username = getByTestId('username');

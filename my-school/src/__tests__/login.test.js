@@ -4,6 +4,34 @@ import Login from '../Components/EnterUser/Login';
 
 describe('Login component', () => {
 
+    it('should have username title', () => {
+        const { getByText } = render(<Login/>)
+        const username = getByText(/username/i);
+        expect(username).toBeTruthy();
+    });
+
+    it('should have password label', () => {
+        const { getByText } = render(<Login/>)
+        const password = getByText(/password/i);
+        expect(password).toBeTruthy();
+    });
+    it('should have remember me title', () => {
+        const { getByText } = render(<Login/>)
+        const remember = getByText(/remember me/i);
+        expect(remember).toBeTruthy();
+    })
+    it('should have New to MySchool?' , () => {
+        const { getByText } = render(<Login/>)
+        const extra = getByText(`New to MySchool?`);
+        expect(extra).toBeTruthy();
+    })
+
+    it('should have  Create an account.' , () => {
+        const { getByText } = render(<Login/>)
+        const CAA = getByText(`Create an account.`);
+        expect(CAA).toBeTruthy();
+    })
+
     it('renders right label and input change for username', async () => {
        const { getByTestId } = render(<Login/>);
        const username = getByTestId('username');
