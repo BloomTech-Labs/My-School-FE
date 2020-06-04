@@ -48,11 +48,11 @@ const EditActivityModal = (props) => {
 
   const [image, setImage] = useState("");
 
-  // Subject value options
   const [subjects, setSubjects] = useState([]);
   const [hover, setHover] = useState(false)
   useEffect(() => {
-    axios
+    let isMounted = true;
+    if (isMounted) axios
       .get("https://my-school-v1.herokuapp.com/api/subjects")
       .then((res) => {
         setSubjects(res.data);
@@ -60,6 +60,9 @@ const EditActivityModal = (props) => {
       .catch((err) => {
         console.log(err);
       });
+    return () => {
+      isMounted = false
+    }
   }, []);
 
   // Date values to pass to DateSelector to autopopulate w/activity's submission date
@@ -133,7 +136,7 @@ const EditActivityModal = (props) => {
   return (
     <>
       <Button
-        _focus={{ boxShadow: "outline"}}
+        _focus={{ boxShadow: "outline" }}
         variant={hover ? 'outline' : 'solid'}
         variantColor="btnYellow"
         ref={btnRef}
@@ -312,7 +315,7 @@ const EditActivityModal = (props) => {
                       />
                     </Flex>
                     <Box border="1px solid #f0f0f0">
-                    <Flex
+                      <Flex
                         justifyContent="space-between"
                         alignItems="center"
                         marginTop="15px"
@@ -320,45 +323,45 @@ const EditActivityModal = (props) => {
                         width='90%'
                         mx='auto'
                       >
-                    {/* IMAGE UPLOAD */}
-                    <Text fontWeight="700">Current Image</Text>
+                        {/* IMAGE UPLOAD */}
+                        <Text fontWeight="700">Current Image</Text>
 
-                    <Button
-                      variant="solid"
-                      border="none"
-                      variantColor='btnGray'
-                    >
-                      <label htmlFor="image" className="hover-label">
-                        Upload A File
+                        <Button
+                          variant="solid"
+                          border="none"
+                          variantColor='btnGray'
+                        >
+                          <label htmlFor="image" className="hover-label">
+                            Upload A File
                       </label>
-                    </Button>
+                        </Button>
 
-                    <Input
-                      type="file"
-                      name="image"
-                      id="image"
-                      placeholder="Upload an image"
-                      onChange={handleImageUpload}
-                      padding="3px"
-                      style={{
-                        width: "0.1px",
-                        height: "0.1px",
-                        opacity: "0",
-                        overflow: "hidden",
-                        position: "absolute",
-                        zIndex: "-1",
-                      }}
-                    />
-                    </Flex>
+                        <Input
+                          type="file"
+                          name="image"
+                          id="image"
+                          placeholder="Upload an image"
+                          onChange={handleImageUpload}
+                          padding="3px"
+                          style={{
+                            width: "0.1px",
+                            height: "0.1px",
+                            opacity: "0",
+                            overflow: "hidden",
+                            position: "absolute",
+                            zIndex: "-1",
+                          }}
+                        />
+                      </Flex>
 
-                    {/* IMAGE PREVIEW */}
-                    <Image
-                      src={props.activity.photo}
-                      alt={props.activity.name}
-                      fallbackSrc={PlaceholderImg}
-                      maxHeight="150px"
-                      mx="auto"
-                    />
+                      {/* IMAGE PREVIEW */}
+                      <Image
+                        src={props.activity.photo}
+                        alt={props.activity.name}
+                        fallbackSrc={PlaceholderImg}
+                        maxHeight="150px"
+                        mx="auto"
+                      />
                     </Box>
                   </form>
                 </FormContext>

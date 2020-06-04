@@ -36,6 +36,7 @@ function StudentCard({student, family}) {
   };
 
 
+const StudentCard = ({ student }) => {
   return (
     <Box className='card' border='solid 1px lightgray' borderRadius='16px' padding='5px'>
         <Box width="100%" fontSize='1.2rem' fontWeight='500' >
@@ -103,14 +104,8 @@ function StudentCard({student, family}) {
       </AlertDialog>
       </IconButton>
     </Box>
+
   );
-}
+};
 
-const mapStateToProps = (state) => {
-  return {
-    activities: state.portfolioReducer.activities
-  }
-}
-
-export default connect(mapStateToProps, {getAllActivitiesForUser})(StudentCard)
-
+export default StudentCard;

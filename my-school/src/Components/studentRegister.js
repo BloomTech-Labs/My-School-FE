@@ -55,9 +55,14 @@ const StudentRegister = props => {
         }
     };
 
+    const pushHistory = () => {
+        history.push('/dashboard')
+      }
+
     return (
         <>
         <Flex  flexDirection='column' p='1.5rem 0rem 3rem 10rem'>
+            <Text paddingBottom='3.5rem' fontSize="1.125rem" fontWeight="700" color="gray.800"><span color='blue.900' className='link'onClick={pushHistory}>Dashboard</span> / Add a new acoount</Text>
             <h3 style={{ fontWeight:'bold'}}>New account setup</h3>
             <FormContext {...methods} >
                 <form onSubmit={handleSubmit(handleStudentRegister)}> 

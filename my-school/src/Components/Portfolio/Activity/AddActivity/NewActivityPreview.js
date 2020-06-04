@@ -11,7 +11,9 @@ import {
     useToast
 } from '@chakra-ui/core';
 
-const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
+
+const NewActivityPreview = ({ preview, studentName, historyPusher }) => {
+    // console.log("preview props:", props)
     const toast = useToast();
 
     // Displays success toast when page loads
@@ -32,6 +34,7 @@ const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
 
     return (
         <>
+        <Text padding='2rem 0rem 2rem 10rem' fontSize="1.125rem" fontWeight="700" color="gray.800"><span onClick={historyPusher}>{studentName !== '' ? `${studentName}'s Portfolio` : ''}</span> / {preview.name} - Preview </Text>
         <SimpleGrid columns={[1, 1, 1, 2]} spacing={["20px", "20px", "20px", "128px"]} mx={["8px", "20px", "32px", "100px"]} color="gray.800">
             <Box w={["100%, 100%, 100%, 50%"]}>
                 <Text fontSize="1.125rem" fontWeight="bold" color="gray.800" pb="32px">{preview.name}</Text>
