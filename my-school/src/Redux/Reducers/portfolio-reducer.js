@@ -37,7 +37,7 @@ export const portfolioReducer = (state = initialState, action) => {
             ...state,
             isLoading: true,
           };
-      case ADDIING_ACTIVITY:
+      case ADDING_ACTIVITY:
             return {
               ...state,
               isLoading: true,
