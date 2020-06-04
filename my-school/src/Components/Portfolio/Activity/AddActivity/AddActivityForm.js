@@ -75,7 +75,7 @@ const AddActivityForm = () => {
         // formats completion Date in YYYY-MM-DD format
         const completionDate = `${data.year}-${monthLeadingZero}-${dayLeadingZero}`;
 
-        if (image.raw) {
+        if (image) {
             const formData = new FormData();
             formData.append('photo', image, image.name);
             formData.set('student_id', localStorage.getItem('student_id') || localStorage.getItem('userId')); //hardcoded...change later
