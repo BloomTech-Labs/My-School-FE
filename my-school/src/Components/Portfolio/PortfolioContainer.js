@@ -9,18 +9,22 @@ import PortfolioBody from "./PortfolioBody";
 import MyDocument from "./PDFExporter";
 
 
-const PortfolioContainer = ({ activities, getAllActivitiesForUser, user}) => {
+const PortfolioContainer = ({ activities, getAllActivitiesForUser, user }) => {
 
   const id = Number(localStorage.getItem('student_id')) || Number(localStorage.getItem('userId'));
 
-    useEffect(() => {
-      getAllActivitiesForUser(id)
-    }, [getAllActivitiesForUser, user, id])
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) getAllActivitiesForUser(id);
+    return () => {
+      isMounted = false
+    }
+  }, [getAllActivitiesForUser, id]);
 
   return (
     <div>
       <PortfolioHeader />
-      <PortfolioBody activities={activities}/>     
+      <PortfolioBody activities={activities} />
       <Route exact path="/export">
         <MyDocument activities={activities} />
       </Route>
@@ -34,4 +38,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getAllActivitiesForUser }) (PortfolioContainer);
+export default connect(mapStateToProps, { getAllActivitiesForUser })(PortfolioContainer);

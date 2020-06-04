@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import axios from 'axios';
 //components
 import PortfolioContainer from "../Portfolio/PortfolioContainer";
-import  AdminDash  from './AdminDash';
+import AdminDash from './AdminDash';
 import Settings from '../EnterUser/Settings';
 import { getFamilyName } from "../../actions/actions-users";
 
@@ -21,25 +21,25 @@ const MainContainer = () => {
         getFamilyName(res.data.family_id);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
-    
-      if(user && user.user_type_id === 1){
-        return(
-         <div>
-        <AdminDash user={user}/>
+
+  if (user && user.user_type_id === 1) {
+    return (
+      <div>
+        <AdminDash user={user} />
         <Route exact path='/settings' component={Settings} />
-        </div> 
-        // {/*  ^ replaces portfolio -- parent can adjust settings -- requires parent type */}
-      )
-        // {/* ^parent login default -- requires parent type*/}
-      } else {
-        return(
-        <PortfolioContainer user={user}/>)
-        // {/* ^ student login default -- viewable by student and parent*/}
-      }
+      </div>
+      // {/*  ^ replaces portfolio -- parent can adjust settings -- requires parent type */}
+    )
+    // {/* ^parent login default -- requires parent type*/}
+  } else {
+    return (
+      <PortfolioContainer user={user} />)
+    // {/* ^ student login default -- viewable by student and parent*/}
+  }
 
-        
+
 
 }
 

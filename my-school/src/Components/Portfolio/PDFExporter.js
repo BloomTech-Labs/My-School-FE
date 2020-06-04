@@ -38,14 +38,14 @@ Font.register({
 const MyDocument = ({ activities }) => {
 
 
-  function noNull(item){
-    if(item==="null"){
+  function noNull(item) {
+    if (item === "null") {
       item = "";
     } else {
-      return(item)
+      return (item)
     }
   }
- 
+
   const PdfPortfolio = (
     <Document style={style.doc} title={""}>
       <Page size="A4" style={style.page}>
@@ -53,12 +53,12 @@ const MyDocument = ({ activities }) => {
           {activities.map((a) => {
             let subdate = moment(a.completion_date).format('MMMM Do YYYY');
             let durtime = timechange(a.duration);
-         
+
             return (
               <View key={a.id} className='section' wrap={false}>
                 <Text style={style.title}>{a.name}</Text>
                 <Text style={style.subtitle}>Date: {subdate}      Subject: {a.subject}     Duration: {durtime}</Text>
-              <Text style={style.text}>{noNull(a.description)}</Text>
+                <Text style={style.text}>{noNull(a.description)}</Text>
                 {a.photo && <Image src={`https${a.photo.slice(4, a.photo.length)}`} style={style.image} />}
               </View>
             );
@@ -72,12 +72,12 @@ const MyDocument = ({ activities }) => {
   return (
     <Box w="100%">
       <Flex direction="row"
-          align="center"
-          justify="center">
-        <Button>  
+        align="center"
+        justify="center">
+        <Button>
           <BlobProvider document={PdfPortfolio}>
             {({ url }) => <a href={url} target="_blank" rel="noopener noreferrer">Link to PDF</a>}
-            </BlobProvider>
+          </BlobProvider>
         </Button>
       </Flex>
     </Box>
@@ -86,9 +86,9 @@ const MyDocument = ({ activities }) => {
 
 const mapStateToProps = (state) => {
   return {
-      activities: state.portfolioReducer.activities,
-      isLoading: state.portfolioReducer.isLoading,
-      error: state.portfolioReducer.error,
+    activities: state.portfolioReducer.activities,
+    isLoading: state.portfolioReducer.isLoading,
+    error: state.portfolioReducer.error,
   };
 };
 
