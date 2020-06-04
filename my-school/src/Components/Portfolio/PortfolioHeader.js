@@ -16,7 +16,7 @@ const PortfolioHeader = () => {
 
   useEffect(() => {
     axios
-      .get(`https://my-school-v1.herokuapp.com/api/users/${id}`)
+      .get(`https://my-school-v1.herokuapp.com/api/users/${Number(localStorage.getItem('userId'))}`)
       .then((response) => {
         if (response.user_type_id === 1) {
           setTitle([response.data.name] + "'s Portfolio");

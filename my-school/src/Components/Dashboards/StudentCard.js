@@ -27,6 +27,7 @@ function StudentCard({student, family}) {
   const history = useHistory();
 
   const pushToPortfolio = (id) => {
+    localStorage.setItem('student_id', id);
     history.push(`/portfolio/${id}`);
   };
  
@@ -45,16 +46,16 @@ function StudentCard({student, family}) {
       fontFamily= {fontN}
     >
       <Box>
-          <Box onClick={() => pushToPortfolio(student.id)} width="100%" fontSize='1.2rem' fontWeight='500' className='card'>
+          <Box width="100%" fontSize='1.2rem' fontWeight='500' className='card'>
               <Image src='' />
           <Heading>{student.name}'s Portfolio </Heading>
           <p>{student.name}</p>
           </Box>
-
           <Box textAlign="left">
               LAST ACTIVITY:
               Submitted_date SUBMITTED submitted_title
           </Box>
+          <Button onClick={() => pushToPortfolio(student.id)}>view portfolio</Button>
           <Button
             _hover={{
                 bg: "white",
