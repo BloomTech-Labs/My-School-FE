@@ -34,21 +34,21 @@ const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
         <SimpleGrid columns={[1, 1, 1, 2]} spacing={["20px", "20px", "20px", "128px"]} mx={["8px", "20px", "32px", "100px"]} color="gray.800">
             <Box w={["100%, 100%, 100%, 50%"]}>
                 <Text fontSize="1.125rem" fontWeight="bold" color="gray.800" pb="32px">{preview.name}</Text>
-                <Flex pb="24px">
-                    <Text fontSize="xs" textTransform="uppercase" color="gray.800" w="25%">Subject: </Text>
-                    <Text w="75%">{preview.subject}</Text>
+                <Flex pb="24px" align="center">
+                    <Text fontSize="xs" textTransform="uppercase" color="gray.800" w="35%">Subject: </Text>
+                    <Text w="65%">{preview.subject}</Text>
                 </Flex>
-                <Flex pb="24px">
-                    <Text fontSize="xs" textTransform="uppercase" w="25%">Description: </Text>
-                    <Text fontSize="sm" w="75%">{preview.description ? preview.description : "No description provided"}</Text>
+                <Flex pb="24px" align="flex-start">
+                    <Text fontSize="xs" textTransform="uppercase" w="35%">Description: </Text>
+                    <Text fontSize="sm" w="65%">{preview.description ? preview.description : "No description provided"}</Text>
                 </Flex>
-                <Flex pb="24px">
-                    <Text fontSize="xs" textTransform="uppercase" w="25%">Duration: </Text>
-                    <Text fontSize="sm" w="75%">{preview.duration ? `${hours}h ${minutes}m` : "Duration not provided"}</Text>
+                <Flex pb="24px" align="flex-end">
+                    <Text fontSize="xs" textTransform="uppercase" w="35%">Duration: </Text>
+                    <Text fontSize="sm" w="65%">{preview.duration ? `${hours}h ${minutes}m` : "Duration not provided"}</Text>
                 </Flex>
-                <Flex pb="24px">
-                    <Text fontSize="xs" textTransform="uppercase" w="25%">Date Completed: </Text>
-                    <Text fontSize="sm" w="75%">{moment(preview.completion_date).format('L')}</Text>
+                <Flex pb="24px" align="flex-end">
+                    <Text fontSize="xs" textTransform="uppercase" w="35%">Date Completed: </Text>
+                    <Text fontSize="sm" w="65%">{moment(preview.completion_date).format('L')}</Text>
                 </Flex>
             </Box>
             <Box w={["100%, 100%, 100%, 50%"]}>
