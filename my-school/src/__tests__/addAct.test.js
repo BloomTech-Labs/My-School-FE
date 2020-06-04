@@ -9,6 +9,74 @@ describe('Add Activity component', () => {
         ReactGA.initialize('foo', { testMode: true });
     })
 
+    it('should have title', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const title = getByText(/title/i);
+        expect(title).toBeTruthy();
+    });
+
+    it('should have subject title', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const subject = getByText(/subject/i);
+        expect(subject).toBeTruthy();
+    });
+
+    it('should have description title', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const description = getByText(/description/i);
+        expect(description).toBeTruthy();
+    });
+    it('should have How long did it take to complete this activity?', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const howLong = getByText(/How long did it take to complete this activity?/i);
+        expect(howLong).toBeTruthy();
+    });
+    it('should have duration title', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const duration = getByText(/duration/i);
+        expect(duration).toBeTruthy();
+    });
+    it('should have hours title', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const hours = getByText(/hours/i);
+        expect(hours).toBeTruthy();
+    });
+    it('should have minutes title', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const minutes = getByText(/minutes/i);
+        expect(minutes).toBeTruthy();
+    });
+    it('should have choose file', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const choose = getByText(/choose file/i);
+        expect(choose).toBeTruthy();
+    });
+    it('should have no file selected', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const noFile = getByText(/no file selected/i);
+        expect(noFile).toBeTruthy();
+    });
+    it('should have confirm submission date title', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const submission = getByText(/Confirm Submission Date/i);
+        expect(submission).toBeTruthy();
+    });
+    it('should have month title', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const month = getByText(/month/i);
+        expect(month).toBeTruthy();
+    });
+    it('should have day title', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const day = getByText(/day/i);
+        expect(day).toBeTruthy();
+    });
+    it('should have year title', () => {
+        const { getByText } = render(<AddActivityForm />)
+        const year = getByText(/year/i);
+        expect(year).toBeTruthy();
+    });
+
     it('Upload An Activity photo title renders', () => {
         const { getByText } = render(<AddActivityForm />);
         const title = getByText(/upload activity photo/i)

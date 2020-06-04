@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
-import {pillColor} from '../../../utils/pillColor'
+import { pillColor } from '../../../utils/pillColor'
 // components
 import DeleteEntryButton from "./DeleteEntryButton";
 import EditActivityModal from "./EditActivityModal";
@@ -37,7 +37,7 @@ function ActivityCard(props) {
       templateColumns=".75fr .25fr 1fr .5fr .25fr .25fr"
       alignItems='center'
       className="activity-card"
-      fontFamily= {fontN}
+      fontFamily={fontN}
     >
       <Box width="100%" fontSize='1.2rem' fontWeight='500'>
         <p className="link" onClick={() => pushToOverview(props.activity.id)}>
@@ -50,7 +50,7 @@ function ActivityCard(props) {
         {hour}hrs {min}m
       </Box>
       <Box textAlign="center">
-        <Tag bg={pillColor(props.activity.subject)} color={pillColor(props.activity.subject).split('.')[0]+'.800'} rounded="full">
+        <Tag bg={pillColor(props.activity.subject)} color={pillColor(props.activity.subject).split('.')[0] + '.800'} rounded="full">
           {props.activity.subject}
         </Tag>
       </Box>
@@ -59,17 +59,24 @@ function ActivityCard(props) {
           {moment(props.activity.completion_date).format("ll").toUpperCase()}
         </p>
       </Box>
-      <Box>
-        <EditActivityModal
-          margin="20px"
-          activity={props.activity}
-          defaultHour={hour}
-          defaultMin={min}
-        />
-      </Box>
-      <Box>
-        <DeleteEntryButton user={props.user} activity={props.activity} />
-      </Box>
+      {localStorage.getItem('student_id') ?
+        (
+          <>
+            <Box>
+              <EditActivityModal
+                margin="20px"
+                activity={props.activity}
+                defaultHour={hour}
+                defaultMin={min}
+              />
+            </Box>
+            <Box>
+              <DeleteEntryButton user={props.user} activity={props.activity} />
+            </Box>
+          </>
+        )
+        :
+        null}
     </Grid>
   );
 }

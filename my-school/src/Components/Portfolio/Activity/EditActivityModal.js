@@ -83,7 +83,7 @@ const EditActivityModal = (props) => {
       data.day < 10 ? "0" + String(data.day) : String(data.day);
     // formats completion Date in YYYY-MM-DD format
     const completionDate = `${data.year}-${monthLeadingZero}-${dayLeadingZero}`;
-
+    const id = Number(localStorage.getItem('student_id')) || Number(localStorage.getItem('userId'));
     if (image) {
       // Updates activity without a new photo
       const formData = new FormData();
@@ -94,7 +94,7 @@ const EditActivityModal = (props) => {
       formData.set("subject_id", parseInt(data.subject));
       formData.set("completion_date", completionDate);
 
-      props.editActivity(props.activity.id, formData, 3);
+      props.editActivity(props.activity.id, formData, id);
     } else {
       //Updates activity with a new photo
       const updatedActivity = {
@@ -105,7 +105,7 @@ const EditActivityModal = (props) => {
         completion_date: completionDate,
       };
 
-      props.editActivityWithoutPhoto(props.activity.id, updatedActivity, 3);
+      props.editActivityWithoutPhoto(props.activity.id, updatedActivity, id);
     }
 
     onClose();

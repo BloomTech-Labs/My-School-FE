@@ -5,6 +5,48 @@ import Signup from '../Components/EnterUser/Signup';
 
 describe('signup component', () => {
 
+    it('should have family name title', () => {
+        const { getByText } = render(<Signup/>)
+        const family = getByText(/Family name/i);
+        expect(family).toBeTruthy();
+    });
+
+    it('should have email title', () => {
+        const { getByText } = render(<Signup/>)
+        const email = getByText(/email/i);
+        expect(email).toBeTruthy();
+    });
+    it('should have password title', () => {
+        const { getByText } = render(<Signup/>)
+        const password = getByText(`Password`);
+        expect(password).toBeTruthy();
+    });
+    it('should have confirm password title', () => {
+        const { getByText } = render(<Signup/>)
+        const password2 = getByText(/Confirm Password/i);
+        expect(password2).toBeTruthy();
+    });
+    it('should have state title', () => {
+        const { getByText } = render(<Signup/>)
+        const state = getByText(/state/i);
+        expect(state).toBeTruthy();
+    });
+    it('should have parent text title', () => {
+        const { getByText } = render(<Signup/>)
+        const extra = getByText(/i am the parent of a child being homeschooled/i);
+        expect(extra).toBeTruthy();
+    });
+    it('should have have account text', () => {
+        const { getByText } = render(<Signup/>)
+        const haveAccount = getByText(`Already have an account?`);
+        expect(haveAccount).toBeTruthy();
+    });
+    it('should have login link', () => {
+        const { getByText } = render(<Signup/>)
+        const login = getByText(/log in./i);
+        expect(login).toBeTruthy();
+    });
+
     it('renders right label and input change for family', async () => {
        const { getByTestId } = render(<Signup/>);
        const family = getByTestId('family');

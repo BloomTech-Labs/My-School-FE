@@ -19,6 +19,7 @@ const DeleteEntryButton= (props) => {
     const [hover, setHover] = useState(false)
     const onCloseDialogue = () => setIsOpenDialogue(false);
     const cancelRef = useRef();
+    const id = Number(localStorage.getItem('student_id')) || Number(localStorage.getItem('userId'));
 
 
     function deleteEntry(id, userId) {
@@ -60,7 +61,7 @@ const DeleteEntryButton= (props) => {
                     </Button>
                     <Button bg="#FF5656" color="white" onClick={() => {
                         onCloseDialogue();
-                        deleteEntry(props.activity.id, 3);
+                        deleteEntry(props.activity.id, id);
                         toast({
                             position: "top",
                             title: "Entry Deleted.",

@@ -7,7 +7,7 @@ import expect from 'expect';
 describe('portfolio reducer', () => {
 
     it('should return the initial state', ()=>{
-        expect(portfolioReducer(undefined, {})).toEqual({
+        expect(portfolioReducer(undefined, {type: ''})).toEqual({
            activities: [],
             err: "",
             isLoading: false,
@@ -15,7 +15,7 @@ describe('portfolio reducer', () => {
     });
 
     it('handlesGET_ACTIVITES_START', () => {
-        const start = { type: types.FETCHING_ACTIVITES };
+        const start = { type: types.FETCHING_ACTIVITIES };
         expect(portfolioReducer(undefined, start)).toEqual({
             activities: [],
              err: "",
@@ -24,7 +24,7 @@ describe('portfolio reducer', () => {
     });
 
     it('handles GET_POST_SUCCESS', () => {
-        const success = { type: types.ACTIVITES_SUCCESS, payload: mockData}
+        const success = { type: types.ACTIVITIES_SUCCESS, payload: mockData}
         expect(portfolioReducer({}, success)).toEqual({
             activities: [
                 {
@@ -39,12 +39,12 @@ describe('portfolio reducer', () => {
                 "age": 10, 
                 "name": "elysia"
                 }], 
-            error: "", 
+            err: "", 
             isLoading: false})
     });
 
     it('handles GET_POST_FAIL', ()=> {
-        const failed = { type: types.ACTIVITES_FAILURE ,payload: 'there was an error tring to get activities' }
+        const failed = { type: types.ACTIVITIES_FAILURE , payload: 'there was an error tring to get activities' }
         expect(portfolioReducer({}, failed)).toEqual({
              err: "there was an error tring to get activities",
              isLoading: false,

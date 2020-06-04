@@ -17,15 +17,17 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
     ReactGA.pageview("/portfolio");
   }, []);
 
+  const id = Number(localStorage.getItem('student_id'));
+
   useEffect(() => {
-    //the paramter passed in will not be hard coded once we make user login and dynamic routes
-    getAllActivitiesForUser(3);
+    getAllActivitiesForUser(id);
   }, [getAllActivitiesForUser]);
 
   useEffect(() => {
     const sorted = activities.sort((a, b) => b.id - a.id);
     setSortedActivities(sorted);
   }, [activities]);
+
   return (
     <div className="portfolio-list">
       {isLoading === true ? (

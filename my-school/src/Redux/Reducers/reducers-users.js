@@ -41,14 +41,14 @@ export const usersReducer = (state = initialState, action) => {
             ...state,
             isLoading: false,
             users: action.payload,
-            error: "",
+            err: "",
         };
 
         case USERS_FAILURE:
             return {
             ...state,
             isLoading: false,
-            error: action.payload,
+            err: action.payload,
             };
         default:
             return state;
