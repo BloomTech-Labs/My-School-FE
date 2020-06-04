@@ -35,11 +35,8 @@ Font.register({
 
 
 // Create Document Component
-const MyDocument = ({ activities, getAllActivitiesForUser }) => {
+const MyDocument = ({ activities }) => {
 
-  useEffect(() =>{
-    getAllActivitiesForUser(3);
-  }, [getAllActivitiesForUser])
 
   function noNull(item){
     if(item==="null"){

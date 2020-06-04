@@ -8,7 +8,6 @@ import { css } from "@emotion/core";
 
 const ActivityOverview = ({
   activities,
-  getAllActivitiesForUser,
   isLoading,
 }) => {
   const history = useHistory();
@@ -18,10 +17,6 @@ const ActivityOverview = ({
   const override = css`
     margin-top: 10rem;
   `;
-
-  useEffect(() => {
-    getAllActivitiesForUser(3);
-  }, [getAllActivitiesForUser]);
 
   useEffect(() => {
     const sorted = activities.sort((a, b) => b.id - a.id);

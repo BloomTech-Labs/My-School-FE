@@ -78,7 +78,7 @@ const AddActivityForm = () => {
         if (image.raw) {
             const formData = new FormData();
             formData.append('photo', image, image.name);
-            formData.set('student_id', 3); //hardcoded...change later
+            formData.set('student_id', localStorage.getItem('student_id') || localStorage.getItem('userId')); //hardcoded...change later
             formData.set('name', data.name);
             formData.set('description', data.description || null);
             formData.set('duration', duration);
@@ -100,7 +100,7 @@ const AddActivityForm = () => {
             })
         } else {
             let activity = {
-                student_id: 3, //hardcoded...will need to change
+                student_id: localStorage.getItem('student_id') || localStorage.getItem('userId'), //hardcoded...will need to change
                 name: data.name,
                 description: data.description || null,
                 duration: duration, 
