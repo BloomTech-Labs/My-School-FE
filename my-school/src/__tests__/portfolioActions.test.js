@@ -1,4 +1,4 @@
-import { ACTIVITES_SUCCESS, FETCHING_ACTIVITES, ACTIVITES_FAILURE } from '../actions/actions-portfolio';
+import { ACTIVITIES_SUCCESS, FETCHING_ACTIVITIES, ACTIVITIES_FAILURE } from '../actions/actions-portfolio';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
@@ -17,7 +17,7 @@ const act = {
     ]
 }
 const expectedActions = {
-    type: ACTIVITES_SUCCESS,
+    type: ACTIVITIES_SUCCESS,
     payload: {
         data: [
             { id: 1, name: 'this is an activity'}
@@ -25,7 +25,7 @@ const expectedActions = {
     }
 }
 const expectedFetchingSuccess = {
-    type: FETCHING_ACTIVITES
+    type: FETCHING_ACTIVITIES
 }
 const error = {
     err: [
@@ -33,7 +33,7 @@ const error = {
     ]
 }
 const expectedError = {
-    type: ACTIVITES_FAILURE,
+    type: ACTIVITIES_FAILURE,
     payload: {
         err: [
             { message: 'there was a bad axios call'}
@@ -49,8 +49,8 @@ describe('Testing getAllActivitiesForUser', () => {
 
     it('should get all activities', () => {
         mock.onGet('/testingActionsSuccess').reply(200,act)
-        store.dispatch({ type: FETCHING_ACTIVITES })
-        store.dispatch({ type: ACTIVITES_SUCCESS, payload: act })
+        store.dispatch({ type: FETCHING_ACTIVITIES })
+        store.dispatch({ type: ACTIVITIES_SUCCESS, payload: act })
         const actions  = store.getActions();
         expect(actions[0]).toEqual(expectedFetchingSuccess);
         expect(actions[1]).toEqual(expectedActions);
@@ -58,8 +58,8 @@ describe('Testing getAllActivitiesForUser', () => {
 
     it('should return error for bad get request', ()=>{
         mock.onGet('/testingActionFailure').reply(404, error)
-        store.dispatch({ type: FETCHING_ACTIVITES })
-        store.dispatch({ type: ACTIVITES_FAILURE, payload: error })
+        store.dispatch({ type: FETCHING_ACTIVITIES })
+        store.dispatch({ type: ACTIVITIES_FAILURE, payload: error })
         const actions  = store.getActions();
         expect(actions[0]).toEqual(expectedFetchingSuccess);
         expect(actions[1]).toEqual(expectedError);

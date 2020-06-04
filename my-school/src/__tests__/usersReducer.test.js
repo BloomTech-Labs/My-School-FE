@@ -9,6 +9,9 @@ describe('users reducer', () => {
     it('should return the initial state', ()=>{
         expect(usersReducer(undefined, {})).toEqual({
             users: [],
+            user: {},
+            family: [],
+            familyName:'',
             isLoading: false,
             err: ''
         })
@@ -18,8 +21,11 @@ describe('users reducer', () => {
         const start = { type: types.FETCHING_USERS };
         expect(usersReducer(undefined, start)).toEqual({
             users: [],
-            err: "",
+            user: {},
+            family: [],
+            familyName:'',
             isLoading: true,
+            err: ''
              })
     });
 
@@ -39,8 +45,9 @@ describe('users reducer', () => {
                 "age": 10, 
                 "name": "elysia"
                 }], 
-            err: "", 
-            isLoading: false})
+            err: '',
+            isLoading: false
+        })
     });
 
     it('handles USERS_FAILURE', ()=> {
@@ -50,5 +57,17 @@ describe('users reducer', () => {
              isLoading: false,
         })
     });
-    
+
+    it('handle deleting user', ()=>{
+        expect(usersReducer({}, { type: types.DELETING_USER })).toEqual({
+            isLoading: true,
+        })
+    });
+
+    it('handle adding user', ()=>{
+        expect(usersReducer({}, { type: types.ADDING_USERS })).toEqual({
+            isLoading: true,
+        })
+    });
+      
   });

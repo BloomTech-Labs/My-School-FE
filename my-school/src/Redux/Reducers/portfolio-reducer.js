@@ -1,7 +1,9 @@
 import {
-    FETCHING_ACTIVITES,
-    ACTIVITES_SUCCESS,
-    ACTIVITES_FAILURE,
+    FETCHING_ACTIVITIES,
+    ACTIVITIES_SUCCESS,
+    ACTIVITIES_FAILURE,
+    DELETING_ACTIVITY,
+    ADDING_ACTIVITY
 } from '../../actions/actions-portfolio.js';
 
 const initialState= {
@@ -12,24 +14,34 @@ const initialState= {
 
 export const portfolioReducer = (state = initialState, action) => {
     switch (action.type) {
-      case FETCHING_ACTIVITES:
+      case FETCHING_ACTIVITIES:
         return {
           ...state,
           isLoading: true,
         };
-      case ACTIVITES_SUCCESS:
+      case ACTIVITIES_SUCCESS:
         return {
           ...state,
           isLoading: false,
           activities: action.payload,
-          error: "",
+          err: "",
         };
-      case ACTIVITES_FAILURE:
+      case ACTIVITIES_FAILURE:
         return {
           ...state,
           isLoading: false,
           err: action.payload,
         };
+      case DELETING_ACTIVITY:
+          return {
+            ...state,
+            isLoading: true,
+          };
+      case ADDING_ACTIVITY:
+            return {
+              ...state,
+              isLoading: true,
+            };
       default:
         return state;
     }
