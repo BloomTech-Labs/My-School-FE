@@ -52,6 +52,9 @@ function App() {
             <Route path='/portfolio/:id/export'>
               <MainLayout page={<PDFExporter />} />
             </Route>
+            <Route path='/activity/:id'>
+              <MainLayout page={<ActivityOverview />} />
+            </Route>
             <Route path='/addstudent'>
               <MainLayout page={<StudentRegistration/>} />
             </Route>

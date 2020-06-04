@@ -7,26 +7,24 @@ import { getAllActivitiesForUser } from "../../actions/actions-portfolio";
 import PortfolioHeader from "./PortfolioHeader";
 import PortfolioBody from "./PortfolioBody";
 import MyDocument from "./PDFExporter";
-import ActivityOverview from './Activity/ActivityOverview';
+
 
 const PortfolioContainer = ({ activities, getAllActivitiesForUser, user}) => {
-  const id = Number(localStorage.getItem('student_id'));
+
+  const id = Number(localStorage.getItem('student_id')) || Number(localStorage.getItem('userId'));
+
     useEffect(() => {
       getAllActivitiesForUser(id)
     }, [getAllActivitiesForUser, user,])
 
   return (
     <div>
-    <PortfolioHeader />
-    <PortfolioBody activities={activities}/>     
-    <Route exact path="/export">
-      <MyDocument activities={activities} />
-    </Route>
-    <Route path='/activity/:id' >
-      <ActivityOverview activities={activities}/>
-    </Route>
- 
-  </div>
+      <PortfolioHeader />
+      <PortfolioBody activities={activities}/>     
+      <Route exact path="/export">
+        <MyDocument activities={activities} />
+      </Route>
+    </div>
   );
 };
 
