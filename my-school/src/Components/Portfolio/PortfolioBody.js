@@ -7,7 +7,6 @@ import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 import {Grid, Text} from '@chakra-ui/core'
 
-
 const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user }) => {
   const [sortedActivities, setSortedActivities] = useState([]);
   const isParent = localStorage.getItem('student_id') ? true : false;

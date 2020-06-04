@@ -13,7 +13,6 @@ const PortfolioContainer = ({ activities, getAllActivitiesForUser, user }) => {
 
   const id = Number(localStorage.getItem('student_id')) || Number(localStorage.getItem('userId'));
 
-
   useEffect(() => {
     let isMounted = true;
     if (isMounted) getAllActivitiesForUser(id);
