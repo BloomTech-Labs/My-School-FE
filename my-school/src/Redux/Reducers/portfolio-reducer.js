@@ -3,7 +3,7 @@ import {
     ACTIVITIES_SUCCESS,
     ACTIVITIES_FAILURE,
     DELETING_ACTIVITY,
-    ADDIING_ACTIVITY
+    ADDING_ACTIVITY
 } from '../../actions/actions-portfolio.js';
 
 const initialState= {
