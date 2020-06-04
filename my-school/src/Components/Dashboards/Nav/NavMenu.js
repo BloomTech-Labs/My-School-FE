@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getFamilyName } from '../../../actions/actions-users';
 import {
   Menu,
   MenuButton,
@@ -14,27 +16,18 @@ import {
   Image,
   Flex
 } from "@chakra-ui/core";
-import axios from 'axios';
+// components
 import NavName from './NavName';
+// assets
 import LogoutIcon from '../../../assets/icons/logout_icon.png';
 import PlusIcon from '../../../assets/icons/plus_icon.png';
 
-const NavMenu = ({user, family}) => {
-  // console.log({user});
-  // console.log({family})
-
+const NavMenu = ({ user, family, isLoading, err, getFamilyName }) => {
   const history = useHistory();
-  const [ students, setStudents ] = useState([]);
 
-  useEffect(() =>{
-    axios.get(`https://my-school-v1.herokuapp.com/api/families/${family}`)
-      .then( res=> {
-        setStudents(res.data.people.filter(p => p.user_type_id === 2))
-      })
-      .catch(err => {
-        console.log("error getting family info", err)
-      })
-  }, []);
+  useEffect(() => {
+    getFamilyName(user.family_id)
+  }, [getFamilyName, user, family])
 
   const handleAdminSettings = () => {
     history.push('/settings')
@@ -58,6 +51,7 @@ const NavMenu = ({user, family}) => {
   }
   
   return (
+    // <>Test</>
       <Menu>
         {/* MenuButton is the trigger to open the MenuList */}
         <MenuButton as={Button} bg='transparent' color="black" variantColor='btnBlue'>
@@ -85,8 +79,10 @@ const NavMenu = ({user, family}) => {
             {/* STUDENT ACCOUNT MANAGEMENT */}
             <MenuGroup title={`${user.familyName} Family`} fontSize="1.125" color="gray.800" fontWeight="bold" mx="24px" mt="20px" mb="12px" p="0">
               {/* EXISTING STUDENT ACCOUNTS */}
-              {students.length > 0 ? 
-              students.map(s => {
+              {family.length > 1 ? 
+              family.map(s => {
+                // family includes parent, so much filter for student accts only
+                if (s.user_type_id === 2) {
                 return (
                   <MenuItem key={s.id} value={s.id} py="8px" pl="24px" onClick={manageStudent}>
                     <Avatar size="sm" src={s.profile_picture} alt={`${s.name} profile picture`} />
@@ -98,7 +94,9 @@ const NavMenu = ({user, family}) => {
                       <Text pt="4px" pl="5px">Manage</Text>
                     </Box>
                   </MenuItem>
-                )
+                )} else {
+                  return null
+                }
               })
               
               : <Text fontSize="sm" color="gray.700" py="8px" my="12px" px="24px">No students have been added to your family yet</Text> } 
@@ -121,5 +119,12 @@ const NavMenu = ({user, family}) => {
   )
 };
 
+const mapStateToProps = (state) => {
+  return {
+    family: state.usersReducer.family,
+    isLoading: state.usersReducer.isLoading,
+    err: state.usersReducer.error
+  }
+}
 
-export default NavMenu;
+export default connect(mapStateToProps, { getFamilyName })(NavMenu);
