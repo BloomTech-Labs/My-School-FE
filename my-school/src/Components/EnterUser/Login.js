@@ -119,7 +119,7 @@ const Login = props => {
                     >Login</Button>
                 </Flex>
             </form>
-            <Text fontSize=".875rem">New to MySchool? <Link as={RouterLink} to="/signup">Create an account.</Link></Text>
+            <Text fontSize=".875rem">New to MySchool? <Link as={RouterLink} to="/signup" color='#FB6542'>Create an account.</Link></Text>
         </>
     )
 }
