@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -11,59 +11,59 @@ import { Box, Button, Heading } from '@chakra-ui/core';
 
 const AdminDash = ({ user, isLoading }) => {
   const history = useHistory();
-  const [ students, setStudents ] = useState([]);
-  const [ familyName, setFamilyName ] = useState('');
+  const [students, setStudents] = useState([]);
+  const [familyName, setFamilyName] = useState('');
   const id = localStorage.getItem('family_id')
 
 
-  useEffect( _ => {
+  useEffect(_ => {
     ReactGA.initialize("UA-156199574-5")
     ReactGA.pageview("/dashboard")
-  },[])
+  }, [])
 
-  useEffect(() =>{
+  useEffect(() => {
     axios.get(`https://my-school-v1.herokuapp.com/api/families/${id}`)
-    .then( res=> {
-      setFamilyName(res.data.family.name)
-      setStudents(res.data.people.filter(s => s.user_type_id===2))
-      
-    })
+      .then(res => {
+        setFamilyName(res.data.family.name)
+        setStudents(res.data.people.filter(s => s.user_type_id === 2))
+
+      })
   }, [id]);
 
 
   const addStudent = () => {
     history.push('/addstudent')
   };
-  
 
-  if(students.length > 0){
-    return(
+
+  if (students.length > 0) {
+    return (
       <>
-      <Heading>{familyName || 'Your' } Family</Heading>
-      <div className='student-list'>
-      
-      {isLoading === true ? <Loader color={'#329795'} /> : 
+        <Heading>{familyName || 'Your'} Family</Heading>
+        <div className='student-list'>
 
-        (students.map(student =>{
-            return(
-              <StudentCard 
-              key={student.id} 
-              student={student} 
-              className='card' 
-              familyName={familyName}/>
-             )
-        }))
-      }
-      
-    
-      <Box as={Button} onClick={addStudent}> + Add new student</Box>
-      </div>
+          {isLoading === true ? <Loader color={'#329795'} /> :
+
+            (students.map(student => {
+              return (
+                <StudentCard
+                  key={student.id}
+                  student={student}
+                  className='card'
+                  familyName={familyName} />
+              )
+            }))
+          }
+
+
+          <Box as={Button} onClick={addStudent}> + Add new student</Box>
+        </div>
       </>
 
     )
   } else {
 
-    return(
+    return (
       <Box as={Button} onClick={addStudent}> + Add new student</Box>
     )
   }
@@ -78,4 +78,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps , { getFamilyByID })(AdminDash);
+export default connect(mapStateToProps, { getFamilyByID })(AdminDash);

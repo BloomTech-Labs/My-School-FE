@@ -8,7 +8,7 @@ import {
     useToast
 } from '@chakra-ui/core';
 
-const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
+const NewActivityPreview = ({ preview, studentName, historyPusher }) => {
     // console.log("preview props:", props)
     const toast = useToast();
 
@@ -30,39 +30,40 @@ const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
 
     return (
         <>
-        <Flex>
-            <Box w={1/2} px={20}>
-                <Text fontSize="2xl">{preview.name}</Text>
-                <Flex>
-                    <Text>Subject: </Text>
-                    <Text>{preview.subject}</Text>
-                </Flex>
-                <Flex>
-                    <Text>Description: </Text>
-                    <Text>{preview.description ? preview.description : "N/A"}</Text>
-                </Flex>
-                <Flex>
-                    <Text>Duration: </Text>
-                    <Text>{preview.duration ? `${hours}h${minutes}m` : "N/A"}</Text>
-                </Flex>
-                <Flex>
-                    <Text>Date Completed: </Text>
-                    <Text>{moment(preview.completion_date).format('l')}</Text>
-                </Flex>
-            </Box>
-            <Box w={1/2} px={20}>
-                <Box border="1px solid #C4C4C4" borderRadius="8px">
-                    <Text>Assignment Photo</Text>
-                    {preview.photo ? 
-                    <Image 
-                        src={preview.photo} 
-                        alt={preview.name} 
-                        size="100px"
-                        objectFit="cover"
-                    />
-                    : <Text>No image uploaded</Text>}
+            <Text padding='2rem 0rem 2rem 10rem' fontSize="1.125rem" fontWeight="700" color="gray.800"><span onClick={historyPusher}>{studentName !== '' ? `${studentName}'s Portfolio` : ''}</span> / {preview.name} - Preview </Text>
+            <Flex>
+                <Box w={1 / 2} px={20}>
+                    <Text fontSize="2xl">{preview.name}</Text>
+                    <Flex>
+                        <Text>Subject: </Text>
+                        <Text>{preview.subject}</Text>
+                    </Flex>
+                    <Flex>
+                        <Text>Description: </Text>
+                        <Text>{preview.description ? preview.description : "N/A"}</Text>
+                    </Flex>
+                    <Flex>
+                        <Text>Duration: </Text>
+                        <Text>{preview.duration ? `${hours}h${minutes}m` : "N/A"}</Text>
+                    </Flex>
+                    <Flex>
+                        <Text>Date Completed: </Text>
+                        <Text>{moment(preview.completion_date).format('l')}</Text>
+                    </Flex>
                 </Box>
-            </Box>
+                <Box w={1 / 2} px={20}>
+                    <Box border="1px solid #C4C4C4" borderRadius="8px">
+                        <Text>Assignment Photo</Text>
+                        {preview.photo ?
+                            <Image
+                                src={preview.photo}
+                                alt={preview.name}
+                                size="100px"
+                                objectFit="cover"
+                            />
+                            : <Text>No image uploaded</Text>}
+                    </Box>
+                </Box>
             </Flex>
         </>
     )
