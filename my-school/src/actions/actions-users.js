@@ -37,24 +37,6 @@ export const getFamilyName = (fam_id) => {
     }
 }
 
-
-export const getFamilyByID = (fam_id) => {
-    return dispatch => {
-        dispatch({type: FETCHING_USERS})
-        axios.get(`https://my-school-v1.herokuapp.com/api/users/${fam_id}`)
-        .then(res => {
-            setTimeout(()=> {
-                dispatch({type: USERS_SUCCESS, payload: res.data})
-            }, 2000);
-        })
-        .catch(err => {
-            console.log(err)
-            dispatch({type: USERS_FAILURE, payload: err})
-        })
-    }
-}
-
-
 export const deleteStudent = (fam_id, student_id) => {
     return dispatch => {
         dispatch({type: DELETING_USER})

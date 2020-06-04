@@ -41,6 +41,7 @@ export const usersReducer = (state = initialState, action) => {
             ...state,
             isLoading: false,
             users: action.payload,
+            family: action.payload.people,
             err: "",
         };
 
