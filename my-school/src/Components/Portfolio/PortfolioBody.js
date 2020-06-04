@@ -5,6 +5,7 @@ import ActivityCard from "./Activity/ActivityCard";
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
+import {Grid, Text} from '@chakra-ui/core'
 
 const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user }) => {
   const [sortedActivities, setSortedActivities] = useState([]);
@@ -35,7 +36,19 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
         <Loader color={'#375E97'} css={override} height='75vh'/>
         </div>
       ) : (
-        sortedActivities.map((activity) => {
+        <>
+        <Grid
+        templateColumns=".75fr .25fr 1fr .5fr .25fr .25fr"
+        alignItems='center'
+        className="activity-card"
+        fontWeight='800'
+      >
+          <Text>Activity</Text>
+          <Text>Duration</Text>
+          <Text textAlign='center'>Subject</Text>
+          <Text>Date</Text>
+        </Grid>
+        {sortedActivities.map((activity) => {
           return (
             <ActivityCard
             key={activity.id}
@@ -43,7 +56,8 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
             className="card"
           />
           )
-        })
+        })}
+        </>
       )}
     </div>
   );
