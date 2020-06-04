@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import moment from 'moment';
 import {
+    SimpleGrid,
     Box,
     Flex,
     Text,
@@ -30,40 +31,40 @@ const NewActivityPreview = ({ preview, loading, setIsLoading }) => {
 
     return (
         <>
-        <Flex>
-            <Box w={1/2} px={20}>
-                <Text fontSize="2xl">{preview.name}</Text>
-                <Flex>
-                    <Text>Subject: </Text>
+        <SimpleGrid columns={[1, 1, 1, 2]} spacing={["20px", "20px", "20px", "128px"]} mx={["8px", "20px", "32px", "100px"]} color="gray.800">
+            <Box w={["100%, 100%, 100%, 50%"]}>
+                <Text fontSize="1.125rem" fontWeight="bold" color="gray.800" pb="32px">{preview.name}</Text>
+                <Flex pb="24px">
+                    <Text fontSize="xs" textTransform="uppercase" color="gray.800">Subject: </Text>
                     <Text>{preview.subject}</Text>
                 </Flex>
-                <Flex>
-                    <Text>Description: </Text>
-                    <Text>{preview.description ? preview.description : "N/A"}</Text>
+                <Flex pb="24px">
+                    <Text fontSize="xs" textTransform="uppercase">Description: </Text>
+                    <Text fontSize="sm">{preview.description ? preview.description : "No description provided"}</Text>
                 </Flex>
-                <Flex>
-                    <Text>Duration: </Text>
-                    <Text>{preview.duration ? `${hours}h${minutes}m` : "N/A"}</Text>
+                <Flex pb="24px">
+                    <Text fontSize="xs" textTransform="uppercase">Duration: </Text>
+                    <Text fontSize="sm">{preview.duration ? `${hours}h ${minutes}m` : "Duration not provided"}</Text>
                 </Flex>
-                <Flex>
-                    <Text>Date Completed: </Text>
-                    <Text>{moment(preview.completion_date).format('l')}</Text>
+                <Flex pb="24px">
+                    <Text fontSize="xs" textTransform="uppercase">Date Completed: </Text>
+                    <Text fontSize="sm">{moment(preview.completion_date).format('L')}</Text>
                 </Flex>
             </Box>
-            <Box w={1/2} px={20}>
-                <Box border="1px solid #C4C4C4" borderRadius="8px">
-                    <Text>Assignment Photo</Text>
+            <Box w={["100%, 100%, 100%, 50%"]}>
+                <Box h="280px" border="1px" borderRadius="8px" borderColor="gray.400" p="24px" w="100%">
+                    <Text fontSize="sm" color="gray.600" pb="22px">Attached Photo</Text>
                     {preview.photo ? 
                     <Image 
                         src={preview.photo} 
                         alt={preview.name} 
-                        size="100px"
-                        objectFit="cover"
+                        maxHeight="200px" 
+                        pb="22px"
                     />
-                    : <Text>No image uploaded</Text>}
+                    : <Text color="gray.800">No image uploaded</Text>}
                 </Box>
             </Box>
-            </Flex>
+        </SimpleGrid>
         </>
     )
 }
