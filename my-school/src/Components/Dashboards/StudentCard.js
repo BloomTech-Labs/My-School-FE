@@ -37,8 +37,8 @@ function StudentCard({student, family}) {
 
 
   return (
-    <Box>
-        <Box width="100%" fontSize='1.2rem' fontWeight='500' className='card'>
+    <Box className='card' border='solid 1px lightgray' borderRadius='16px' padding='5px'>
+        <Box width="100%" fontSize='1.2rem' fontWeight='500' >
             <Avatar size='xl' src={student.profile_picture} />
         <Text fontSize='2xl'>{student.name}'s Portfolio </Text>
         <Text fontSize='lg'>{student.username}</Text>
