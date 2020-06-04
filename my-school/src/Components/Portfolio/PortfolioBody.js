@@ -5,10 +5,12 @@ import ActivityCard from "./Activity/ActivityCard";
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
-import { Text } from '@chakra-ui/core';
+import {Grid, Text} from '@chakra-ui/core'
 
 const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user }) => {
   const [sortedActivities, setSortedActivities] = useState([]);
+  const isParent = localStorage.getItem('student_id') ? true : false;
+  const gridTemplateColumns = isParent ? ".75fr .25fr 1fr .5fr .25fr .25fr" : "1.25fr .25fr .25fr .25fr"
   const override = css`
     margin-top: 10rem;
   `;
@@ -40,18 +42,33 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
           <Loader color={'#375E97'} css={override} height='75vh' />
         </div>
       ) : (
-          sortedActivities.map((activity) => (
+        <>
+        <Grid
+        templateColumns={gridTemplateColumns}
+        alignItems='center'
+        className="activity-card"
+        fontWeight='800'
+      >
+          <Text>Name</Text>
+          <Text>Subject</Text>
+          <Text textAlign='center'>Duration</Text>
+          <Text>Date</Text>
+          {isParent && <Text>Options</Text>}
+        </Grid>
+          {sortedActivities.map((activity) => (
             <ActivityCard
               key={activity.id}
               activity={activity}
               className="card"
             />
           ))
-        )}
+        }
         {sortedActivities.length === 0 && isLoading === false ? 
         <Text textAlign='center' color='blue.900'>You currently have no entries in you're portfolio <br/> It's time to get to work!</Text>
         : ''}
-    </div>
+        </>
+      )}
+      </div>
   );
 };
 

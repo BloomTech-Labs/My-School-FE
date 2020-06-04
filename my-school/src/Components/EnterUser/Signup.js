@@ -253,7 +253,7 @@ const Signup = () => {
                     _hover={{bg: "green.700"}}
                 >Submit</Button>
             </form>
-            <Text fontSize=".875rem">Already have an account? <Link as={RouterLink} to="/login">Log in.</Link></Text>
+            <Text fontSize=".875rem">Already have an account? <Link as={RouterLink} to="/login" color='#FB6542'>Log in.</Link></Text>
         </>
     )
 }
