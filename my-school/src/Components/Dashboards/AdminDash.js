@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { getFamilyByID } from '../../actions/actions-users';
 import StudentCard from './StudentCard';
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
@@ -78,4 +77,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getFamilyByID })(AdminDash);
+export default connect(mapStateToProps , {})(AdminDash);
