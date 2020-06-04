@@ -7,6 +7,7 @@ import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 import {Grid, Text} from '@chakra-ui/core'
 
+
 const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user }) => {
   const [sortedActivities, setSortedActivities] = useState([]);
   const isParent = localStorage.getItem('student_id') ? true : false;
@@ -20,11 +21,15 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
     ReactGA.pageview("/portfolio");
   }, []);
 
-  const id = Number(localStorage.getItem('student_id'));
+  const id = Number(localStorage.getItem('student_id')) || Number(localStorage.getItem('userId'));
 
   useEffect(() => {
-    getAllActivitiesForUser(id);
-  }, [getAllActivitiesForUser]);
+    let isMounted = true;
+    if (isMounted) getAllActivitiesForUser(id);
+    return () => {
+      isMounted = false
+    }
+  }, [getAllActivitiesForUser, id]);
 
   useEffect(() => {
     const sorted = activities.sort((a, b) => b.id - a.id);
@@ -34,8 +39,8 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
   return (
     <div className="portfolio-list">
       {isLoading === true ? (
-        <div style={{display:'flex', justifyContent:'center', alignItems: 'center', height:'40vh'}}>
-        <Loader color={'#375E97'} css={override} height='75vh'/>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40vh' }}>
+          <Loader color={'#375E97'} css={override} height='75vh' />
         </div>
       ) : (
         <>
@@ -51,18 +56,20 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user })
           <Text>Date</Text>
           {isParent && <Text>Options</Text>}
         </Grid>
-        {sortedActivities.map((activity) => {
-          return (
+          {sortedActivities.map((activity) => (
             <ActivityCard
-            key={activity.id}
-            activity={activity}
-            className="card"
-          />
-          )
-        })}
+              key={activity.id}
+              activity={activity}
+              className="card"
+            />
+          ))
+        }
+        {sortedActivities.length === 0 && isLoading === false ? 
+        <Text textAlign='center' color='blue.900'>You currently have no entries in you're portfolio <br/> It's time to get to work!</Text>
+        : ''}
         </>
       )}
-    </div>
+      </div>
   );
 };
 
