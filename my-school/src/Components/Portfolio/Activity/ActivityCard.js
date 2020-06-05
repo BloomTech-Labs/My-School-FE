@@ -13,7 +13,7 @@ function ActivityCard(props) {
   const [hour, setHour] = useState();
   const [min, setMin] = useState();
   const history = useHistory();
-
+  const gridTemplateColumns = localStorage.getItem('student_id') ? ".75fr .25fr 1fr .5fr .25fr .25fr" : "1.25fr .25fr .25fr .25fr"
 
   useEffect(() => {
     if (props.activity.duration !== null) {
@@ -34,7 +34,7 @@ function ActivityCard(props) {
 
   return (
     <Grid
-      templateColumns=".75fr .25fr 1fr .5fr .25fr .25fr"
+      templateColumns={gridTemplateColumns}
       alignItems='center'
       className="activity-card"
       fontFamily={fontN}
@@ -47,12 +47,12 @@ function ActivityCard(props) {
         </p>
       </Box>
       <Box>
-        {hour}hrs {min}m
-      </Box>
-      <Box textAlign="center">
         <Tag bg={pillColor(props.activity.subject)} color={pillColor(props.activity.subject).split('.')[0] + '.800'} rounded="full">
           {props.activity.subject}
         </Tag>
+      </Box>
+      <Box textAlign='center'>
+        {hour}hrs {min}m
       </Box>
       <Box>
         <p>

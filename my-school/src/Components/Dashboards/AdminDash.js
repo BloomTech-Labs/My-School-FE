@@ -14,7 +14,6 @@ const AdminDash = ({ user, isLoading }) => {
   const [familyName, setFamilyName] = useState('');
   const id = localStorage.getItem('family_id')
 
-
   useEffect(_ => {
     ReactGA.initialize("UA-156199574-5")
     ReactGA.pageview("/dashboard")
@@ -25,7 +24,9 @@ const AdminDash = ({ user, isLoading }) => {
       .then(res => {
         setFamilyName(res.data.family.name)
         setStudents(res.data.people.filter(s => s.user_type_id === 2))
-
+      })
+      .catch(err => {
+        console.log(err)
       })
   }, [id]);
 
@@ -41,7 +42,10 @@ const AdminDash = ({ user, isLoading }) => {
       <Heading as='h3' margin='10'>{familyName || 'Your' } Family</Heading>
       <SimpleGrid className='student-list' minChildWidth='120px' min spacing='25px'>
       
-      {isLoading === true ? <Loader color={'#329795'} /> : 
+      {isLoading === true ? <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40vh' }}>
+              <Loader color={'#375E97'} height='75vh' />
+            </div>
+            : 
 
         (students.map(student =>{
             return(
@@ -57,10 +61,8 @@ const AdminDash = ({ user, isLoading }) => {
     
       <Box as={Button} onClick={addStudent} className='card' minHeight='150px'> + Add new student</Box>
       </SimpleGrid>
-
-
+       
       </>
-
     )
   } else {
 
@@ -79,4 +81,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps , {})(AdminDash);
+export default connect(mapStateToProps, {})(AdminDash);
