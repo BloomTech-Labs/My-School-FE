@@ -4,6 +4,7 @@ export const ACTIVITIES_SUCCESS =  'ACTIVITES_SUCCESS';
 export const ACTIVITIES_FAILURE = 'ACTIVITES_FAILURE';
 export const ADDING_ACTIVITY = 'ADDING_ACTIVITY';
 export const DELETING_ACTIVITY = 'DELETING_ACTIVITY';
+export const ALL_ACTIVITIES_SUCCESS = 'ALL_ACTIVITIES_SUCCESS'
 
 
 export const getAllActivitiesForUser = (id) => dispatch => {
@@ -17,6 +18,19 @@ export const getAllActivitiesForUser = (id) => dispatch => {
         .catch(err => {
             dispatch({type: ACTIVITIES_FAILURE, payload: err})
         })
+}
+
+export const getAllActivities = () => dispatch => {
+    dispatch({type: FETCHING_ACTIVITIES})
+    axios.get(`https://my-school-v1.herokuapp.com/api/activities`)
+    .then(res => {
+        setTimeout(()=> {
+            dispatch({type: ALL_ACTIVITIES_SUCCESS, payload: res})
+        }, 1000)
+    })
+    .catch(err => {
+        dispatch({type: ACTIVITIES_FAILURE, payload: err})
+    })
 }
 
 export const editActivityWithoutPhoto  = (id, changes, userId) => {

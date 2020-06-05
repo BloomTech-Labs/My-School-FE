@@ -5,10 +5,11 @@ import axios from 'axios';
 import StudentCard from './StudentCard';
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
+import { getAllActivities } from '../../actions/actions-portfolio'
 
 import { Box, Button, Heading } from '@chakra-ui/core';
 
-const AdminDash = ({ user, isLoading }) => {
+const AdminDash = ({ user, isLoading, allActivities, getAllActivities }) => {
   const history = useHistory();
   const [students, setStudents] = useState([]);
   const [familyName, setFamilyName] = useState('');
@@ -17,6 +18,10 @@ const AdminDash = ({ user, isLoading }) => {
   useEffect(_ => {
     ReactGA.initialize("UA-156199574-5")
     ReactGA.pageview("/dashboard")
+  }, [])
+
+  useEffect(() => {
+    getAllActivities()
   }, [])
 
   useEffect(() => {
@@ -29,7 +34,6 @@ const AdminDash = ({ user, isLoading }) => {
         console.log(err)
       })
   }, [id]);
-
 
   const addStudent = () => {
     history.push('/addstudent')
@@ -54,7 +58,8 @@ const AdminDash = ({ user, isLoading }) => {
                   key={student.id}
                   student={student}
                   className='card'
-                  familyName={familyName} />
+                  familyName={familyName}
+                  allActivities={allActivities} />
               )
             }))
           }
@@ -79,7 +84,8 @@ const mapStateToProps = (state) => {
     family: state.usersReducer.family,
     isLoading: state.usersReducer.isLoading,
     error: state.usersReducer.error,
+    allActivities: state.portfolioReducer.allActivities
   };
 };
 
-export default connect(mapStateToProps, {})(AdminDash);
+export default connect(mapStateToProps, { getAllActivities })(AdminDash);

@@ -3,11 +3,13 @@ import {
     ACTIVITIES_SUCCESS,
     ACTIVITIES_FAILURE,
     DELETING_ACTIVITY,
-    ADDING_ACTIVITY
+    ADDING_ACTIVITY,
+    ALL_ACTIVITIES_SUCCESS
 } from '../../actions/actions-portfolio.js';
 
 const initialState= {
     activities: [],
+    allActivities: [],
     isLoading: false,
     err: ''
 }
@@ -26,6 +28,13 @@ export const portfolioReducer = (state = initialState, action) => {
           activities: action.payload,
           err: "",
         };
+        case ALL_ACTIVITIES_SUCCESS:
+          return {
+            ...state,
+            isLoading: false,
+            allActivities: action.payload,
+            err: "",
+          };
       case ACTIVITIES_FAILURE:
         return {
           ...state,

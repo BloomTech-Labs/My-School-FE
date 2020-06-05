@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState, useEffect }from "react";
 import { Flex, Image, IconButton, Heading, Text, Box } from "@chakra-ui/core";
 import placeholder from "../../assets/placeholder_img.png";
-import {connect} from 'react-redux';
-import {getAllActivitiesForUser} from '../../actions/actions-portfolio'
 import moment from 'moment';
 import {useHistory} from 'react-router-dom'
 
-const StudentCard = ({ student, familyName, activities }) => {
+const StudentCard = ({ student, familyName, allActivities }) => {
   const history = useHistory()
+  const [ acts , setFilteredActs ] = useState([])
+  const [ lastActivity, setLastActivity ] = useState([]);
 
-  const lastActivity = activities.sort((a, b) => b.created_at - a.created_at)
+  useEffect(()=>{
+      if(allActivities.length !== 0 && student ) 
+      setFilteredActs(allActivities.data.filter(act => act.student_id === student.id ? act : null))
+      ;
+  },[allActivities])
+
+  useEffect(()=>{
+    if(acts.length !== 0 && acts) setLastActivity(acts.sort((a, b) => b.id - a.id));
+  }, [acts])
 
   const pushToPortfolio = (id) => {
     localStorage.setItem('student_id', id);
@@ -29,18 +37,10 @@ const StudentCard = ({ student, familyName, activities }) => {
       </Flex>
       <Flex direction='column'>
       <Text fontWeight='800' fontSize='.9rem'>LAST ACTIVITY</Text>
-  {lastActivity[0] && <Text>{moment(lastActivity[0].created_at).format('ll').toUpperCase()} SUBMITTED {lastActivity[0].name}</Text>}
+      {lastActivity[0] && <Text>{moment(lastActivity[0].created_at).format('ll').toUpperCase()} SUBMITTED {lastActivity[0].name}</Text>}
       </Flex>
     </Flex>
   );
 };
 
-//{moment(props.activity.completion_date).format("ll").toUpperCase()}
-
-const mapStateToProps = (state) => {
-  return {
-    activities: state.portfolioReducer.activities
-  }
-}
-
-export default connect(mapStateToProps, {getAllActivitiesForUser})(StudentCard)
+export default StudentCard;
