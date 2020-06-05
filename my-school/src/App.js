@@ -8,13 +8,13 @@ import ReactGA from "react-ga";
 import Landing from "./Components/EnterUser/Landing";
 import AuthPage from "./Components/EnterUser/AuthPage";
 import MainLayout from "./Components/MainLayout";
-import MainContainer from "./Components/Dashboards/MainContainer";
 import PortfolioContainer from "./Components/Portfolio/PortfolioContainer";
 import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActivityForm";
 import PDFExporter from './Components/Portfolio/PDFExporter'
 import ActivityOverview from "./Components/Portfolio/Activity/ActivityOverview";
 import StudentRegistration from './Components/studentRegister';
 import Settings from './Components/EnterUser/Settings';
+import AdminDash from './Components/Dashboards/AdminDash';
 
 function App() {
   React.useEffect((_) => {
@@ -38,7 +38,7 @@ function App() {
               <AuthPage login={false} />
             </Route>
             <Route path='/dashboard'>
-              <MainLayout page={<MainContainer />} />
+              <MainLayout page={<AdminDash />} />
             </Route>
             <Route path='/settings'>
               <MainLayout page={<Settings />} />

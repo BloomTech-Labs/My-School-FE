@@ -44,11 +44,9 @@ const AdminDash = ({ user, isLoading }) => {
 
           {isLoading === true ? (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40vh' }}>
-            <Loader color={'#375E97'}  height='75vh' />
-          </div>
-          ) 
-          
-          :
+              <Loader color={'#375E97'} height='75vh' />
+            </div>
+          ) :
 
             (students.map(student => {
               return (
@@ -76,7 +74,6 @@ const AdminDash = ({ user, isLoading }) => {
 };
 
 const mapStateToProps = (state) => {
-  // console.log(state)
   return {
     user: state.usersReducer.user,
     family: state.usersReducer.family,
@@ -85,4 +82,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps , {})(AdminDash);
+export default connect(mapStateToProps, {})(AdminDash);
