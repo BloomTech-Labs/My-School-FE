@@ -1,6 +1,8 @@
 import React,{ useRef } from 'react';
 import { useForm, FormContext } from 'react-hook-form';
 import { axiosWithAuth } from '../utils/axiosWithAuth.js';
+import { connect } from 'react-redux';
+import { getFamilyName } from '../actions/actions-users';
 import {
     Button,
     Input,
@@ -43,6 +45,7 @@ const StudentRegister = props => {
                 isClosable: true,
               })
               history.push(`/dashboard/${localStorage.getItem('userId')}`)
+              props.getFamilyName(localStorage.getItem('family_id'))
         })
         .catch(err => console.log(err.message))
     };
@@ -182,4 +185,12 @@ const StudentRegister = props => {
     )
 }
 
-export default StudentRegister;
+const mapStateToProps = (state) => {
+    return {
+      family: state.usersReducer.family,
+      isLoading: state.usersReducer.isLoading,
+      err: state.usersReducer.error
+    }
+  }
+export default connect(mapStateToProps, { getFamilyName })(StudentRegister);
+// export default StudentRegister;
