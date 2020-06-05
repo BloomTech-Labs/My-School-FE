@@ -25,9 +25,11 @@ import PlusIcon from '../../../assets/icons/plus_icon.png';
 const NavMenu = ({ user, family, isLoading, err, getFamilyName }) => {
   const history = useHistory();
 
+  const famId = Number(localStorage.getItem('family_id'))
+
   useEffect(() => {
-    getFamilyName(user.family_id)
-  }, [user, family])
+    getFamilyName(famId)
+  }, [famId])
 
   const handleAdminSettings = () => {
     history.push('/settings')
@@ -51,7 +53,6 @@ const NavMenu = ({ user, family, isLoading, err, getFamilyName }) => {
   }
 
   return (
-    // <>Test</>
     <Menu>
       {/* MenuButton is the trigger to open the MenuList */}
       <MenuButton as={Button} bg='transparent' color="black" variantColor='btnBlue'>
