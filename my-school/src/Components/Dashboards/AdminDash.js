@@ -14,7 +14,6 @@ const AdminDash = ({ user, isLoading }) => {
   const [familyName, setFamilyName] = useState('');
   const id = localStorage.getItem('family_id')
 
-
   useEffect(_ => {
     ReactGA.initialize("UA-156199574-5")
     ReactGA.pageview("/dashboard")
@@ -25,7 +24,9 @@ const AdminDash = ({ user, isLoading }) => {
       .then(res => {
         setFamilyName(res.data.family.name)
         setStudents(res.data.people.filter(s => s.user_type_id === 2))
-
+      })
+      .catch(err => {
+        console.log(err)
       })
   }, [id]);
 
@@ -41,7 +42,11 @@ const AdminDash = ({ user, isLoading }) => {
         <Heading>{familyName || 'Your'} Family</Heading>
         <div className='student-list'>
 
-          {isLoading === true ? <Loader color={'#329795'} /> :
+          {isLoading === true ? (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40vh' }}>
+              <Loader color={'#375E97'} height='75vh' />
+            </div>
+          ) :
 
             (students.map(student => {
               return (
@@ -77,4 +82,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps , {})(AdminDash);
+export default connect(mapStateToProps, {})(AdminDash);
