@@ -35,7 +35,11 @@ const Login = props => {
             localStorage.setItem('userId' , user.id);
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('family_id', user.family_id);
-            history.push('/dashboard')
+            if (user.user_type_id === 1) {
+                history.push('/dashboard')
+            } else if (user.user_type_id === 2) {
+                history.push(`/portfolio/${user.id}`)
+            }
         })
         .catch(err => {
             console.log(err)
