@@ -9,18 +9,15 @@ export default function TopNav() {
   const [user, setUser] = useState({});
 
   const id = localStorage.getItem('userId')
-  const [family, setFamily] = useState();
 
   useEffect(() => {
     axios
       .get(`https://my-school-v1.herokuapp.com/api/users/${id}`)
       .then((res) => {
-        console.log('topnav', res.data)
         setUser(res.data);
-        setFamily(res.data.family_id)
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
 
 
@@ -35,7 +32,7 @@ export default function TopNav() {
         >
           <NavLeft />
           <Flex align="center">
-            <NavMenu user={user} family={family}/>
+            <NavMenu user={user} />
              
           </Flex>
         </Flex>
