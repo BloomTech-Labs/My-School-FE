@@ -4,7 +4,7 @@ import {
     ACTIVITIES_FAILURE,
     DELETING_ACTIVITY,
     ADDING_ACTIVITY
-} from '../../actions/actions-portfolio.js';
+} from '../actions/actions-portfolio';
 
 const initialState= {
     activities: [],

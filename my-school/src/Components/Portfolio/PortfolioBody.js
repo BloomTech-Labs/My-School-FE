@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getAllActivitiesForUser } from "../../actions/actions-portfolio.js";
+import { getAllActivitiesForUser } from "../../Redux/actions/actions-portfolio.js";
 import ActivityCard from "./Activity/ActivityCard";
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 import {Grid, Text} from '@chakra-ui/core'
 
-const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, user }) => {
+const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, studentId, user }) => {
   const [sortedActivities, setSortedActivities] = useState([]);
   const isParent = localStorage.getItem('student_id') ? true : false;
   const gridTemplateColumns = isParent ? ".75fr .25fr 1fr .5fr .25fr .25fr" : "1.25fr .25fr .25fr .25fr"

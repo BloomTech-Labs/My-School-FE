@@ -1,4 +1,4 @@
-import { getUserByID, getFamilyName, getFamilyByID, deleteStudent, deleteAccount } from '../actions/actions-users';
+import { getUserByID, getFamilyName, getFamilyByID, deleteStudent, deleteAccount } from '../Redux/actions/actions-users';
 import { getAllActivitiesForUser, editActivityWithoutPhoto, editActivity, deleteActivity } from '../actions/actions-portfolio';
 import { registerAssertions } from 'redux-actions-assertions/jest'
 import thunk from 'redux-thunk';

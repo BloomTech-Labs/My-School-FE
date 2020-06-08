@@ -1,33 +1,29 @@
 
 import React, { useEffect } from "react";
-import { Route } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { getAllActivitiesForUser } from "../../actions/actions-portfolio";
+import { getAllActivitiesForUser } from "../../Redux/actions/actions-portfolio";
 // Components
 import PortfolioHeader from "./PortfolioHeader";
 import PortfolioBody from "./PortfolioBody";
-import MyDocument from "./PDFExporter";
 
 
 const PortfolioContainer = ({ activities, getAllActivitiesForUser, user }) => {
 
-  const id = Number(localStorage.getItem('student_id')) || Number(localStorage.getItem('userId'));
+  const studentId = useParams().id
 
   useEffect(() => {
     let isMounted = true;
-    if (isMounted) getAllActivitiesForUser(id);
+    if (isMounted) getAllActivitiesForUser(studentId);
     return () => {
       isMounted = false
     }
-  }, [getAllActivitiesForUser, id]);
+  }, [getAllActivitiesForUser, studentId]);
 
   return (
     <div>
       <PortfolioHeader />
-      <PortfolioBody activities={activities} />
-      <Route exact path="/export">
-        <MyDocument activities={activities} />
-      </Route>
+      <PortfolioBody activities={activities} studentId={studentId}/>
     </div>
   );
 };

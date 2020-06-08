@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import {
   editActivity,
   editActivityWithoutPhoto,
-} from "../../../actions/actions-portfolio.js";
+} from "../../../Redux/actions/actions-portfolio.js";
 import {
   Button,
   Input,

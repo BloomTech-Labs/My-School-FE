@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { Text } from "@chakra-ui/core";
 import OverviewCard from "./OverviewCard";
-import { getAllActivitiesForUser } from "../../../actions/actions-portfolio";
+import { getAllActivitiesForUser } from "../../../Redux/actions/actions-portfolio";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 import axios from 'axios'

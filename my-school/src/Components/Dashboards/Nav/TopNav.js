@@ -1,25 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { Box, Flex } from "@chakra-ui/core";
 import NavMenu from "./NavMenu";
 import NavLeft from "./NavLeft";
 
+
 export default function TopNav() {
-
-  const [user, setUser] = useState({});
-
-  const id = localStorage.getItem('userId')
-
-  useEffect(() => {
-    axios
-      .get(`https://my-school-v1.herokuapp.com/api/users/${id}`)
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, [id]);
-
-
 
   return (
     <nav className="top-nav">
@@ -32,7 +17,7 @@ export default function TopNav() {
         >
           <NavLeft />
           <Flex align="center">
-            <NavMenu user={user} />
+            <NavMenu />
              
           </Flex>
         </Flex>
@@ -40,3 +25,4 @@ export default function TopNav() {
     </nav>
   );
 }
+
