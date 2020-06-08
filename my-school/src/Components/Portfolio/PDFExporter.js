@@ -14,7 +14,7 @@ import fontN from "../../assets/Nunito_Sans/Nunito Sans Regular.ttf"
 import fontP from "../../assets/Pridi/Pridi Light.ttf"
 import fontR from "../../assets/Raleway/Raleway Medium.ttf"
 import style from "./PDFExporterStyles.js";
-import { getAllActivitiesForUser } from '../../actions/actions-portfolio';
+import { getAllActivitiesForUser } from '../../Redux/actions/actions-portfolio';
 import { Button, Box, Flex } from '@chakra-ui/core';
 import timechange from '../../utils/timeChange'
 

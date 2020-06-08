@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {login} from '../../Redux/actions/actions-users'
 import {
     Button,
     Input,
@@ -15,44 +17,32 @@ import {
 import axios from 'axios';
 import validateCredentials from '../../utils/validateCredentials';
 
-const Login = props => {
+const Login = ({onSubmit, login, user}) => {
 
     const [invalid, setInvalid] = useState(false);
     const [ checked, setChecked ] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const history = useHistory();
+    
+    const handleLogin = userData => {
+        login({...userData, rememberMe: checked})
+    }
 
-    const handleLogin = (data) => {
-        const user = {
-            ...data,
-            rememberMe: checked
-        }
-        
-        axios.post(`https://my-school-v1.herokuapp.com/api/auth/login`, user)
-        .then(res => {
-            const user = res.data.user;
-            localStorage.setItem('auth', user.user_type_id);
-            localStorage.setItem('userId' , user.id);
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('family_id', user.family_id);
-            if (user.user_type_id === 1) {
-                history.push('/dashboard')
-            } else if (user.user_type_id === 2) {
-                history.push(`/portfolio/${user.id}`)
-            }
-        })
-        .catch(err => {
-            console.log(err)
-            setInvalid(true)
-        })
-    };
+    useEffect(() => {
+        if (user.user_type_id === 1) {
+            history.push("/dashboard");
+        } else if (user.user_type_id === 2) {
+            history.push(`/portfolio/${user.id}`);
+        } 
+    }, [user, history])
 
     const handleChecked = () => {
         setChecked(!checked)
     }
+
     return (
         <>
-            <form onSubmit={props.onSubmit || handleSubmit(handleLogin)} data-testid='form-submit' >
+            <form onSubmit={onSubmit || handleSubmit(handleLogin)} data-testid='form-submit' >
                 {/* USERNAME/EMAIL */}
                 <FormControl isInvalid={errors.username} w="85%" mb="24px">
                     <FormLabel htmlFor="username" fontWeight="700" color="gray.800">Username</FormLabel>
@@ -128,5 +118,11 @@ const Login = props => {
     )
 }
 
-export default Login;
+const mapStateToProps = state => {
+    console.log({state})
+    return {
+        user: state.usersReducer.user
+    }
+}
 
+export default connect(mapStateToProps, {login})(Login)
