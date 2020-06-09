@@ -59,7 +59,7 @@ const PortfolioHeader = (props) => {
       <Flex width="25%" justify="space-evenly">
         <HeaderButton text="Add Activity" icon="add" location={`/portfolio/${id}/add`} />
         {/*  EXPORT BUTTON -- PARENTS ONLY? */}
-        {localStorage.getItem('student_id') ? <HeaderButton text="Convert to PDF" icon="download" location={`/portfolio/${id}/export`} /> : null}
+        {localStorage.getItem('student_id') ? <HeaderButton text="Convert to PDF" icon="download" location={`/portfolio/${id}/export`} title={title}/> : null}
       </Flex>
       {/*  Start with opening in another tab, then download. */}
       {/*SEARCH BOX AND SORT/FILTER FEATUREs WILL GO HERE*/}

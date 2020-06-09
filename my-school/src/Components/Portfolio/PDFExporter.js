@@ -7,6 +7,7 @@ import {
   View,
   Document,
   Image,
+  PDFViewer,
   BlobProvider
 } from "@react-pdf/renderer";
 import moment from 'moment';
@@ -37,7 +38,7 @@ Font.register({
 
 
 // Create Document Component
-const MyDocument = ({ activities }) => {
+const MyDocument = ({ activities, title }) => {
 
 //Don't show null
   function noNull(item) {
@@ -50,7 +51,7 @@ const MyDocument = ({ activities }) => {
 
   //Creates actual document
   const PdfPortfolio = (
-    <Document style={style.doc} title={""}>
+    <Document style={style.doc} title={title}>
       <Page size="A4" style={style.page}>
         <View >
           {/* for each activity, return a view. dates and times formatted */}
@@ -80,11 +81,12 @@ const MyDocument = ({ activities }) => {
       <Flex direction="row"
         align="center"
         justify="center">
-        <Button>
+<PDFViewer><Document /></PDFViewer>
+        {/* <Button>
           <BlobProvider document={PdfPortfolio}>
             {({ url }) => <a href={url} target="_blank" rel="noopener noreferrer">Link to PDF</a>}
           </BlobProvider>
-        </Button>
+        </Button> */}
       </Flex>
     </Box>
   );
