@@ -17,7 +17,7 @@ import {
   Flex
 } from "@chakra-ui/core";
 // components
-import NavName from './NavName';
+import NavIcon from './NavIcon';
 // assets
 import LogoutIcon from '../../../assets/icons/logout_icon.png';
 import PlusIcon from '../../../assets/icons/plus_icon.png';
@@ -49,8 +49,8 @@ const NavMenu = ({ user, family, isLoading, err }) => {
   return (
     <Menu>
       {/* MenuButton is the trigger to open the MenuList */}
-      <MenuButton as={Button} bg='transparent' color="black" variantColor='btnBlue'>
-        <NavName user={user} />
+      <MenuButton as={Button} bg='transparent' color="black" variantColor='btnBlue' height="auto" p="0" mr="30px">
+        <NavIcon user={user} />
         <Avatar size="md" src={user.profile_picture} alt="Your profile picture" ml="16px" border="2px" borderColor="lightblue" />
       </MenuButton>
       {/* MenuList is the wrapper for MenuItems */}

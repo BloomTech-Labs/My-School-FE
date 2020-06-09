@@ -8,17 +8,15 @@ export default function TopNav() {
 
   return (
     <nav className="top-nav">
-      <Box bg="blue.900" w="100%">
+      <Box bg="blue.900" w="100%" >
         <Flex
           direction="row"
           align="center"
           justify="space-between"
-          padding=".1% 2%"
         >
           <NavLeft />
           <Flex align="center">
             <NavMenu />
-             
           </Flex>
         </Flex>
       </Box>
