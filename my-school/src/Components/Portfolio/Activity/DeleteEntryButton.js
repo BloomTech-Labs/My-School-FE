@@ -12,19 +12,12 @@ import {
     useToast,
 } from '@chakra-ui/core';
 
-const DeleteEntryButton= (props) => {
-
+const DeleteEntryButton= ({ activity, deleteActivity, user }) => {
     const toast = useToast();
     const [isOpenDialogue, setIsOpenDialogue] = useState();
     const [hover, setHover] = useState(false)
     const onCloseDialogue = () => setIsOpenDialogue(false);
     const cancelRef = useRef();
-    const id = Number(localStorage.getItem('student_id')) || Number(localStorage.getItem('userId'));
-
-
-    function deleteEntry(id, userId) {
-        props.deleteActivity(id, userId)
-    };
 
     return (
         <Button
@@ -61,7 +54,7 @@ const DeleteEntryButton= (props) => {
                     </Button>
                     <Button bg="#FF5656" color="white" onClick={() => {
                         onCloseDialogue();
-                        deleteEntry(props.activity.id, id);
+                        deleteActivity(activity.id, user.id);
                         toast({
                             position: "top",
                             title: "Entry Deleted.",
@@ -82,8 +75,7 @@ const DeleteEntryButton= (props) => {
 };
 const mapStateToProps = (state) => {
     return {
-        isLoading: state.portfolioReducer.isLoading,
-        error: state.portfolioReducer.error,
+        user: state.usersReducer.user
     };
 };
 
