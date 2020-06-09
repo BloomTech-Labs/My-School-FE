@@ -3,17 +3,20 @@ import TopNav from './Dashboards/Nav/TopNav';
 import {connect} from 'react-redux'
 import {getUserByID, getFamily} from '../Redux/actions/actions-users'
 
-
-const MainLayout = ({user, page, getFamily, getUserByID}) => {
+const MainLayout = ({ page, getFamily, getUserByID }) => {
     const Page = page; 
 
     const id = localStorage.getItem('user_id')
 
     useEffect(() => {
-        console.log({id})
         getUserByID(id)
-        getFamily(user.family_id)
-    }, [getFamily])
+        .then(res => {
+            getFamily(res.data.family_id)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [getFamily, getUserByID, id])
 
     return (
         <>
@@ -24,9 +27,10 @@ const MainLayout = ({user, page, getFamily, getUserByID}) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    console.log("state in main layout", state)
     return {
-        user: state.usersReducer.user
+        user: state.usersReducer.user,
+        family: state.usersReducer.family
     }
 }
 

@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getFamilyName } from '../../../Redux/actions/actions-users';
 import {
   Menu,
   MenuButton,
@@ -17,19 +16,13 @@ import {
   Flex
 } from "@chakra-ui/core";
 // components
-import NavName from './NavName';
+import NavIcon from './NavIcon';
 // assets
 import LogoutIcon from '../../../assets/icons/logout_icon.png';
 import PlusIcon from '../../../assets/icons/plus_icon.png';
 
-const NavMenu = ({ user, family, isLoading, err, getFamilyName }) => {
+const NavMenu = ({ user, family, isLoading, err }) => {
   const history = useHistory();
-
-  const famId = Number(localStorage.getItem('family_id'))
-
-  useEffect(() => {
-    getFamilyName(famId)
-  }, [famId])
 
   const handleAdminSettings = () => {
     history.push('/settings')
@@ -55,8 +48,8 @@ const NavMenu = ({ user, family, isLoading, err, getFamilyName }) => {
   return (
     <Menu>
       {/* MenuButton is the trigger to open the MenuList */}
-      <MenuButton as={Button} bg='transparent' color="black" variantColor='btnBlue'>
-        <NavName user={user} />
+      <MenuButton as={Button} bg='transparent' color="black" variantColor='btnBlue' height="auto" p="0" mr="30px">
+        <NavIcon user={user} />
         <Avatar size="md" src={user.profile_picture} alt="Your profile picture" ml="16px" border="2px" borderColor="lightblue" />
       </MenuButton>
       {/* MenuList is the wrapper for MenuItems */}
@@ -122,7 +115,6 @@ const NavMenu = ({ user, family, isLoading, err, getFamilyName }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     user: state.usersReducer.user,
     family: state.usersReducer.family,
@@ -131,4 +123,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getFamilyName })(NavMenu);
+export default connect(mapStateToProps, { })(NavMenu);

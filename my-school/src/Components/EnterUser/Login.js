@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -14,7 +14,6 @@ import {
     Text,
     Link
 } from '@chakra-ui/core';
-import axios from 'axios';
 import validateCredentials from '../../utils/validateCredentials';
 
 const Login = ({onSubmit, login, user}) => {
@@ -26,15 +25,17 @@ const Login = ({onSubmit, login, user}) => {
     
     const handleLogin = userData => {
         login({...userData, rememberMe: checked})
+        .then(res => {
+            if (res && res.data && res.data.user && res.data.user.user_type_id === 1) {
+                history.push("/dashboard");
+            } else if (res && res.data & res.data.user && res.data.user.user_type_id === 2) {
+                history.push(`/portfolio/${user.id}`);
+            } 
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
-
-    useEffect(() => {
-        if (user.user_type_id === 1) {
-            history.push("/dashboard");
-        } else if (user.user_type_id === 2) {
-            history.push(`/portfolio/${user.id}`);
-        } 
-    }, [user, history])
 
     const handleChecked = () => {
         setChecked(!checked)
@@ -119,7 +120,6 @@ const Login = ({onSubmit, login, user}) => {
 }
 
 const mapStateToProps = state => {
-    console.log({state})
     return {
         user: state.usersReducer.user
     }

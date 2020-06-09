@@ -1,7 +1,7 @@
 import React from "react";
 import { Heading } from "@chakra-ui/core";
 
-const NavName = ({ user }) => {
+const NavIcon = ({ user }) => {
   return (
     <Heading as="h3" size="md" alt="user name" color="white">
       <svg
@@ -23,4 +23,4 @@ const NavName = ({ user }) => {
   );
 };
 
-export default NavName;
+export default NavIcon;

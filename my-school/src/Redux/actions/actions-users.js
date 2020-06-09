@@ -12,10 +12,11 @@ export const SET_REGISTRATION = "SET_REGISTRATION";
 
 export const getUserByID = (id) => (dispatch) => {
   dispatch({ type: FETCH_USER });
-  axios
+  return axios
     .get(`https://my-school-v1.herokuapp.com/api/users/${id}`)
     .then((res) => {
       dispatch({ type: SET_USER, payload: res.data });
+      return res;
     })
     .catch((err) => {
       dispatch({ type: SET_ERROR, payload: err });
@@ -61,12 +62,13 @@ export const deleteAccount = (accountID, familyID = null) => (dispatch) => {
 
 export const login = (user) => (dispatch) => {
   dispatch({ type: FETCH_USER });
-  axios
+  return axios
     .post("https://my-school-v1.herokuapp.com/api/auth/login", user)
     .then((res) => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user_id", res.data.user.id);
       dispatch({ type: SET_USER_ON_LOGIN, payload: res.data });
+      return res;
     })
     .catch((err) => {
       dispatch({ type: SET_ERROR, payload: err });

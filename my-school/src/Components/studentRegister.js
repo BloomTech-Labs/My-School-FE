@@ -27,7 +27,7 @@ const StudentRegister = (props) => {
     props.createStudent(props.user.family_id, data, 2);
     toast({
       title: "Account created.",
-      description: `"We've created an account for ${data.firstname}.`,
+      description: `We've created an account for ${data.firstname}.`,
       status: "success",
       duration: 4500,
       isClosable: true,
