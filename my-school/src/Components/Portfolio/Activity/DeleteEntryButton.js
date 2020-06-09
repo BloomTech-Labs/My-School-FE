@@ -13,7 +13,6 @@ import {
 } from '@chakra-ui/core';
 
 const DeleteEntryButton= ({ activity, deleteActivity, studentId }) => {
-    // console.log(user)
     const toast = useToast();
     const [isOpenDialogue, setIsOpenDialogue] = useState();
     const [hover, setHover] = useState(false)
@@ -76,7 +75,6 @@ const DeleteEntryButton= ({ activity, deleteActivity, studentId }) => {
 };
 const mapStateToProps = (state) => {
     return {
-        // user: state.usersReducer.user
         ...state
     };
 };
