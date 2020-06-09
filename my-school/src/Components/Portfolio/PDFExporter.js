@@ -18,6 +18,8 @@ import { getAllActivitiesForUser } from '../../Redux/actions/actions-portfolio';
 import { Button, Box, Flex } from '@chakra-ui/core';
 import timechange from '../../utils/timeChange'
 
+
+//importing fonts to PDF was overcomplicated omg
 Font.register({
   family: "Nunito",
   src: fontN
@@ -37,7 +39,7 @@ Font.register({
 // Create Document Component
 const MyDocument = ({ activities }) => {
 
-
+//Don't show null
   function noNull(item) {
     if (item === "null") {
       item = "";
@@ -46,10 +48,12 @@ const MyDocument = ({ activities }) => {
     }
   }
 
+  //Creates actual document
   const PdfPortfolio = (
     <Document style={style.doc} title={""}>
       <Page size="A4" style={style.page}>
         <View >
+          {/* for each activity, return a view. dates and times formatted */}
           {activities.map((a) => {
             let subdate = moment(a.completion_date).format('MMMM Do YYYY');
             let durtime = timechange(a.duration);
@@ -59,6 +63,7 @@ const MyDocument = ({ activities }) => {
                 <Text style={style.title}>{a.name}</Text>
                 <Text style={style.subtitle}>Date: {subdate}      Subject: {a.subject}     Duration: {durtime}</Text>
                 <Text style={style.text}>{noNull(a.description)}</Text>
+                {/* need to make sure this works with multiple images per activity */}
                 {a.photo && <Image src={`https${a.photo.slice(4, a.photo.length)}`} style={style.image} />}
               </View>
             );
@@ -69,6 +74,7 @@ const MyDocument = ({ activities }) => {
 
   );
 
+  //show Link to activate new tab PDF
   return (
     <Box w="100%">
       <Flex direction="row"

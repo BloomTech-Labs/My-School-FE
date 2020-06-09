@@ -20,9 +20,9 @@ const StudentCard = ({ student, familyName, activities }) => {
     history.push(`/portfolio/${id}`);
   };
  
-  function handleDelete(student_id){
-    deleteStudent(student_id);
-  };
+  // function handleDelete(student_id){
+  //   deleteStudent(student_id);
+  // };
 
 
   return (
