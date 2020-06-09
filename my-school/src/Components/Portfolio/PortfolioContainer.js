@@ -8,9 +8,9 @@ import PortfolioHeader from "./PortfolioHeader";
 import PortfolioBody from "./PortfolioBody";
 
 
-const PortfolioContainer = ({ activities, getAllActivitiesForUser, user }) => {
-
+const PortfolioContainer = ({ activities, getAllActivitiesForUser, family }) => {
   const studentId = useParams().id
+  const student = family.filter(f => f.id === Number(studentId));
 
   useEffect(() => {
     let isMounted = true;
@@ -22,15 +22,16 @@ const PortfolioContainer = ({ activities, getAllActivitiesForUser, user }) => {
 
   return (
     <div>
-      <PortfolioHeader />
-      <PortfolioBody activities={activities} studentId={studentId}/>
+      <PortfolioHeader student={student}/>
+      <PortfolioBody />
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    activities: state.portfolioReducer.activities
+    activities: state.portfolioReducer.activities,
+    family: state.usersReducer.family
   };
 };
 

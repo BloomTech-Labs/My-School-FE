@@ -4,7 +4,7 @@ import placeholder from "../../assets/placeholder_img.png";
 import {connect} from 'react-redux';
 import {getAllActivitiesForUser} from '../../Redux/actions/actions-portfolio'
 import moment from 'moment';
-import {useHistory} from 'react-router-dom'
+import {useHistory ,useParams} from 'react-router-dom'
 
 const StudentCard = ({ student, familyName, activities }) => {
   const history = useHistory()
@@ -15,9 +15,10 @@ const StudentCard = ({ student, familyName, activities }) => {
 
   const lastActivity = activities.sort((a, b) => b.created_at - a.created_at)
 
-  const pushToPortfolio = (id) => {
-    localStorage.setItem('student_id', id);
-    history.push(`/portfolio/${id}`);
+  const studentId = useParams().id;
+
+  const pushToPortfolio = (studentId) => {
+    history.push(`/portfolio/${studentId}`);
   };
  
   // function handleDelete(student_id){
