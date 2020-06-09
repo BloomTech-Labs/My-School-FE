@@ -22,14 +22,8 @@ import NavName from './NavName';
 import LogoutIcon from '../../../assets/icons/logout_icon.png';
 import PlusIcon from '../../../assets/icons/plus_icon.png';
 
-const NavMenu = ({ user, family, isLoading, err, getFamilyName }) => {
+const NavMenu = ({ user, family, isLoading, err }) => {
   const history = useHistory();
-
-  const famId = Number(localStorage.getItem('family_id'))
-
-  useEffect(() => {
-    getFamilyName(famId)
-  }, [famId])
 
   const handleAdminSettings = () => {
     history.push('/settings')
@@ -131,4 +125,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getFamilyName })(NavMenu);
+export default connect(mapStateToProps, { })(NavMenu);
