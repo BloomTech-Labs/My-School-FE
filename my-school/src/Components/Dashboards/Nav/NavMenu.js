@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getFamilyName } from '../../../Redux/actions/actions-users';
 import {
   Menu,
   MenuButton,
@@ -116,7 +115,6 @@ const NavMenu = ({ user, family, isLoading, err }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     user: state.usersReducer.user,
     family: state.usersReducer.family,

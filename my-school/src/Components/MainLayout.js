@@ -16,7 +16,7 @@ const MainLayout = ({ page, getFamily, getUserByID }) => {
         .catch(err => {
             console.log(err)
         })
-    }, [])
+    }, [getFamily, getUserByID, id])
 
     return (
         <>

@@ -4,7 +4,7 @@ import { Heading, Flex, Text } from "@chakra-ui/core";
 import axios from "axios";
 import HeaderButton from "./HeaderButton";
 
-const PortfolioHeader = ({ }) => {
+const PortfolioHeader = (props) => {
   const [title, setTitle] = useState("");
   let { pathname } = useLocation();
   const [studentName, setStudentName] = useState('')

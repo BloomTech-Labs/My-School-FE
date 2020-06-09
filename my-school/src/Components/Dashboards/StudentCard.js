@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Image, IconButton, Heading, Text, Box } from "@chakra-ui/core";
+import { Flex, Image, IconButton, Heading, Text } from "@chakra-ui/core";
 import placeholder from "../../assets/placeholder_img.png";
 import {connect} from 'react-redux';
 import {getAllActivitiesForUser} from '../../Redux/actions/actions-portfolio'
