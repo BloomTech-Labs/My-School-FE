@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { pillColor } from '../../../utils/pillColor'
 // components
 import DeleteEntryButton from "./DeleteEntryButton";
@@ -10,10 +10,11 @@ import fontN from "../../../assets/Nunito_Sans/Nunito Sans Regular.ttf";
 import { Tag, Grid, Box } from "@chakra-ui/core";
 
 function ActivityCard(props) {
+  const studentId = useParams().id;
   const [hour, setHour] = useState();
   const [min, setMin] = useState();
   const history = useHistory();
-  const gridTemplateColumns = localStorage.getItem('student_id') ? ".75fr .25fr 1fr .5fr .25fr .25fr" : "1.25fr .25fr .25fr .25fr"
+  const gridTemplateColumns = props.isParent ? ".75fr .25fr 1fr .5fr .25fr .25fr" : "1.25fr .25fr .25fr .25fr"
 
   useEffect(() => {
     if (props.activity.duration !== null) {
@@ -59,7 +60,7 @@ function ActivityCard(props) {
           {moment(props.activity.completion_date).format("ll").toUpperCase()}
         </p>
       </Box>
-      {localStorage.getItem('student_id') ?
+      {props.isParent ?
         (
           <>
             <Box>
@@ -68,10 +69,11 @@ function ActivityCard(props) {
                 activity={props.activity}
                 defaultHour={hour}
                 defaultMin={min}
+                studentId={studentId}
               />
             </Box>
             <Box>
-              <DeleteEntryButton user={props.user} activity={props.activity} />
+              <DeleteEntryButton activity={props.activity} studentId={studentId}/>
             </Box>
           </>
         )
