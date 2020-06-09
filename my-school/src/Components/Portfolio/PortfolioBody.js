@@ -20,7 +20,7 @@ const PortfolioBody = ({ activities, getAllActivitiesForUser, isLoading, student
     ReactGA.pageview("/portfolio");
   }, []);
 
-  const id = Number(localStorage.getItem('student_id')) || Number(localStorage.getItem('userId'));
+  const id = Number(localStorage.getItem('user_id'));
 
   useEffect(() => {
     let isMounted = true;
