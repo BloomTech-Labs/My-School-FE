@@ -49,6 +49,7 @@ const PortfolioBody = ({ activities, isLoading, user }) => {
               <ActivityCard
                 key={activity.id}
                 activity={activity}
+                isParent={isParent}
                 className="card"
               />
             ))
