@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import axios from 'axios';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import {
     Flex,
@@ -22,8 +21,10 @@ import {
     PopoverCloseButton
 } from '@chakra-ui/core';
 import { useForm } from 'react-hook-form';
+import {connect} from 'react-redux'
+import {register as registration} from '../../Redux/actions/actions-users'
 
-const Signup = () => {
+const Signup = ({registration}) => {
     const history = useHistory();
     const { handleSubmit, errors, register, watch } = useForm();
 
@@ -36,36 +37,8 @@ const Signup = () => {
         const newFam = {
             name: data.family
         };
-        // Creates new family, so we can grab family_id when creating new parent admin user
-        axios.post("https://my-school-v1.herokuapp.com/api/families", newFam)
-        .then(res => {
-            const famId = res.data.id;
-
-            const newUser = {
-                username: data.email,
-                email: data.email,
-                password: data.password,
-                family_id: famId,
-                user_type_id: 1
-            };
-            // Creates new parent admin user account
-            axios.post("https://my-school-v1.herokuapp.com/api/auth/registration", newUser)
-            .then(res => {
-                const user = res.data.user;
-                localStorage.setItem('auth', user.user_type_id);
-                localStorage.setItem('userId' , user.id);
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('family_id', user.family_id);
-
-                history.push('/dashboard')
-            })
-            .catch(err => {
-                console.log("Error creating new user acct", err)
-            })
-        })
-        .catch(err => {
-            console.log("Error creating family acct", err)
-        })
+        registration(newFam, data, 1)
+        history.push('/dashboard')
     }
 
     return (
@@ -258,4 +231,10 @@ const Signup = () => {
     )
 }
 
-export default Signup;
+const mapStateToProps = state => {
+    return {
+        user: state.usersReducer.user
+    }
+}
+
+export default connect(mapStateToProps, {registration})(Signup);

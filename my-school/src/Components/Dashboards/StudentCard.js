@@ -1,21 +1,8 @@
-import React, { useState, useRef } from "react";
-import { connect } from 'react-redux';
-import { deleteStudent} from '../../actions/actions-users';
-import { getAllActivitiesForUser } from '../../actions/actions-portfolio';
-import {  
-          // Avatar,
-          // Box,
-          Text,
-          // Button, 
-          IconButton,
-          // AlertDialog,
-          // AlertDialogBody,
-          // AlertDialogFooter,
-          // AlertDialogHeader,
-          // AlertDialogContent,
-          // AlertDialogOverlay,
-          useToast, } from '@chakra-ui/core';
+import React from "react";
+import { Flex, Image, IconButton, Heading, Text } from "@chakra-ui/core";
 import placeholder from "../../assets/placeholder_img.png";
+import {connect} from 'react-redux';
+import {getAllActivitiesForUser} from '../../Redux/actions/actions-portfolio'
 import moment from 'moment';
 import {useHistory} from 'react-router-dom'
 

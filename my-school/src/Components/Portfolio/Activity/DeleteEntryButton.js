@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import { deleteActivity} from '../../../actions/actions-portfolio.js';
+import { deleteActivity} from '../../../Redux/actions/actions-portfolio.js';
 import {
     Button,
     AlertDialog,

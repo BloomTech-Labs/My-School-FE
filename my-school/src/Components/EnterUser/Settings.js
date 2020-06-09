@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import {  getUserByID } from '../../actions/actions-users';
+import {  getUserByID } from '../../Redux/actions/actions-users';
 import { Box, Button, ButtonGroup, IconButton, Avatar, Flex, Editable,Text, EditableInput, EditablePreview, Heading, Divider} from '@chakra-ui/core';
 
 const Settings = () => {

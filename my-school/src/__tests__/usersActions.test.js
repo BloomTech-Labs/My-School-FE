@@ -3,7 +3,7 @@ import {
     DELETING_USER,
     USERS_SUCCESS,
     USERS_FAILURE, 
-} from '../actions/actions-users';
+} from '../Redux/actions/actions-users';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';

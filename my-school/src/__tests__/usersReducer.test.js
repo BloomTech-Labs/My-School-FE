@@ -1,5 +1,5 @@
 import { usersReducer } from '../Redux/Reducers/reducers-users';
-import * as types from '../actions/actions-users';
+import * as types from '../Redux/actions/actions-users';
 import { mockData }from '../mockData-reducer';
 import expect from 'expect';
 
