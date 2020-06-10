@@ -54,7 +54,13 @@ export const usersReducer = (state = initialState, action) => {
         isLoading: true
       }
     case CLEAR_USER :
-      return initialState
+      return {
+        user: {},
+        family: [],
+        familyName: '',
+        isLoading: false,
+        error: ''
+      }
     case SET_USER_ON_LOGIN :
       return {
         ...state,

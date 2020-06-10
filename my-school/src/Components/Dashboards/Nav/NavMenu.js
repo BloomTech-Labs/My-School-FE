@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logout } from '../../../Redux/actions/actions-users';
 import {
   Menu,
   MenuButton,
@@ -21,7 +22,7 @@ import NavIcon from './NavIcon';
 import LogoutIcon from '../../../assets/icons/logout_icon.png';
 import PlusIcon from '../../../assets/icons/plus_icon.png';
 
-const NavMenu = ({ user, family, isLoading, err }) => {
+const NavMenu = ({ user, family, logout, isLoading, err }) => {
   const history = useHistory();
 
   const handleAdminSettings = () => {
@@ -41,6 +42,7 @@ const NavMenu = ({ user, family, isLoading, err }) => {
   // Logout click handler...currently removes everything in localstorage but could be updated to be more specific
   const handleLogout = e => {
     e.preventDefault();
+    logout();
     localStorage.clear();
     history.push('/login');
   }
@@ -123,4 +125,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { })(NavMenu);
+export default connect(mapStateToProps, { logout })(NavMenu);
