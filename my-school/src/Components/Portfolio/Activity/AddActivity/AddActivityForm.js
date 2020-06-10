@@ -185,13 +185,14 @@ const AddActivityForm = () => {
             / Add Assignment
           </Text>
           <FormContext {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)} data-testid="form-submit">
+            <form onSubmit={handleSubmit(onSubmit)} data-testid="form-submit" >
               {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
-              {/* <Flex wrap="wrap" m="32px auto"> */}
               <SimpleGrid
                 columns={[1, 1, 1, 2]}
                 spacing={["20px", "20px", "20px", "128px"]}
-                mx={["8px", "20px", "32px", "100px"]}
+                mx={["8px", "20px", "32px", "auto"]}
+                px={["0", "0", "0", "36px"]}
+                maxWidth="1200px"
               >
                 <Box w={["100%, 100%, 100%, 50%"]}>
                   <FormControl
@@ -422,7 +423,6 @@ const AddActivityForm = () => {
                     </Button>
                   </Flex>
                 </Box>
-                {/* </Flex> */}
               </SimpleGrid>
             </form>
           </FormContext>
