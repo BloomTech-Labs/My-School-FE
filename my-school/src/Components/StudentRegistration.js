@@ -16,7 +16,7 @@ import { useToast } from "@chakra-ui/core";
 import { useHistory } from "react-router-dom";
 import { createStudent } from "../Redux/actions/actions-users";
 
-const StudentRegister = (props) => {
+const StudentRegistration = (props) => {
   const toast = useToast();
   const history = useHistory();
   const { register, handleSubmit, errors, watch } = useForm();
@@ -206,6 +206,5 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, { getFamily, createStudent })(
-  StudentRegister
+  StudentRegistration
 );
-// export default StudentRegister;
