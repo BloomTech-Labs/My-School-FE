@@ -36,7 +36,7 @@ const NavMenu = ({ user, family, logout, isLoading, err }) => {
   }
 
   const handleAddStudent = () => {
-    history.push('/addstudent')
+    history.push('/add-student')
   }
 
   // Logout click handler...currently removes everything in localstorage but could be updated to be more specific
