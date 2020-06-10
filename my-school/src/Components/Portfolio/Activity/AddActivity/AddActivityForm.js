@@ -190,9 +190,9 @@ const AddActivityForm = () => {
               <SimpleGrid
                 columns={[1, 1, 1, 2]}
                 spacing={["20px", "20px", "20px", "128px"]}
-                mx={["8px", "20px", "32px", "auto"]}
-                px={["0", "0", "0", "36px"]}
-                maxWidth="1200px"
+                mx={["8px", "20px", "32px", "100px"]}
+                // px={["0", "0", "0", "36px"]}
+                // maxWidth="1400px"
               >
                 <Box w={["100%, 100%, 100%, 50%"]}>
                   <FormControl
