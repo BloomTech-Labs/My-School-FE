@@ -27,7 +27,7 @@ const style = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    paddingHorizontal: "1in",
+    marginLeft: "4cm",
     textAlign: 'justify',
     fontFamily: 'Pridi',
   },
