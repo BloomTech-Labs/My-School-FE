@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, useLocation, useParams, useHistory } from 'react-router-dom';
+import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
-  } from "@chakra-ui/core";
+} from "@chakra-ui/core";
 
 const Breadcrumbs = ({ user, family, activities }) => {
     const location = useLocation();
-    const history = useHistory();
     const params = useParams();
 
     let activityId;
     let studentId;
+    // This sets either the activityId or studentId to params.id based on the route path
     if (location.pathname.includes('/activity')) {
         activityId = params.id;
         studentId = activities[0].student_id;
@@ -21,18 +21,20 @@ const Breadcrumbs = ({ user, family, activities }) => {
         studentId = params.id;
     }
 
+    // Finds the student object in family global state that matches the studentId, sets it local state & uses it to render the student's name in the breadcrumb
     const [student, setStudent] = useState({});
     useEffect(() => {
         setStudent(family.find(f => f.id === Number(studentId)))
     }, [family, studentId])
 
+    // Finds the activity object in activities global state that matches the activityId, sets it to local state & uses it to render the activity name in the breadcrumb
     const [currentActivity, setCurrentActivity] = useState({});
     useEffect(() => {
         setCurrentActivity(activities.find(a => a.id === Number(activityId)))
     }, [activities, activityId])
 
 
-    // This is checking to see if the page being rendered is the portfolio container...if it is, it returns true (this will affect the "isCurrentPage" prop on the Breadcrumb)
+    // This is checking to see if the page component being rendered is the portfolio container based on the pathname...if it is, it returns true (this will affect the "isCurrentPage" prop on the Breadcrumb)
     let isPortfolioContainer;
     if (student && location.pathname === `/portfolio/${student.id}`) {
          isPortfolioContainer = true
@@ -40,7 +42,6 @@ const Breadcrumbs = ({ user, family, activities }) => {
          isPortfolioContainer = false
     };
 
-    console.log("Breadcrumbs location", location, history, student, isPortfolioContainer, activities, params)
 
     return (
         <Breadcrumb>
@@ -50,17 +51,17 @@ const Breadcrumbs = ({ user, family, activities }) => {
             <BreadcrumbItem color="myschoolblue">
                 <BreadcrumbLink as={RouterLink} to="/dashboard">Dashboard</BreadcrumbLink>
             </BreadcrumbItem>
-        : null}
+        : null }
 
         {/* This will only show up on /add-student route */}
         {location.pathname === '/add-student' && user.user_type_id === 1 ? 
             <BreadcrumbItem isCurrentPage>
                 <BreadcrumbLink>Add a new student account</BreadcrumbLink>
             </BreadcrumbItem>
-        : null}
+        : null }
 
-        {/* This should also show up for the /activity/:id route; check if it includes /activity & somehow find student id */}
-        {student && location.pathname.includes('portfolio') || location.pathname.includes('activity') ?
+        {/* This will show up on any route that includes portfolio or activity */}
+        {student && (location.pathname.includes('portfolio') || location.pathname.includes('activity')) ?
             <BreadcrumbItem isCurrentPage={isPortfolioContainer}>
                 <BreadcrumbLink as={RouterLink} to={`/portfolio/${student.id}`}>
                     {user.user_type_id === 1 && student
@@ -69,21 +70,21 @@ const Breadcrumbs = ({ user, family, activities }) => {
                     }
                 </BreadcrumbLink>
             </BreadcrumbItem>
-        : null}
+        : null }
 
-        {/* This will only show up when the AddActivityForm is being rendered */}
+        {/* This will only show up when the AddActivityForm is rendered */}
         {student && location.pathname === `/portfolio/${student.id}/add` ?
             <BreadcrumbItem isCurrentPage>
                 <BreadcrumbLink>Add an activity</BreadcrumbLink>
             </BreadcrumbItem>
         : null }
 
-        {/* This should only render when the ActivityOverview is being rendered */}
+        {/* This will only render when the ActivityOverview is rendered */}
         {student && currentActivity && location.pathname === `/activity/${activityId}` ? 
             <BreadcrumbItem isCurrentPage>
                 <BreadcrumbLink>{currentActivity.name}</BreadcrumbLink>
             </BreadcrumbItem>
-        : null}
+        : null }
 
         </Breadcrumb>
     )
