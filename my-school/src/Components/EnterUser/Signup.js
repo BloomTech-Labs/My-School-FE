@@ -165,7 +165,7 @@ const Signup = ({registration}) => {
                 {/* STATE? */}
                 <FormControl mb="24px" w="85%">
                     <FormLabel fontWeight="700" color="gray.800">State</FormLabel>
-                    <Select borderColor="gray.400" data-testid='state'>
+                    <Select borderColor="gray.400" data-testid='state' defaultValue='MD'>
                         <StateSelect />
                     </Select>
                 </FormControl>

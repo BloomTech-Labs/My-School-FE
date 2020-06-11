@@ -23,9 +23,7 @@ const StateSelect = () => {
       <option value="KY">Kentucky</option>
       <option value="LA">Louisiana</option>
       <option value="ME">Maine</option>
-      <option value="MD" selected>
-        Maryland
-      </option>
+      <option value="MD">Maryland</option>
       <option value="MA">Massachusetts</option>
       <option value="MI">Michigan</option>
       <option value="MN">Minnesota</option>

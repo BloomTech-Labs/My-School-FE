@@ -74,7 +74,7 @@ const NavMenu = ({ user, family, logout, isLoading, err }) => {
         {user.user_type_id === 1 &&
           <>
             {/* STUDENT ACCOUNT MANAGEMENT */}
-            <MenuGroup title={`${capitalizeName(user.familyName)} Family`} fontSize="1.125" color="gray.800" fontWeight="bold" mx="24px" mt="20px" mb="12px" p="0">
+            <MenuGroup title={`${user.familyName && capitalizeName(user.familyName)} Family`} fontSize="1.125" color="gray.800" fontWeight="bold" mx="24px" mt="20px" mb="12px" p="0">
               {/* EXISTING STUDENT ACCOUNTS */}
               {family.length > 1 ?
                 family.map(s => {

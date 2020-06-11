@@ -1,8 +1,8 @@
 import { 
-    FETCHING_USERS,
-    DELETING_USER,
-    USERS_SUCCESS,
-    USERS_FAILURE, 
+    SET_ERROR,
+    SET_USER,
+    FETCH_USER,
+    DELETE_USER
 } from '../Redux/actions/actions-users';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -25,28 +25,28 @@ const user = {
     ]
 }
 const expectedUser = {
-    type: USERS_SUCCESS,
+    type: SET_USER,
     payload: {
         data: [
             { id: 1, name: 'dylan'}
         ]
     }
 }
-const expectedFetchingSuccess = { type: FETCHING_USERS }
+const expectedFetchingSuccess = { type: FETCH_USER }
 const error = {
     err: [
         { message: 'there was a bad axios call'}
     ]
 }
 const expectedError = {
-    type: USERS_FAILURE,
+    type: SET_ERROR,
     payload: {
         err: [
             { message: 'there was a bad axios call'}
         ]
     }
 }
-const expectDelete = { type: DELETING_USER }
+const expectDelete = { type: DELETE_USER }
 
 
 describe('Testing getAllActivitiesForUser', () => {
@@ -56,28 +56,28 @@ describe('Testing getAllActivitiesForUser', () => {
     });
 
     it('testing the users fetching and success action creators', () => {
-        store.dispatch({ type: FETCHING_USERS })
+        store.dispatch({ type: FETCH_USER })
         mock.onGet('/testingActionsSuccess').reply(200, user )
-        store.dispatch({ type: USERS_SUCCESS, payload: user })
+        store.dispatch({ type: SET_USER, payload: user })
         const actions  = store.getActions();
         expect(actions[0]).toEqual(expectedFetchingSuccess);
         expect(actions[1]).toEqual(expectedUser);
     });
 
     it('should return error for bad get request', ()=>{
-        store.dispatch({ type: FETCHING_USERS })
+        store.dispatch({ type: FETCH_USER })
         mock.onGet('/testingActionFailure').reply(404, user)
-        store.dispatch({ type: USERS_FAILURE, payload: error })
+        store.dispatch({ type: SET_ERROR, payload: error })
         const actions  = store.getActions();
         expect(actions[0]).toEqual(expectedFetchingSuccess);
         expect(actions[1]).toEqual(expectedError);
     })
 
     it('action for posting user should return', ()=>{
-        store.dispatch({ type: DELETING_USER })
-        store.dispatch({ type: FETCHING_USERS })
+        store.dispatch({ type: DELETE_USER })
+        store.dispatch({ type: FETCH_USER })
         mock.onGet('/testingActionFailure').reply(404, user)
-        store.dispatch({ type: USERS_SUCCESS, payload: user })
+        store.dispatch({ type: SET_USER, payload: user })
         const actions  = store.getActions();
         expect(actions[0]).toEqual(expectDelete);
         expect(actions[1]).toEqual(expectedFetchingSuccess);
