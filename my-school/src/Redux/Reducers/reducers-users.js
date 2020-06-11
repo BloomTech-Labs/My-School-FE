@@ -34,7 +34,8 @@ export const usersReducer = (state = initialState, action) => {
     case SET_ERROR :
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        isLoading: false,
       }
     case FETCH_FAMILY :
       return {
@@ -46,7 +47,8 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         family: action.payload.people,
-        familyName: action.payload.family.name
+        familyName: action.payload.family.name,
+        error: ''
       }
     case DELETE_USER : 
       return {

@@ -3,13 +3,15 @@ import { useParams, Link as RouterLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { Flex, Text, Link } from "@chakra-ui/core";
 import HeaderButton from "./HeaderButton";
+import capitalizeName from '../../utils/capitalizeName'
 
 const PortfolioHeader = ({ user, family, student}) => {
 
   const isParent = user.user_type_id === 1 ? true : false;
   const studentId = useParams().id;
-  const [studentName, setStudentName] = useState('');
-  
+  const [studentName, setStudentName] = useState('')
+
+
   useEffect(() => {
     if (student.length === 1) {
       setStudentName(student[0].name);
@@ -24,7 +26,7 @@ const PortfolioHeader = ({ user, family, student}) => {
       {isParent ?
         <Flex>
           <Link as={RouterLink} to="/dashboard">Dashboard </Link>
-          <Text>&nbsp;/ {studentName}'s Portfolio</Text>
+          <Text>&nbsp;/ {capitalizeName(studentName)}'s Portfolio</Text>
         </Flex>
         : 
         <Text>My Portfolio</Text>

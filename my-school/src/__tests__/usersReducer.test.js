@@ -8,31 +8,29 @@ describe('users reducer', () => {
 
     it('should return the initial state', ()=>{
         expect(usersReducer(undefined, {})).toEqual({
-            users: [],
             user: {},
             family: [],
-            familyName:'',
+            familyName: '',
             isLoading: false,
-            err: ''
+            error: ''
         })
     });
 
     it('handles FETCHING_USERS', () => {
         const start = { type: types.FETCHING_USERS };
         expect(usersReducer(undefined, start)).toEqual({
-            users: [],
             user: {},
             family: [],
-            familyName:'',
-            isLoading: true,
-            err: ''
+            familyName: '',
+            isLoading: false,
+            error: ''
              })
     });
 
     it('handles USERS_SUCCESS', () => {
-        const success = { type: types.USERS_SUCCESS, payload: mockData}
+        const success = { type: types.SET_FAMILY, payload: mockData}
         expect(usersReducer({}, success)).toEqual({
-            users: [
+            family: [
                 {
                 "age": 25,
                 "name": "dylan"
@@ -45,29 +43,28 @@ describe('users reducer', () => {
                 "age": 10, 
                 "name": "elysia"
                 }], 
-            err: '',
-            isLoading: false
+            error: '',
+            isLoading: false,
+            familyName: 'a name'
         })
     });
 
-    it('handles USERS_FAILURE', ()=> {
-        const failed = { type: types.USERS_FAILURE ,payload: 'there was an error tring to get users' }
+    it('handles SET_ERROR', ()=> {
+        const failed = { type: types.SET_ERROR ,payload: 'there was an error tring to get users' }
         expect(usersReducer({}, failed)).toEqual({
-             err: "there was an error tring to get users",
+             error: "there was an error tring to get users",
              isLoading: false,
         })
     });
 
     it('handle deleting user', ()=>{
-        expect(usersReducer({}, { type: types.DELETING_USER })).toEqual({
+        expect(usersReducer({}, { type: types.DELETE_USER })).toEqual({
             isLoading: true,
         })
     });
 
     it('handle adding user', ()=>{
-        expect(usersReducer({}, { type: types.ADDING_USERS })).toEqual({
-            isLoading: true,
-        })
+        expect(usersReducer({}, { type: types.SET_REGISTRATION })).toEqual({})
     });
       
   });

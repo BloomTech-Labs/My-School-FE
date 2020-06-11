@@ -6,6 +6,7 @@ import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { getFamily } from '../../Redux/actions/actions-users'
 import { Box, Button, Heading } from '@chakra-ui/core';
+import capitalizeName from '../../utils/capitalizeName'
 
 const AdminDash = ({ user, isLoading, family, familyName }) => {
   const history = useHistory();
@@ -21,7 +22,7 @@ const AdminDash = ({ user, isLoading, family, familyName }) => {
 
   return (
     <>
-      <Heading>{user.familyName} Family</Heading>
+      <Heading>{user.familyName && capitalizeName(user.familyName)} Family</Heading>
 
       <div className='student-list'>
 
@@ -50,7 +51,6 @@ const AdminDash = ({ user, isLoading, family, familyName }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log({ state })
   return {
     user: state.usersReducer.user,
     familyName: state.usersReducer.familyName,

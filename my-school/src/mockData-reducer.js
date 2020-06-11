@@ -1,4 +1,5 @@
-export const mockData = [
+export const mockData = {
+    people: [
     {
         "name": "dylan",
         "age": 25
@@ -11,4 +12,8 @@ export const mockData = [
         "name": "elysia",
         "age": 10
     }
-]
+],
+    family: {
+        name: 'a name'
+    }
+}

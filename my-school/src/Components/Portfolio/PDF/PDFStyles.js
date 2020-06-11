@@ -29,7 +29,7 @@ const style = StyleSheet.create({
     fontSize: 14,
     paddingHorizontal: "1in",
     textAlign: 'justify',
-    fontFamily: 'Pridi'
+    fontFamily: 'Pridi',
   },
   image: {
     marginTop: 40,
