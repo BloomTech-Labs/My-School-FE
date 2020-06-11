@@ -16,6 +16,7 @@ import {
 import { useToast } from "@chakra-ui/core";
 import { useHistory } from "react-router-dom";
 import { createStudent } from "../Redux/actions/actions-users";
+import {validateCredentials} from '../utils/validateCredentials'
 
 const StudentRegistration = (props) => {
   const toast = useToast();
@@ -36,21 +37,12 @@ const StudentRegistration = (props) => {
     history.push(`/dashboard`);
   };
 
-  const validateCredentials = (value) => {
-    if (value <= 0) {
-      return "must provide credentials";
-    } else {
-      return null;
-    }
-  };
-
   const pushHistory = () => {
     history.push("/dashboard");
   };
 
   return (
     <Box mx={["8px", "20px", "32px", "100px"]}>
-      {/* <Flex flexDirection="column" p="1.5rem 0rem 3rem 10rem"> */}
         <Text
           paddingBottom="3.5rem"
           fontSize="1.125rem"
@@ -65,13 +57,6 @@ const StudentRegistration = (props) => {
         <Text fontSize="lg" fontWeight="bold" mb="32px">New Student Account Setup</Text>
         <Box w={["100%", "100%", "75%", "50%"]}>
         <form onSubmit={handleSubmit(handleStudentRegister)}>
-          {/* <Flex
-            w="80vw"
-            flexWrap="wrap"
-            p="1.5rem 1.5rem 1.5rem 0rem"
-            h="50vh"
-            data-testid="form-submit"
-          > */}
           <FormControl isInvalid={errors.firstname} mb="32px">
               <FormLabel htmlFor="firstname" fontWeight="bold">First name</FormLabel>
               <Input
@@ -107,24 +92,6 @@ const StudentRegistration = (props) => {
                 {errors.username && errors.username.message}
               </FormErrorMessage>
             </FormControl>
-            {/* <FormControl isInvalid={errors.portfolioname} w="50%">
-              <FormLabel htmlFor="porfolioname">
-                Portfolio name (optional)
-              </FormLabel>
-              <Input
-                type="text"
-                id="porfolioname"
-                name="porfolioname"
-                placeholder="Useful for nicknames! ie: Bobby’s portfolio"
-                ref={register()}
-                defaultValue={""}
-                w="60%"
-                data-testid="portName"
-              />
-              <FormErrorMessage>
-                {errors.portfolioname && errors.portfolioname.message}
-              </FormErrorMessage>
-            </FormControl> */}
             <FormControl isInvalid={errors.password} mb="32px">
               <FormLabel htmlFor="password" fontWeight="bold">Password</FormLabel>
               <Input
@@ -148,22 +115,6 @@ const StudentRegistration = (props) => {
                 {errors.password && errors.password.message}
               </FormErrorMessage>
             </FormControl>
-            {/* <FormControl isInvalid={errors.firstname} w="50%">
-              <FormLabel htmlFor="firstname">First name</FormLabel>
-              <Input
-                type="text"
-                id="firstname"
-                name="firstname"
-                placeholder={`What is the student's first name?`}
-                ref={register({ validate: validateCredentials })}
-                defaultValue={""}
-                w="60%"
-                data-testid="fName"
-              />
-              <FormErrorMessage>
-                {errors.firstname && errors.firstname.message}
-              </FormErrorMessage> */}
-            {/* </FormControl> */}
             <FormControl isInvalid={errors.passwordconfirmation} mb="32px">
               <FormLabel htmlFor="passwordconfirmation" fontWeight="bold">
                 Password (Confirmation)
@@ -187,22 +138,6 @@ const StudentRegistration = (props) => {
                   errors.passwordconfirmation.message}
               </FormErrorMessage>
             </FormControl>
-            {/* <FormControl isInvalid={errors.lastname} w="50%">
-              <FormLabel htmlFor="lastname">Last name</FormLabel>
-              <Input
-                type="text"
-                id="lastname"
-                name="lastname"
-                placeholder={`What is the student's last name?`}
-                ref={register({ validate: validateCredentials })}
-                defaultValue={""}
-                w="60%"
-                data-testid="lName"
-              />
-              <FormErrorMessage>
-                {errors.lastname && errors.lastname.message}
-              </FormErrorMessage>
-            </FormControl> */}
             <Button
               variantColor="green"
               fontSize="lg"
@@ -212,11 +147,8 @@ const StudentRegistration = (props) => {
             >
               Submit{" "}
             </Button>
-            
-          {/* </Flex> */}
         </form>
         </Box>
-      {/* </Flex> */}
     </Box>
   );
 };
