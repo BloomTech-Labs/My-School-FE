@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
-// import { pdf } from '@react-pdf/renderer';
-// import Blob from './PDF/Blob';
-// import MyDocument from './PDF/PDFPortfolio';
 import { connect } from "react-redux";
 import { Flex, Text, Link } from "@chakra-ui/core";
 import HeaderButton from "./HeaderButton";
 
-const PortfolioHeader = ({ user, family, student }) => {
+const PortfolioHeader = ({ user, family, student}) => {
+
   const isParent = user.user_type_id === 1 ? true : false;
   const studentId = useParams().id;
-  const [studentName, setStudentName] = useState('')
-  // const blob = pdf(PDFPortfolio).toBlob();
+  const [studentName, setStudentName] = useState('');
   
   useEffect(() => {
     if (student.length === 1) {
       setStudentName(student[0].name);
-      console.log(Blob);
     }
   }, [student])
-
-
- 
-  
 
 
   return (
@@ -46,11 +38,14 @@ const PortfolioHeader = ({ user, family, student }) => {
 
 
         {/*  EXPORT BUTTON -- ADMINS ONLY */}
-        {isParent ?
+       
+           
+          {isParent ?
 
-        <HeaderButton text="Convert to PDF" icon="download"  location={`/portfolio/${studentId}/export`}/>
-        : null}
+          <HeaderButton icon="download" text="Export PDF" location={`/portfolio/${studentId}/export`} /> 
 
+          : null} 
+        
       </Flex>
       
       {/*SEARCH BOX AND SORT/FILTER FEATURES WILL GO HERE*/}

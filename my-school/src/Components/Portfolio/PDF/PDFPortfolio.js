@@ -37,7 +37,7 @@ Font.register({
 
 
 // Create Document Page Component
-const MyDocument = ({ activities, title }) => {
+const MyDocument = ({activities}) => {
 
   //Don't show null
   function noNull(item) {
@@ -49,46 +49,50 @@ const MyDocument = ({ activities, title }) => {
   }
 
   //Creates actual document
-  const PDFPortfolio = ({ activities, title }) =>  {
+ const PDFPortfolio = (
+  
 
-    return(
-      <Document style={style.doc} title={title}>
-        <Page size="A4" style={style.page}>
-          <View >
-            {/* for each activity, return a view. dates and times formatted */}
-            {activities.map((a) => {
-              let subdate = moment(a.completion_date).format('MMMM Do YYYY');
-              let durtime = timechange(a.duration);
+    <Document style={style.doc} title={''}>
+      <Page size="A4" style={style.page}>
+        <View >
+          {/* for each activity, return a view. dates and times formatted */}
+          {activities.map((a) => {
+            let subdate = moment(a.completion_date).format('MMMM Do YYYY');
+            let durtime = timechange(a.duration);
 
-              return (
-                <View key={a.id} className='section' wrap={false}>
+            return (
+              <View>
+                <View key={a.id} wrap={false}>
                   <Text style={style.title}>{a.name}</Text>
                   <Text style={style.subtitle}>Date: {subdate}      Subject: {a.subject}     Duration: {durtime}</Text>
                   <Text style={style.text}>{noNull(a.description)}</Text>
-                  {/* need to make sure this works with multiple images per activity */}
+                </View>
+            
+                <View key={a.id} wrap={false}>
+                {/* need to make sure this works with multiple images per activity */}
                   {a.photo && <Image src={`https${a.photo.slice(4, a.photo.length)}`} style={style.image} />}
                 </View>
-              );
-            })}
-          </View>
-        </Page>
-      </Document>
-      );
-    };
+              </View>
+            );
+          })}
+        </View>
+      </Page>
+    </Document>
+ );
 
 
-  // show Link to activate new tab PDF
+  // // show Link to activate new tab PDF
   return(
     <Box w="100%">
       <Flex direction="row"
         align="center"
         justify="center">
-        <Button>
+          <Button>
           <BlobProvider document={PDFPortfolio}>
-            {({ url }) => <a href={url} target="_blank" rel="noopener noreferrer">Link to PDF</a>}
+            {({ url }) => <a href={url} target="_blank" rel="noopener noreferrer">PDF</a>}
           </BlobProvider>
         </Button>
-      </Flex>
+        </Flex>
     </Box>
   );
 };
