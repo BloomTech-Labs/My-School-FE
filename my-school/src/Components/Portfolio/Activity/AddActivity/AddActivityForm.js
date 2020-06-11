@@ -25,7 +25,7 @@ import { useForm, FormContext } from "react-hook-form";
 import DateSelector from "../DateSelector";
 import NewActivityPreview from "./NewActivityPreview";
 import validateTitle from "../../../../utils/validateTitle";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const AddActivityForm = () => {
   React.useEffect(() => {
@@ -33,10 +33,8 @@ const AddActivityForm = () => {
   }, []);
 
   const methods = useForm();
-  const history = useHistory();
   const { handleSubmit, errors, register, formState } = methods;
   const toast = useToast();
-  const [studentName, setStudentName] = useState("");
   const [image, setImage] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const studentId = useParams().id;
@@ -133,64 +131,22 @@ const AddActivityForm = () => {
         });
     }
   }
-  useEffect(() => {
-    if (studentId)
-      axios
-        .get(`https://my-school-v1.herokuapp.com/api/users/${studentId}`)
-        .then((res) => {
-          const name =
-            res.data.name.charAt(0).toUpperCase() + res.data.name.slice(1);
-          setStudentName(name);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  }, [studentId]);
-
-  const historyPusher = () => {
-    history.push(`/portfolio/${studentId}}`);
-  };
-
-  const pushHistory = () => {
-    history.push("/dashboard");
-  };
 
   return (
-    <Box mt="36px">
+    <Box my="36px" mx="40px">
       {preview ? (
         <NewActivityPreview
           preview={preview}
-          studentName={studentName}
-          historyPusher={historyPusher}
         />
       ) : (
         <Flex flexDirection="column">
-          <Text
-            padding="2rem 0rem 2rem 10rem"
-            fontSize="1.125rem"
-            fontWeight="700"
-            color="gray.800"
-          >
-            {studentId ? (
-              <span className="link" onClick={pushHistory}>
-                Dashboard /
-              </span>
-            ) : (
-              ""
-            )}{" "}
-            <span className="link" onClick={historyPusher}>
-              {" "}
-              {studentName !== "" ? `${studentName}'s Portfolio` : ""}
-            </span>{" "}
-            / Add Assignment
-          </Text>
           <FormContext {...methods}>
             <form onSubmit={handleSubmit(onSubmit)} data-testid="form-submit" >
               {/* Title, Subject, Description, Duration, Submission Date, Upload Photo */}
               <SimpleGrid
                 columns={[1, 1, 1, 2]}
                 spacing={["20px", "20px", "20px", "128px"]}
-                mx={["8px", "20px", "32px", "100px"]}
+                // mx={["8px", "20px", "32px", "100px"]}
                 // px={["0", "0", "0", "36px"]}
                 // maxWidth="1400px"
               >
