@@ -23,6 +23,7 @@ import {
 import { useForm } from 'react-hook-form';
 import {connect} from 'react-redux'
 import {register as registration} from '../../Redux/actions/actions-users'
+import StateSelect from './StateSelect';
 
 const Signup = ({registration}) => {
     const history = useHistory();
@@ -164,8 +165,8 @@ const Signup = ({registration}) => {
                 {/* STATE? */}
                 <FormControl mb="24px" w="85%">
                     <FormLabel fontWeight="700" color="gray.800">State</FormLabel>
-                    <Select borderColor="gray.400" data-testid='state'>
-                        <option value="maryland">Maryland</option>
+                    <Select borderColor="gray.400" data-testid='state' defaultValue='MD'>
+                        <StateSelect />
                     </Select>
                 </FormControl>
                 {/* CHECKBOX */}

@@ -7,7 +7,7 @@ describe('Add student component', () => {
 
     it('mySchool title renders', () => {
         const { getByText } = render(<AddStudent/>);
-        const title = getByText(/new account setup/i)
+        const title = getByText(/new student account setup/i)
         expect(title).toBeTruthy();
     })
 
@@ -29,22 +29,10 @@ describe('Add student component', () => {
         expect(password2).toBeTruthy();
     });
 
-    it('should have port name title', () => {
-        const { getByText } = render(<AddStudent/>)
-        const port = getByText(`Portfolio name (optional)`);
-        expect(port).toBeTruthy();
-    });
-    
     it('should have first name title', () => {
         const { getByText } = render(<AddStudent/>)
         const fname = getByText(/first name/i);
         expect(fname).toBeTruthy();
-    });
-
-    it('should have last name title', () => {
-        const { getByText } = render(<AddStudent/>)
-        const lname = getByText(/last name/i);
-        expect(lname).toBeTruthy();
     });
 
     it('renders right label and input change for username', async () => {
@@ -55,15 +43,6 @@ describe('Add student component', () => {
         })
         expect(username.value).toEqual('dcoll');
     })
-
-    it('renders right label and input change for portfolio name', async () => {
-        const { getByTestId } = render(<AddStudent/>);
-        const portName = getByTestId('portName');
-        await act(async () =>{
-            fireEvent.change(portName, {target: {name: "porfolioname" , value: 'dyl portfolio' }});
-        })
-         expect(portName.value).toEqual('dyl portfolio');
-     })
 
     it('renders right label and input change for password', async () => {
         const { getByTestId } = render(<AddStudent/>);
@@ -92,15 +71,6 @@ describe('Add student component', () => {
          expect(password.value).toEqual('password');
      })
 
-     it('renders right label and input change for last name', async() => {
-        const { getByTestId } = render(<AddStudent/>);
-        const lName = getByTestId('lName');
-        await act(async () => {
-            fireEvent.change(lName, {target: {name: 'lastname' , value: 'collins'}});
-        });
-         expect(lName.value).toEqual('collins');
-     })
-
     it('renders submit button and runs upon clicking', async () => {
         const onSubmit = jest.fn(e => e.preventDefault())
         const { getByTestId } = render(<AddStudent/>);
@@ -109,23 +79,18 @@ describe('Add student component', () => {
         expect(submitButton).toBeTruthy();
         //mocking the submit button
         const username = getByTestId('username');
-        const portName = getByTestId('portName');
         const password = getByTestId('password');
         const fName =getByTestId('fName');
         const password2 =getByTestId('password2');
-        const lName =getByTestId('lName')
-        const submit = getByTestId('form-submit');
         await act(async ()=>{
             fireEvent.change(username, {target: {name: 'username' , value:'dylan '}});
-            fireEvent.change(portName, {target: {name: 'portfolioname' , value: 'dcoll port'}});
             fireEvent.change(password, {target: {name: 'password' , value:'password'}});
             fireEvent.change(fName, {target: {name: 'firstname' , value:'dylan'}});
             fireEvent.change(password2, {target: {name: 'passwordconfirmation' , value: 'password'}});
-            fireEvent.change(lName, {target: {name: 'lastname' , value:'collins'}});
         })
-        submit.addEventListener('submit', onSubmit)
+        submitButton.addEventListener('submit', onSubmit)
         await act( async ()=>{
-        fireEvent.submit(submit)
+        fireEvent.submit(submitButton)
         })
         expect(onSubmit).toHaveBeenCalled();
      })
