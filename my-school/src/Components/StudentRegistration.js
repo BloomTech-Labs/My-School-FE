@@ -33,7 +33,7 @@ const StudentRegistration = (props) => {
       duration: 4500,
       isClosable: true,
     });
-    history.push(`/dashboard/`);
+    history.push(`/dashboard`);
   };
 
   const validateCredentials = (value) => {
