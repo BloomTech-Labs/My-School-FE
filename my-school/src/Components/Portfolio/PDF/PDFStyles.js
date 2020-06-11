@@ -37,13 +37,12 @@ const style = StyleSheet.create({
   text: {
     fontSize: 14,
     textAlign: 'justify',
-    fontFamily: 'Pridi'
+    fontFamily: 'Pridi',
   },
   image: {
-    marginVertical: 15,
-    marginLeft: 100,
-    alignSelf: "right",
-    width: '100%'
+    marginLeft: '1in',
+    height: 'auto',
+    width: '6in',
   },
 });
 /* ----------------------/STYLES----------------------------------------- */
