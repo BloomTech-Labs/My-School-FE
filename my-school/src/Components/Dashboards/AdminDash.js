@@ -16,7 +16,7 @@ const AdminDash = ({ user, isLoading, family, familyName }) => {
   }, [])
 
   const addStudent = () => {
-    history.push('/addstudent')
+    history.push('/add-student')
   };
 
   return (

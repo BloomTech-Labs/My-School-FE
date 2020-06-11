@@ -9,6 +9,7 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
+  Box,
   Flex,
   Text,
 } from "@chakra-ui/core";
@@ -16,7 +17,7 @@ import { useToast } from "@chakra-ui/core";
 import { useHistory } from "react-router-dom";
 import { createStudent } from "../Redux/actions/actions-users";
 
-const StudentRegister = (props) => {
+const StudentRegistration = (props) => {
   const toast = useToast();
   const history = useHistory();
   const { register, handleSubmit, errors, watch } = useForm();
@@ -48,8 +49,8 @@ const StudentRegister = (props) => {
   };
 
   return (
-    <>
-      <Flex flexDirection="column" p="1.5rem 0rem 3rem 10rem">
+    <Box mx={["8px", "20px", "32px", "100px"]}>
+      {/* <Flex flexDirection="column" p="1.5rem 0rem 3rem 10rem"> */}
         <Text
           paddingBottom="3.5rem"
           fontSize="1.125rem"
@@ -61,18 +62,36 @@ const StudentRegister = (props) => {
           </span>{" "}
           / Add a new acoount
         </Text>
-        <h3 style={{ fontWeight: "bold" }}>New account setup</h3>
-
+        <Text fontSize="lg" fontWeight="bold" mb="32px">New Student Account Setup</Text>
+        <Box w={["100%", "100%", "75%", "50%"]}>
         <form onSubmit={handleSubmit(handleStudentRegister)}>
-          <Flex
+          {/* <Flex
             w="80vw"
             flexWrap="wrap"
             p="1.5rem 1.5rem 1.5rem 0rem"
             h="50vh"
             data-testid="form-submit"
-          >
-            <FormControl isInvalid={errors.username} w="39%">
-              <FormLabel htmlFor="username">Username</FormLabel>
+          > */}
+          <FormControl isInvalid={errors.firstname} mb="32px">
+              <FormLabel htmlFor="firstname" fontWeight="bold">First name</FormLabel>
+              <Input
+                type="text"
+                id="firstname"
+                name="firstname"
+                placeholder={`What is the student's first name?`}
+                ref={register({ validate: validateCredentials })}
+                defaultValue={""}
+                data-testid="fName"
+                borderColor="gray.400"
+                focusBorderColor="myschoolblue"
+              />
+              <FormErrorMessage>
+                {errors.firstname && errors.firstname.message}
+              </FormErrorMessage>
+            </FormControl>
+
+            <FormControl isInvalid={errors.username} mb="32px">
+              <FormLabel htmlFor="username" fontWeight="bold">Username</FormLabel>
               <Input
                 type="text"
                 id="username"
@@ -80,14 +99,15 @@ const StudentRegister = (props) => {
                 placeholder="This is what they will use to log in"
                 ref={register({ validate: validateCredentials })}
                 defaultValue={""}
-                w="55%"
                 data-testid="username"
+                borderColor="gray.400"
+                focusBorderColor="myschoolblue"
               />
               <FormErrorMessage>
                 {errors.username && errors.username.message}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={errors.portfolioname} w="50%">
+            {/* <FormControl isInvalid={errors.portfolioname} w="50%">
               <FormLabel htmlFor="porfolioname">
                 Portfolio name (optional)
               </FormLabel>
@@ -104,9 +124,9 @@ const StudentRegister = (props) => {
               <FormErrorMessage>
                 {errors.portfolioname && errors.portfolioname.message}
               </FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={errors.password} w="39%">
-              <FormLabel htmlFor="password">Password</FormLabel>
+            </FormControl> */}
+            <FormControl isInvalid={errors.password} mb="32px">
+              <FormLabel htmlFor="password" fontWeight="bold">Password</FormLabel>
               <Input
                 type="password"
                 id="password"
@@ -120,14 +140,15 @@ const StudentRegister = (props) => {
                 })}
                 defaultValue={""}
                 placeholder={`Your student's password`}
-                w="55%"
                 data-testid="password"
+                borderColor="gray.400"
+                focusBorderColor="myschoolblue"
               />
               <FormErrorMessage>
                 {errors.password && errors.password.message}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={errors.firstname} w="50%">
+            {/* <FormControl isInvalid={errors.firstname} w="50%">
               <FormLabel htmlFor="firstname">First name</FormLabel>
               <Input
                 type="text"
@@ -141,10 +162,10 @@ const StudentRegister = (props) => {
               />
               <FormErrorMessage>
                 {errors.firstname && errors.firstname.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={errors.passwordconfirmation} w="39%">
-              <FormLabel htmlFor="passwordconfirmation">
+              </FormErrorMessage> */}
+            {/* </FormControl> */}
+            <FormControl isInvalid={errors.passwordconfirmation} mb="32px">
+              <FormLabel htmlFor="passwordconfirmation" fontWeight="bold">
                 Password (Confirmation)
               </FormLabel>
               <Input
@@ -157,15 +178,16 @@ const StudentRegister = (props) => {
                     value === password.current || "The passwords do not match",
                 })}
                 defaultValue={""}
-                w="55%"
                 data-testid="password2"
+                borderColor="gray.400"
+                focusBorderColor="myschoolblue"
               />
               <FormErrorMessage>
                 {errors.passwordconfirmation &&
                   errors.passwordconfirmation.message}
               </FormErrorMessage>
             </FormControl>
-            <FormControl isInvalid={errors.lastname} w="50%">
+            {/* <FormControl isInvalid={errors.lastname} w="50%">
               <FormLabel htmlFor="lastname">Last name</FormLabel>
               <Input
                 type="text"
@@ -180,20 +202,22 @@ const StudentRegister = (props) => {
               <FormErrorMessage>
                 {errors.lastname && errors.lastname.message}
               </FormErrorMessage>
-            </FormControl>
-            <Text w="60%"></Text>
+            </FormControl> */}
             <Button
               variantColor="green"
-              w="7vw"
+              fontSize="lg"
+              w="90px"
               type="submit"
               data-testid="submit"
             >
               Submit{" "}
             </Button>
-          </Flex>
+            
+          {/* </Flex> */}
         </form>
-      </Flex>
-    </>
+        </Box>
+      {/* </Flex> */}
+    </Box>
   );
 };
 
@@ -206,6 +230,5 @@ const mapStateToProps = (state) => {
   };
 };
 export default connect(mapStateToProps, { getFamily, createStudent })(
-  StudentRegister
+  StudentRegistration
 );
-// export default StudentRegister;

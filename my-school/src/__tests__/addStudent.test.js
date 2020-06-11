@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, act} from '../test-utils/test-utils';
-import AddStudent from '../Components/studentRegister'
+import AddStudent from '../Components/StudentRegistration'
 
 
 describe('Add student component', () => {

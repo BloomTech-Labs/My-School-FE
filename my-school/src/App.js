@@ -12,7 +12,7 @@ import PortfolioContainer from "./Components/Portfolio/PortfolioContainer";
 import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActivityForm";
 import MyDocument from './Components/Portfolio/PDF/PDFPortfolio'
 import ActivityOverview from "./Components/Portfolio/Activity/ActivityOverview";
-import StudentRegistration from './Components/studentRegister';
+import StudentRegistration from './Components/StudentRegistration';
 import Settings from './Components/EnterUser/Settings';
 import AdminDash from './Components/Dashboards/AdminDash';
 
@@ -55,7 +55,7 @@ function App() {
             <Route path='/activity/:id'>
               <MainLayout page={<ActivityOverview />} />
             </Route>
-            <Route path='/addstudent'>
+            <Route path='/add-student'>
               <MainLayout page={<StudentRegistration/>} />
             </Route>
           </Switch>
