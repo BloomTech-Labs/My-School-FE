@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useLocation, useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
+    Flex,
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
@@ -44,18 +45,27 @@ const Breadcrumbs = ({ user, family, activities }) => {
          isPortfolioContainer = false
     };
 
-    console.log(student, user, user.user_type_id, location.pathname, `/portfolio/${studentId}`)
 
     return (
-        <>
+        <Flex align="center">
         {/* Back button...should not show up on /dashboard (if parent) or /portfolio/:id (if student) */}
         {(student && user && user.user_type_id === 2 && location.pathname === `/portfolio/${student.id}`) || location.pathname === '/dashboard' ?
             null
-        : <IconButton aria-label="go back" icon="chevron-left" onClick={() => history.goBack()}/>}
+        : <IconButton 
+            aria-label="go back" 
+            icon="chevron-left" 
+            bg="none"
+            color="gray.900"
+            fontSize="20px"
+            _hover={{ color: "myschoolblue" }}
+            onClick={() => history.goBack()}
+        
+        />}
 
         <Breadcrumb 
             fontWeight="semibold"
             color="gray.900"
+            fontSize={["sm", "sm", "md", "md"]}
         >
 
         {/* Dashboard should show up on all routes except for /dashboard */}
@@ -99,7 +109,7 @@ const Breadcrumbs = ({ user, family, activities }) => {
         : null }
 
         </Breadcrumb>
-        </>
+        </Flex>
     )
 }
 
