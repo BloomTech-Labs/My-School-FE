@@ -24,13 +24,7 @@ import PlusIcon from '../../../assets/icons/plus_icon.png';
 const NavMenu = ({ user, family, isLoading, err }) => {
   const history = useHistory();
 
-  const handleAdminSettings = () => {
-    history.push('/settings')
-  }
-
-  const manageStudent = (e) => {
-    e.preventDefault();
-    const id = e.target.value;
+  const handleSettings = id => {
     history.push(`/settings/${id}`)
   }
 
@@ -63,7 +57,7 @@ const NavMenu = ({ user, family, isLoading, err }) => {
             <Text fontSize="0.625rem" color="gray.600" textTransform="uppercase">{user.user_type_id === 1 ? `Primary Account` : `Student Account`}</Text>
           </Flex>
         </Flex>
-        {user.user_type_id === 1 && <MenuItem fontSize="sm" color="gray.700" px="24px" mt="12px" py="12px" onClick={handleAdminSettings}>Account Settings</MenuItem>}
+        {user.user_type_id === 1 && <MenuItem fontSize="sm" color="gray.700" px="24px" mt="12px" py="12px" onClick={()=> {handleSettings(user.id)}}>Account Settings</MenuItem>}
 
         <MenuDivider color="gray.300" m="0" />
 
@@ -76,16 +70,16 @@ const NavMenu = ({ user, family, isLoading, err }) => {
               {family.length > 1 ?
                 family.map(s => {
                   // family includes parent, so much filter for student accts only
-                  if (s.user_type_id === 2) {
+                  if (s.user_type_id === 2 && localStorage.getItem('userId') !== s.id) {
                     return (
-                      <MenuItem key={s.id} value={s.id} py="8px" pl="24px" onClick={manageStudent}>
+                      <MenuItem key={s.id} value={s.id} py="8px" pl="24px" >
                         <Avatar size="sm" src={s.profile_picture} alt={`${s.name} profile picture`} />
                         <Flex flexDirection="column" ml="12px">
                           <Text fontSize="md" fontWeight="bold" color="gray.700">{s.name}</Text>
                           <Text fontSize="0.625rem" color="gray.500" textTransform="uppercase">Student Account</Text>
                         </Flex>
                         <Box fontSize="0.625rem" color="myschoolblue" textTransform="uppercase" border="1px" borderColor="myschoolblue" borderRadius="4px" h="24px" w="56px" bg="white" ml="52px">
-                          <Text pt="4px" pl="5px">Manage</Text>
+                          <Text pt="4px" pl="5px" onClick={()=>{handleSettings(s.id)}}>Manage</Text>
                         </Box>
                       </MenuItem>
                     )
