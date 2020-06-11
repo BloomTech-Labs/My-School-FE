@@ -10,7 +10,7 @@ import AuthPage from "./Components/EnterUser/AuthPage";
 import MainLayout from "./Components/MainLayout";
 import PortfolioContainer from "./Components/Portfolio/PortfolioContainer";
 import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActivityForm";
-import PDFExporter from './Components/Portfolio/PDF/PDFExporter';
+import PDFExporter from './Components/Portfolio//PDF/PDFExporter'
 import ActivityOverview from "./Components/Portfolio/Activity/ActivityOverview";
 import StudentRegistration from './Components/StudentRegistration';
 import Settings from './Components/EnterUser/Settings';
