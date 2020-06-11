@@ -37,7 +37,6 @@ const MainLayout = ({ page, getFamily, getUserByID }) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log("state in main layout", state)
     return {
         user: state.usersReducer.user,
         family: state.usersReducer.family

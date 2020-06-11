@@ -40,7 +40,7 @@ function App() {
             <Route path='/dashboard'>
               <MainLayout page={<AdminDash />} />
             </Route>
-            <Route path='/settings'>
+            <Route path='/settings/:id'>
               <MainLayout page={<Settings />} />
             </Route>
             <Route exact path='/portfolio/:id'>
