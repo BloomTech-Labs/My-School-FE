@@ -19,7 +19,7 @@ const OverviewCard = (props) => {
     if (props.activity.id === Number(id)) {
       props.nameSetter(props.activity.name)
     }
-  }, [props.activity, id])
+  }, [props, props.activity, id])
 
   const handlePrevious = (index) => {
     props.puller(index);

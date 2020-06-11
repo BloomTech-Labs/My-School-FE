@@ -44,7 +44,7 @@ const ActivityOverview = ({
           console.log(err)
         });
     return undefined
-  }, [])
+  }, [id])
 
   const pusher = (index) => {
     const neededIndex = index + 1;

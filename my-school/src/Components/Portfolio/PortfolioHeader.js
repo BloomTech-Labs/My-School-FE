@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
+// import { pdf } from '@react-pdf/renderer';
+// import Blob from './PDF/Blob';
+// import MyDocument from './PDF/PDFPortfolio';
 import { connect } from "react-redux";
 import { Flex, Text, Link } from "@chakra-ui/core";
 import HeaderButton from "./HeaderButton";
@@ -8,14 +11,22 @@ const PortfolioHeader = ({ user, family, student }) => {
   const isParent = user.user_type_id === 1 ? true : false;
   const studentId = useParams().id;
   const [studentName, setStudentName] = useState('')
-
+  // const blob = pdf(PDFPortfolio).toBlob();
+  
   useEffect(() => {
     if (student.length === 1) {
-      setStudentName(student[0].name)
+      setStudentName(student[0].name);
+      console.log(Blob);
     }
   }, [student])
 
+
+ 
+  
+
+
   return (
+    
     <Flex margin="2% 4%" justify="space-between">
       {/* PAGE TITLE // BREADCRUMBS */}
       {isParent ?
@@ -27,15 +38,22 @@ const PortfolioHeader = ({ user, family, student }) => {
         <Text>My Portfolio</Text>
       }
 
-      {/* BUTTONS: 2 if parent, 1 if student */}
+      {/* BUTTONS: 2 if admin, 1 if student */}
       <Flex width="25%" justify="space-evenly">
+
+        {/* ADD ACTIVITY BUTTON -- STUDENTS AND ADMINS*/}
         <HeaderButton text="Add Activity" icon="add" location={`/portfolio/${studentId}/add`} />
-        {/*  EXPORT BUTTON -- PARENTS ONLY? */}
-        {isParent ? <HeaderButton text="Convert to PDF" icon="download" location={`/portfolio/${studentId}/export`} /> : null}
+
+
+        {/*  EXPORT BUTTON -- ADMINS ONLY */}
+        {isParent ?
+
+        <HeaderButton text="Convert to PDF" icon="download"  location={`/portfolio/${studentId}/export`}/>
+        : null}
+
       </Flex>
       
-      {/*  Start with opening in another tab, then download. */}
-      {/*SEARCH BOX AND SORT/FILTER FEATUREs WILL GO HERE*/}
+      {/*SEARCH BOX AND SORT/FILTER FEATURES WILL GO HERE*/}
       {/* future -- activity tracker? */}
     </Flex>
   );
