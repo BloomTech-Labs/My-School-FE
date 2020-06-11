@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { Flex, Text, Link } from "@chakra-ui/core";
+import { Flex, Box, Text, Icon } from "@chakra-ui/core";
 import HeaderButton from "./HeaderButton";
-import capitalizeName from '../../utils/capitalizeName'
+import capitalizeName from '../../utils/capitalizeName';
 
 const PortfolioHeader = ({ user, family, student }) => {
   const isParent = user.user_type_id === 1 ? true : false;
@@ -18,24 +18,28 @@ const PortfolioHeader = ({ user, family, student }) => {
   }, [student])
 
   return (
-    <Flex margin="2% 4%" justify="space-between">
-      {/* PAGE TITLE // BREADCRUMBS */}
-      {isParent ?
-        <Flex>
-          <Link as={RouterLink} to="/dashboard">Dashboard </Link>
-          <Text>&nbsp;/ {capitalizeName(studentName)}'s Portfolio</Text>
-        </Flex>
-        : 
-        <Text>My Portfolio</Text>
-      }
+    <Flex my="36px" mx={["8px", "20px", "40px", "40px"]} justify="space-between">
+
+      <Flex flexDirection="column">
+        {/* Portfolio Title */}
+        <Text fontSize="1.5rem" color="gray.800" fontWeight="bold">{isParent ? `${capitalizeName(studentName)}'s Portfolio` : `My Portfolio`}</Text>
+
+        {/* Shows Manage Account if parent account */}
+        {isParent ?
+          <Flex flexDirection="row" align="center" as={RouterLink} to={`/settings/${studentId}`}>
+            <Icon name="settings" color="myschoolorange" pr="8px" fontSize="1.5rem" />
+            <Text textTransform="uppercase" color="myschoolorange" fontSize="xs" fontWeight="bold">Manage Account</Text>
+          </Flex>
+          : null}
+      </Flex>
 
       {/* BUTTONS: 2 if parent, 1 if student */}
-      <Flex width="25%" justify="space-evenly">
+      <Flex width="30%" justify="space-evenly">
         <HeaderButton text="Add Activity" icon="add" location={`/portfolio/${studentId}/add`} />
         {/*  EXPORT BUTTON -- PARENTS ONLY? */}
         {isParent ? <HeaderButton text="Convert to PDF" icon="download" location={`/portfolio/${studentId}/export`} /> : null}
       </Flex>
-      
+
       {/*  Start with opening in another tab, then download. */}
       {/*SEARCH BOX AND SORT/FILTER FEATUREs WILL GO HERE*/}
       {/* future -- activity tracker? */}

@@ -23,7 +23,12 @@ const MainLayout = ({ page, getFamily, getUserByID }) => {
     return (
         <>
             <TopNav />
-            <Box my="36px" mx={["8px", "16px", "auto", "auto"]} maxWidth="1400px">
+            <Box 
+                my="36px" 
+                mx="auto" 
+                px={["8px", "16px", "32px", "100px"]}
+                maxWidth="1400px"
+            >
                 <Breadcrumbs />
                 {Page}
             </Box>

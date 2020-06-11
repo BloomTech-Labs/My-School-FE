@@ -10,8 +10,6 @@ import {
   FormLabel,
   FormErrorMessage,
   Box,
-  Flex,
-  Text,
 } from "@chakra-ui/core";
 import { useToast } from "@chakra-ui/core";
 import { useHistory } from "react-router-dom";
@@ -34,27 +32,11 @@ const StudentRegistration = (props) => {
       duration: 4500,
       isClosable: true,
     });
-    history.push(`/dashboard/`);
-  };
-
-  const pushHistory = () => {
-    history.push("/dashboard");
+    history.push(`/dashboard`);
   };
 
   return (
-    <Box mx={["8px", "20px", "32px", "100px"]}>
-        <Text
-          paddingBottom="3.5rem"
-          fontSize="1.125rem"
-          fontWeight="700"
-          color="gray.800"
-        >
-          <span color="blue.900" className="link" onClick={pushHistory}>
-            Dashboard
-          </span>{" "}
-          / Add a new acoount
-        </Text>
-        <Text fontSize="lg" fontWeight="bold" mb="32px">New Student Account Setup</Text>
+    <Box mx={["8px", "20px", "40px", "40px"]} my="36px">
         <Box w={["100%", "100%", "75%", "50%"]}>
         <form onSubmit={handleSubmit(handleStudentRegister)}>
           <FormControl isInvalid={errors.firstname} mb="32px">
