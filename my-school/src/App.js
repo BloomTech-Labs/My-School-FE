@@ -10,7 +10,7 @@ import AuthPage from "./Components/EnterUser/AuthPage";
 import MainLayout from "./Components/MainLayout";
 import PortfolioContainer from "./Components/Portfolio/PortfolioContainer";
 import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActivityForm";
-import PDFPortfolio from './Components/Portfolio/PDF/PDFPortfolio'
+import PDFExporter from './Components/Portfolio/PDF/PDFExporter';
 import ActivityOverview from "./Components/Portfolio/Activity/ActivityOverview";
 import StudentRegistration from './Components/StudentRegistration';
 import Settings from './Components/EnterUser/Settings';
@@ -50,7 +50,7 @@ function App() {
               <MainLayout page={<AddActivityForm />} />
             </Route>
             <Route path='/portfolio/:id/export'>
-              <MainLayout page={<PDFPortfolio />} />
+              <MainLayout page={<PDFExporter />} />
             </Route>
             <Route path='/activity/:id'>
               <MainLayout page={<ActivityOverview />} />
