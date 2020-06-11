@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, useLocation, useParams } from 'react-router-dom';
+import { Link as RouterLink, useLocation, useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
+    IconButton
 } from "@chakra-ui/core";
 
 const Breadcrumbs = ({ user, family, activities }) => {
     const location = useLocation();
     const params = useParams();
+    const history = useHistory();
 
     let activityId;
     let studentId;
@@ -42,28 +44,38 @@ const Breadcrumbs = ({ user, family, activities }) => {
          isPortfolioContainer = false
     };
 
+    console.log(student, user, user.user_type_id, location.pathname, `/portfolio/${studentId}`)
 
     return (
-        <Breadcrumb>
+        <>
+        {/* Back button...should not show up on /dashboard (if parent) or /portfolio/:id (if student) */}
+        {(student && user && user.user_type_id === 2 && location.pathname === `/portfolio/${student.id}`) || location.pathname === '/dashboard' ?
+            null
+        : <IconButton aria-label="go back" icon="chevron-left" onClick={() => history.goBack()}/>}
+
+        <Breadcrumb 
+            fontWeight="semibold"
+            color="gray.900"
+        >
 
         {/* Dashboard should show up on all routes except for /dashboard */}
         {location.pathname !== '/dashboard' && user.user_type_id === 1 ? 
-            <BreadcrumbItem color="myschoolblue">
-                <BreadcrumbLink as={RouterLink} to="/dashboard">Dashboard</BreadcrumbLink>
+            <BreadcrumbItem>
+                <BreadcrumbLink as={RouterLink} to="/dashboard" color="myschoolblue">Dashboard</BreadcrumbLink>
             </BreadcrumbItem>
         : null }
 
         {/* This will only show up on /add-student route */}
         {location.pathname === '/add-student' && user.user_type_id === 1 ? 
-            <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink>Add a new student account</BreadcrumbLink>
+            <BreadcrumbItem isCurrentPage >
+                <BreadcrumbLink color="gray.900">Add a new student account</BreadcrumbLink>
             </BreadcrumbItem>
         : null }
 
         {/* This will show up on any route that includes portfolio or activity */}
         {student && (location.pathname.includes('portfolio') || location.pathname.includes('activity')) ?
             <BreadcrumbItem isCurrentPage={isPortfolioContainer}>
-                <BreadcrumbLink as={RouterLink} to={`/portfolio/${student.id}`}>
+                <BreadcrumbLink as={RouterLink} to={`/portfolio/${student.id}`} color={isPortfolioContainer ? "gray.900" : "myschoolblue"}>
                     {user.user_type_id === 1 && student
                         ? `${student.name}'s Portfolio`
                         : `My Portfolio`
@@ -75,18 +87,19 @@ const Breadcrumbs = ({ user, family, activities }) => {
         {/* This will only show up when the AddActivityForm is rendered */}
         {student && location.pathname === `/portfolio/${student.id}/add` ?
             <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink>Add an activity</BreadcrumbLink>
+                <BreadcrumbLink color="gray.900">Add an activity</BreadcrumbLink>
             </BreadcrumbItem>
         : null }
 
         {/* This will only render when the ActivityOverview is rendered */}
         {student && currentActivity && location.pathname === `/activity/${activityId}` ? 
             <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink>{currentActivity.name}</BreadcrumbLink>
+                <BreadcrumbLink color="gray.900">{currentActivity.name}</BreadcrumbLink>
             </BreadcrumbItem>
         : null }
 
         </Breadcrumb>
+        </>
     )
 }
 
