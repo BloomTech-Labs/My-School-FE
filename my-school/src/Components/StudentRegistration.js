@@ -36,7 +36,7 @@ const StudentRegistration = (props) => {
   };
 
   return (
-    <Box mx={["8px", "20px", "40px", "40px"]}>
+    <Box mx={["8px", "20px", "40px", "40px"]} my="36px">
         <Box w={["100%", "100%", "75%", "50%"]}>
         <form onSubmit={handleSubmit(handleStudentRegister)}>
           <FormControl isInvalid={errors.firstname} mb="32px">

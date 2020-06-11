@@ -107,6 +107,13 @@ const Breadcrumbs = ({ user, family, activities }) => {
             </BreadcrumbItem>
         : null }
 
+        {/* This will only render on the PDFExporter */}
+        {student && location.pathname.includes('export') ?
+            <BreadcrumbItem isCurrentPage>
+                <BreadcrumbLink color="gray.900">Export Portfolio</BreadcrumbLink>
+            </BreadcrumbItem>
+        : null }
+
         {/* This will only render when the ActivityOverview is rendered */}
         {student && currentActivity && location.pathname === `/activity/${activityId}` ? 
             <BreadcrumbItem isCurrentPage>
