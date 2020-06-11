@@ -50,7 +50,12 @@ const Breadcrumbs = ({ user, family, activities }) => {
         <Flex align="center">
         {/* Back button...should not show up on /dashboard (if parent) or /portfolio/:id (if student) */}
         {(student && user && user.user_type_id === 2 && location.pathname === `/portfolio/${student.id}`) || location.pathname === '/dashboard' ?
-            null
+            <IconButton 
+            icon="chevron-left" 
+            bg="none"
+            fontSize="20px"
+            visibility="hidden"
+        />
         : <IconButton 
             aria-label="go back" 
             icon="chevron-left" 
