@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import TopNav from './Dashboards/Nav/TopNav';
 import {connect} from 'react-redux'
 import {getUserByID, getFamily} from '../Redux/actions/actions-users'
+import Breadcrumbs from './Dashboards/Nav/Breadcrumbs';
 
 const MainLayout = ({ page, getFamily, getUserByID }) => {
     const Page = page; 
@@ -21,6 +22,7 @@ const MainLayout = ({ page, getFamily, getUserByID }) => {
     return (
         <>
             <TopNav />
+            <Breadcrumbs />
             {Page}
         </>
     )

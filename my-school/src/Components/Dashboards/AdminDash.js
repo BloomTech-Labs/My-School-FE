@@ -50,7 +50,6 @@ const AdminDash = ({ user, isLoading, family, familyName }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log({ state })
   return {
     user: state.usersReducer.user,
     familyName: state.usersReducer.familyName,
