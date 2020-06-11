@@ -86,7 +86,7 @@ describe('signup component', () => {
     it('renders the state input', () => {
         const { getByTestId } = render(<Signup/>);
         const stateInput = getByTestId('state');
-        expect(stateInput.value).toEqual('maryland');
+        expect(stateInput.value).toEqual('MD');
      })
 
     it('checking to make sure the value of checkbox changes on click', async () => {

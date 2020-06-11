@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logout } from '../../../Redux/actions/actions-users';
 import {
   Menu,
   MenuButton,
@@ -20,8 +21,9 @@ import NavIcon from './NavIcon';
 // assets
 import LogoutIcon from '../../../assets/icons/logout_icon.png';
 import PlusIcon from '../../../assets/icons/plus_icon.png';
+import capitalizeName from '../../../utils/capitalizeName.js'
 
-const NavMenu = ({ user, family, isLoading, err }) => {
+const NavMenu = ({ user, family, logout, isLoading, err }) => {
   const history = useHistory();
 
   const handleSettings = id => {
@@ -29,12 +31,13 @@ const NavMenu = ({ user, family, isLoading, err }) => {
   }
 
   const handleAddStudent = () => {
-    history.push('/addstudent')
+    history.push('/add-student')
   }
 
   // Logout click handler...currently removes everything in localstorage but could be updated to be more specific
   const handleLogout = e => {
     e.preventDefault();
+    logout();
     localStorage.clear();
     history.push('/login');
   }
@@ -65,7 +68,7 @@ const NavMenu = ({ user, family, isLoading, err }) => {
         {user.user_type_id === 1 &&
           <>
             {/* STUDENT ACCOUNT MANAGEMENT */}
-            <MenuGroup title={`${user.familyName} Family`} fontSize="1.125" color="gray.800" fontWeight="bold" mx="24px" mt="20px" mb="12px" p="0">
+            <MenuGroup title={`${user.familyName && capitalizeName(user.familyName)} Family`} fontSize="1.125" color="gray.800" fontWeight="bold" mx="24px" mt="20px" mb="12px" p="0">
               {/* EXISTING STUDENT ACCOUNTS */}
               {family.length > 1 ?
                 family.map(s => {
@@ -75,7 +78,7 @@ const NavMenu = ({ user, family, isLoading, err }) => {
                       <MenuItem key={s.id} value={s.id} py="8px" pl="24px" >
                         <Avatar size="sm" src={s.profile_picture} alt={`${s.name} profile picture`} />
                         <Flex flexDirection="column" ml="12px">
-                          <Text fontSize="md" fontWeight="bold" color="gray.700">{s.name}</Text>
+                          <Text fontSize="md" fontWeight="bold" color="gray.700">{capitalizeName(s.name)}</Text>
                           <Text fontSize="0.625rem" color="gray.500" textTransform="uppercase">Student Account</Text>
                         </Flex>
                         <Box fontSize="0.625rem" color="myschoolblue" textTransform="uppercase" border="1px" borderColor="myschoolblue" borderRadius="4px" h="24px" w="56px" bg="white" ml="52px">
@@ -117,4 +120,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { })(NavMenu);
+export default connect(mapStateToProps, { logout })(NavMenu);

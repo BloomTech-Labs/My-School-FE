@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import TopNav from './Dashboards/Nav/TopNav';
 import {connect} from 'react-redux'
 import {getUserByID, getFamily} from '../Redux/actions/actions-users'
+import Breadcrumbs from './Dashboards/Nav/Breadcrumbs';
+import { Box } from '@chakra-ui/core';
 
 const MainLayout = ({ page, getFamily, getUserByID }) => {
     const Page = page; 
@@ -21,7 +23,15 @@ const MainLayout = ({ page, getFamily, getUserByID }) => {
     return (
         <>
             <TopNav />
-            {Page}
+            <Box 
+                my="36px" 
+                mx="auto" 
+                px={["8px", "16px", "32px", "100px"]}
+                maxWidth="1400px"
+            >
+                <Breadcrumbs />
+                {Page}
+            </Box>
         </>
     )
 }

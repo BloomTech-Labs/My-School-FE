@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/core';
 import validateCredentials from '../../utils/validateCredentials';
 
-const Login = ({onSubmit, login, user}) => {
+const Login = ({onSubmit, login}) => {
 
     const [invalid, setInvalid] = useState(false);
     const [ checked, setChecked ] = useState(false);
@@ -28,8 +28,8 @@ const Login = ({onSubmit, login, user}) => {
         .then(res => {
             if (res && res.data && res.data.user && res.data.user.user_type_id === 1) {
                 history.push("/dashboard");
-            } else if (res && res.data & res.data.user && res.data.user.user_type_id === 2) {
-                history.push(`/portfolio/${user.id}`);
+            } else if (res && res.data && res.data.user) {
+                history.push(`/portfolio/${res.data.user.id}`);
             } 
         })
         .catch(err => {
