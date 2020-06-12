@@ -98,8 +98,7 @@ const Settings = ({ family, editProfileWithoutImage, deleteAccount, deletEntireF
             }, [1000])
         }
     };
-console.log(user, 'this is the user')
-console.log(renderedUser, 'this is the rendered user')
+
     const handleUpdate = e => {
         if (image) {
             const formData = new FormData();
