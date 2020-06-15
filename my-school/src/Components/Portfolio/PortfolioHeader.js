@@ -5,7 +5,8 @@ import { Flex, Box, Text, Icon } from "@chakra-ui/core";
 import HeaderButton from "./HeaderButton";
 import capitalizeName from '../../utils/capitalizeName';
 
-const PortfolioHeader = ({ user, family, student }) => {
+const PortfolioHeader = ({ user, family, student}) => {
+
   const isParent = user.user_type_id === 1 ? true : false;
   const studentId = useParams().id;
   const [studentName, setStudentName] = useState('')
@@ -13,9 +14,10 @@ const PortfolioHeader = ({ user, family, student }) => {
 
   useEffect(() => {
     if (student.length === 1) {
-      setStudentName(student[0].name)
+      setStudentName(student[0].name);
     }
   }, [student])
+
 
   return (
     <Flex my="36px" mx={["8px", "20px", "40px", "40px"]} justify="space-between">
@@ -36,8 +38,17 @@ const PortfolioHeader = ({ user, family, student }) => {
       {/* BUTTONS: 2 if parent, 1 if student */}
       <Flex width="30%" justify="space-evenly">
         <HeaderButton text="Add Activity" icon="add" location={`/portfolio/${studentId}/add`} />
-        {/*  EXPORT BUTTON -- PARENTS ONLY? */}
-        {isParent ? <HeaderButton text="Convert to PDF" icon="download" location={`/portfolio/${studentId}/export`} /> : null}
+
+
+        {/*  EXPORT BUTTON -- ADMINS ONLY */}
+       
+           
+          {isParent ?
+
+          <HeaderButton icon="download" text="Export PDF" location={`/portfolio/${studentId}/export`} /> 
+
+          : null} 
+        
       </Flex>
 
       {/*  Start with opening in another tab, then download. */}
