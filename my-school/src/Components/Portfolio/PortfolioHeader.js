@@ -20,24 +20,6 @@ const PortfolioHeader = ({ user, family, student}) => {
 
 
   return (
-<<<<<<< HEAD
-    
-    <Flex margin="2% 4%" justify="space-between">
-      {/* PAGE TITLE // BREADCRUMBS */}
-      {isParent ?
-        <Flex>
-          <Link as={RouterLink} to="/dashboard">Dashboard </Link>
-          <Text>&nbsp;/ {capitalizeName(studentName)}'s Portfolio</Text>
-        </Flex>
-        : 
-        <Text>My Portfolio</Text>
-      }
-
-      {/* BUTTONS: 2 if admin, 1 if student */}
-      <Flex width="25%" justify="space-evenly">
-
-        {/* ADD ACTIVITY BUTTON -- STUDENTS AND ADMINS*/}
-=======
     <Flex my="36px" mx={["8px", "20px", "40px", "40px"]} justify="space-between">
 
       <Flex flexDirection="column">
@@ -55,7 +37,6 @@ const PortfolioHeader = ({ user, family, student}) => {
 
       {/* BUTTONS: 2 if parent, 1 if student */}
       <Flex width="30%" justify="space-evenly">
->>>>>>> 0e8450aab9f161c3c43b1d119e8886d15821921b
         <HeaderButton text="Add Activity" icon="add" location={`/portfolio/${studentId}/add`} />
 
 
@@ -69,14 +50,9 @@ const PortfolioHeader = ({ user, family, student}) => {
           : null} 
         
       </Flex>
-<<<<<<< HEAD
-      
-      {/*SEARCH BOX AND SORT/FILTER FEATURES WILL GO HERE*/}
-=======
 
       {/*  Start with opening in another tab, then download. */}
       {/*SEARCH BOX AND SORT/FILTER FEATUREs WILL GO HERE*/}
->>>>>>> 0e8450aab9f161c3c43b1d119e8886d15821921b
       {/* future -- activity tracker? */}
     </Flex>
   );
