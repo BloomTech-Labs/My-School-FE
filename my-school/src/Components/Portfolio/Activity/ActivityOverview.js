@@ -8,16 +8,12 @@ import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
 import axios from 'axios'
 
-const ActivityOverview = ({
-  activities,
-  isLoading,
-}) => {
+const ActivityOverview = ({ activities, isLoading }) => {
   const history = useHistory();
   const [sortedActivities, setSortedActivities] = useState([]);
   const [arrLength, setArrLength] = useState();
-  const [studentName, setStudentName] = useState('')
   const [projectName, setProjectName] = useState('')
-  const id = Number(localStorage.getItem('student_id')) || Number(localStorage.getItem('userId'));
+
   const override = css`
     margin-top: 10rem;
   `;
@@ -31,6 +27,7 @@ const ActivityOverview = ({
     setArrLength(sortedActivities.length);
   }, [arrLength, sortedActivities]);
 
+<<<<<<< HEAD
   useEffect(() => {
 
     if (id)
@@ -46,6 +43,8 @@ const ActivityOverview = ({
     return undefined
   }, [id])
 
+=======
+>>>>>>> 0e8450aab9f161c3c43b1d119e8886d15821921b
   const pusher = (index) => {
     const neededIndex = index + 1;
     if (neededIndex === sortedActivities.length) {
@@ -68,17 +67,8 @@ const ActivityOverview = ({
     setProjectName(name)
   }
 
-  const historyPusher = () => {
-    history.push(`/portfolio/${id}}`)
-  }
-
-  const pushHistory = () => {
-    history.push('/dashboard')
-  }
-
   return (
     <>
-      <Text padding='2rem 0rem 0rem 10rem' fontSize="1.125rem" fontWeight="700" color="gray.800">{localStorage.getItem('student_id') ? <span className='link' onClick={pushHistory}>Dashboard /</span> : ''} <span className='link' onClick={historyPusher}>{studentName !== '' ? `${studentName}'s Portfolio` : ''}</span> / {projectName}</Text>
       {isLoading === true ? (
         <div
           style={{

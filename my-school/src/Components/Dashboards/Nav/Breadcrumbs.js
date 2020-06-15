@@ -8,6 +8,7 @@ import {
     BreadcrumbLink,
     IconButton
 } from "@chakra-ui/core";
+import capitalizeName from '../../../utils/capitalizeName';
 
 const Breadcrumbs = ({ user, family, activities }) => {
     const location = useLocation();
@@ -92,7 +93,7 @@ const Breadcrumbs = ({ user, family, activities }) => {
             <BreadcrumbItem isCurrentPage={isPortfolioContainer}>
                 <BreadcrumbLink as={RouterLink} to={`/portfolio/${student.id}`} color={isPortfolioContainer ? "gray.900" : "myschoolblue"}>
                     {user.user_type_id === 1 && student
-                        ? `${student.name}'s Portfolio`
+                        ? `${capitalizeName(student.name)}'s Portfolio`
                         : `My Portfolio`
                     }
                 </BreadcrumbLink>
@@ -103,6 +104,13 @@ const Breadcrumbs = ({ user, family, activities }) => {
         {student && location.pathname === `/portfolio/${student.id}/add` ?
             <BreadcrumbItem isCurrentPage>
                 <BreadcrumbLink color="gray.900">Add an activity</BreadcrumbLink>
+            </BreadcrumbItem>
+        : null }
+
+        {/* This will only render on the PDFExporter */}
+        {student && location.pathname.includes('export') ?
+            <BreadcrumbItem isCurrentPage>
+                <BreadcrumbLink color="gray.900">Export Portfolio</BreadcrumbLink>
             </BreadcrumbItem>
         : null }
 

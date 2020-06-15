@@ -133,7 +133,7 @@ const AddActivityForm = () => {
   }
 
   return (
-    <Box my="36px" mx="40px">
+    <Box my="36px" mx={["8px", "20px", "40px", "40px"]}>
       {preview ? (
         <NewActivityPreview
           preview={preview}
