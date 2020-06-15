@@ -14,7 +14,8 @@ const StudentCard = ({ student, familyName, activities }) => {
   // const onCloseDialogue = () => setIsOpenDialogue(false);
   // const cancelRef = useRef();
 
-  const lastActivity = activities.sort((a, b) => b.created_at - a.created_at)
+  const studentActivities = activities.filter(a => a.student_id === student.id);
+  const lastActivity = studentActivities.sort((a, b) => b.created_at - a.created_at)
 
   // const studentId = useParams().id;
 
