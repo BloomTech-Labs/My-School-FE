@@ -4,7 +4,7 @@ import ActivityCard from "./Activity/ActivityCard";
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
-import { Grid, Text } from '@chakra-ui/core'
+import { Grid, Text, Box } from '@chakra-ui/core'
 
 const PortfolioBody = ({ activities, isLoading, user }) => {
 
@@ -26,7 +26,8 @@ const PortfolioBody = ({ activities, isLoading, user }) => {
   }, [activities]);
 
   return (
-    <div className="portfolio-list">
+    // <div className="portfolio-list">
+    <Box my="36px" mx={["8px", "20px", "40px", "40px"]}>
       {isLoading === true ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40vh' }}>
           <Loader color={'#375E97'} css={override} height='75vh' />
@@ -37,7 +38,7 @@ const PortfolioBody = ({ activities, isLoading, user }) => {
               templateColumns={gridTemplateColumns}
               alignItems='center'
               className="activity-card"
-              fontWeight='800'
+              bg="gray.200"
             >
               <Text>Name</Text>
               <Text>Subject</Text>
@@ -59,7 +60,8 @@ const PortfolioBody = ({ activities, isLoading, user }) => {
               : ''}
           </>
         )}
-    </div>
+    {/* </div> */}
+    </Box>
   );
 };
 

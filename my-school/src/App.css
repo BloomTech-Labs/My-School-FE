@@ -25,10 +25,10 @@
 }
 
 .activity-card{
-  width:80%;
+  /* width:80%; */
   height: 10%;
-  border-bottom: grey solid 1px;
-  padding: .75rem;
+  border-bottom: #DBE8FB solid 1px;
+  padding: 10px 16px;
 }
 
 .photo{
