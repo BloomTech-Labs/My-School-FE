@@ -18,7 +18,7 @@ import validateCredentials from '../../utils/validateCredentials';
 
 const Login = ({onSubmit, login}) => {
 
-    const [invalid, setInvalid] = useState(false);
+    const [invalid] = useState(false);
     const [ checked, setChecked ] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const history = useHistory();

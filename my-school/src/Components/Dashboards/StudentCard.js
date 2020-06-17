@@ -2,25 +2,35 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Flex, Image, IconButton, Heading, Text } from "@chakra-ui/core";
 import placeholder from "../../assets/placeholder_img.png";
-import {connect, useSelector} from 'react-redux';
+import { connect } from 'react-redux';
 import {getAllActivitiesForUser} from '../../Redux/actions/actions-portfolio'
 import moment from 'moment';
-import {useHistory ,useParams} from 'react-router-dom'
+import {useHistory } from 'react-router-dom'
 import capitalizeName from '../../utils/capitalizeName'
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const StudentCard = ({ student, familyName, activities }) => {
   const history = useHistory()
+  // const toast = useToast();
+  // const [isOpenDialogue, setIsOpenDialogue] = useState();
+  // const onCloseDialogue = () => setIsOpenDialogue(false);
+  // const cancelRef = useRef();
 
   const [recent, setRecent] = useState({})
 
-  const lastActivity = activities.sort((a, b) => b.created_at - a.created_at)
+  // const lastActivity = activities.sort((a, b) => b.created_at - a.created_at)
+  // const studentActivities = activities.filter(a => a.student_id === student.id);
+  // const lastActivity = studentActivities.sort((a, b) => b.created_at - a.created_at)
 
-  const studentId = useParams().id;
 
   const pushToPortfolio = (studentId) => {
     history.push(`/portfolio/${studentId}`);
   };
+ 
+  // function handleDelete(student_id){
+  //   deleteStudent(student_id);
+  // };
+
 
   useEffect(() => {
     axios.get(`https://my-school-v1.herokuapp.com/api/users/${student.id}/activities`)
@@ -31,6 +41,73 @@ const StudentCard = ({ student, familyName, activities }) => {
   }, [])
 
   return (
+    // <Box className='card' border='solid 1px lightgray' borderRadius='16px' padding='5px'>
+    //     <Box width="100%" fontSize='1.2rem' fontWeight='500' >
+    //         <Avatar size='xl' src={student.profile_picture} />
+    //     <Text fontSize='2xl'>{student.name}'s Portfolio </Text>
+    //     <Text fontSize='lg'>{student.username}</Text>
+    //     </Box>
+    //     <Box textAlign="left">
+    //        <Text>LAST ACTIVITY: submitted_title</Text>
+           
+    //         <Text>SUBMITTED:  Submitted_date </Text>
+    //     </Box>
+
+      //   <IconButton
+      //     _hover={{
+      //         bg: "white",
+      //         color: "#FB6542"
+      //     }}
+      //     _focus={{ boxShadow: "outline" }}
+      //     icon="delete"
+      //     aria-label="Delete Portfolio"
+      //     variant="solid"
+      //     bg="#FB6542"
+      //     color= "white"
+      //     onClick={() => {
+      //         setIsOpenDialogue(true);
+      //     }}
+      // >
+      // <AlertDialog
+      //     isOpen={isOpenDialogue}
+      //     leastDestructiveRef={cancelRef}
+      //     onClose={onCloseDialogue}
+    //   >
+    //       <AlertDialogOverlay />
+    //       <AlertDialogContent>
+    //           <AlertDialogHeader fontSize="lg" fontWeight="bold">
+    //               Delete Portfolio
+    //           </AlertDialogHeader>
+
+    //           <AlertDialogBody>
+    //               You're deleting an entire portfolio and student account -- permanently.
+    //               Are you quite certain?
+    //           </AlertDialogBody>
+
+    //           <AlertDialogFooter>
+    //               <Button ref={cancelRef} onClick={onCloseDialogue}>
+    //                   Cancel
+    //               </Button>
+    //               <Button bg="#FF5656" color="white" onClick={() => {
+    //                   onCloseDialogue();
+    //                   handleDelete();
+    //                   toast({
+    //                       position: "top",
+    //                       title: "Student Deleted.",
+    //                       description: "That portfolio is donesies.",
+    //                       status: "success",
+    //                       duration: 5000,
+    //                       isClosable: true,
+    //                   });
+    //               }}
+    //               >
+    //               </Button>
+    //           </AlertDialogFooter>
+    //       </AlertDialogContent>
+    //   </AlertDialog>
+    //   </IconButton>
+    // </Box>
+
     <Flex width={['90vw', '90vw', '400px', '25vw']} direction="column" border="1px solid #ededed" borderRadius='15px' padding='1%' height={['30vh', '30vh', '30vh', '18vh']} justify='space-evenly'>
       <Flex justify='space-between'>
         <Image src={placeholder} size="45px" rounded="full" flexWrap="wrap" />
