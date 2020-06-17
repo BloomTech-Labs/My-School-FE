@@ -1,4 +1,5 @@
-import axios from "axios";
+import { axiosWithAuth }  from "../../utils/axiosWithAuth";
+import axios from 'axios';
 
 export const FETCH_USER = "FETCH_USER";
 export const SET_USER = "SET_USER";
@@ -17,7 +18,7 @@ export const DELETE_STUDENT_SUCCESS = 'DELETE_STUDENT_SUCCESS';
 
 export const getUserByID = (id) => (dispatch) => {
   dispatch({ type: FETCH_USER });
-  return axios
+  return axiosWithAuth()
     .get(`https://my-school-v1.herokuapp.com/api/users/${id}`)
     .then((res) => {
       dispatch({ type: SET_USER, payload: res.data });
@@ -30,7 +31,7 @@ export const getUserByID = (id) => (dispatch) => {
 
 export const getFamilyName = (id) => (dispatch) => {
   dispatch({ type: FETCH_FAMILY });
-  axios
+  axiosWithAuth()
     .get(`https://my-school-v1.herokuapp.com/api/families/${id}`)
     .then((res) => {
       dispatch({ type: SET_FAMILY, payload: res.data });
@@ -42,11 +43,10 @@ export const getFamilyName = (id) => (dispatch) => {
 
 export const deletEntireFamily = familyId => dispatch => {
   dispatch({ type: DELETE_USER })
-  return axios
+  return axiosWithAuth()
     .delete(`https://my-school-v1.herokuapp.com/api/families/${familyId}`)
     .then(res => {
       dispatch({ type: CLEAR_USER })
-      console.log('the family was delete')
       return res
     })
     .catch(err => dispatch({ type: SET_ERROR, payload: err })
@@ -55,7 +55,7 @@ export const deletEntireFamily = familyId => dispatch => {
 
 export const deleteAccount = (id, user) => dispatch => {
   dispatch({ type: DELETE_USER });
-  return axios
+  return axiosWithAuth()
     .delete(`https://my-school-v1.herokuapp.com/api/users/${id}`)
     .then(res => {
       dispatch({ type: DELETE_STUDENT_SUCCESS, payload: user })
@@ -81,7 +81,7 @@ export const login = (user) => (dispatch) => {
 
 export const getFamily = (familyId) => (dispatch) => {
   dispatch({ type: FETCH_FAMILY });
-  axios
+  axiosWithAuth()
     .get(`https://my-school-v1.herokuapp.com/api/families/${familyId}`)
     .then((res) => {
       dispatch({ type: SET_FAMILY, payload: res.data });
@@ -97,7 +97,7 @@ export const logout = () => (dispatch) => {
 
 export const register = (family, user, userTypeID) => (dispatch) => {
   dispatch({ type: SET_REGISTRATION });
-  axios
+  axiosWithAuth()
     .post("https://my-school-v1.herokuapp.com/api/families", family)
     .then((res) => {
       const familyID = res.data.id;
@@ -109,7 +109,7 @@ export const register = (family, user, userTypeID) => (dispatch) => {
         name: user.firstname || null,
         user_type_id: userTypeID,
       };
-      axios
+      axiosWithAuth()
         .post(
           "https://my-school-v1.herokuapp.com/api/auth/registration",
           newUser
@@ -137,10 +137,10 @@ export const createStudent = (familyID, user, userTypeID) => (dispatch) => {
     name: user.firstname,
     user_type_id: 2,
   };
-  axios
+  axiosWithAuth()
     .post("https://my-school-v1.herokuapp.com/api/auth/registration", newUser)
     .then((res) => {
-      axios
+      axiosWithAuth()
         .get(`https://my-school-v1.herokuapp.com/api/families/${familyID}`)
         .then((res) => {
           dispatch({ type: SET_FAMILY, payload: res.data });
@@ -156,7 +156,7 @@ export const createStudent = (familyID, user, userTypeID) => (dispatch) => {
 
 export const editProfileWithoutImage = (data, id) => dispatch => {
   dispatch({ type: UPDATING_USER })
-  return axios
+  return axiosWithAuth()
     .put(`https://my-school-v1.herokuapp.com/api/users/${id}`, data)
     .then(res => {
       if (res.data.user_type_id === 1) {
@@ -175,7 +175,7 @@ export const editProfileWithoutImage = (data, id) => dispatch => {
 
 export const editProfileWithImage = (data, id) => dispatch => {
   dispatch({ type: UPDATING_USER })
-  return axios
+  return axiosWithAuth()
     .put(`https://my-school-v1.herokuapp.com/api/users/${id}/profilepic`, data)
     .then(res => {
       if (res.data.user_type_id === 1) {

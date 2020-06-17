@@ -15,6 +15,7 @@ import ActivityOverview from "./Components/Portfolio/Activity/ActivityOverview";
 import StudentRegistration from './Components/StudentRegistration';
 import Settings from './Components/EnterUser/Settings';
 import AdminDash from './Components/Dashboards/AdminDash';
+import PrivateRoute from './Components/PrivateRoute'
 
 function App() {
   React.useEffect((_) => {
@@ -31,33 +32,35 @@ function App() {
             <Route exact path='/'>
               <Landing />
             </Route>
-            <Route path = '/login'>
+            <Route path='/login'>
               <AuthPage login={true} />
             </Route>
             <Route path='/signup'>
               <AuthPage login={false} />
             </Route>
-            <Route path='/dashboard'>
-              <MainLayout page={<AdminDash />} />
-            </Route>
-            <Route path='/settings/:id'>
-              <MainLayout page={<Settings />} />
-            </Route>
-            <Route exact path='/portfolio/:id'>
-              <MainLayout page={<PortfolioContainer />} />
-            </Route>
-            <Route path='/portfolio/:id/add'>
-              <MainLayout page={<AddActivityForm />} />
-            </Route>
-            <Route path='/portfolio/:id/export'>
-              <MainLayout page={<PDFExporter />} />
-            </Route>
-            <Route path='/activity/:id'>
-              <MainLayout page={<ActivityOverview />} />
-            </Route>
-            <Route path='/add-student'>
-              <MainLayout page={<StudentRegistration/>} />
-            </Route>
+            <PrivateRoute>
+              <Route path='/dashboard'>
+                <MainLayout page={<AdminDash />} />
+              </Route>
+              <Route path='/settings/:id'>
+                <MainLayout page={<Settings />} />
+              </Route>
+              <Route exact path='/portfolio/:id'>
+                <MainLayout page={<PortfolioContainer />} />
+              </Route>
+              <Route path='/portfolio/:id/add'>
+                <MainLayout page={<AddActivityForm />} />
+              </Route>
+              <Route path='/portfolio/:id/export'>
+                <MainLayout page={<PDFExporter />} />
+              </Route>
+              <Route path='/activity/:id'>
+                <MainLayout page={<ActivityOverview />} />
+              </Route>
+              <Route path='/add-student'>
+                <MainLayout page={<StudentRegistration />} />
+              </Route>
+            </PrivateRoute>
           </Switch>
         </Router>
       </div>
