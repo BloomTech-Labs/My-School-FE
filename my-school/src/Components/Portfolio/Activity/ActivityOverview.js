@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { Text } from "@chakra-ui/core";
 import OverviewCard from "./OverviewCard";
 import { getAllActivitiesForUser } from "../../../Redux/actions/actions-portfolio";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
-import axios from 'axios'
 
 const ActivityOverview = ({ activities, isLoading }) => {
   const history = useHistory();
   const [sortedActivities, setSortedActivities] = useState([]);
   const [arrLength, setArrLength] = useState();
-  const [projectName, setProjectName] = useState('')
 
   const override = css`
     margin-top: 10rem;
@@ -45,9 +42,6 @@ const ActivityOverview = ({ activities, isLoading }) => {
     }
 
   };
-  const nameSetter = name => {
-    setProjectName(name)
-  }
 
   return (
     <>
@@ -71,7 +65,6 @@ const ActivityOverview = ({ activities, isLoading }) => {
               pusher={pusher}
               puller={puller}
               arrLength={arrLength}
-              nameSetter={nameSetter}
             />
           ))
         )}

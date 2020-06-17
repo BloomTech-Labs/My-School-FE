@@ -15,12 +15,6 @@ const OverviewCard = (props) => {
     setMins(props.activity.duration % 60);
   }, [hours, mins, props.activity.duration]);
 
-  useEffect(() => {
-    if (props.activity.id === Number(id)) {
-      props.nameSetter(props.activity.name)
-    }
-  }, [props, props.activity, id])
-
   const handlePrevious = (index) => {
     props.puller(index);
   };

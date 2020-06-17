@@ -55,7 +55,7 @@ const Settings = ({ family, editProfileWithoutImage, deleteAccount, deletEntireF
         } else {
             return null
         }
-    }, [id]);
+    }, [id, family]);
 
     const axiosHandler = (data, isDataForm) => {
         if (isDataForm === true) {
@@ -239,7 +239,7 @@ const Settings = ({ family, editProfileWithoutImage, deleteAccount, deletEntireF
                             : null
                         }
                         {user.password === user.passwordConfirm && passwordField === true && user.password !== '' ? <Text color="green.400" paddingLeft='22vw'><Icon name="check-circle" size="24px" /> Both password match</Text> : null}
-                        {passwordField === true && user.password !== user.passwordConfirm || passwordField === true && user.passord === '' ? <Text color="red.500" paddingLeft='12.5vw'><Icon name="warning" size="24px" color="red.500" /> Both password must match and be at least 8 characters</Text> : null}
+                        {( passwordField === true && user.password !== user.passwordConfirm ) || (passwordField === true && user.passord === '') ? <Text color="red.500" paddingLeft='12.5vw'><Icon name="warning" size="24px" color="red.500" /> Both password must match and be at least 8 characters</Text> : null}
                         <Flex paddingLeft='7rem' className='settings-box' alignItems='center'>
                             <Text paddingRight='1rem' w='10vw'>Name:</Text>
                             <FormLabel htmlFor='name'></FormLabel>
@@ -253,21 +253,21 @@ const Settings = ({ family, editProfileWithoutImage, deleteAccount, deletEntireF
                                 onChange={handleInputs}
                             ></Input>
                         </Flex>
-                        {user.name === '' && user.user_type_id == 2 ? <Text color="red.500" paddingLeft='21vw'><Icon name="warning" size="24px" color="red.500" /> Must provide a name</Text> : null}
+                        {user.name === '' && user.user_type_id === 2 ? <Text color="red.500" paddingLeft='21vw'><Icon name="warning" size="24px" color="red.500" /> Must provide a name</Text> : null}
                         <Flex paddingLeft='7rem' className='settings-box' justifyContent='space-around' w='30vw'>
                             <Button
                                 m='1rem'
                                 type='submit'
                                 id='submit'
                                 isDisabled={
-                                        user.user_type_id === 2 && passwordField === true && user.password.length > 7 && user.password === user.passwordConfirm && user.name !== '' && user.username !== '' && user.username !== renderedUser.username && user.name !== renderedUser.name ||
-                                        user.user_type_id === 2 && passwordField === false && user.username !== renderedUser.username && user.username !== '' && user.name !== '' ||
-                                        user.user_type_id === 2 && passwordField === true && user.password.length > 7 && user.password === user.passwordConfirm && user.name !== '' && user.username !== ''  ||
-                                        user.user_type_id === 2 && passwordField === false && user.username !== '' && user.name !== '' && user.name !== renderedUser.name  ||
-                                        user.user_type_id === 2 && passwordField === false && user.name !== renderedUser.name && user.username !== '' && user.name !== '' ||
-                                        user.user_type_id === 1 && passwordField === true && user.password.length > 7 && user.password === user.passwordConfirm && user.username !== '' && EmailValidator.validate(user.username) === true ||
-                                        user.user_type_id === 1 && passwordField === false && user.username !== renderedUser.username && EmailValidator.validate(user.username) === true ||
-                                        user.user_type_id === 1 && passwordField === false && user.name !== renderedUser.name && EmailValidator.validate(user.username) === true ||
+                                    (user.user_type_id === 2 && passwordField === true && user.password.length > 7 && user.password === user.passwordConfirm && user.name !== '' && user.username !== '' && user.username !== renderedUser.username && user.name !== renderedUser.name) ||
+                                        (user.user_type_id === 2 && passwordField === false && user.username !== renderedUser.username && user.username !== '' && user.name !== '' )||
+                                        (user.user_type_id === 2 && passwordField === true && user.password.length > 7 && user.password === user.passwordConfirm && user.name !== '' && user.username !== '' )||
+                                        (user.user_type_id === 2 && passwordField === false && user.username !== '' && user.name !== '' && user.name !== renderedUser.name )||
+                                        (user.user_type_id === 2 && passwordField === false && user.name !== renderedUser.name && user.username !== '' && user.name !== '' )||
+                                        (user.user_type_id === 1 && passwordField === true && user.password.length > 7 && user.password === user.passwordConfirm && user.username !== '' && EmailValidator.validate(user.username) === true )||
+                                        (user.user_type_id === 1 && passwordField === false && user.username !== renderedUser.username && EmailValidator.validate(user.username) === true )||
+                                        (user.user_type_id === 1 && passwordField === false && user.name !== renderedUser.name && EmailValidator.validate(user.username) === true )||
                                         image ? false : true}
                                 _focus={{ boxShadow: "outline" }}
                                 variant={hover ? 'outline' : 'solid'}
