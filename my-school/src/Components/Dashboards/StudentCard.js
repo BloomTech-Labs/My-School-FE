@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import { Flex, Image, IconButton, Heading, Text } from "@chakra-ui/core";
 import placeholder from "../../assets/placeholder_img.png";
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import {getAllActivitiesForUser} from '../../Redux/actions/actions-portfolio'
 import moment from 'moment';
-import {useHistory ,useParams} from 'react-router-dom'
+import {useHistory } from 'react-router-dom'
 import capitalizeName from '../../utils/capitalizeName'
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 const StudentCard = ({ student, familyName, activities }) => {
   const history = useHistory()
@@ -14,10 +16,12 @@ const StudentCard = ({ student, familyName, activities }) => {
   // const onCloseDialogue = () => setIsOpenDialogue(false);
   // const cancelRef = useRef();
 
-  const studentActivities = activities.filter(a => a.student_id === student.id);
-  const lastActivity = studentActivities.sort((a, b) => b.created_at - a.created_at)
+  const [recent, setRecent] = useState({})
 
-  // const studentId = useParams().id;
+  // const lastActivity = activities.sort((a, b) => b.created_at - a.created_at)
+  // const studentActivities = activities.filter(a => a.student_id === student.id);
+  // const lastActivity = studentActivities.sort((a, b) => b.created_at - a.created_at)
+
 
   const pushToPortfolio = (studentId) => {
     history.push(`/portfolio/${studentId}`);
@@ -27,6 +31,14 @@ const StudentCard = ({ student, familyName, activities }) => {
   //   deleteStudent(student_id);
   // };
 
+
+  useEffect(() => {
+    axios.get(`https://my-school-v1.herokuapp.com/api/users/${student.id}/activities`)
+    .then(res => {
+      setRecent(res.data[res.data.length - 1])
+    })
+    .catch(err => console.log(err))
+  }, [])
 
   return (
     // <Box className='card' border='solid 1px lightgray' borderRadius='16px' padding='5px'>
@@ -107,8 +119,8 @@ const StudentCard = ({ student, familyName, activities }) => {
 
       </Flex>
       <Flex direction='column'>
-      <Text fontWeight='800' fontSize='.9rem'>LAST ACTIVITY</Text>
-  {lastActivity[0] && <Text>{moment(lastActivity[0].created_at).format('ll').toUpperCase()} SUBMITTED {lastActivity[0].name}</Text>}
+      <Text fontWeight='800' fontSize='.9rem'>RECENT ACTIVITY</Text>
+  {recent && <Text>{moment(recent.created_at).format('ll').toUpperCase()} SUBMITTED {recent.name}</Text>}
       </Flex>
     </Flex>
   );

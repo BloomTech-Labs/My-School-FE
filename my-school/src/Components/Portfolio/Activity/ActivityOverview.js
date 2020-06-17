@@ -27,24 +27,6 @@ const ActivityOverview = ({ activities, isLoading }) => {
     setArrLength(sortedActivities.length);
   }, [arrLength, sortedActivities]);
 
-<<<<<<< HEAD
-  useEffect(() => {
-
-    if (id)
-      axios
-        .get(`https://my-school-v1.herokuapp.com/api/users/${id}`)
-        .then(res => {
-          const name = res.data.name.charAt(0).toUpperCase() + res.data.name.slice(1)
-          setStudentName(name)
-        })
-        .catch(err => {
-          console.log(err)
-        });
-    return undefined
-  }, [id])
-
-=======
->>>>>>> 0e8450aab9f161c3c43b1d119e8886d15821921b
   const pusher = (index) => {
     const neededIndex = index + 1;
     if (neededIndex === sortedActivities.length) {
