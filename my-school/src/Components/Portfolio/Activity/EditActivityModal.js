@@ -136,14 +136,14 @@ const EditActivityModal = (props) => {
   return (
     <>
       <Button
-        _focus={{ boxShadow: "outline" }}
-        variant={hover ? 'outline' : 'solid'}
-        variantColor="btnYellow"
+        textTransform="uppercase"
+        letterSpacing="1.2px"
+        size="xs"
+        mx="4px"
+        variant="outline"
+        variantColor="green"
         ref={btnRef}
         onClick={onOpen}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-
       >
         Edit
       </Button>
