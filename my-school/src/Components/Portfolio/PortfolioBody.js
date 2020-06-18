@@ -10,7 +10,7 @@ const PortfolioBody = ({ activities, isLoading, user }) => {
 
   const [sortedActivities, setSortedActivities] = useState([]);
   const isParent = user.user_type_id === 1 ? true : false;
-  const gridTemplateColumns = isParent ? "1fr .3fr .3fr .3fr .5fr " : "1.25fr .25fr .25fr .25fr"
+  const gridTemplateColumns = isParent ? "1fr .3fr .3fr .3fr .5fr " : "1fr .3fr .3fr .3fr"
   const override = css`
     margin-top: 10rem;
   `;

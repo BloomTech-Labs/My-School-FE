@@ -14,7 +14,7 @@ function ActivityCard(props) {
   const [hour, setHour] = useState();
   const [min, setMin] = useState();
   const history = useHistory();
-  const gridTemplateColumns = props.isParent ? "1fr .3fr .3fr .3fr .5fr " : "1.25fr .25fr .25fr .25fr"
+  const gridTemplateColumns = props.isParent ? "1fr .3fr .3fr .3fr .5fr " : "1fr .3fr .3fr .3fr"
 
   useEffect(() => {
     if (props.activity.duration !== null) {
