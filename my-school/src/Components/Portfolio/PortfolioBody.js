@@ -4,13 +4,13 @@ import ActivityCard from "./Activity/ActivityCard";
 import ReactGA from "react-ga";
 import Loader from "react-spinners/ClimbingBoxLoader";
 import { css } from "@emotion/core";
-import { Grid, Text } from '@chakra-ui/core'
+import { Grid, Text, Box } from '@chakra-ui/core'
 
 const PortfolioBody = ({ activities, isLoading, user }) => {
 
   const [sortedActivities, setSortedActivities] = useState([]);
   const isParent = user.user_type_id === 1 ? true : false;
-  const gridTemplateColumns = isParent ? ".75fr .25fr 1fr .5fr .25fr .25fr" : "1.25fr .25fr .25fr .25fr"
+  const gridTemplateColumns = isParent ? "1fr .3fr .3fr .3fr .5fr " : "1fr .3fr .3fr .3fr"
   const override = css`
     margin-top: 10rem;
   `;
@@ -26,7 +26,8 @@ const PortfolioBody = ({ activities, isLoading, user }) => {
   }, [activities]);
 
   return (
-    <div className="portfolio-list">
+    // <div className="portfolio-list">
+    <Box my="36px" mx={["8px", "20px", "40px", "40px"]} color="gray.700">
       {isLoading === true ? (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '40vh' }}>
           <Loader color={'#375E97'} css={override} height='75vh' />
@@ -37,13 +38,13 @@ const PortfolioBody = ({ activities, isLoading, user }) => {
               templateColumns={gridTemplateColumns}
               alignItems='center'
               className="activity-card"
-              fontWeight='800'
+              bg="gray.200"
             >
-              <Text>Name</Text>
-              <Text>Subject</Text>
-              <Text textAlign='center'>Duration</Text>
-              <Text>Date</Text>
-              {isParent && <Text>Options</Text>}
+              <Text px="4px">Name</Text>
+              <Text px="4px">Subject</Text>
+              <Text px="4px">Duration</Text>
+              <Text px="4px">Date</Text>
+              {isParent && <Text px="4px" textAlign="center">Actions</Text>}
             </Grid>
             {sortedActivities.map((activity) => (
               <ActivityCard
@@ -59,7 +60,8 @@ const PortfolioBody = ({ activities, isLoading, user }) => {
               : ''}
           </>
         )}
-    </div>
+    {/* </div> */}
+    </Box>
   );
 };
 

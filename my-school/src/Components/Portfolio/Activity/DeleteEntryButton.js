@@ -15,20 +15,19 @@ import {
 const DeleteEntryButton= ({ activity, deleteActivity, studentId }) => {
     const toast = useToast();
     const [isOpenDialogue, setIsOpenDialogue] = useState();
-    const [hover, setHover] = useState(false)
     const onCloseDialogue = () => setIsOpenDialogue(false);
     const cancelRef = useRef();
 
     return (
         <Button
-        _focus={{ boxShadow: "outline"}}
+            textTransform="uppercase"
+            letterSpacing="1.2px"
+            size="xs"
+            mx="4px"
+            variant="outline"
+            variantColor="red"
             onClick={() => {
                 setIsOpenDialogue(true)}}
-
-            variant={hover ? 'outline' : 'solid'}
-            variantColor="red"
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
         >
 
             Delete
