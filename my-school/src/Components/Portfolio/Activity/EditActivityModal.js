@@ -49,7 +49,7 @@ const EditActivityModal = (props) => {
   const [image, setImage] = useState("");
 
   const [subjects, setSubjects] = useState([]);
-  const [hover, setHover] = useState(false)
+
   useEffect(() => {
     let isMounted = true;
     if (isMounted) axios

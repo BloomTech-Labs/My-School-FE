@@ -15,7 +15,6 @@ import {
 const DeleteEntryButton= ({ activity, deleteActivity, studentId }) => {
     const toast = useToast();
     const [isOpenDialogue, setIsOpenDialogue] = useState();
-    const [hover, setHover] = useState(false)
     const onCloseDialogue = () => setIsOpenDialogue(false);
     const cancelRef = useRef();
 
