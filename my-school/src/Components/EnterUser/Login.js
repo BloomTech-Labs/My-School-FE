@@ -18,7 +18,7 @@ import validateCredentials from '../../utils/validateCredentials';
 
 const Login = ({onSubmit, login}) => {
 
-    const [invalid] = useState(false);
+    const [invalid, setInvalid] = useState(false);
     const [ checked, setChecked ] = useState(false);
     const { register, handleSubmit, errors } = useForm();
     const history = useHistory();
@@ -30,7 +30,9 @@ const Login = ({onSubmit, login}) => {
                 history.push("/dashboard");
             } else if (res && res.data && res.data.user) {
                 history.push(`/portfolio/${res.data.user.id}`);
-            } 
+            }else{
+                setInvalid(true)
+            }
         })
         .catch(err => {
             console.log(err)
