@@ -10,21 +10,22 @@ import capitalizeName from '../../utils/capitalizeName'
 
 const StudentCard = ({ student, familyName }) => {
   const history = useHistory()
-
   const [recent, setRecent] = useState({})
 
   const pushToPortfolio = (studentId) => {
     history.push(`/portfolio/${studentId}`);
   };
 
-  useEffect(() => {
+  const handleActivities = () => {
     axiosWithAuth()
       .get(`https://my-school-v1.herokuapp.com/api/users/${student.id}/activities`)
       .then(res => {
         setRecent(res.data[res.data.length - 1])
       })
       .catch(err => console.log(err))
-  }, [])
+  }
+
+  useEffect(handleActivities, [student.id])
 
   return (
     <Flex width={['90vw', '90vw', '400px', '25vw']} direction="column" border="1px solid #ededed" borderRadius='15px' padding='1%' height={['30vh', '30vh', '30vh', '18vh']} justify='space-evenly'>
@@ -45,3 +46,5 @@ const StudentCard = ({ student, familyName }) => {
 };
 
 export default connect(() => { return {} }, { getAllActivitiesForUser })(StudentCard)
+// export default StudentCard
+// export default connect(mapStateToProps, { getFamily })(AdminDash);

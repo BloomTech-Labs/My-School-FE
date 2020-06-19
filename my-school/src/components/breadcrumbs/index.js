@@ -127,7 +127,6 @@ const Breadcrumbs = ({ user, family, activities }) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log('hiiiiii', state)
     return {
         user: state.usersReducer.user,
         family: state.usersReducer.family,

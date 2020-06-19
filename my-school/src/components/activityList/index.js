@@ -74,7 +74,6 @@ const PortfolioBody = ({ activities, isLoading, user }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log("pooooortfolio", state);
   return {
     user: state.usersReducer.user,
     activities: state.portfolioReducer.activities,
