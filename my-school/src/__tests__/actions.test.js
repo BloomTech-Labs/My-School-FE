@@ -1,5 +1,5 @@
-import { getUserByID, getFamilyName, deleteAccount } from '../Redux/actions/actions-users';
-import { getAllActivitiesForUser, editActivityWithoutPhoto, editActivity, deleteActivity } from '../Redux/actions/actions-portfolio';
+import { getUserByID, getFamilyName, deleteAccount } from '../redux/actions/user-actions';
+import { getAllActivitiesForUser, editActivityWithoutPhoto, editActivity, deleteActivity } from '../redux/actions/portfolio-actions';
 import { registerAssertions } from 'redux-actions-assertions/jest'
 import thunk from 'redux-thunk';
 import { registerMiddlewares } from 'redux-actions-assertions';

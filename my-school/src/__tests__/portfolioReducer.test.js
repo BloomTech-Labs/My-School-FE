@@ -1,6 +1,6 @@
-import { portfolioReducer } from "../Redux/Reducers/portfolio-reducer";
-import * as types from "../Redux/actions/actions-portfolio";
-import { mockData } from "../mockData-reducer";
+import { portfolioReducer } from "../redux/reducers/portfolio-reducer";
+import * as types from "../redux/actions/portfolio-actions";
+import { mockData } from "./mockData-reducer";
 import expect from "expect";
 
 describe("portfolio reducer", () => {

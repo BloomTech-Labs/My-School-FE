@@ -1,22 +1,22 @@
+  
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
-import customTheme from "./Styles/theme";
+import customTheme from "./theme";
 import ReactGA from "react-ga";
 //Components
-import Landing from "./Components/EnterUser/Landing";
-import AuthPage from "./Components/EnterUser/AuthPage";
-import MainLayout from "./Components/MainLayout";
-import PortfolioContainer from "./Components/Portfolio/PortfolioContainer";
-import AddActivityForm from "./Components/Portfolio/Activity/AddActivity/AddActivityForm";
-import PDFExporter from './Components/Portfolio//PDF/PDFExporter'
-import ActivityOverview from "./Components/Portfolio/Activity/ActivityOverview";
-import StudentRegistration from './Components/StudentRegistration';
-import Settings from './Components/EnterUser/Settings';
-import AdminDash from './Components/Dashboards/AdminDash';
-import PrivateRoute from './Components/PrivateRoute'
-
+import PrivateRoute from './utils/PrivateRoute'
+import Landing from './components/landingPage'
+import LoginAndRegister from './components/loginAndRegister'
+import Layout from './components/layout'
+import Dashboard from './components/dashboard'
+import Settings from './components/settings/Settings'
+import StudentRegistration from './components/loginAndRegister/studentRegistration'
+import AddActivityForm from './components/addActivity'
+import PortfolioContainer from './components/portfolioContainer'
+import PDFExporter from './components/pdf'
+import ActivityOverview from './components/overviewCard'
 function App() {
   React.useEffect((_) => {
     ReactGA.initialize("UA-156199574-5");
@@ -33,34 +33,34 @@ function App() {
               <Landing />
             </Route>
             <Route path='/login'>
-              <AuthPage login={true} />
+              <LoginAndRegister login={true} />
             </Route>
             <Route path='/signup'>
-              <AuthPage login={false} />
+              <LoginAndRegister login={false} />
             </Route>
             <PrivateRoute>
               <Route path='/dashboard'>
-                <MainLayout page={<AdminDash />} />
+                <Layout page={<Dashboard />} />
               </Route>
               <Route path='/settings/:id'>
-                <MainLayout page={<Settings />} />
+                <Layout page={<Settings />} />
               </Route>
               <Route exact path='/portfolio/:id'>
-                <MainLayout page={<PortfolioContainer />} />
+                <Layout page={<PortfolioContainer />} />
               </Route>
               <Route path='/portfolio/:id/add'>
-                <MainLayout page={<AddActivityForm />} />
+                <Layout page={<AddActivityForm />} />
               </Route>
               <Route path='/portfolio/:id/export'>
-                <MainLayout page={<PDFExporter />} />
+                <Layout page={<PDFExporter />} />
               </Route>
               <Route path='/activity/:id'>
-                <MainLayout page={<ActivityOverview />} />
+                <Layout page={<ActivityOverview />} />
               </Route>
               <Route path='/add-student'>
-                <MainLayout page={<StudentRegistration />} />
+                <Layout page={<StudentRegistration />} />
               </Route>
-            </PrivateRoute>
+            </PrivateRoute> 
           </Switch>
         </Router>
       </div>

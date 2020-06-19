@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, fireEvent, act} from '../test-utils/test-utils';
-import AddActivityForm from '../Components/Portfolio/Activity/AddActivity/AddActivityForm';
+import { render, fireEvent, act} from './testUtils';
+import AddActivityForm from '../components/addActivity'
 import ReactGA from 'react-ga';
 
 describe('Add Activity component', () => {

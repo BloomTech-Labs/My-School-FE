@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, fireEvent, act} from '../test-utils/test-utils';
-import Signup from '../Components/EnterUser/Signup';
+import { render, fireEvent, act} from './testUtils';
+import Signup from '../components/loginAndRegister/signup';
 
 
 describe('signup component', () => {
