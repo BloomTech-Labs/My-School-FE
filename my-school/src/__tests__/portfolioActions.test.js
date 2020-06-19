@@ -1,4 +1,4 @@
-import { ACTIVITIES_SUCCESS, FETCHING_ACTIVITIES, ACTIVITIES_FAILURE } from '../Redux/actions/actions-portfolio';
+import { ACTIVITIES_SUCCESS, FETCHING_ACTIVITIES, ACTIVITIES_FAILURE } from '../redux/actions/portfolio-actions';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';

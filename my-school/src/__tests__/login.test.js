@@ -1,6 +1,6 @@
 import React from 'react';
-import { render, fireEvent, act} from '../test-utils/test-utils.js';
-import Login from '../Components/EnterUser/Login';
+import { render, fireEvent, act} from './testUtils';
+import Login from '../components/loginAndRegister/login';
 
 describe('Login component', () => {
 

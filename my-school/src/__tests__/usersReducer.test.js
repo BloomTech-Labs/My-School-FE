@@ -1,6 +1,6 @@
-import { usersReducer } from '../Redux/Reducers/reducers-users';
-import * as types from '../Redux/actions/actions-users';
-import { mockData }from '../mockData-reducer';
+import { usersReducer } from '../redux/reducers/users-reducer';
+import * as types from '../redux/actions/user-actions';
+import { mockData }from './mockData-reducer';
 import expect from 'expect';
 
 
