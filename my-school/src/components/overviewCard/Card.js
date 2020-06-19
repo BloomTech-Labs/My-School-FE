@@ -7,7 +7,6 @@ import OverviewCardButton from "./Button";
 import OverviewImageBox from "./Box";
 
 const OverviewCard = (props) => {
-    console.log('overviewcard props', props)
   const { id } = useParams();
   const [hours, setHours] = useState();
   const [mins, setMins] = useState();

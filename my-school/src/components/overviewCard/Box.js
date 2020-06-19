@@ -3,7 +3,6 @@ import PlaceholderImg from "../../assets/placeholder_img.png";
 import {Box as CHBox, Text, Image} from '@chakra-ui/core'
 
 const Box = ({props}) => {
-  console.log('box props', props)
 
     return(
         <CHBox width="35%" height="70%">
