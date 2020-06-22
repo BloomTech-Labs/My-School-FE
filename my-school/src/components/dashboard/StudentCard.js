@@ -28,9 +28,13 @@ const StudentCard = ({ student, familyName }) => {
   useEffect(handleActivities, [student.id])
 
   return (
-    <Flex width={['90vw', '90vw', '400px', '25vw']} direction="column" border="1px solid #ededed" borderRadius='15px' padding='1%' height={['30vh', '30vh', '30vh', '18vh']} justify='space-evenly'>
+    <Flex width={['90vw', '90vw', '400px', '25vw']} direction="column" margin="4px" border="1px solid #ededed" borderRadius='15px' padding='1%' height={['30vh', '30vh', '30vh', '18vh']} justify='space-evenly'>
       <Flex justify='space-between'>
+{ !student.profile_picture ?
         <Image src={placeholder} size="45px" rounded="full" flexWrap="wrap" />
+        :
+        <Image src={student.profile_picture} size="45px" rounded="full" flexWrap="wrap" />
+}
         <Flex direction="column" width="70%">
           <Heading as="h3" fontSize='1.2rem'>{capitalizeName(student.name)}'s Portfolio</Heading>
           <Text>{capitalizeName(student.name)} {familyName && capitalizeName(familyName)}</Text>

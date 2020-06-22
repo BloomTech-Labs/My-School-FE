@@ -31,6 +31,7 @@ const AdminDash = ({ user, isLoading, family, familyName }) => {
           <div
             style={{
               display: "flex",
+              direction: "row",
               justifyContent: "center",
               alignItems: "center",
               height: "40vh",
