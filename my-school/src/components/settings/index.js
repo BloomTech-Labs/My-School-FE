@@ -161,17 +161,6 @@ const Settings = ({
 
   return (
     <>
-      <Text
-        padding="2rem 0rem 2rem 10rem"
-        fontSize="1.125rem"
-        fontWeight="700"
-        color="gray.800"
-      >
-        <span className="link">Dashboard</span> /{" "}
-        {renderedUser.user_type_id === 1
-          ? `My account Settings`
-          : `${renderedUser.name}'s Account settings`}
-      </Text>
       {Object.keys(user).length > 0 && (
         <Flex direction="column">
           <form onSubmit={handleSubmit(handleUpdate)}>
