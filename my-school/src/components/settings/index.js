@@ -47,7 +47,7 @@ const Settings = ({
     const selectedUser = family.filter((user) =>
       user.id === Number(id) ? user : null
     );
-    const name = selectedUser[0] ? selectedUser[0].name  : '' ;
+    const name = selectedUser[0] ? selectedUser[0].name : '';
     setUser({
       ...selectedUser[0],
       password: "password",
@@ -70,13 +70,12 @@ const Settings = ({
             title: "Success!",
             description: `${
               user.user_type_id === 1 ? `Your` : `${user.name}'s`
-            } profile was updated successfully`,
+              } profile picture was updated successfully`,
             status: "success",
             duration: 6000,
             isClosable: true,
             position: "top-right",
           });
-          setImage("");
         })
         .catch((err) => console.log(err));
     } else {
@@ -86,7 +85,7 @@ const Settings = ({
             title: "Success!",
             description: `${
               user.user_type_id === 1 ? `Your` : `${user.name}'s`
-            } profile was updated successfully`,
+              } profile was updated successfully`,
             status: "success",
             duration: 6000,
             isClosable: true,
@@ -104,7 +103,7 @@ const Settings = ({
       setThumbnail(URL.createObjectURL(e.target.files[0]));
       setTimeout(() => {
         document.getElementById("submit").click();
-      }, [1000]);
+      }, [300]);
     }
   };
 
@@ -112,6 +111,7 @@ const Settings = ({
     if (image) {
       const formData = new FormData();
       formData.append("photo", image, image.name);
+      setImage("");
       axiosHandler(formData, true);
     } else if (passwordField === false) {
       if (user.user_type_id === 1) {
@@ -164,7 +164,7 @@ const Settings = ({
       {Object.keys(user).length > 0 && (
         <Flex direction="column">
           <form onSubmit={handleSubmit(handleUpdate)}>
-            <ProfilePicture thumbnail={thumbnail} renderedUser={renderedUser}/>
+            <ProfilePicture thumbnail={thumbnail} renderedUser={renderedUser} />
             <Input
               hidden
               name="profilepic"
@@ -173,10 +173,10 @@ const Settings = ({
               onChange={handleImageGrabber}
             />
             <Divider w="100vw" padding="1rem 0rem" />
-            <Username handleInputs={handleInputs} user={user}/>
+            <Username handleInputs={handleInputs} user={user} />
             {user.username === "" && <ValidationMessage color='red.500' icon='warning' message='Please provide a username' />}
             {user.user_type_id === 1 &&
-            EmailValidator.validate(user.username) === false && <ValidationMessage color='red.500' icon='warning' message='Please provide a valid email.' />}
+              EmailValidator.validate(user.username) === false && <ValidationMessage color='red.500' icon='warning' message='Please provide a valid email.' />}
             <Password
               passwordField={passwordField}
               user={user}
@@ -188,24 +188,26 @@ const Settings = ({
               <PasswordConfirm handleInputs={handleInputs} user={user} />
             )}
             {user.password === user.passwordConfirm &&
-            passwordField === true &&
-            user.password !== "" ? (
-            <ValidationMessage color='green.400' icon='check-circle' message='Passwords match.' />
-            ) : null}
+              passwordField === true &&
+              user.password !== "" ? (
+                <ValidationMessage color='green.400' icon='check-circle' message='Passwords match.' />
+              ) : null}
             {(passwordField === true &&
               user.password !== user.passwordConfirm) ||
-            (passwordField === true && user.passord === "") ? (
-            <ValidationMessage color='red.500' icon='warning' message='Passwords must match, and must be at least 8 characters' />
-            ) : null}
+              (passwordField === true && user.passord === "") ? (
+                <ValidationMessage color='red.500' icon='warning' message='Passwords must match, and must be at least 8 characters' />
+              ) : null}
             <Name handleInputs={handleInputs} user={user} />
             {user.name === "" && user.user_type_id === 2 ? (
-            <ValidationMessage color='red.500' icon='warning' message='Must provide a name' />
+              <ValidationMessage color='red.500' icon='warning' message='Must provide a name' />
             ) : null}
             <Flex
               paddingLeft="7rem"
               className="settings-box"
               justifyContent="space-around"
               w="30vw"
+              alignItems='baseline'
+
             >
               <UpdateButton
                 user={user}

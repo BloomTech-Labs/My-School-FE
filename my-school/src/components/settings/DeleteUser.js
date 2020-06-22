@@ -12,7 +12,6 @@ import {
 import { useHistory } from "react-router-dom";
 
 const DeleteUser = ({ id, user, deleteAccount, deleteEntireFamily }) => {
-  const [hoverDelete, setHoverDelete] = useState(false);
   const [isOpenDialogue, setIsOpenDialogue] = useState();
   const cancelRef = useRef();
   const history = useHistory();
@@ -46,12 +45,13 @@ const DeleteUser = ({ id, user, deleteAccount, deleteEntireFamily }) => {
 
   return (
     <Button
-      m="1rem"
+      textTransform="uppercase"
+      letterSpacing="1.2px"
+      size="xs"
+      mx="4px"
+      variant="outline"
       variantColor="red"
-      variant={hoverDelete ? "outline" : "solid"}
-      onMouseEnter={() => setHoverDelete(true)}
-      onMouseLeave={() => setHoverDelete(false)}
-      _focus={{ boxShadow: "outline" }}
+      p='1.5rem'
       onClick={() => {
         setIsOpenDialogue(true);
       }}
