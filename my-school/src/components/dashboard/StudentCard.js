@@ -28,7 +28,7 @@ const StudentCard = ({ student, familyName }) => {
   useEffect(handleActivities, [student.id])
 
   return (
-    <Flex width={['90vw', '90vw', '400px', '25vw']} direction="column" border="1px solid #ededed" borderRadius='15px' padding='1%' height={['30vh', '30vh', '30vh', '18vh']} justify='space-evenly'>
+    <Flex width={['90vw', '90vw', '400px', '25vw']} direction="column" margin="4px" border="1px solid #ededed" borderRadius='15px' padding='1%' height={['30vh', '30vh', '30vh', '18vh']} justify='space-evenly'>
       <Flex justify='space-between'>
         <Image src={placeholder} size="45px" rounded="full" flexWrap="wrap" />
         <Flex direction="column" width="70%">
