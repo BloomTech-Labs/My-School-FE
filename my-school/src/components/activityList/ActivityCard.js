@@ -10,6 +10,7 @@ import fontN from "../../assets/Nunito_Sans/Nunito Sans Regular.ttf";
 import { Tag, Grid, Box, Flex } from "@chakra-ui/core";
 
 function ActivityCard(props) {
+  console.log(props)
   const studentId = useParams().id;
   const [hour, setHour] = useState();
   const [min, setMin] = useState();
@@ -56,7 +57,7 @@ function ActivityCard(props) {
         {hour}hrs {min}m
       </Box>
       <Box textTransform="uppercase" fontSize="xs" px="4px">
-          {moment(props.activity.completion_date).format("ll").toUpperCase()}
+          {moment.parseZone(props.activity.completion_date).format("ll").toUpperCase()}
       </Box>
       {props.isParent ?
         (

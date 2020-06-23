@@ -54,7 +54,7 @@ const OverviewCardGrid = ({props, hours, mins}) => {
                 </Box>
                 <Box width="100%">
                   {" "}
-                  {moment(props.activity.completion_date)
+                  {moment.parseZone(props.activity.completion_date)
                     .format("ll")
                     .toUpperCase()}
                 </Box>

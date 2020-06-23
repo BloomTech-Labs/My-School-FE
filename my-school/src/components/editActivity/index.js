@@ -67,7 +67,7 @@ const EditActivityModal = (props) => {
 
   // Date values to pass to DateSelector to autopopulate w/activity's submission date
   const defaultMonth = moment(props.activity.completion_date).month() + 1;
-  const defaultDate = moment(props.activity.completion_date).date();
+  const defaultDate = moment.parseZone(props.activity.completion_date).date();
   const defaultYear = moment(props.activity.completion_date).year();
 
   // Photo upload change handler

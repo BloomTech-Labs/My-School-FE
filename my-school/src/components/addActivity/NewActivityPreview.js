@@ -49,7 +49,7 @@ const NewActivityPreview = ({ preview, studentName, historyPusher }) => {
                 </Flex>
                 <Flex pb="24px" align="flex-end">
                     <Text fontSize="xs" textTransform="uppercase" w="35%">Date Completed: </Text>
-                    <Text fontSize="sm" w="65%">{moment(preview.completion_date).format('L')}</Text>
+                    <Text fontSize="sm" w="65%">{moment.utc(preview.completion_date).format('L')}</Text>
                 </Flex>
             </Box>
             <Box w={["100%, 100%, 100%, 50%"]}>
