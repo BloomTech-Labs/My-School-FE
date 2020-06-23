@@ -57,7 +57,7 @@ const DeleteEntry= ({ activity, deleteActivity, studentId }) => {
                         toast({
                             position: "top",
                             title: "Entry Deleted.",
-                            description: "That entry is donesies.",
+                            description: "That entry has been deleted.",
                             status: "success",
                             duration: 5000,
                             isClosable: true,
