@@ -26,7 +26,7 @@ const PDFDocument = ({activities}) => {
         <Page size="A4" style={style.page}>
           <View>
             {activities.map((a) => {
-              let subdate = moment(a.completion_date).format("MMMM Do YYYY");
+              let subdate = moment.parseZone(a.completion_date).format("MMMM Do YYYY");
               let durtime = timeChange(a.duration);
   
               return (
