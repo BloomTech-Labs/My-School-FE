@@ -43,7 +43,7 @@ const StudentCard = ({ student, familyName }) => {
       </Flex>
       <Flex direction='column'>
         <Text fontWeight='800' fontSize='.9rem'>RECENT ACTIVITY</Text>
-        {recent && <Text>{moment.utc(recent.created_at).format('ll').toUpperCase()} SUBMITTED {recent.name}</Text>}
+        {recent ? <Text>{moment.utc(recent.created_at).format('ll').toUpperCase()} SUBMITTED {recent.name}</Text> : `${capitalizeName(student.name)} has not tracked any activities yet`}
       </Flex>
     </Flex>
   );

@@ -29,7 +29,7 @@ const UploadPhoto = ({ setImage, image }) => {
             Choose File
           </Box>
           <Text fontSize="lg" color="gray.700">
-            {image && image.raw ? `${image.raw.name}` : `No file selected`}
+            {image ? `${image.name}` : `No file selected`}
           </Text>
         </Flex>
       </FormLabel>
