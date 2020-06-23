@@ -55,17 +55,31 @@ window.addEventListener('resize', handleResize)
                 Link to PDF
               </a>
               :
-              'No'
+               <div
+                  style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "40vh",
+                  }}
+               >
+                  <Loader color={"#375E97"} css={override} height="75vh" />
+              </div>
             )}
           </BlobProvider>
         ) : (
+          
+          loading || error ? 
           <PDFDownloadLink
             as={Button}
             document={PdfPortfolio}
             filename="portfolio.pdf"
           >
             {({ blob, url, loading, error }) =>
-              loading || error ? "Loading document" : "Download to Computer"
+              
+              "Loading document" 
+              : 
+              "Download to Computer"
             }
           </PDFDownloadLink>
         )}
