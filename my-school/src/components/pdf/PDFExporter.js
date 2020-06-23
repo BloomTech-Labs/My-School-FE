@@ -8,6 +8,7 @@ import {
 import fontN from "../../assets/Nunito_Sans/Nunito Sans Regular.ttf";
 import fontP from "../../assets/Pridi/Pridi Light.ttf";
 import fontR from "../../assets/Raleway/Raleway Medium.ttf";
+import Loader from "react-spinners/ClimbingBoxLoader";
 import { getAllActivitiesForUser } from "../../redux/actions/portfolio-actions";
 import { Button, Box, Flex } from "@chakra-ui/core";
 
@@ -63,7 +64,7 @@ window.addEventListener('resize', handleResize)
                   height: "40vh",
                   }}
                >
-                  <Loader color={"#375E97"} css={override} height="75vh" />
+                  <Loader color={"#375E97"} height="75vh" />
               </div>
             )}
           </BlobProvider>
@@ -77,7 +78,16 @@ window.addEventListener('resize', handleResize)
           >
             {({ blob, url, loading, error }) =>
               loading || error ?
-              "Loading document" 
+              <div
+              style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "40vh",
+              }}
+           >
+              <Loader color={"#375E97"} height="75vh" />
+          </div>
               : 
               "Download to Computer"
             }
