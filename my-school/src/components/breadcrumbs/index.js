@@ -94,7 +94,7 @@ const Breadcrumbs = ({ user, family, activities }) => {
                 <BreadcrumbLink as={RouterLink} to={`/portfolio/${student.id}`} color={isPortfolioContainer ? "gray.900" : "myschoolblue"}>
                     {user.user_type_id === 1 && student
                         ? `${capitalizeName(student.name)}'s Portfolio`
-                        : `My Portfolio`
+                        : !isPortfolioContainer && `My Portfolio`
                     }
                 </BreadcrumbLink>
             </BreadcrumbItem>

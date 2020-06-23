@@ -10,7 +10,6 @@ import fontN from "../../assets/Nunito_Sans/Nunito Sans Regular.ttf";
 import { Tag, Grid, Box, Flex } from "@chakra-ui/core";
 
 function ActivityCard(props) {
-  console.log(props)
   const studentId = useParams().id;
   const [hour, setHour] = useState();
   const [min, setMin] = useState();
