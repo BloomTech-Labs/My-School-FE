@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import {
   useToast,
   Flex,
-  Text,
   Divider,
   Input,
 } from "@chakra-ui/core";

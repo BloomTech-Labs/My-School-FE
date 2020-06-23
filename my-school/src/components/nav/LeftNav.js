@@ -1,15 +1,32 @@
 import React from "react";
 import { Flex, Image } from "@chakra-ui/core";
 import { Link } from "react-router-dom";
-// import logo from '../../../assets/logo_dark_bg.png';
+import { connect } from "react-redux";
 import logo from '../../assets/logo_dark_bg.png'
-const NavLeft = () => {
+const NavLeft = ({ user }) => {
+  console.log(user)
   return (
-    <Link to="/" >
-      <Flex direction='column' align='center'>
-        <Image src={logo} alt="MySchool logo" p="24px"/>
-      </Flex>
-    </Link>
+    <>
+      {user.user_type_id === 1 ?
+        <Link to="/dashboard" >
+          <Flex direction='column' align='center'>
+            <Image src={logo} alt="MySchool logo" p="24px" />
+          </Flex>
+        </Link>
+        :
+        <Link to={`/portfolio/${user.id}`} >
+          <Flex direction='column' align='center'>
+            <Image src={logo} alt="MySchool logo" p="24px" />
+          </Flex>
+        </Link>
+      }
+    </>
   );
 };
-export default NavLeft;
+
+const maptStateToProps = (state) => {
+  return {
+    user: state.usersReducer.user,
+  }
+}
+export default connect(maptStateToProps, {})(NavLeft);
