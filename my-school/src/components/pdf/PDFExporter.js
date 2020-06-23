@@ -69,14 +69,14 @@ window.addEventListener('resize', handleResize)
           </BlobProvider>
         ) : (
           
-          loading || error ? 
+      
           <PDFDownloadLink
             as={Button}
             document={PdfPortfolio}
             filename="portfolio.pdf"
           >
             {({ blob, url, loading, error }) =>
-              
+              loading || error ?
               "Loading document" 
               : 
               "Download to Computer"
