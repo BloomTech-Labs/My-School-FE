@@ -20,23 +20,26 @@ const style = StyleSheet.create({
     textAlign: 'center',
     color: 'black',
     fontFamily: 'Raleway',
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    width: "80%",
   },
   subtitle: {
     fontSize: 12,
+    marginTop: 10,
+    marginBottom: 10,
+    width: "80%",
     textAlign: 'center',
     fontFamily: 'Raleway'
   },
   text: {
     fontSize: 14,
-    // marginLeft: "4cm",
     width: "80%",
+    marginTop: 10,
     textAlign: 'left',
     fontFamily: 'Pridi',
   },
   image: {
     marginTop: 40,
-    // marginLeft: "4cm",
     height: "auto",
     width: "6in"
   },
